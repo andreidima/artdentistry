@@ -6,7 +6,7 @@
         <div class="col-md-7">
             <div class="shadow-lg" style="border-radius: 40px 40px 40px 40px;">
                 <div class="border border-secondary p-2" style="border-radius: 40px 40px 0px 0px; background-color:#e66800">
-                    <h6 class="ms-2 my-0" style="color:white"><i class="fas fa-tooth me-1"></i>Servicii / {{ $serviciu->nume }}</h6>
+                    <h6 class="ms-2 my-0" style="color:white"><i class="fas fa-tooth me-1"></i>Categorii / {{ $serviciu_categorie->nume }}</h6>
                 </div>
 
                 <div class="card-body py-2 border border-secondary"
@@ -21,26 +21,10 @@
                         >
                             <tr>
                                 <td class="pe-4">
-                                    Categorie
-                                </td>
-                                <td>
-                                    {{ $serviciu->categorie->nume ?? '' }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="pe-4">
                                     Nume
                                 </td>
                                 <td>
-                                    {{ $serviciu->nume }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="pe-4">
-                                    Preț
-                                </td>
-                                <td>
-                                    {{ $serviciu->pret }}
+                                    {{ $serviciu_categorie->nume ?? '' }}
                                 </td>
                             </tr>
                             <tr>
@@ -48,7 +32,7 @@
                                     Descriere
                                 </td>
                                 <td>
-                                    {{ $serviciu->descriere }}
+                                    {{ $serviciu_categorie->descriere }}
                                 </td>
                             </tr>
                             <tr>
@@ -56,7 +40,7 @@
                                     Observații
                                 </td>
                                 <td>
-                                    {{ $serviciu->observatii }}
+                                    {{ $serviciu_categorie->observatii }}
                                 </td>
                             </tr>
                         </table>
@@ -64,7 +48,7 @@
 
                     <div class="form-row mb-2 px-2">
                         <div class="col-lg-12 d-flex justify-content-center">
-                            <a class="btn btn-primary text-white btn-sm rounded-pill" href="/servicii">Pagină servicii</a>
+                            <a class="btn btn-primary text-white btn-sm rounded-pill" href="/servicii-categorii">Pagină categorii</a>
                         </div>
                     </div>
 

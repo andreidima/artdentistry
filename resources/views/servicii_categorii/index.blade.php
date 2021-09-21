@@ -45,40 +45,39 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($categorii as $categorie)
+                        @forelse ($servicii_categorii as $serviciu_categorie)
                             <tr>
                                 <td align="">
-                                    {{ ($categorii ->currentpage()-1) * $categorii ->perpage() + $loop->index + 1 }}
+                                    {{ ($servicii_categorii ->currentpage()-1) * $servicii_categorii ->perpage() + $loop->index + 1 }}
                                 </td>
                                 <td>
-                                    <b>{{ $categorie->nume }}</b>
+                                    <b>{{ $serviciu_categorie->nume }}</b>
                                 </td>
                                 <td>
-                                    @foreach ($categorie->servicii as $serviciu)
-                                        {{ $serviciu->nume }}
-                                        @if (!$loop->last)
-                                            <br>
-                                        @endif
+                                    @foreach ($serviciu_categorie->servicii as $serviciu)
+                                        <p class="m-0">
+                                            {{ $serviciu->nume }}
+                                        </p>
                                     @endforeach
                                 </td>
-                                <td class="d-flex justify-content-end">
-                                    <a href="{{ $categorie->path() }}"
-                                        class="flex me-1"
-                                    >
-                                        <span class="badge bg-success">Vizualizează</span>
-                                    </a>
-                                    <a href="{{ $categorie->path() }}/modifica"
-                                        class="flex me-1"
-                                    >
-                                        <span class="badge bg-primary">Modifică</span>
-                                    </a>
-                                    <div style="flex" class="">
-                                        <a
-                                            href="#"
+                                <td class="">
+                                    <div class="d-flex justify-content-end">
+                                        <a href="{{ $serviciu_categorie->path() }}"
+                                            class="flex me-1"
+                                        >
+                                            <span class="badge bg-success">Vizualizează</span>
+                                        </a>
+                                        <a href="{{ $serviciu_categorie->path() }}/modifica"
+                                            class="flex me-1"
+                                        >
+                                            <span class="badge bg-primary">Modifică</span>
+                                        </a>
+                                        <a href="#"
+                                            class="flex"
                                             data-bs-toggle="modal"
-                                            data-bs-target="#stergeCategorie{{ $categorie->id }}"
-                                            title="Șterge Categorie"
-                                            >
+                                            data-bs-target="#stergeServiciuCategorie{{ $serviciu_categorie->id }}"
+                                            title="Șterge Serviciu Categorie"
+                                        >
                                             <span class="badge bg-danger">Șterge</span>
                                         </a>
                                     </div>
@@ -93,20 +92,20 @@
 
                 <nav>
                     <ul class="pagination pagination-sm justify-content-center">
-                        {{$categorii->appends(Request::except('page'))->links()}}
+                        {{$servicii_categorii->appends(Request::except('page'))->links()}}
                     </ul>
                 </nav>
 
         </div>
     </div>
 
-    {{-- Modalele pentru stergere categorie --}}
-    @foreach ($categorii as $categorie)
-        <div class="modal fade text-dark" id="stergeCategorie{{  $categorie->id  }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- Modalele pentru stergere serviciu_categorie --}}
+    @foreach ($servicii_categorii as $serviciu_categorie)
+        <div class="modal fade text-dark" id="stergeServiciuCategorie{{  $serviciu_categorie->id  }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header bg-danger">
-                    <h5 class="modal-title text-white" id="exampleModalLabel">Categorie <b>{{ $categorie->nume }}</b></h5>
+                    <h5 class="modal-title text-white" id="exampleModalLabel">Categorie <b>{{ $serviciu_categorie->nume }}</b></h5>
                     <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" style="text-align:left;">
@@ -115,7 +114,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Renunță</button>
 
-                    <form method="POST" action="{{ $categorie->path() }}">
+                    <form method="POST" action="{{ $serviciu_categorie->path() }}">
                         @method('DELETE')
                         @csrf
                         <button

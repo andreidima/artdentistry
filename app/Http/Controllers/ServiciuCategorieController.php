@@ -17,7 +17,7 @@ class ServiciuCategorieController extends Controller
     {
         $search_nume = \Request::get('search_nume');
 
-        $categorii = ServiciuCategorie::with('servicii')
+        $servicii_categorii = ServiciuCategorie::with('servicii')
             ->when($search_nume, function ($query, $search_nume) {
                 return $query->where('nume', 'like', '%' . $search_nume . '%');
             })
@@ -25,7 +25,7 @@ class ServiciuCategorieController extends Controller
             ->latest()
             ->simplePaginate(25);
 
-        return view('servicii_categorii.index', compact('categorii', 'search_nume'));
+        return view('servicii_categorii.index', compact('servicii_categorii', 'search_nume'));
     }
 
     /**
@@ -35,9 +35,7 @@ class ServiciuCategorieController extends Controller
      */
     public function create()
     {
-        $categorii = Serviciu::where('serviciu_id', 0)->orderBy('nume')->get();
-
-        return view('servicii.create', compact('categorii'));
+        return view('servicii_categorii.create');
     }
 
     /**
@@ -48,59 +46,60 @@ class ServiciuCategorieController extends Controller
      */
     public function store(Request $request)
     {
-        $serviciu = Serviciu::create($this->validateRequest($request));
+        $serviciu_categorie = ServiciuCategorie::create($this->validateRequest($request));
 
-        return redirect('/servicii')->with('status', 'Serviciul "' . $serviciu->nume . '" a fost adăugat cu succes!');
+        return redirect('/servicii-categorii')->with('status', 'Categoria "' . $serviciu_categorie->nume . '" a fost adăugată cu succes!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Serviciu  $serviciu
+     * @param  \App\Models\ServiciuCategorie  $serviciu_categorie
      * @return \Illuminate\Http\Response
      */
-    public function show(Serviciu $serviciu)
+    public function show(ServiciuCategorie $serviciu_categorie)
     {
-        return view('servicii.show', compact('serviciu'));
+        return view('servicii_categorii.show', compact('serviciu_categorie'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Serviciu  $serviciu
+     * @param  \App\Models\ServiciuCategorie  $serviciu_categorie
      * @return \Illuminate\Http\Response
      */
-    public function edit(Serviciu $serviciu)
+    public function edit(ServiciuCategorie $serviciu_categorie)
     {
-        $categorii = Serviciu::where('serviciu_id', 0)->orderBy('nume')->get();
-
-        return view('servicii.edit', compact('serviciu', 'categorii'));
+        return view('servicii_categorii.edit', compact('serviciu_categorie'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Serviciu  $serviciu
+     * @param  \App\Models\ServiciuCategorie  $serviciu_categorie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Serviciu $serviciu)
+    public function update(Request $request, ServiciuCategorie $serviciu_categorie)
     {
-        $serviciu->update($this->validateRequest($request));
+        $serviciu_categorie->update($this->validateRequest($request));
 
-        return redirect('/servicii')->with('status', 'Serviciul "' . $serviciu->nume . '" a fost modificat cu succes!');
+        return redirect('/servicii-categorii')->with('status', 'Categoria "' . $serviciu_categorie->nume . '" a fost modificată cu succes!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Serviciu  $serviciu
+     * @param  \App\Models\ServiciuCategorie  $serviciu_categorie
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Serviciu $serviciu)
+    public function destroy(ServiciuCategorie $serviciu_categorie)
     {
-        $serviciu->delete();
-        return redirect('/servicii')->with('status', 'Serviciul "' . $serviciu->nume . '" a fost șters cu succes!');
+        if (count($serviciu_categorie->servicii)){
+            return back()->with('error', 'Categoria „' . $serviciu_categorie->nume . '” nu poate fi ștearsă pentru că are servicii atașate! Mai întâi este nevoie să ștergeți sau să mutați serviciile la altă categorie!');
+        }
+        $serviciu_categorie->delete();
+        return redirect('/servicii-categorii')->with('status', 'Categoria „' . $serviciu_categorie->nume . '” a fost ștearsă cu succes!');
     }
 
     /**

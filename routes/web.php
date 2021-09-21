@@ -29,4 +29,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('servicii-categorii', ServiciuCategorieController::class,  ['parameters' => ['servicii-categorii' => 'serviciu_categorie']]);
     Route::resource('servicii', ServiciuController::class,  ['parameters' => ['servicii' => 'serviciu']]);
+
+    Route::resource('programari', ServiciuController::class,  ['parameters' => ['programari' => 'programare']]);
 });

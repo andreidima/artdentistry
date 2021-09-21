@@ -14,7 +14,7 @@ class ServiciuCategorie extends Model
 
     public function path()
     {
-        return "/servicii/{$this->id}";
+        return "/servicii-categorii/{$this->id}";
     }
 
     public function servicii()
