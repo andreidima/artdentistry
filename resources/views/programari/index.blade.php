@@ -90,7 +90,7 @@
                                         <a
                                             href="#"
                                             data-bs-toggle="modal"
-                                            data-bs-target="#stergeProgramare{{ $pacient->id }}"
+                                            data-bs-target="#stergeProgramare{{ $programare->id }}"
                                             title="Șterge Programare"
                                             >
                                             <span class="badge bg-danger">Șterge</span>

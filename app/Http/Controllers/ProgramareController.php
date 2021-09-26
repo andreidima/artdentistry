@@ -51,55 +51,33 @@ class ProgramareController extends Controller
      */
     public function store(Request $request)
     {
-        $client = ServiceClient::where('id', $request->client_deja_inregistrat)->first();
-        if (isset($client)){
-            $client->update($this->validateRequestClient($request));
-        } else {
-            $client = ServiceClient::make($this->validateRequestClient($request));
-            $client->save();
-        }
+        $programare = Programare::create($this->validateRequest($request));
 
-        $service_fisa = ServiceFisa::make($this->validateRequestFisa($request));
-        $service_fisa->client_id = $client->id;
-        $service_fisa->save();
-
-        $service_fisa->servicii()->attach($request->input('servicii_selectate'));
-
-        // Dubla Incrementare nr_document
-        \App\Variabila::Nr_document();
-        \App\Variabila::Nr_document();
-
-        return redirect($service_fisa->path())->with('status',
-            'Fișa de service pentru clientul "' . ($service_fisa->client->nume ?? '') . '", a fost adăugată cu succes!');
+        return back()->with('status', 'Programarea pentru "' . $programare->pacient->nume ?? '' . '" a fost adăugată cu succes!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\ServiceFisa  $fisaService
+     * @param  \App\ServiceFisa  $programare
      * @return \Illuminate\Http\Response
      */
-    public function show(ServiceFisa $fise)
+    public function show(Programare $programare)
     {
-        return view('service.fise.show', compact('fise'));
+        return view('programari.show', compact('programare'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ServiceFisa  $fisaService
+     * @param  \App\Programare  $programare
      * @return \Illuminate\Http\Response
      */
-    public function edit(ServiceFisa $fise)
+    public function edit(Programare $programare)
     {
-        $clienti = ServiceClient::orderBy('nume')->get();
-        $parteneri = ServicePartener::orderBy('nume')->get();
-        $servicii = ServiceServiciu::orderBy('nume')->get();
-        $servicii_curente_selectate = $fise->servicii->pluck('id')->toArray();
-        // dd($servicii_curente_selectate);
-        $categorii_servicii = ServiceServiciuCategorie::orderBy('nume')->get();
+        $pacienti = Pacient::orderBy('nume')->get();
 
-        return view('service.fise.edit', compact('fise', 'clienti', 'parteneri', 'servicii', 'servicii_curente_selectate', 'categorii_servicii'));
+        return view('programare.edit', compact('programare', 'pacienti'));
     }
 
     /**
@@ -146,49 +124,20 @@ class ProgramareController extends Controller
      *
      * @return array
      */
-    protected function validateRequestClient(Request $request)
+    protected function validateRequest(Request $request)
     {
-        return request()->validate([
-            'client_id' =>['nullable'],
-            'nume' => ['required', 'max:100'],
-            'nr_ord_reg_com' => ['max:50'],
-            'cui' => ['max:50'],
-            'adresa' => ['max:180'],
-            'iban' => ['max:100'],
-            'banca' => ['max:100'],
-            'reprezentant' => ['max:100'],
-            'reprezentant_functie' => ['max:100'],
-            'telefon' => ['numeric', 'digits:10'],
-            'email' => ['nullable', 'max:180'],
-            'site_web' => ['nullable', 'max:180'],
-        ]);
-    }
-
-    /**
-     * Validate the request attributes.
-     *
-     * @return array
-     */
-    protected function validateRequestFisa(Request $request)
-    {
-        return request()->validate([
-            'partener_id' => ['nullable'],
-            'nr_intrare' => ['required', 'numeric'],
-            'nr_iesire' => ['required', 'numeric'],
-            'tehnician_service' => ['max:90'],
-            'data_receptie' => [''],
-            'consultanta_it' => [''],
-            'instalare_anydesk' => [''],
-            'descriere_echipament' => [''],
-            'defect_reclamat' => [''],
-            'defect_constatat' => [''],
-            'rezultat_service' => [''],
-            'observatii' => [''],
-            'data_ridicare' => [''],
-            'durata_interventie' => [''],
-            'cost' => [''],
-            'donatie' => [''],
-            'casare' => [''],
-        ]);
+        return request()->validate(
+            [
+                'pacient_id' => 'nullable',
+                'data' => 'required',
+                'ora_inceput' => 'nullable',
+                'ora_sfarsit' => 'nullable',
+                'pret_total' => 'nullable|numeric|between:0,9999|regex:/^\d*(\.\d{1,2})?$/',
+                'observatii' => 'nullable|max:1000',
+            ],
+            [
+                'pret.regex' => 'Prețul poate avea la partea zecimală maxim 2 cifre.',
+            ]
+        );
     }
 }
