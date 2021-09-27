@@ -4,7 +4,7 @@
 <div class="container card" style="border-radius: 40px 40px 40px 40px;">
         <div class="row card-header align-items-center" style="border-radius: 40px 40px 0px 0px;">
             <div class="col-lg-3">
-                <h4 class="mb-0"><a href="{{ route('programari.index') }}"><i class="fas fa-calendar-check me-1"></i>Programari</a></h4>
+                <h4 class="mb-0"><a href="{{ route('programari.index') }}"><i class="fas fa-calendar-check me-1"></i>Programări</a></h4>
             </div>
             <div class="col-lg-6" id="app1">
                 <form class="needs-validation" novalidate method="GET" action="{{ route('programari.index') }}">
@@ -51,9 +51,9 @@
                         <tr class="" style="padding:2rem">
                             <th>Nr. Crt.</th>
                             <th>Nume</th>
-                            <th>Data</th>
-                            <th>Ora început</th>
-                            <th>Ora sfârșit</th>
+                            <th class="text-center">Data</th>
+                            <th class="text-center">Ora început</th>
+                            <th class="text-center">Ora sfârșit</th>
                             <th class="text-end">Acțiuni</th>
                         </tr>
                     </thead>

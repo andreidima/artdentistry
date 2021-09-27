@@ -53,7 +53,7 @@ class ProgramareController extends Controller
     {
         $programare = Programare::create($this->validateRequest($request));
 
-        return back()->with('status', 'Programarea pentru "' . $programare->pacient->nume ?? '' . '" a fost adăugată cu succes!');
+        return redirect('/programari')->with('status', 'Programarea pentru „' . ($programare->pacient->nume ?? '') . '” a fost adăugată cu succes!');
     }
 
     /**
@@ -77,46 +77,33 @@ class ProgramareController extends Controller
     {
         $pacienti = Pacient::orderBy('nume')->get();
 
-        return view('programare.edit', compact('programare', 'pacienti'));
+        return view('programari.edit', compact('programare', 'pacienti'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ServiceFisa  $fisaService
+     * @param  \App\Programare  $programare
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ServiceFisa $fise)
+    public function update(Request $request, Programare $programare)
     {
-        // dd($request);
-        $client = ServiceClient::where('id', $request->client_deja_inregistrat)->first();
-        if (isset($client)){
-            $client->update($this->validateRequestClient($request));
-        } else {
-            $client = ServiceClient::make($this->validateRequestClient($request));
-            $client->save();
-        }
+        $programare->update($this->validateRequest($request));
 
-        $fise->update($this->validateRequestFisa($request, $fise));
-        $fise->update(['client_id' => $client->id]);
-
-        $fise->servicii()->sync($request->input('servicii_selectate'));
-
-        return redirect($fise->path())->with('status',
-            'Fișa de service pentru clientul "' . ($fise->client->nume ?? '') . '", a fost modificată cu succes!');
+        return redirect('/programari')->with('status', 'Programarea pentru „' . ($programare->pacient->nume ?? '') . '” a fost modificată cu succes!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ServiceFisa  $fisaService
+     * @param  \App\Programare  $programare
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ServiceFisa $fise)
+    public function destroy(Programare $programare)
     {
-        $fise->delete();
-        return redirect('/service/fise')->with('status', 'Fișa "' . $fise->nr_fisa . '" a fost ștearsă cu succes!');
+        $programare->delete();
+        return redirect('/programari')->with('status', 'Programarea pentru „' . ($programare->pacient->nume ?? '') . '” a fost ștearsă cu succes!');
     }
 
     /**

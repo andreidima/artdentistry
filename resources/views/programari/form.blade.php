@@ -29,7 +29,7 @@
                     ></vue2-datepicker>
             </div>
             <div class="col-lg-4 mb-2 text-lg-center">
-                <label for="ora_inceput" class="mb-0 ps-1">Ora sosire:</label>
+                <label for="ora_inceput" class="mb-0 ps-1">Ora început:</label>
                     <vue2-datepicker
                         data-veche="{{ old('ora_inceput', ($programare->ora_inceput ?? '')) }}"
                         nume-camp-db="ora_inceput"
@@ -40,10 +40,10 @@
                     ></vue2-datepicker>
             </div>
             <div class="col-lg-4 mb-2 text-lg-end">
-                <label for="ora_plecare" class="mb-0 pe-2">Ora plecare:</label>
+                <label for="ora_sfarsit" class="mb-0 pe-2">Ora sfârșit:</label>
                     <vue2-datepicker
-                        data-veche="{{ old('ora_plecare', ($programare->ora_plecare ?? '')) }}"
-                        nume-camp-db="ora_plecare"
+                        data-veche="{{ old('ora_sfarsit', ($programare->ora_sfarsit ?? '')) }}"
+                        nume-camp-db="ora_sfarsit"
                         tip="time"
                         value-type="HH:mm"
                         format="HH:mm"
