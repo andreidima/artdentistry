@@ -21,4 +21,9 @@ class Programare extends Model
     {
         return $this->belongsTo(Pacient::class, 'pacient_id');
     }
+
+    public function servicii()
+    {
+        return $this->belongsToMany(Serviciu::class, 'programare_serviciu', 'programare_id', 'serviciu_id');
+    }
 }

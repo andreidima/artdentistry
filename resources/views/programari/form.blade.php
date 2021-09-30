@@ -1,6 +1,6 @@
 @csrf
 
-<div class="row mb-0 d-flex border-radius: 0px 0px 40px 40px" id="app1">
+<div class="row mb-0 d-flex border-radius: 0px 0px 40px 40px" id="programare">
     <div class="col-lg-12 px-2 mb-0">
         <div class="row">
             <div class="col-lg-12 mb-2">
@@ -16,6 +16,27 @@
                         >{{ $pacient->nume }} </option>
                     @endforeach
                 </select>
+            </div>
+            <div class="col-lg-12 mb-2">
+                <script type="application/javascript">
+                    servicii={!! json_encode($servicii) !!}
+                    serviciiSelectate={!! json_encode(old('servicii_selectate', $servicii_curente_selectate ?? [])) !!}
+                </script>
+                <div v-for="serviciu in servicii" class="col-lg-6 mb-2 rounded-pill">
+                    <div class="custom-control custom-checkbox border border-4" style="padding-left:30px; display: inline-block; border-color:mediumseagreen;">
+                        <input type="checkbox"
+                            class="custom-control-input"
+                            name="servicii_selectate[]"
+                            v-model="servicii_selectate"
+                            :value="serviciu.id"
+                            style="padding:20px"
+                            :id="serviciu.id"
+                            number>
+                        <label class="custom-control-label text-white px-1" :for="serviciu.id" style="background-color:mediumseagreen;">
+                            @{{ serviciu.nume }}
+                        </label>
+                    </div>
+                </div>
             </div>
             <div class="col-lg-4 mb-2">
                 <label for="data" class="mb-0 ps-1">Data:</label>

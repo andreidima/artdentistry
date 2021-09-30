@@ -29,6 +29,17 @@
                             </tr>
                             <tr>
                                 <td>
+                                    Servicii
+                                </td>
+                                <td>
+                                    @foreach ($programare->servicii->sortBy('nume') as $serviciu)
+                                        {{ $serviciu->nume }}
+                                        <br />
+                                    @endforeach
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     Data
                                 </td>
                                 <td>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Programare;
 use App\Models\Pacient;
+use App\Models\Serviciu;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -39,8 +40,9 @@ class ProgramareController extends Controller
     public function create()
     {
         $pacienti = Pacient::orderBy('nume')->get();
+        $servicii = Serviciu::orderBy('nume')->get();
 
-        return view('programari.create', compact('pacienti'));
+        return view('programari.create', compact('pacienti', 'servicii'));
     }
 
     /**
@@ -52,6 +54,8 @@ class ProgramareController extends Controller
     public function store(Request $request)
     {
         $programare = Programare::create($this->validateRequest($request));
+
+        $programare->servicii()->attach($request->input('servicii_selectate'));
 
         return redirect('/programari')->with('status', 'Programarea pentru „' . ($programare->pacient->nume ?? '') . '” a fost adăugată cu succes!');
     }
@@ -76,8 +80,10 @@ class ProgramareController extends Controller
     public function edit(Programare $programare)
     {
         $pacienti = Pacient::orderBy('nume')->get();
+        $servicii = Serviciu::orderBy('nume')->get();
+        $servicii_curente_selectate = $programare->servicii->pluck('id')->toArray();
 
-        return view('programari.edit', compact('programare', 'pacienti'));
+        return view('programari.edit', compact('programare', 'pacienti', 'servicii', 'servicii_curente_selectate'));
     }
 
     /**
@@ -90,6 +96,8 @@ class ProgramareController extends Controller
     public function update(Request $request, Programare $programare)
     {
         $programare->update($this->validateRequest($request));
+
+        $programare->servicii()->sync($request->input('servicii_selectate'));
 
         return redirect('/programari')->with('status', 'Programarea pentru „' . ($programare->pacient->nume ?? '') . '” a fost modificată cu succes!');
     }
@@ -116,7 +124,7 @@ class ProgramareController extends Controller
         return request()->validate(
             [
                 'pacient_id' => 'nullable',
-                'data' => 'required',
+                'data' => 'nullable',
                 'ora_inceput' => 'nullable',
                 'ora_sfarsit' => 'nullable',
                 'pret_total' => 'nullable|numeric|between:0,9999|regex:/^\d*(\.\d{1,2})?$/',
