@@ -111,6 +111,7 @@ class ProgramareController extends Controller
     public function destroy(Programare $programare)
     {
         $programare->delete();
+        $programare->servicii()->detach();
         return redirect('/programari')->with('status', 'Programarea pentru „' . ($programare->pacient->nume ?? '') . '” a fost ștearsă cu succes!');
     }
 
@@ -123,7 +124,7 @@ class ProgramareController extends Controller
     {
         return request()->validate(
             [
-                'pacient_id' => 'nullable',
+                'pacient_id' => 'required',
                 'data' => 'nullable',
                 'ora_inceput' => 'nullable',
                 'ora_sfarsit' => 'nullable',
