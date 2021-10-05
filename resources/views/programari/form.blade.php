@@ -1,8 +1,10 @@
 @csrf
 
-<div class="row mb-0 d-flex border-radius: 0px 0px 40px 40px" id="programare">
-    <div class="col-lg-12 px-2 mb-0">
-        <div class="row">
+<div class="row mb-0 p-3 d-flex border-radius: 0px 0px 40px 40px" id="programare">
+    <div class="col-lg-12 mb-0">
+        <div class="row p-2 mb-0"
+            style="background-color:#ddffff; border-left:6px solid; border-color:#2196F3; border-radius: 5px 5px 5px 5px"
+        >
             <div class="col-lg-4 mb-2">
                 <label for="pacient_id" class="mb-0 ps-3">Pacient*:</label>
                 <select name="pacient_id"
@@ -60,7 +62,11 @@
                     value="{{ old('pret_total', $programare->pret_total) }}"
                     required>
             </div>
-            <div class="col-lg-12 mb-2">
+        </div>
+        <div class="row p-2"
+            style="background-color:#B8FFB8; border-left:6px solid; border-color:mediumseagreen; border-radius: 5px 5px 5px 5px"
+        >
+            <div class="col-lg-12 mb-0">
                 <label for="servicii" class="mb-0 ps-3">Servicii:</label>
                 <script type="application/javascript">
                     servicii={!! json_encode($servicii) !!}
@@ -68,31 +74,33 @@
                 </script>
                 <div class="row">
                     <div v-for="serviciu in servicii" class="col-lg-4 mb-2 rounded-pill">
-                        <div class="custom-control custom-checkbox border border-4" style="padding-left:30px; display: inline-block; border-color:mediumseagreen;">
+                        <div class="form-check ps-4" style="display: inline-block; border: 1px solid mediumseagreen;">
                             <input type="checkbox"
-                                class="custom-control-input"
+                                class="form-check-input"
                                 name="servicii_selectate[]"
                                 v-model="servicii_selectate"
                                 :value="serviciu.id"
-                                style="padding:20px"
+                                {{-- style="margin-left:5px" --}}
                                 :id="serviciu.id"
                                 number>
-                            <label class="custom-control-label text-white px-1" :for="serviciu.id" style="background-color:mediumseagreen;">
+                            <label class="form-check-label text-white px-1" :for="serviciu.id" style="background-color:mediumseagreen;">
                                 @{{ serviciu.nume }}
                             </label>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row p-2"
+            style="background-color:lightyellow; border-left:6px solid; border-color:goldenrod; border-radius: 5px 5px 5px 5px"
+        >
             <div class="col-lg-12 mb-2">
                 <label for="observatii" class="mb-0 ps-3">Observații:</label>
                 <textarea class="form-control form-control-sm {{ $errors->has('observatii') ? 'is-invalid' : '' }}"
                     name="observatii" rows="2">{{ old('observatii', $programare->observatii) }}</textarea>
             </div>
-        </div>
 
-        <div class="row py-2 justify-content-center">
-            <div class="col-lg-8 d-flex justify-content-center">
+            <div class="col-lg-12 py-3 d-flex justify-content-center">
                 <button type="submit" class="btn btn-primary text-white btn-sm me-2 rounded-pill">{{ $buttonText }}</button>
                 <a class="btn btn-secondary btn-sm rounded-pill" href="/programari">Renunță</a>
             </div>
