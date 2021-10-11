@@ -42,12 +42,17 @@
                                 <i class="fas fa-users me-1"></i>Pacienți
                             </a>
                         </li>
-                        <li class="nav-item me-3">
-                            <a class="nav-link active" aria-current="page" href="{{ route('programari.index') }}">
+                        <li class="nav-item me-3 dropdown">
+                            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-calendar-check me-1"></i>Programări
                             </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{{ route('programari.index') }}">Administrare</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{{ route('programari.afisare_tabel') }}">Vizualizare tabel</a></li>
+                            </ul>
                         </li>
-                        <li class="nav-item me-3">
+                        {{-- <li class="nav-item me-3">
                             <a class="nav-link active" aria-current="page" href="{{ route('servicii.index') }}">
                                 <i class="fas fa-tooth me-1"></i>Servicii
                             </a>
@@ -56,17 +61,19 @@
                             <a class="nav-link active" aria-current="page" href="{{ route('servicii-categorii.index') }}">
                                 <i class="fas fa-tooth me-1"></i>Categorii de servicii
                             </a>
-                        </li>
-                        {{-- <li class="nav-item me-3 dropdown">
+                        </li> --}}
+                        <li class="nav-item me-3 dropdown">
                             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-tooth me-1"></i>Servicii
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{{ route('servicii-categorii.index') }}">Categorii</a></li>
+                                <li><a class="dropdown-item" href="{{ route('servicii-categorii.index') }}">Categorii de servicii</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="{{ route('servicii.index') }}">Servicii</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{{ route('vizualizare-ramificatii-servicii') }}">Vizualizarea ramificațiilor</a></li>
                             </ul>
-                        </li> --}}
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

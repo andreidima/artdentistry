@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PacientController;
 use App\Http\Controllers\ServiciuCategorieController;
 use App\Http\Controllers\ServiciuController;
+use App\Http\Controllers\VizualizareRamificatieServiciuController;
 use App\Http\Controllers\ProgramareController;
 
 /*
@@ -29,6 +30,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('servicii-categorii', ServiciuCategorieController::class,  ['parameters' => ['servicii-categorii' => 'serviciu_categorie']]);
     Route::resource('servicii', ServiciuController::class,  ['parameters' => ['servicii' => 'serviciu']]);
+    Route::get('vizualizare-ramificatii-servicii', [VizualizareRamificatieServiciuController::class, 'vizualizareRamificatieServiciu'])->name('vizualizare-ramificatii-servicii');
 
+    Route::get('programari/afisare-tabel', [ProgramareController::class, 'afisareTabel'])->name('programari.afisare_tabel');
     Route::resource('programari', ProgramareController::class,  ['parameters' => ['programari' => 'programare']]);
 });

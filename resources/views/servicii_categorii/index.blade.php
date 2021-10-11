@@ -40,7 +40,7 @@
                         <tr class="" style="padding:2rem">
                             <th>Nr. Crt.</th>
                             <th>Categorie</th>
-                            <th>Servicii</th>
+                            {{-- <th>Servicii</th> --}}
                             <th class="text-end">Acțiuni</th>
                         </tr>
                     </thead>
@@ -53,13 +53,13 @@
                                 <td>
                                     <b>{{ $serviciu_categorie->nume }}</b>
                                 </td>
-                                <td>
+                                {{-- <td>
                                     @foreach ($serviciu_categorie->servicii as $serviciu)
                                         <p class="m-0">
                                             {{ $serviciu->nume }}
                                         </p>
                                     @endforeach
-                                </td>
+                                </td> --}}
                                 <td class="">
                                     <div class="d-flex justify-content-end">
                                         <a href="{{ $serviciu_categorie->path() }}"

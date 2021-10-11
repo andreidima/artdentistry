@@ -136,4 +136,33 @@ class ProgramareController extends Controller
             ]
         );
     }
+
+    /**
+     * Afisare Tabel
+     *
+     * @return array
+     */
+    protected function afisareTabel(Request $request)
+    {
+        $search_nume = \Request::get('search_nume');
+        $search_data_inceput = \Request::get('search_data_inceput') ?? \Carbon\Carbon::now()->startOfWeek()->toDateString();
+        $search_data_sfarsit = \Request::get('search_data_sfarsit') ?? \Carbon\Carbon::now()->endOfWeek()->toDateString();
+
+
+        if (\Carbon\Carbon::parse($search_data_sfarsit)->diffInDays($search_data_inceput) > 35){
+            return back()->with('error', 'Selectează te rog intervale mai mici de 35 de zile, pentru ca extragerea datelor din baza de date să fie eficientă!');
+        }
+
+        $pacienti = Pacient::with(['programare'=> function($query) use ($search_data_inceput, $search_data_sfarsit){
+                $query->whereDate('data', '>=', $search_data_inceput)
+                    ->whereDate('data', '<=', $search_data_sfarsit);
+            }])
+            ->when($search_nume, function ($query, $search_nume) {
+                return $query->where('nume', 'like', '%' . $search_nume . '%');
+            })
+            ->orderBy('nume')
+            ->paginate(10);
+
+        return view('programari.index.tabel', compact('angajati', 'search_nume', 'search_data_inceput', 'search_data_sfarsit'));
+    }
 }
