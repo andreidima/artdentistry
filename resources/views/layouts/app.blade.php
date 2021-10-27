@@ -37,9 +37,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item me-3">
+                        {{-- <li class="nav-item me-3">
                             <a class="nav-link active" aria-current="page" href="{{ route('pacienti.index') }}">
                                 <i class="fas fa-users me-1"></i>Pacienți
+                            </a>
+                        </li> --}}
+                        <li class="nav-item me-3">
+                            <a class="nav-link active" aria-current="page" href="{{ route('fise-de-tratament.index') }}">
+                                <i class="fas fa-file-alt me-1"></i>Fișe de tratament
                             </a>
                         </li>
                         <li class="nav-item me-3 dropdown">
