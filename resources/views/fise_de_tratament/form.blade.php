@@ -45,7 +45,7 @@
             style="background-color:#ddffff; border-left:6px solid; border-color:#2196F3; border-radius: 0px 0px 0px 0px"
             >
             <div class="col-lg-12">
-                <div class="row mb-2">
+                <div class="row mb-2 d-flex justify-content-center">
                     <div class="col-lg-3 mb-2">
                         <label for="nume" class="mb-0 ps-3">Nume:</label>
                         <input
@@ -97,7 +97,7 @@
                             >
                     </div>
                 </div>
-                <div class="row mb-2">
+                <div class="row mb-2 d-flex justify-content-center">
                     <div class="col-lg-2 mb-2">
                         <label for="strada" class="mb-0 ps-3">Strada:</label>
                         <input
@@ -179,7 +179,7 @@
                             >
                     </div>
                 </div>
-                <div class="row">
+                <div class="row d-flex justify-content-center">
                     <div class="col-lg-2 mb-2">
                         <label for="asigurare_medicala" class="mb-0 ps-3">Asigurare medicală:</label>
                         <input
@@ -216,27 +216,861 @@
         <div class="row px-2 py-2 mb-0"
             style="background-color:#B8FFB8; border-left:6px solid; border-color:mediumseagreen; border-radius: 0px 0px 0px 0px"
             >
-            <div class="col-lg-12">
+            <div class="col-lg-12 mb-2">
                 <label class="px-1" style="background-color:mediumseagreen; color:white">
                     STATUS DENTAR
                 </label>
             </div>
-            <div class="col-lg-1 mb-2 d-flex">
-                {{-- <div class="row align-items-center">
-                    <div class="col-auto"> --}}
-                        <label for="status_dentar_18" class="col-form-label">18</label>
-                    {{-- </div>
-                    <div class="col-auto"> --}}
-                        <input
-                            type="text"
-                            class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_18') ? 'is-invalid' : '' }}"
-                            name="status_dentar_18"
-                            placeholder=""
-                            value="{{ old('status_dentar_18', $fisa_de_tratament->status_dentar_18) }}"
-                            >
-                    {{-- </div>
-                </div> --}}
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_11" class="col-form-label col-form-label-sm pe-1">11</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_11') ? 'is-invalid' : '' }}"
+                    name="status_dentar_11"
+                    placeholder=""
+                    value="{{ old('status_dentar_11', $fisa_de_tratament->status_dentar_11) }}"
+                    >
             </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_12" class="col-form-label col-form-label-sm pe-1">12</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_12') ? 'is-invalid' : '' }}"
+                    name="status_dentar_12"
+                    placeholder=""
+                    value="{{ old('status_dentar_12', $fisa_de_tratament->status_dentar_12) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_15" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_15') ? 'is-invalid' : '' }}"
+                    name="status_dentar_15"
+                    placeholder=""
+                    value="{{ old('status_dentar_15', $fisa_de_tratament->status_dentar_15) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_16" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_16') ? 'is-invalid' : '' }}"
+                    name="status_dentar_16"
+                    placeholder=""
+                    value="{{ old('status_dentar_16', $fisa_de_tratament->status_dentar_16) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_17" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_17') ? 'is-invalid' : '' }}"
+                    name="status_dentar_17"
+                    placeholder=""
+                    value="{{ old('status_dentar_17', $fisa_de_tratament->status_dentar_17) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_18" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_18') ? 'is-invalid' : '' }}"
+                    name="status_dentar_18"
+                    placeholder=""
+                    value="{{ old('status_dentar_18', $fisa_de_tratament->status_dentar_18) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_21" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_21') ? 'is-invalid' : '' }}"
+                    name="status_dentar_21"
+                    placeholder=""
+                    value="{{ old('status_dentar_21', $fisa_de_tratament->status_dentar_21) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_22" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_22') ? 'is-invalid' : '' }}"
+                    name="status_dentar_22"
+                    placeholder=""
+                    value="{{ old('status_dentar_22', $fisa_de_tratament->status_dentar_22) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_23" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_23') ? 'is-invalid' : '' }}"
+                    name="status_dentar_23"
+                    placeholder=""
+                    value="{{ old('status_dentar_23', $fisa_de_tratament->status_dentar_23) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_24" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_24') ? 'is-invalid' : '' }}"
+                    name="status_dentar_24"
+                    placeholder=""
+                    value="{{ old('status_dentar_24', $fisa_de_tratament->status_dentar_24) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_25" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_25') ? 'is-invalid' : '' }}"
+                    name="status_dentar_25"
+                    placeholder=""
+                    value="{{ old('status_dentar_25', $fisa_de_tratament->status_dentar_25) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_26" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_26') ? 'is-invalid' : '' }}"
+                    name="status_dentar_26"
+                    placeholder=""
+                    value="{{ old('status_dentar_26', $fisa_de_tratament->status_dentar_26) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_27" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_27') ? 'is-invalid' : '' }}"
+                    name="status_dentar_27"
+                    placeholder=""
+                    value="{{ old('status_dentar_27', $fisa_de_tratament->status_dentar_27) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_28" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_28') ? 'is-invalid' : '' }}"
+                    name="status_dentar_28"
+                    placeholder=""
+                    value="{{ old('status_dentar_28', $fisa_de_tratament->status_dentar_28) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_31" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_31') ? 'is-invalid' : '' }}"
+                    name="status_dentar_31"
+                    placeholder=""
+                    value="{{ old('status_dentar_31', $fisa_de_tratament->status_dentar_31) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_32" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_32') ? 'is-invalid' : '' }}"
+                    name="status_dentar_32"
+                    placeholder=""
+                    value="{{ old('status_dentar_32', $fisa_de_tratament->status_dentar_32) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_33" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_33') ? 'is-invalid' : '' }}"
+                    name="status_dentar_33"
+                    placeholder=""
+                    value="{{ old('status_dentar_33', $fisa_de_tratament->status_dentar_33) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_34" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_34') ? 'is-invalid' : '' }}"
+                    name="status_dentar_34"
+                    placeholder=""
+                    value="{{ old('status_dentar_34', $fisa_de_tratament->status_dentar_34) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_35" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_35') ? 'is-invalid' : '' }}"
+                    name="status_dentar_35"
+                    placeholder=""
+                    value="{{ old('status_dentar_35', $fisa_de_tratament->status_dentar_35) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_36" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_36') ? 'is-invalid' : '' }}"
+                    name="status_dentar_36"
+                    placeholder=""
+                    value="{{ old('status_dentar_36', $fisa_de_tratament->status_dentar_36) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_37" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_37') ? 'is-invalid' : '' }}"
+                    name="status_dentar_37"
+                    placeholder=""
+                    value="{{ old('status_dentar_37', $fisa_de_tratament->status_dentar_37) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_38" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_38') ? 'is-invalid' : '' }}"
+                    name="status_dentar_38"
+                    placeholder=""
+                    value="{{ old('status_dentar_38', $fisa_de_tratament->status_dentar_38) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_41" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_41') ? 'is-invalid' : '' }}"
+                    name="status_dentar_41"
+                    placeholder=""
+                    value="{{ old('status_dentar_41', $fisa_de_tratament->status_dentar_41) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_42" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_42') ? 'is-invalid' : '' }}"
+                    name="status_dentar_42"
+                    placeholder=""
+                    value="{{ old('status_dentar_42', $fisa_de_tratament->status_dentar_42) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_43" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_43') ? 'is-invalid' : '' }}"
+                    name="status_dentar_43"
+                    placeholder=""
+                    value="{{ old('status_dentar_43', $fisa_de_tratament->status_dentar_43) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_44" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_44') ? 'is-invalid' : '' }}"
+                    name="status_dentar_44"
+                    placeholder=""
+                    value="{{ old('status_dentar_44', $fisa_de_tratament->status_dentar_44) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_45" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_45') ? 'is-invalid' : '' }}"
+                    name="status_dentar_45"
+                    placeholder=""
+                    value="{{ old('status_dentar_45', $fisa_de_tratament->status_dentar_45) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_46" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_46') ? 'is-invalid' : '' }}"
+                    name="status_dentar_46"
+                    placeholder=""
+                    value="{{ old('status_dentar_46', $fisa_de_tratament->status_dentar_46) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_47" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_47') ? 'is-invalid' : '' }}"
+                    name="status_dentar_47"
+                    placeholder=""
+                    value="{{ old('status_dentar_47', $fisa_de_tratament->status_dentar_47) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_48" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_48') ? 'is-invalid' : '' }}"
+                    name="status_dentar_48"
+                    placeholder=""
+                    value="{{ old('status_dentar_48', $fisa_de_tratament->status_dentar_48) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+            <div class="col-lg-3 mb-2 d-flex">
+                <label for="status_dentar_13" class="col-form-label col-form-label-sm pe-1">13</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_13') ? 'is-invalid' : '' }}"
+                    name="status_dentar_13"
+                    placeholder=""
+                    value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
+                    >
+            </div>
+
+            @php
+                $status_dentar_dinti = array (
+                    11, 12, 13, 14, 15,
+                    21, 22, 23, 24, 25
+                )
+            @endphp
+
+            @foreach ($status_dentar_dinti as $status_dentar_dinte)
+                <div class="col-lg-3 mb-2 d-flex">
+                    <label for="status_dentar_{{ $status_dentar_dinte }}" class="col-form-label col-form-label-sm pe-1">{{ $status_dentar_dinte }}</label>
+                    <input
+                        type="text"
+                        class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_' . $status_dentar_dinte) ? 'is-invalid' : '' }}"
+                        name="status_dentar_{{ $status_dentar_dinte }}"
+                        placeholder=""
+                        value="{{ old('status_dentar_{{ $status_dentar_dinte }}', $fisa_de_tratament->status_dentar_{{ $status_dentar_dinte }}) }}"
+                        >
+                </div>
+            @endfor
         </div>
 
 
