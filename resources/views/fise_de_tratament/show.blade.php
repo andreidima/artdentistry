@@ -1,7 +1,7 @@
 @extends ('layouts.app')
 
 @section('content')
-<div class="container">
+{{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-7">
             <div class="shadow-lg" style="border-radius: 40px 40px 40px 40px;">
@@ -72,5 +72,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection

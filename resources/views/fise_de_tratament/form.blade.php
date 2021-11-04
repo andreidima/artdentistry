@@ -221,7 +221,7 @@
                     STATUS DENTAR
                 </label>
             </div>
-            <div class="col-lg-3 mb-2 d-flex">
+            {{-- <div class="col-lg-3 mb-2 d-flex">
                 <label for="status_dentar_11" class="col-form-label col-form-label-sm pe-1">11</label>
                 <input
                     type="text"
@@ -1050,13 +1050,21 @@
                     placeholder=""
                     value="{{ old('status_dentar_13', $fisa_de_tratament->status_dentar_13) }}"
                     >
-            </div>
+            </div> --}}
+        </div>
+
+        <div class="row px-2 py-2 mb-0"
+            style="background-color:#B8FFB8; border-left:6px solid; border-color:mediumseagreen; border-radius: 0px 0px 0px 0px"
+            >
 
             @php
+                // $status_dentar_dinti = array (
+                //     11, 12, 13, 14, 15,
+                //     21, 22, 23, 24, 25
+                // );
                 $status_dentar_dinti = array (
-                    11, 12, 13, 14, 15,
-                    21, 22, 23, 24, 25
-                )
+                    11, 12
+                );
             @endphp
 
             @foreach ($status_dentar_dinti as $status_dentar_dinte)
@@ -1067,10 +1075,12 @@
                         class="form-control form-control-sm rounded-pill {{ $errors->has('status_dentar_' . $status_dentar_dinte) ? 'is-invalid' : '' }}"
                         name="status_dentar_{{ $status_dentar_dinte }}"
                         placeholder=""
-                        value="{{ old('status_dentar_{{ $status_dentar_dinte }}', $fisa_de_tratament->status_dentar_{{ $status_dentar_dinte }}) }}"
+                        value="{{ old('status_dentar_' . $status_dentar_dinte, $fisa_de_tratament->{'status_dentar_' . $status_dentar_dinte}) }}"
+                        {{-- value="{{ old('status_dentar_' . $status_dentar_dinte, ${'fisa_de_tratament->status_dentar_' . $status_dentar_dinte}) }}" --}}
+                        {{-- value="{{ old('status_dentar_' . $status_dentar_dinte, $fisa_de_tratament->status_dentar_11) }}" --}}
                         >
                 </div>
-            @endfor
+            @endforeach
         </div>
 
 

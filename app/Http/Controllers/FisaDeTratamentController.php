@@ -109,7 +109,7 @@ class FisaDeTratamentController extends Controller
     protected function validateRequest(Request $request)
     {
         return request()->validate([
-            'fisa_numar' => 'nullable|numeric|between:0,99999',
+            'fisa_numar' => 'numeric|between:0,99999',
             'medic_curant' => 'nullable|max:100',
             'data' => 'nullable',
             'nume' => 'nullable|max:100',
@@ -128,6 +128,8 @@ class FisaDeTratamentController extends Controller
             'ocupatie' => 'nullable|max:100',
             'loc_de_munca' => 'nullable|max:100',
             'status_dentar_grupa' => 'nullable|max:50',
+            'status_dentar_11' => 'nullable|max:65000',
+            'status_dentar_12' => 'nullable|max:65000',
             'status_dentar' => 'nullable|max:65000',
             'diagnostic_odontal' => 'nullable|max:500',
             'diagnostic_paradontal' => 'nullable|max:500',
