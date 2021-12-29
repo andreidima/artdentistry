@@ -18,7 +18,8 @@ class FisaDeTratamentController extends Controller
         $search_telefon = \Request::get('search_telefon');
 
         $fise_de_tratament = FisaDeTratament::
-            when($search_nume, function ($query, $search_nume) {
+            with('chestionar_evaluare_stare_generala')
+            ->when($search_nume, function ($query, $search_nume) {
                 return $query->where('nume', 'like', '%' . $search_nume . '%');
             })
             ->when($search_telefon, function ($query, $search_telefon) {
@@ -48,6 +49,8 @@ class FisaDeTratamentController extends Controller
      */
     public function store(Request $request)
     {
+        $request->request->add(['user_id' => $request->user()->id]);
+
         $fisa_de_tratament = FisaDeTratament::create($this->validateRequest($request));
 
         return redirect('/fise-de-tratament')->with('status', 'Fișa de tratament pentru pacientul "' . $fisa_de_tratament->nume . '" a fost adăugată cu succes!');
@@ -84,6 +87,8 @@ class FisaDeTratamentController extends Controller
      */
     public function update(Request $request, FisaDeTratament $fisa_de_tratament)
     {
+        $request->request->add(['user_id' => $request->user()->id]);
+
         $fisa_de_tratament->update($this->validateRequest($request));
 
         return redirect('/fise-de-tratament')->with('status', 'Fișa de tratament pentru pacientul "' . $fisa_de_tratament->nume . '" a fost modificată cu succes!');
@@ -110,25 +115,25 @@ class FisaDeTratamentController extends Controller
     {
         return request()->validate([
             'fisa_numar' => 'numeric|between:0,99999',
-            'medic_curant' => 'nullable|max:100',
+            'medic_curant' => 'nullable|max:500',
             'data' => 'nullable',
-            'nume' => 'nullable|max:100',
+            'nume' => 'nullable|max:500',
             'varsta' => 'nullable|numeric|integer|between:0,150',
             'sex' => 'nullable|max:1',
             'cnp' => 'nullable|numeric|integer|digits:13',
-            'asigurare_medicala' => 'nullable|max:50',
-            'oras' => 'nullable|max:50',
-            'strada' => 'nullable|max:50',
-            'numar' => 'nullable|max:50',
-            'bloc' => 'nullable|max:50',
-            'scara' => 'nullable|max:50',
-            'apartament' => 'nullable|max:50',
-            'sector' => 'nullable|max:50',
-            'judet' => 'nullable|max:50',
-            'telefon' => 'nullable|max:20',
-            'ocupatie' => 'nullable|max:100',
-            'loc_de_munca' => 'nullable|max:100',
-            'status_dentar_grupa' => 'nullable|max:50',
+            'asigurare_medicala' => 'nullable|max:500',
+            'oras' => 'nullable|max:500',
+            'strada' => 'nullable|max:500',
+            'numar' => 'nullable|max:500',
+            'bloc' => 'nullable|max:500',
+            'scara' => 'nullable|max:500',
+            'apartament' => 'nullable|max:500',
+            'sector' => 'nullable|max:500',
+            'judet' => 'nullable|max:500',
+            'telefon' => 'nullable|max:500',
+            'ocupatie' => 'nullable|max:500',
+            'loc_de_munca' => 'nullable|max:500',
+            'status_dentar_grupa' => 'nullable|max:500',
             'status_dentar_11' => 'nullable|max:500',
             'status_dentar_12' => 'nullable|max:500',
             'status_dentar_13' => 'nullable|max:500',
@@ -188,7 +193,8 @@ class FisaDeTratamentController extends Controller
             'diagnostic_complex' => 'nullable|max:500',
             'plan_complex_tratament' => 'nullable|max:65000',
             'deviz_provizoriu' => 'nullable|max:65000',
-            'observatii' => 'nullable|max:500',
+            'observatii' => 'nullable|max:2000',
+            'user_id' => 'required',
         ]);
     }
 }

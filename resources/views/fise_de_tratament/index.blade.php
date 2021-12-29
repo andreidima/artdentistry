@@ -43,6 +43,7 @@
                             <th>Nr. Crt.</th>
                             <th>Nume</th>
                             <th>Telefon</th>
+                            <th>Chestionar</th>
                             <th class="text-end">Acțiuni</th>
                         </tr>
                     </thead>
@@ -54,6 +55,17 @@
                                 </td>
                                 <td>
                                     <b>{{ $fisa_de_tratament->nume }}</b>
+                                </td>
+                                <td>
+                                    @if ($fisa_de_tratament->chestionar_evaluare_stare_generala)
+                                        <a href="{{ $fisa_de_tratament->path() }}/chestionar-evaluare-stare-generala/{{ $fisa_de_tratament->chestionar_evaluare_stare_generala->id }}/modifica">
+                                            <span class="badge bg-primary">Modifică</span>
+                                        </a>
+                                    @else
+                                        <a href="{{ $fisa_de_tratament->path() }}/chestionar-evaluare-stare-generala/adauga">
+                                            <span class="badge bg-success">Adaugă</span>
+                                        </a>
+                                    @endif
                                 </td>
                                 <td>
                                     {{ $fisa_de_tratament->telefon }}
