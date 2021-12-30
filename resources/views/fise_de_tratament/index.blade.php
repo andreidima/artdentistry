@@ -59,6 +59,7 @@
                                 <td>
                                     @if ($fisa_de_tratament->chestionar_evaluare_stare_generala)
                                         <a href="{{ $fisa_de_tratament->path() }}/chestionar-evaluare-stare-generala/{{ $fisa_de_tratament->chestionar_evaluare_stare_generala->id }}/modifica">
+                                        {{-- <a href="{{ $fisa_de_tratament->path() }}/chestionar-evaluare-stare-generala/{{ $fisa_de_tratament->chestionar_evaluare_stare_generala->id }}"> --}}
                                             <span class="badge bg-primary">Modifică</span>
                                         </a>
                                     @else

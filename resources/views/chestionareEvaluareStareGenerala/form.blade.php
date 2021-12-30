@@ -2,24 +2,33 @@
 
 <div class="row mb-0 p-3 d-flex border-radius: 0px 0px 40px 40px" id="app">
     <div class="col-lg-12 mb-0">
+        <div class="row mb-4 rounded-3" style="border:1px solid #e9ecef; border-left:0.25rem darkcyan solid">
+            <div class="col-lg-12 d-flex align-items-left">
+                        <input
+                            type="hidden"
+                            name="fisa_de_tratament_id"
+                            value="{{ $fisa_de_tratament->id }}">
+            </div>
+        </div>
 
-        <div class="row mb-4 py-2" style="background-color: rgb(221, 255, 252)">
+
+        <div class="row mb-4 rounded-3" style="border:1px solid #e9ecef; border-left:0.25rem darkcyan solid">
             <div class="col-lg-12 d-flex align-items-left">
                 <div class="me-4">
                     Este posibil să fiți gravidă?
                 </div>
                 <div class="col-auto d-flex">
                     <div class="form-check me-4">
-                        <input class="form-check-input" type="radio" value="1" name="gravida" id="gravida"
+                        <input class="form-check-input" type="radio" value="1" name="gravida" id="gravida_da"
                             {{ old('gravida', $chestionar->gravida) == '1' ? 'checked' : '' }}>
-                        <label class="form-check-label" for="gravida">
+                        <label class="form-check-label" for="gravida_da">
                             DA
                         </label>
                     </div>
                     <div class="form-check me-4">
-                        <input class="form-check-input" type="radio" value="0" name="gravida" id="gravida"
+                        <input class="form-check-input" type="radio" value="0" name="gravida" id="gravida_nu"
                             {{ old('gravida', $chestionar->gravida) == '0' ? 'checked' : '' }}>
-                        <label class="form-check-label" for="gravida">
+                        <label class="form-check-label" for="gravida_nu">
                             NU
                         </label>
                     </div>
@@ -62,7 +71,7 @@
             </div>
         </div>
 
-        <div class="row mb-4 py-2" style="background-color: rgb(221, 255, 252)">
+        <div class="row mb-4 rounded-3" style="border:1px solid #e9ecef; border-left:0.25rem #e66800 solid">
             <div class="col-lg-12 d-flex align-items-left">
                 <div class="row">
                     <div class="col-md-auto me-4">
@@ -70,16 +79,16 @@
                     </div>
                     <div class="col-auto d-flex">
                         <div class="form-check me-4">
-                            <input class="form-check-input" type="radio" value="1" name="alergii_intolerante" id="alergii_intolerante"
+                            <input class="form-check-input" type="radio" value="1" name="alergii_intolerante" id="alergii_intolerante_da"
                                 {{ old('alergii_intolerante', $chestionar->alergii_intolerante) == '1' ? 'checked' : '' }}>
-                            <label class="form-check-label" for="alergii_intolerante">
+                            <label class="form-check-label" for="alergii_intolerante_da">
                                 DA
                             </label>
                         </div>
                         <div class="form-check me-4">
-                            <input class="form-check-input" type="radio" value="0" name="alergii_intolerante" id="alergii_intolerante"
+                            <input class="form-check-input" type="radio" value="0" name="alergii_intolerante" id="alergii_intolerante_nu"
                                 {{ old('alergii_intolerante', $chestionar->alergii_intolerante) == '0' ? 'checked' : '' }}>
-                            <label class="form-check-label" for="alergii_intolerante">
+                            <label class="form-check-label" for="alergii_intolerante_nu">
                                 NU
                             </label>
                         </div>
@@ -118,7 +127,7 @@
             </div>
         </div>
 
-        <div class="row mb-4 py-2" style="background-color: rgb(221, 255, 252)">
+        <div class="row mb-4 rounded-3" style="border:1px solid #e9ecef; border-left:0.25rem darkcyan solid">
             <div class="col-lg-12 d-flex align-items-left">
                 <div class="row">
                     <div class="col-md-auto me-4">
@@ -126,16 +135,16 @@
                     </div>
                     <div class="col-auto d-flex">
                         <div class="form-check me-4">
-                            <input class="form-check-input" type="radio" value="1" name="tratament_medical" id="tratament_medical"
+                            <input class="form-check-input" type="radio" value="1" name="tratament_medical" id="tratament_medical_da"
                                 {{ old('tratament_medical', $chestionar->tratament_medical) == '1' ? 'checked' : '' }}>
-                            <label class="form-check-label" for="tratament_medical">
+                            <label class="form-check-label" for="tratament_medical_da">
                                 DA
                             </label>
                         </div>
                         <div class="form-check me-4">
-                            <input class="form-check-input" type="radio" value="0" name="tratament_medical" id="tratament_medical"
+                            <input class="form-check-input" type="radio" value="0" name="tratament_medical" id="tratament_medical_nu"
                                 {{ old('tratament_medical', $chestionar->tratament_medical) == '0' ? 'checked' : '' }}>
-                            <label class="form-check-label" for="tratament_medical">
+                            <label class="form-check-label" for="tratament_medical_nu">
                                 NU
                             </label>
                         </div>
@@ -159,7 +168,7 @@
             </div>
         </div>
 
-        <div class="row mb-4 py-2" style="background-color: rgb(221, 255, 252)">
+        <div class="row mb-4 rounded-3" style="border:1px solid #e9ecef; border-left:0.25rem #e66800 solid">
             <div class="col-lg-12 d-flex align-items-left">
                 <div class="row">
                     <div class="col-md-auto me-4">
@@ -167,16 +176,16 @@
                     </div>
                     <div class="col-auto d-flex">
                         <div class="form-check me-4">
-                            <input class="form-check-input" type="radio" value="1" name="tratament_antibiotice" id="tratament_antibiotice"
+                            <input class="form-check-input" type="radio" value="1" name="tratament_antibiotice" id="tratament_antibiotice_da"
                                 {{ old('tratament_antibiotice', $chestionar->tratament_antibiotice) == '1' ? 'checked' : '' }}>
-                            <label class="form-check-label" for="tratament_antibiotice">
+                            <label class="form-check-label" for="tratament_antibiotice_da">
                                 DA
                             </label>
                         </div>
                         <div class="form-check me-4">
-                            <input class="form-check-input" type="radio" value="0" name="tratament_antibiotice" id="tratament_antibiotice"
+                            <input class="form-check-input" type="radio" value="0" name="tratament_antibiotice" id="tratament_antibiotice_nu"
                                 {{ old('tratament_antibiotice', $chestionar->tratament_antibiotice) == '0' ? 'checked' : '' }}>
-                            <label class="form-check-label" for="tratament_antibiotice">
+                            <label class="form-check-label" for="tratament_antibiotice_nu">
                                 NU
                             </label>
                         </div>
@@ -226,7 +235,7 @@
             </div>
         </div>
 
-        <div class="row mb-4 py-2" style="background-color: rgb(221, 255, 252)">
+        <div class="row mb-4 rounded-3" style="border:1px solid #e9ecef; border-left:0.25rem darkcyan solid">
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-auto me-4">
@@ -326,7 +335,713 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-12 ps-5">
+                <div class="row">
+                    <div class="col-md-auto">
+                        boli vasculare:
+                    </div>
+                    <div class="col">
+                        <div class="row align-items-center">
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="arteriopatii">
+                                        arteriopatii
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="arteriopatii" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="arteriopatii" id="arteriopatii"
+                                        {{ old('arteriopatii', $chestionar->arteriopatii) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="varice">
+                                        varice
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="varice" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="varice" id="varice"
+                                        {{ old('varice', $chestionar->varice) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="tromboflebite">
+                                        (trombo)flebite
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="tromboflebite" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="tromboflebite" id="tromboflebite"
+                                        {{ old('tromboflebite', $chestionar->tromboflebite) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="embolii">
+                                        embolii
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="embolii" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="embolii" id="embolii"
+                                        {{ old('embolii', $chestionar->embolii) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="hipertensiune_arteriala">
+                                        hipertensiune arterială
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="hipertensiune_arteriala" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="hipertensiune_arteriala" id="hipertensiune_arteriala"
+                                        {{ old('hipertensiune_arteriala', $chestionar->hipertensiune_arteriala) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="hipotensiune_arteriala">
+                                        hipotensiune arterială
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="hipotensiune_arteriala" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="hipotensiune_arteriala" id="hipotensiune_arteriala"
+                                        {{ old('hipotensiune_arteriala', $chestionar->hipotensiune_arteriala) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <label class="col-form-label" for="boli_vasculare_altele">
+                                            altele
+                                        </label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input
+                                            type="text"
+                                            id="boli_vasculare_altele"
+                                            name="boli_vasculare_altele"
+                                            class="form-control bg-white rounded-3 {{ $errors->has('boli_vasculare_altele') ? 'is-invalid' : '' }}"
+                                            value="{{ old('boli_vasculare_altele', $chestionar->boli_vasculare_altele) }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 ps-5">
+                <div class="row">
+                    <div class="col-md-auto">
+                        boli ale plămânilor și ale căilor respiratorii:
+                    </div>
+                    <div class="col">
+                        <div class="row align-items-center">
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="tbc">
+                                        TBC
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="tbc" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="tbc" id="tbc"
+                                        {{ old('tbc', $chestionar->tbc) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="bronsita_cronica">
+                                        bronsită cronică
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="bronsita_cronica" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="bronsita_cronica" id="bronsita_cronica"
+                                        {{ old('bronsita_cronica', $chestionar->bronsita_cronica) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="astm">
+                                        astm
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="astm" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="astm" id="astm"
+                                        {{ old('astm', $chestionar->astm) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="silicoza">
+                                        silicoză
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="silicoza" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="silicoza" id="silicoza"
+                                        {{ old('silicoza', $chestionar->silicoza) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <label class="col-form-label" for="boli_plamani_altele">
+                                            altele
+                                        </label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input
+                                            type="text"
+                                            id="boli_plamani_altele"
+                                            name="boli_plamani_altele"
+                                            class="form-control bg-white rounded-3 {{ $errors->has('boli_plamani_altele') ? 'is-invalid' : '' }}"
+                                            value="{{ old('boli_plamani_altele', $chestionar->boli_plamani_altele) }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 ps-5">
+                <div class="row">
+                    <div class="col-md-auto">
+                        boli digestive:
+                    </div>
+                    <div class="col">
+                        <div class="row align-items-center">
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="gastrita">
+                                        gastrită
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="gastrita" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="gastrita" id="gastrita"
+                                        {{ old('gastrita', $chestionar->gastrita) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="ulcer">
+                                        ulcer
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="ulcer" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="ulcer" id="ulcer"
+                                        {{ old('ulcer', $chestionar->ulcer) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="reflux_esofagian">
+                                        reflux esofagian
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="reflux_esofagian" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="reflux_esofagian" id="reflux_esofagian"
+                                        {{ old('reflux_esofagian', $chestionar->reflux_esofagian) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="hernie_hiatala">
+                                        hernie hiatală
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="hernie_hiatala" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="hernie_hiatala" id="hernie_hiatala"
+                                        {{ old('hernie_hiatala', $chestionar->hernie_hiatala) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <label class="col-form-label" for="boli_digestive_altele">
+                                            altele
+                                        </label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input
+                                            type="text"
+                                            id="boli_digestive_altele"
+                                            name="boli_digestive_altele"
+                                            class="form-control bg-white rounded-3 {{ $errors->has('boli_digestive_altele') ? 'is-invalid' : '' }}"
+                                            value="{{ old('boli_digestive_altele', $chestionar->boli_digestive_altele) }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 ps-5">
+                <div class="row">
+                    <div class="col-md-auto">
+                        boli hepatice:
+                    </div>
+                    <div class="col">
+                        <div class="row align-items-center">
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="hepatita">
+                                        hepatită
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="hepatita" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="hepatita" id="hepatita"
+                                        {{ old('hepatita', $chestionar->hepatita) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="ciroza">
+                                        ciroză
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="ciroza" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="ciroza" id="ciroza"
+                                        {{ old('ciroza', $chestionar->ciroza) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <label class="col-form-label" for="boli_hepatice_altele">
+                                            altele
+                                        </label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input
+                                            type="text"
+                                            id="boli_hepatice_altele"
+                                            name="boli_hepatice_altele"
+                                            class="form-control bg-white rounded-3 {{ $errors->has('boli_hepatice_altele') ? 'is-invalid' : '' }}"
+                                            value="{{ old('boli_hepatice_altele', $chestionar->boli_hepatice_altele) }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 ps-5">
+                <div class="row">
+                    <div class="col-md-auto">
+                        boli renale:
+                    </div>
+                    <div class="col">
+                        <div class="row align-items-center">
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="insuficienta_renala">
+                                        insuficiență renală
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="insuficienta_renala" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="insuficienta_renala" id="insuficienta_renala"
+                                        {{ old('insuficienta_renala', $chestionar->insuficienta_renala) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <label class="col-form-label" for="boli_renale_altele">
+                                            altele
+                                        </label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input
+                                            type="text"
+                                            id="boli_renale_altele"
+                                            name="boli_renale_altele"
+                                            class="form-control bg-white rounded-3 {{ $errors->has('boli_renale_altele') ? 'is-invalid' : '' }}"
+                                            value="{{ old('boli_renale_altele', $chestionar->boli_renale_altele) }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 ps-5">
+                <div class="row">
+                    <div class="col-md-auto">
+                        boli metabolice:
+                    </div>
+                    <div class="col">
+                        <div class="row align-items-center">
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="diabet_zaharat">
+                                        diabet zaharat
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="diabet_zaharat" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="diabet_zaharat" id="diabet_zaharat"
+                                        {{ old('diabet_zaharat', $chestionar->diabet_zaharat) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="guta">
+                                        gută
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="guta" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="guta" id="guta"
+                                        {{ old('guta', $chestionar->guta) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <label class="col-form-label" for="boli_metabolice_altele">
+                                            altele
+                                        </label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input
+                                            type="text"
+                                            id="boli_metabolice_altele"
+                                            name="boli_metabolice_altele"
+                                            class="form-control bg-white rounded-3 {{ $errors->has('boli_metabolice_altele') ? 'is-invalid' : '' }}"
+                                            value="{{ old('boli_metabolice_altele', $chestionar->boli_metabolice_altele) }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 ps-5">
+                <div class="row">
+                    <div class="col-md-auto">
+                        boli endocrine:
+                    </div>
+                    <div class="col">
+                        <div class="row align-items-center">
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="hipertiroidism">
+                                        hipertiroidism
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="hipertiroidism" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="hipertiroidism" id="hipertiroidism"
+                                        {{ old('hipertiroidism', $chestionar->hipertiroidism) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="feocromocitom">
+                                        feocromocitom
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="feocromocitom" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="feocromocitom" id="feocromocitom"
+                                        {{ old('feocromocitom', $chestionar->feocromocitom) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <label class="col-form-label" for="boli_endocrine_altele">
+                                            altele
+                                        </label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input
+                                            type="text"
+                                            id="boli_endocrine_altele"
+                                            name="boli_endocrine_altele"
+                                            class="form-control bg-white rounded-3 {{ $errors->has('boli_endocrine_altele') ? 'is-invalid' : '' }}"
+                                            value="{{ old('boli_endocrine_altele', $chestionar->boli_endocrine_altele) }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 ps-5">
+                <div class="row">
+                    <div class="col-md-auto">
+                        boli neurologice:
+                    </div>
+                    <div class="col">
+                        <div class="row align-items-center">
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="epilepsie">
+                                        epilepsie
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="epilepsie" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="epilepsie" id="epilepsie"
+                                        {{ old('epilepsie', $chestionar->epilepsie) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <label class="col-form-label" for="boli_neurologice_altele">
+                                            altele
+                                        </label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input
+                                            type="text"
+                                            id="boli_neurologice_altele"
+                                            name="boli_neurologice_altele"
+                                            class="form-control bg-white rounded-3 {{ $errors->has('boli_neurologice_altele') ? 'is-invalid' : '' }}"
+                                            value="{{ old('boli_neurologice_altele', $chestionar->boli_neurologice_altele) }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 ps-5">
+                <div class="row">
+                    <div class="col-md-auto">
+                        boli ale scheletului:
+                    </div>
+                    <div class="col">
+                        <div class="row align-items-center">
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="afectiuni_ale_coloanei">
+                                        afecțiuni ale coloanei
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="afectiuni_ale_coloanei" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="afectiuni_ale_coloanei" id="afectiuni_ale_coloanei"
+                                        {{ old('afectiuni_ale_coloanei', $chestionar->afectiuni_ale_coloanei) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <label class="col-form-label" for="boli_ale_scheletului_altele">
+                                            altele
+                                        </label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input
+                                            type="text"
+                                            id="boli_ale_scheletului_altele"
+                                            name="boli_ale_scheletului_altele"
+                                            class="form-control bg-white rounded-3 {{ $errors->has('boli_ale_scheletului_altele') ? 'is-invalid' : '' }}"
+                                            value="{{ old('boli_ale_scheletului_altele', $chestionar->boli_ale_scheletului_altele) }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 ps-5">
+                <div class="row">
+                    <div class="col-md-auto">
+                        boli psihice:
+                    </div>
+                    <div class="col">
+                        <div class="row align-items-center">
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="depresii">
+                                        depresii
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="depresii" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="depresii" id="depresii"
+                                        {{ old('depresii', $chestionar->depresii) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="fobii">
+                                        fobii
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="fobii" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="fobii" id="fobii"
+                                        {{ old('fobii', $chestionar->fobii) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <label class="col-form-label" for="boli_psihice_altele">
+                                            altele
+                                        </label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input
+                                            type="text"
+                                            id="boli_psihice_altele"
+                                            name="boli_psihice_altele"
+                                            class="form-control bg-white rounded-3 {{ $errors->has('boli_psihice_altele') ? 'is-invalid' : '' }}"
+                                            value="{{ old('boli_psihice_altele', $chestionar->boli_psihice_altele) }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 ps-5">
+                <div class="row">
+                    <div class="col-md-auto">
+                        boli hematologice:
+                    </div>
+                    <div class="col">
+                        <div class="row align-items-center">
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="sangerari_echimoze">
+                                        sângerați ușor sau faceți echimoze(vânătăi) la traumatiste minore sau periaj dentar
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="sangerari_echimoze" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="sangerari_echimoze" id="sangerari_echimoze"
+                                        {{ old('sangerari_echimoze', $chestionar->sangerari_echimoze) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="hemofilie">
+                                        hemofilie
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="hemofilie" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="hemofilie" id="hemofilie"
+                                        {{ old('hemofilie', $chestionar->hemofilie) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="anemie">
+                                        anemie
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="anemie" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="anemie" id="anemie"
+                                        {{ old('anemie', $chestionar->anemie) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="leucemie_limfom">
+                                        leucemie, limfom
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="leucemie_limfom" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="leucemie_limfom" id="leucemie_limfom"
+                                        {{ old('leucemie_limfom', $chestionar->leucemie_limfom) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <label class="col-form-label" for="boli_hematologice_altele">
+                                            altele
+                                        </label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input
+                                            type="text"
+                                            id="boli_hematologice_altele"
+                                            name="boli_hematologice_altele"
+                                            class="form-control bg-white rounded-3 {{ $errors->has('boli_hematologice_altele') ? 'is-invalid' : '' }}"
+                                            value="{{ old('boli_hematologice_altele', $chestionar->boli_hematologice_altele) }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 ps-5 align-items-left">
+                <div class="row">
+                    <div class="col-md-auto">
+                        <label for="alte_boli" class="col-form-label">alte boli:</label>
+                    </div>
+                    <div class="col">
+                        <input
+                            type="text"
+                            id="alte_boli"
+                            name="alte_boli"
+                            class="form-control bg-white rounded-3 {{ $errors->has('alte_boli') ? 'is-invalid' : '' }}"
+                            value="{{ old('alte_boli', $chestionar->alte_boli) }}">
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <div class="row mb-4 rounded-3" style="border:1px solid #e9ecef; border-left:0.25rem darkcyan solid">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-md-auto me-4">
+                        Suferiți de vreuna dintre următoarele boli infecțioase?
+                    </div>
+                    <div class="col-auto d-flex">
+                        <div class="form-check me-4">
+                            <input class="form-check-input" type="radio" value="1" name="boli_infectioase" id="boli_infectioase_da"
+                                {{ old('boli_infectioase', $chestionar->boli_infectioase) == '1' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="boli_infectioase_da">
+                                DA
+                            </label>
+                        </div>
+                        <div class="form-check me-4">
+                            <input class="form-check-input" type="radio" value="0" name="boli_infectioase" id="boli_infectioase_nu"
+                                {{ old('boli_infectioase', $chestionar->boli_infectioase) == '0' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="boli_infectioase_nu">
+                                NU
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 ps-5">
+                <div class="row">
+                    <div class="col-md-auto">
+                        sufăr de:
+                    </div>
+                    <div class="col">
+                        <div class="row align-items-center">
+                            <div class="col-md-auto d-flex">
+                                <div class="me-4">
+                                    hepatită cronică virală
+                                </div>
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="hepatita_cronica_virala_a">
+                                        A
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="hepatita_cronica_virala_a" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="hepatita_cronica_virala_a" id="hepatita_cronica_virala_a"
+                                        {{ old('hepatita_cronica_virala_a', $chestionar->hepatita_cronica_virala_a) == '1' ? 'checked' : '' }}>
+                                </div>
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="hepatita_cronica_virala_b">
+                                        B
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="hepatita_cronica_virala_b" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="hepatita_cronica_virala_b" id="hepatita_cronica_virala_b"
+                                        {{ old('hepatita_cronica_virala_b', $chestionar->hepatita_cronica_virala_b) == '1' ? 'checked' : '' }}>
+                                </div>
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="hepatita_cronica_virala_c">
+                                        C
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="hepatita_cronica_virala_c" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="hepatita_cronica_virala_c" id="hepatita_cronica_virala_c"
+                                        {{ old('hepatita_cronica_virala_c', $chestionar->hepatita_cronica_virala_c) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto d-flex">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="infectie_cu_virusul_hiv">
+                                        infecție cu virusul hiv
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="infectie_cu_virusul_hiv" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="infectie_cu_virusul_hiv" id="infectie_cu_virusul_hiv"
+                                        {{ old('infectie_cu_virusul_hiv', $chestionar->infectie_cu_virusul_hiv) == '1' ? 'checked' : '' }}>
+                                </div>
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="sida">
+                                        SIDA
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="sida" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="sida" id="sida"
+                                        {{ old('sida', $chestionar->sida) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="alte_infectii_cronice">
+                                        Alte infecții cronice
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="alte_infectii_cronice" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="alte_infectii_cronice" id="alte_infectii_cronice"
+                                        {{ old('alte_infectii_cronice', $chestionar->alte_infectii_cronice) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         <div class="row">
             <div class="col-lg-12 mb-2 d-flex justify-content-center">
