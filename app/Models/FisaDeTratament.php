@@ -12,6 +12,16 @@ class FisaDeTratament extends Model
     protected $table = 'fise_de_tratament';
     protected $guarded = [];
 
+    protected static function booted()
+    {
+        static::deleting(function($fisa_de_tratament) { // before delete() method call this
+            $fisa_de_tratament->chestionar_evaluare_stare_generala()->each(function($chestionar_evaluare_stare_generala) {
+                $chestionar_evaluare_stare_generala->delete(); // <-- direct deletion
+            });
+            // do the rest of the cleanup...
+        });
+    }
+
     public function path()
     {
         return "/fise-de-tratament/{$this->id}";

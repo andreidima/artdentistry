@@ -5,7 +5,7 @@
     <div class="row py-5 justify-content-center">
         {{-- <div class="col-md-3 position-absolute top-50 start-50 translate-middle"> --}}
         {{-- <div class="col-md-4 py-5 d-flex justify-content-center"> --}}
-            <div class="card col-lg-3 p-0" style="border:1px solid darkcyan">
+            <div class="card col-sm-7 col-lg-4 p-0" style="border:1px solid darkcyan">
                 <div class="card-header text-white" style="background-color:darkcyan;">
                     <div class="row">
                         <div class="col-lg-12 text-center fs-5">

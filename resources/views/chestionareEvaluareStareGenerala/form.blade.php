@@ -2,12 +2,35 @@
 
 <div class="row mb-0 p-3 d-flex border-radius: 0px 0px 40px 40px" id="app">
     <div class="col-lg-12 mb-0">
-        <div class="row mb-4 rounded-3" style="border:1px solid #e9ecef; border-left:0.25rem darkcyan solid">
-            <div class="col-lg-12 d-flex align-items-left">
-                        <input
-                            type="hidden"
-                            name="fisa_de_tratament_id"
-                            value="{{ $fisa_de_tratament->id }}">
+
+        <div class="row mb-5 d-flex text-center" style="">
+            <div class="col-12">
+                <h6 class="m-0">
+                    Decizia Consiliului Național al C.M.D.R. 16 06 2007
+                </h6>
+                <h3 class="m-0">CHESTIONAR EVALUARE STARE GENERALĂ</h3>
+                CITIȚI CU ATENȚIE ȘI COMPLETAȚI CORECT *
+            </div>
+        </div>
+
+        <div class="row mb-5 rounded-3 d-flex align-items-center" style="">
+            <div class="col-auto">
+                Nume
+                <b>{{ $fisa_de_tratament->nume }}</b>,
+                sex
+                <b>{{ $fisa_de_tratament->sex }}</b>,
+                data nașterii
+                @if ($fisa_de_tratament->varsta)
+                    <b>{{ \Carbon\Carbon::now()->subYears($fisa_de_tratament->varsta)->year }}</b>,
+                @endif
+                C.N.P.
+                <b>{{ $fisa_de_tratament->cnp }}</b>
+
+                {{-- Este necesar de transmis si fisa pentru care se completeaza chestionarul --}}
+                <input
+                    type="hidden"
+                    name="fisa_de_tratament_id"
+                    value="{{ $fisa_de_tratament->id }}">
             </div>
         </div>
 
@@ -37,7 +60,7 @@
             <div class="col-lg-12 ps-5 d-flex align-items-left">
                 <div class="row align-items-center">
                     <div class="col-md-auto">
-                        <label for="varsta_sarcina" class="col-form-label">Dacă sunteți gravidă ce vârstă are sarcina?</label>
+                        <label for="varsta_sarcina" class="col-form-label">dacă sunteți gravidă ce vârstă are sarcina?</label>
                     </div>
                     <div class="col-auto">
                         <input
@@ -57,7 +80,7 @@
             <div class="col-lg-12 ps-5 d-flex align-items-left">
                 <div class="row align-items-center">
                     <div class="col-auto">
-                        <label for="data_menstruatie" class="col-form-label">Data ultimei menstruații</label>
+                        <label for="data_menstruatie" class="col-form-label">data ultimei menstruații</label>
                     </div>
                     <div class="col-auto">
                         <input
@@ -950,7 +973,7 @@
             </div>
         </div>
 
-        <div class="row mb-4 rounded-3" style="border:1px solid #e9ecef; border-left:0.25rem darkcyan solid">
+        <div class="row mb-4 rounded-3" style="border:1px solid #e9ecef; border-left:0.25rem #e66800 solid">
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-md-auto me-4">
@@ -1042,6 +1065,508 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="row mb-4 rounded-3" style="border:1px solid #e9ecef; border-left:0.25rem darkcyan solid">
+            <div class="col-lg-12 d-flex align-items-left">
+                <div class="row">
+                    <div class="col-md-auto me-4">
+                        Ați primit vreodată sânge sau produse din sânge?
+                    </div>
+                    <div class="col-auto d-flex">
+                        <div class="form-check me-4">
+                            <input class="form-check-input" type="radio" value="1" name="primire_sange" id="primire_sange_da"
+                                {{ old('primire_sange', $chestionar->primire_sange) == '1' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="primire_sange_da">
+                                DA
+                            </label>
+                        </div>
+                        <div class="form-check me-4">
+                            <input class="form-check-input" type="radio" value="0" name="primire_sange" id="primire_sange_nu"
+                                {{ old('primire_sange', $chestionar->primire_sange) == '0' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="primire_sange_nu">
+                                NU
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 ps-5 align-items-left">
+                <div class="row">
+                    <div class="col-md-auto">
+                        <label for="primire_sange_cu_ce_ocazie" class="col-form-label">cu ce ocazie?</label>
+                    </div>
+                    <div class="col">
+                        <input
+                            type="text"
+                            id="primire_sange_cu_ce_ocazie"
+                            name="primire_sange_cu_ce_ocazie"
+                            class="form-control bg-white rounded-3 {{ $errors->has('primire_sange_cu_ce_ocazie') ? 'is-invalid' : '' }}"
+                            value="{{ old('primire_sange_cu_ce_ocazie', $chestionar->primire_sange_cu_ce_ocazie) }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4 rounded-3" style="border:1px solid #e9ecef; border-left:0.25rem #e66800 solid">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-md-auto me-4">
+                        Vi s-au mai efectuat tratamente stomatologice?
+                    </div>
+                    <div class="col-auto d-flex">
+                        <div class="form-check me-4">
+                            <input class="form-check-input" type="radio" value="1" name="tratamente_stomatologice" id="tratamente_stomatologice_da"
+                                {{ old('tratamente_stomatologice', $chestionar->tratamente_stomatologice) == '1' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="tratamente_stomatologice_da">
+                                DA
+                            </label>
+                        </div>
+                        <div class="form-check me-4">
+                            <input class="form-check-input" type="radio" value="0" name="tratamente_stomatologice" id="tratamente_stomatologice_nu"
+                                {{ old('tratamente_stomatologice', $chestionar->tratamente_stomatologice) == '0' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="tratamente_stomatologice_nu">
+                                NU
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 ps-5">
+                <div class="row">
+                    <div class="col-md-auto">
+                        mi s-au efectuat tratamente stomatologice:
+                    </div>
+                    <div class="col">
+                        <div class="row align-items-center">
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="fara_anestezie">
+                                        fără anestezie
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="fara_anestezie" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="fara_anestezie" id="fara_anestezie"
+                                        {{ old('fara_anestezie', $chestionar->fara_anestezie) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="cu_anestezie_locala">
+                                        cu anestezie locală
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="cu_anestezie_locala" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="cu_anestezie_locala" id="cu_anestezie_locala"
+                                        {{ old('cu_anestezie_locala', $chestionar->cu_anestezie_locala) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="cu_anestezie_locala_si_sedare_inhalatorie">
+                                        cu anestezie locală și sedare inhalatorie
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="cu_anestezie_locala_si_sedare_inhalatorie" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="cu_anestezie_locala_si_sedare_inhalatorie" id="cu_anestezie_locala_si_sedare_inhalatorie"
+                                        {{ old('cu_anestezie_locala_si_sedare_inhalatorie', $chestionar->cu_anestezie_locala_si_sedare_inhalatorie) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="cu_anestezie_generala">
+                                        cu anestezie generală
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="cu_anestezie_generala" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="cu_anestezie_generala" id="cu_anestezie_generala"
+                                        {{ old('cu_anestezie_generala', $chestionar->cu_anestezie_generala) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4 rounded-3" style="border:1px solid #e9ecef; border-left:0.25rem darkcyan solid">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-md-auto me-4">
+                        La tratamentele și anesteziile stomatologice anterioare au apărut accidente sau incidente
+                    </div>
+                    <div class="col-auto d-flex">
+                        <div class="form-check me-4">
+                            <input class="form-check-input" type="radio" value="1" name="accidente_sau_incidente" id="accidente_sau_incidente_da"
+                                {{ old('accidente_sau_incidente', $chestionar->accidente_sau_incidente) == '1' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="accidente_sau_incidente_da">
+                                DA
+                            </label>
+                        </div>
+                        <div class="form-check me-4">
+                            <input class="form-check-input" type="radio" value="0" name="accidente_sau_incidente" id="accidente_sau_incidente_nu"
+                                {{ old('accidente_sau_incidente', $chestionar->accidente_sau_incidente) == '0' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="accidente_sau_incidente_nu">
+                                NU
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 ps-5">
+                <div class="row">
+                    <div class="col-md-auto">
+                        au apărut:
+                    </div>
+                    <div class="col">
+                        <div class="row align-items-center">
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="lesin">
+                                        leșin
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="lesin" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="lesin" id="lesin"
+                                        {{ old('lesin', $chestionar->lesin) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="greata">
+                                        greață
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="greata" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="greata" id="greata"
+                                        {{ old('greata', $chestionar->greata) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="alergii">
+                                        alergii
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="alergii" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="alergii" id="alergii"
+                                        {{ old('alergii', $chestionar->alergii) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <label class="col-form-label" for="accidente_sau_incidente_altele">
+                                            altele
+                                        </label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input
+                                            type="text"
+                                            id="accidente_sau_incidente_altele"
+                                            name="accidente_sau_incidente_altele"
+                                            class="form-control bg-white rounded-3 {{ $errors->has('accidente_sau_incidente_altele') ? 'is-invalid' : '' }}"
+                                            value="{{ old('accidente_sau_incidente_altele', $chestionar->accidente_sau_incidente_altele) }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4 rounded-3" style="border:1px solid #e9ecef; border-left:0.25rem #e66800 solid">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-md-auto me-4">
+                        Vi s-au efectuat intervenții chirurgicale?
+                    </div>
+                    <div class="col-auto d-flex">
+                        <div class="form-check me-4">
+                            <input class="form-check-input" type="radio" value="1" name="interventii_chirurgicale" id="interventii_chirurgicale_da"
+                                {{ old('interventii_chirurgicale', $chestionar->interventii_chirurgicale) == '1' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="interventii_chirurgicale_da">
+                                DA
+                            </label>
+                        </div>
+                        <div class="form-check me-4">
+                            <input class="form-check-input" type="radio" value="0" name="interventii_chirurgicale" id="interventii_chirurgicale_nu"
+                                {{ old('interventii_chirurgicale', $chestionar->interventii_chirurgicale) == '0' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="interventii_chirurgicale_nu">
+                                NU
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 ps-5 align-items-left">
+                <div class="row">
+                    <div class="col-md-auto">
+                        <label for="interventii_chirurgicale_detaliat" class="col-form-label">mi s-au efectuat următoarele intervenții chirurgicale:</label>
+                    </div>
+                    <div class="col">
+                        <input
+                            type="text"
+                            id="interventii_chirurgicale_detaliat"
+                            name="interventii_chirurgicale_detaliat"
+                            class="form-control bg-white rounded-3 {{ $errors->has('interventii_chirurgicale_detaliat') ? 'is-invalid' : '' }}"
+                            value="{{ old('interventii_chirurgicale_detaliat', $chestionar->interventii_chirurgicale_detaliat) }}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 ps-5">
+                <div class="row">
+                    <div class="col-md-auto">
+                        am primit următoarele tipuri de anestezie:
+                    </div>
+                    <div class="col">
+                        <div class="row align-items-center">
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="anestezie_loco_regionala">
+                                        loco-regională
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="anestezie_loco_regionala" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="anestezie_loco_regionala" id="anestezie_loco_regionala"
+                                        {{ old('anestezie_loco_regionala', $chestionar->anestezie_loco_regionala) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="anestezie_sedare_inhalatorie">
+                                        anestezie sedare inhalatorie
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="anestezie_sedare_inhalatorie" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="anestezie_sedare_inhalatorie" id="anestezie_sedare_inhalatorie"
+                                        {{ old('anestezie_sedare_inhalatorie', $chestionar->anestezie_sedare_inhalatorie) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="anestezie_sedare_intravenoasa">
+                                        sedare intravenoasă
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="anestezie_sedare_intravenoasa" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="anestezie_sedare_intravenoasa" id="anestezie_sedare_intravenoasa"
+                                        {{ old('anestezie_sedare_intravenoasa', $chestionar->anestezie_sedare_intravenoasa) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="form-check me-4">
+                                    <label class="form-check-label" for="anestezie_generala">
+                                        generală
+                                    </label>
+                                    <input class="form-check-input" type="hidden" name="anestezie_generala" value="0" />
+                                    <input class="form-check-input" type="checkbox" value="1" name="anestezie_generala" id="anestezie_generala"
+                                        {{ old('anestezie_generala', $chestionar->anestezie_generala) == '1' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4 rounded-3" style="border:1px solid #e9ecef; border-left:0.25rem darkcyan solid">
+            <div class="col-lg-12 d-flex align-items-left">
+                <div class="me-4">
+                    Fumați
+                </div>
+                <div class="col-auto d-flex">
+                    <div class="form-check me-4">
+                        <input class="form-check-input" type="radio" value="1" name="fumat" id="fumat_da"
+                            {{ old('fumat', $chestionar->fumat) == '1' ? 'checked' : '' }}>
+                        <label class="form-check-label" for="fumat_da">
+                            DA
+                        </label>
+                    </div>
+                    <div class="form-check me-4">
+                        <input class="form-check-input" type="radio" value="0" name="fumat" id="fumat_nu"
+                            {{ old('fumat', $chestionar->fumat) == '0' ? 'checked' : '' }}>
+                        <label class="form-check-label" for="fumat_nu">
+                            NU
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 ps-5 d-flex align-items-left">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <label for="fumat_nr_tigari" class="col-form-label">fumez</label>
+                    </div>
+                    <div class="col-auto">
+                        <input
+                            type="text"
+                            id="fumat_nr_tigari"
+                            name="fumat_nr_tigari"
+                            class="form-control bg-white rounded-3 {{ $errors->has('fumat_nr_tigari') ? 'is-invalid' : '' }}"
+                            value="{{ old('fumat_nr_tigari', $chestionar->fumat_nr_tigari) }}">
+                    </div>
+                    <div class="col-auto">
+                        <label for="fumat_nr_tigari" class="col-form-label">
+                            țigarete (țigarete, pipă) pe zi de
+                        </label>
+                    </div>
+                    <div class="col-auto">
+                        <input
+                            type="text"
+                            id="fumat_nr_ani"
+                            name="fumat_nr_ani"
+                            class="form-control bg-white rounded-3 {{ $errors->has('fumat_nr_ani') ? 'is-invalid' : '' }}"
+                            value="{{ old('fumat_nr_ani', $chestionar->fumat_nr_ani) }}">
+                    </div>
+                    <div class="col-auto">
+                        <label for="fumat_nr_ani" class="col-form-label">
+                            ani
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4 rounded-3" style="border:1px solid #e9ecef; border-left:0.25rem #e66800 solid">
+            <div class="col-lg-12 d-flex align-items-left">
+                <div class="me-4">
+                    Consumați regulat băuturi alcolice
+                </div>
+                <div class="col-auto d-flex">
+                    <div class="form-check me-4">
+                        <input class="form-check-input" type="radio" value="1" name="bauturi_alcolice" id="bauturi_alcolice_da"
+                            {{ old('bauturi_alcolice', $chestionar->bauturi_alcolice) == '1' ? 'checked' : '' }}>
+                        <label class="form-check-label" for="bauturi_alcolice_da">
+                            DA
+                        </label>
+                    </div>
+                    <div class="form-check me-4">
+                        <input class="form-check-input" type="radio" value="0" name="bauturi_alcolice" id="bauturi_alcolice_nu"
+                            {{ old('bauturi_alcolice', $chestionar->bauturi_alcolice) == '0' ? 'checked' : '' }}>
+                        <label class="form-check-label" for="bauturi_alcolice_nu">
+                            NU
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 ps-5 d-flex align-items-left">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <label for="bauturi_alcolice_tip" class="col-form-label">ce tip?</label>
+                    </div>
+                    <div class="col-auto">
+                        <input
+                            type="text"
+                            id="bauturi_alcolice_tip"
+                            name="bauturi_alcolice_tip"
+                            class="form-control bg-white rounded-3 {{ $errors->has('bauturi_alcolice_tip') ? 'is-invalid' : '' }}"
+                            value="{{ old('bauturi_alcolice_tip', $chestionar->bauturi_alcolice_tip) }}">
+                    </div>
+                    <div class="col-auto">
+                        <label for="bauturi_alcolice_cantitate" class="col-form-label">
+                            ce cantitate?
+                        </label>
+                    </div>
+                    <div class="col-auto">
+                        <input
+                            type="text"
+                            id="bauturi_alcolice_cantitate"
+                            name="bauturi_alcolice_cantitate"
+                            class="form-control bg-white rounded-3 {{ $errors->has('bauturi_alcolice_cantitate') ? 'is-invalid' : '' }}"
+                            value="{{ old('bauturi_alcolice_cantitate', $chestionar->bauturi_alcolice_cantitate) }}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 ps-5 d-flex align-items-left">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        aveți probleme dacă întrerupeți consumul?
+                    </div>
+                    <div class="col-auto d-flex">
+                        <div class="form-check me-4">
+                            <input class="form-check-input" type="radio" value="1" name="bauturi_alcolice_probleme" id="bauturi_alcolice_probleme_da"
+                                {{ old('bauturi_alcolice_probleme', $chestionar->bauturi_alcolice_probleme) == '1' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="bauturi_alcolice_probleme_da">
+                                DA
+                            </label>
+                        </div>
+                        <div class="form-check me-4">
+                            <input class="form-check-input" type="radio" value="0" name="bauturi_alcolice_probleme" id="bauturi_alcolice_probleme_nu"
+                                {{ old('bauturi_alcolice_probleme', $chestionar->bauturi_alcolice_probleme) == '0' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="bauturi_alcolice_probleme_nu">
+                                NU
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4 rounded-3" style="border:1px solid #e9ecef; border-left:0.25rem darkcyan solid">
+            <div class="col-lg-12 d-flex align-items-left">
+                <div class="me-4">
+                    Consumați droguri?
+                </div>
+                <div class="col-auto d-flex">
+                    <div class="form-check me-4">
+                        <input class="form-check-input" type="radio" value="1" name="droguri" id="droguri_da"
+                            {{ old('droguri', $chestionar->droguri) == '1' ? 'checked' : '' }}>
+                        <label class="form-check-label" for="droguri_da">
+                            DA
+                        </label>
+                    </div>
+                    <div class="form-check me-4">
+                        <input class="form-check-input" type="radio" value="0" name="droguri" id="droguri_nu"
+                            {{ old('droguri', $chestionar->droguri) == '0' ? 'checked' : '' }}>
+                        <label class="form-check-label" for="droguri_nu">
+                            NU
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 ps-5 d-flex align-items-left">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <label for="droguri_tip" class="col-form-label">ce tip?</label>
+                    </div>
+                    <div class="col-auto">
+                        <input
+                            type="text"
+                            id="droguri_tip"
+                            name="droguri_tip"
+                            class="form-control bg-white rounded-3 {{ $errors->has('droguri_tip') ? 'is-invalid' : '' }}"
+                            value="{{ old('droguri_tip', $chestionar->droguri_tip) }}">
+                    </div>
+                    <div class="col-auto">
+                        <label for="droguri_cantitate" class="col-form-label">
+                            ce cantitate?
+                        </label>
+                    </div>
+                    <div class="col-auto">
+                        <input
+                            type="text"
+                            id="droguri_cantitate"
+                            name="droguri_cantitate"
+                            class="form-control bg-white rounded-3 {{ $errors->has('droguri_cantitate') ? 'is-invalid' : '' }}"
+                            value="{{ old('droguri_cantitate', $chestionar->droguri_cantitate) }}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 ps-5 d-flex align-items-left">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        sunteți dependent?
+                    </div>
+                    <div class="col-auto d-flex">
+                        <div class="form-check me-4">
+                            <input class="form-check-input" type="radio" value="1" name="droguri_dependenta" id="droguri_dependenta_da"
+                                {{ old('droguri_dependenta', $chestionar->droguri_dependenta) == '1' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="droguri_dependenta_da">
+                                DA
+                            </label>
+                        </div>
+                        <div class="form-check me-4">
+                            <input class="form-check-input" type="radio" value="0" name="droguri_dependenta" id="droguri_dependenta_nu"
+                                {{ old('droguri_dependenta', $chestionar->droguri_dependenta) == '0' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="droguri_dependenta_nu">
+                                NU
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-lg-12 mb-2 d-flex justify-content-center">

@@ -9,7 +9,7 @@
                 <h4 for="fisa_numar" class="text-white p-2" style="background-color:#e66800"
                 >FIȘĂ DE TRATAMENT</h4>
             </div> --}}
-            <div class="col-lg-1 mb-2">
+            <div class="col-lg-2 mb-2">
                 <label for="fisa_numar" class="mb-0 ps-3">Număr:</label>
                 <input
                     type="text"
