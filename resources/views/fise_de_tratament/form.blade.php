@@ -29,16 +29,29 @@
                     value="{{ old('medic_curant', $fisa_de_tratament->medic_curant) }}"
                     >
             </div>
-            <div class="col-lg-1 mb-2 justify-content-center">
-                <label for="data" class="mb-0 ps-1">Data:</label>
-                    <vue2-datepicker
-                        data-veche="{{ old('data', ($fisa_de_tratament->data ?? '')) }}"
-                        nume-camp-db="data"
-                        tip="date"
-                        value-type="YYYY-MM-DD"
-                        format="DD-MM-YYYY"
-                        :latime="{ width: '125px' }"
-                    ></vue2-datepicker>
+            <div class="col-lg-3 mb-2 d-flex">
+                <div class="me-2">
+                    <label for="data" class="mb-0 ps-1">Data:</label>
+                        <vue2-datepicker
+                            data-veche="{{ old('data', ($fisa_de_tratament->data ?? '')) }}"
+                            nume-camp-db="data"
+                            tip="date"
+                            value-type="YYYY-MM-DD"
+                            format="DD-MM-YYYY"
+                            :latime="{ width: '125px' }"
+                        ></vue2-datepicker>
+                </div>
+                <div>
+                    <label for="ora" class="mb-0 ps-1">Ora:</label>
+                        <vue2-datepicker
+                            data-veche="{{ old('ora', ($fisa_de_tratament->ora ?? '')) }}"
+                            nume-camp-db="ora"
+                            tip="time"
+                            value-type="hh:mm:ss"
+                            format="hh:mm"
+                            :latime="{ width: '125px' }"
+                        ></vue2-datepicker>
+                    </div>
             </div>
         </div>
         <div class="row px-2 py-2 mb-0"

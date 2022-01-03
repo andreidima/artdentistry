@@ -28,15 +28,17 @@ Route::group(['middleware' => 'auth'], function () {
         return view('acasa');
     });
 
-    Route::resource('pacienti', PacientController::class,  ['parameters' => ['pacienti' => 'pacient']]);
+    // Route::resource('pacienti', PacientController::class,  ['parameters' => ['pacienti' => 'pacient']]);
 
-    Route::resource('servicii-categorii', ServiciuCategorieController::class,  ['parameters' => ['servicii-categorii' => 'serviciu_categorie']]);
-    Route::resource('servicii', ServiciuController::class,  ['parameters' => ['servicii' => 'serviciu']]);
-    Route::get('vizualizare-ramificatii-servicii', [VizualizareRamificatieServiciuController::class, 'vizualizareRamificatieServiciu'])->name('vizualizare-ramificatii-servicii');
+    // Route::resource('servicii-categorii', ServiciuCategorieController::class,  ['parameters' => ['servicii-categorii' => 'serviciu_categorie']]);
+    // Route::resource('servicii', ServiciuController::class,  ['parameters' => ['servicii' => 'serviciu']]);
+    // Route::get('vizualizare-ramificatii-servicii', [VizualizareRamificatieServiciuController::class, 'vizualizareRamificatieServiciu'])->name('vizualizare-ramificatii-servicii');
 
-    Route::get('programari/afisare-tabel', [ProgramareController::class, 'afisareTabel'])->name('programari.afisare_tabel');
-    Route::resource('programari', ProgramareController::class,  ['parameters' => ['programari' => 'programare']]);
+    // Route::get('programari/afisare-tabel', [ProgramareController::class, 'afisareTabel'])->name('programari.afisare_tabel');
+    // Route::resource('programari', ProgramareController::class,  ['parameters' => ['programari' => 'programare']]);
 
     Route::resource('fise-de-tratament/{fisa_de_tratament}/chestionar-evaluare-stare-generala', ChestionarEvaluareStareGeneralaController::class,  ['parameters' => ['chestionar-evaluare-stare-generala' => 'chestionar']]);
     Route::resource('fise-de-tratament', FisaDeTratamentController::class,  ['parameters' => ['fise-de-tratament' => 'fisa_de_tratament']]);
+
+    Route::get('programari', [ProgramareController::class, 'afisareSaptamanal'])->name('programari.afisareSaptamanal');
 });

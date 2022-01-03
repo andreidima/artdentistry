@@ -118,6 +118,7 @@ class FisaDeTratamentController extends Controller
             'fisa_numar' => 'numeric|between:0,99999',
             'medic_curant' => 'nullable|max:500',
             'data' => 'nullable',
+            'ora' => 'nullable',
             'nume' => 'nullable|max:500',
             'varsta' => 'nullable|numeric|integer|between:0,150',
             'sex' => 'nullable|max:1',

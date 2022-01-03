@@ -48,7 +48,12 @@
                                 <i class="fas fa-file-alt me-1"></i>Fișe de tratament
                             </a>
                         </li>
-                        <li class="nav-item me-3 dropdown">
+                        <li class="nav-item me-3">
+                            <a class="nav-link active" aria-current="page" href="{{ route('programari.afisareSaptamanal') }}">
+                                <i class="fas fa-calendar-check me-1"></i>Programări
+                            </a>
+                        </li>
+                        {{-- <li class="nav-item me-3 dropdown">
                             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-calendar-check me-1"></i>Programări
                             </a>
@@ -57,7 +62,7 @@
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="{{ route('programari.afisare_tabel') }}">Vizualizare tabel</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
                         {{-- <li class="nav-item me-3">
                             <a class="nav-link active" aria-current="page" href="{{ route('servicii.index') }}">
                                 <i class="fas fa-tooth me-1"></i>Servicii
@@ -68,7 +73,7 @@
                                 <i class="fas fa-tooth me-1"></i>Categorii de servicii
                             </a>
                         </li> --}}
-                        <li class="nav-item me-3 dropdown">
+                        {{-- <li class="nav-item me-3 dropdown">
                             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-tooth me-1"></i>Servicii
                             </a>
@@ -79,7 +84,7 @@
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="{{ route('vizualizare-ramificatii-servicii') }}">Vizualizarea ramificațiilor</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
                     </ul>
 
                     <!-- Right Side Of Navbar -->
