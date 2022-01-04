@@ -15,34 +15,29 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // Saptamana aceasta
-        $data = \Carbon\Carbon::today()->startOfWeek();
-        for ($zile = 0; $zile < 5 ; $zile++){
-            $data->addDays($zile);
+        // Fise
+        \App\Models\FisaDeTratament::factory(50)->create();
 
-            for ($i = 0; $i < random(10); $i++){
-                $fisa = \App\Models\Fisa::factory()->create();
-                $programare->data = $data;
-                $programare->ora = $ora->ora;
-                $programare->save();
-            }
-        }
+        //Programari
+        for ($saptamana_zile = 0; $saptamana_zile <= 7; $saptamana_zile += 7){
+            $data = \Carbon\Carbon::today()->addDays($saptamana_zile)->startOfWeek();
 
-        // Saptamana viitoare
-        $ore_de_program = \App\Models\ProgramareOraDeProgram::select('ziua_din_saptamana', 'ora')
-            ->inRandomOrder()
-            ->take(70)
-            ->get();
+            for ($zile = 0; $zile < 5 ; $zile++){
+                $ora = \Carbon\Carbon::parse($data);
+                $ora->hour = 8;
+                $ora->minute = 0;
 
-        foreach ($ore_de_program->groupBy('ziua_din_saptamana') as $ore_zilnic){
-            $data = \Carbon\Carbon::today()->addDays(7)->startOfWeek();
-            $data->addDays($ore_zilnic->first()->ziua_din_saptamana - 1);
+                for ($i = 0; $i < rand(5, 10); $i++){
+                    $programare = new \App\Models\Programare;
+                    $programare->fisa_de_tratament_id = \App\Models\FisaDeTratament::inRandomOrder()->first()->id;
+                    $programare->data = $data;
+                    $programare->ora = $ora;
+                    $programare->save();
 
-            foreach($ore_zilnic as $ora){
-                $programare = \App\Models\Programare::factory()->create();
-                $programare->data = $data;
-                $programare->ora = $ora->ora;
-                $programare->save();
+                    $ora->addMinutes(rand(2, 10) * 10);
+                }
+
+                $data->addDay();
             }
         }
     }

@@ -20,8 +20,8 @@
                 sex
                 <b>{{ $fisa_de_tratament->sex }}</b>,
                 data nașterii
-                @if ($fisa_de_tratament->varsta)
-                    <b>{{ \Carbon\Carbon::now()->subYears($fisa_de_tratament->varsta)->year }}</b>,
+                @if ($fisa_de_tratament->cnp)
+                    <b>{{ substr($fisa_de_tratament->cnp, 5, 2) }}.{{ substr($fisa_de_tratament->cnp, 3, 2) }}.{{ substr($fisa_de_tratament->cnp, 1, 2) }}</b>,
                 @endif
                 C.N.P.
                 <b>{{ $fisa_de_tratament->cnp }}</b>

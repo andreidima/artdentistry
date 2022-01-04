@@ -40,5 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('fise-de-tratament/{fisa_de_tratament}/chestionar-evaluare-stare-generala', ChestionarEvaluareStareGeneralaController::class,  ['parameters' => ['chestionar-evaluare-stare-generala' => 'chestionar']]);
     Route::resource('fise-de-tratament', FisaDeTratamentController::class,  ['parameters' => ['fise-de-tratament' => 'fisa_de_tratament']]);
 
-    Route::get('programari', [ProgramareController::class, 'afisareSaptamanal'])->name('programari.afisareSaptamanal');
+    Route::get('programari/afisare-saptamanal', [ProgramareController::class, 'afisareSaptamanal'])->name('programari.afisareSaptamanal');
+    Route::get('programari/{programare}/semnare', [ProgramareController::class, 'semnare']);
+    Route::resource('programari', ProgramareController::class,  ['parameters' => ['programari' => 'programare']]);
 });

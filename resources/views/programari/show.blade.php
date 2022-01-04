@@ -6,7 +6,7 @@
         <div class="col-md-7">
             <div class="shadow-lg" style="border-radius: 40px 40px 40px 40px;">
                 <div class="border border-secondary p-2" style="border-radius: 40px 40px 0px 0px; background-color:#e66800">
-                    <h6 class="ms-2 my-0" style="color:white"><i class="fas fa-calendar-check me-1"></i>Programări / {{ $programare->pacient->nume ?? '' }}</h6>
+                    <h6 class="ms-2 my-0" style="color:white"><i class="fas fa-calendar-check me-1"></i>Programări / {{ $programare->fisa_de_tratament->nume ?? '' }}</h6>
                 </div>
 
                 <div class="card-body py-2 border border-secondary"
@@ -24,18 +24,7 @@
                                     Pacient
                                 </td>
                                 <td>
-                                    {{ $programare->pacient->nume }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Servicii
-                                </td>
-                                <td>
-                                    @foreach ($programare->servicii->sortBy('nume') as $serviciu)
-                                        {{ $serviciu->nume }}
-                                        <br />
-                                    @endforeach
+                                    {{ $programare->fisa_de_tratament->nume }}
                                 </td>
                             </tr>
                             <tr>
@@ -48,26 +37,34 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Ora început
+                                    Ora
                                 </td>
                                 <td>
-                                    {{ $programare->ora_inceput ? \Carbon\Carbon::parse($programare->ora_inceput)->isoFormat('HH:mm') : '' }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Ora sfârșit
-                                </td>
-                                <td>
-                                    {{ $programare->ora_sfarsit ? \Carbon\Carbon::parse($programare->ora_sfarsit)->isoFormat('HH:mm') : '' }}
+                                    {{ $programare->ora ? \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') : '' }}
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    Preț total
+                                    Evoluție și tratament
                                 </td>
                                 <td>
-                                    {{ $programare->pret_total }}
+                                    {{ $programare->evolutie_si_tratament }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Cod
+                                </td>
+                                <td>
+                                    {{ $programare->cod }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Semnătura
+                                </td>
+                                <td>
+                                    <img src="{{ $programare->semnatura }}"/>
                                 </td>
                             </tr>
                             <tr>
@@ -83,7 +80,7 @@
 
                     <div class="form-row mb-2 px-2">
                         <div class="col-lg-12 d-flex justify-content-center">
-                            <a class="btn btn-primary text-white btn-sm rounded-pill" href="/programari">Pagină programări</a>
+                            <a class="btn btn-primary text-white rounded-pill" href="/programari">Pagină programări</a>
                         </div>
                     </div>
 

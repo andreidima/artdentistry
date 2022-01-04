@@ -12,7 +12,7 @@
             </h4>
         </div>
         <div class="col-lg-6" id="app">
-            <form class="needs-validation" novalidate method="GET" action="programari">
+            <form class="needs-validation" novalidate method="GET" action="/programari/afisare-saptamanal">
                 @csrf
                 <div class="row mb-1 input-group custom-search-form justify-content-center">
                     <div class="col-lg-4 d-flex">
@@ -32,7 +32,7 @@
                         </button>
                     </div>
                     <div class="col-lg-4 d-grid">
-                        <a class="btn btn-sm bg-secondary text-white border border-dark rounded-pill" href="programari" role="button">
+                        <a class="btn btn-sm bg-secondary text-white border border-dark rounded-pill" href="/programari/afisare-saptamanal" role="button">
                             <i class="far fa-trash-alt text-white me-1"></i>Resetează căutarea
                         </a>
                     </div>
@@ -49,26 +49,29 @@
             @for ($ziua = \Carbon\Carbon::parse($search_data->startOfWeek()); $ziua->lessThan($search_data->endOfWeek()->subDays(2)); $ziua->addDay())
                 <div class="col-lg-2 table-responsive rounded">
                     <table class="table table-striped table-hover table-sm rounded">
-                        <thead class="text-white rounded" style="background-color:#e66800;">
+                        <thead class="text-white rounded-3" style="background-color:#e66800;">
                             <tr class="" style="padding:2rem">
-                                <th class="text-center">
+                                <th class="text-center rounded-3">
                                     {{ \Carbon\Carbon::parse($ziua)->dayName }}
                                     <br>
                                     {{ \Carbon\Carbon::parse($ziua)->isoFormat('DD.MM.YYYY') }}
                                 </th>
                             </tr>
                         </thead>
-                        @foreach ($fise->where('data', \Carbon\Carbon::parse($ziua)->isoformat('YYYY-MM-DD')) as $fisa)
+                        @foreach ($programari->where('data', \Carbon\Carbon::parse($ziua)->isoformat('YYYY-MM-DD')) as $programare)
                             <tr>
-                                    <td class="text-center text-white">
-                                        <span class="px-1">
-                                            {{ $fisa->ora ? \Carbon\Carbon::parse($fisa->ora)->isoFormat('HH:mm') : '' }}
+                                <td class="d-flex">
+                                    <div class="me-2">
+                                        <span class="px-1 text-white rounded-3" style="background-color:darkcyan;">
+                                            {{ $programare->ora ? \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') : '' }}
                                         </span>
-                                        -
-                                                <span>
-                                                    {{ $fisa->nume }}
-                                                </span>
-                                    </td>
+                                    </div>
+                                    <div>
+                                        {{ $programare->fisa_de_tratament->nume }}
+                                        <br>
+                                        {{ $programare->fisa_de_tratament->telefon }}
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
                     </table>

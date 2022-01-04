@@ -104,7 +104,7 @@ class FisaDeTratamentController extends Controller
     {
         // $fisa_de_tratament->chestionar_evaluare_stare_generala->delete();
         $fisa_de_tratament->delete();
-        return redirect('/fise-de-tratament')->with('status', 'Fișa de tratament pentru pacientul "' . $fisa_de_tratament->nume . '" a fost ștearsa cu succes!');
+        return redirect('/fise-de-tratament')->with('status', 'Fișa de tratament pentru pacientul "' . $fisa_de_tratament->nume . '" a fost ștearsă cu succes!');
     }
 
     /**

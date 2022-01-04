@@ -41,6 +41,7 @@
                     <thead class="text-white rounded" style="background-color:#e66800;">
                         <tr class="" style="padding:2rem">
                             <th>Nr. Crt.</th>
+                            <th>Număr</th>
                             <th>Nume</th>
                             <th>Telefon</th>
                             <th class="text-center">Chestionar</th>
@@ -52,6 +53,9 @@
                             <tr>
                                 <td align="">
                                     {{ ($fise_de_tratament ->currentpage()-1) * $fise_de_tratament ->perpage() + $loop->index + 1 }}
+                                </td>
+                                <td>
+                                    <b>{{ $fisa_de_tratament->fisa_numar }}</b>
                                 </td>
                                 <td>
                                     <b>{{ $fisa_de_tratament->nume }}</b>

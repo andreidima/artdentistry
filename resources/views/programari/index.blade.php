@@ -10,7 +10,9 @@
                 <form class="needs-validation" novalidate method="GET" action="{{ route('programari.index') }}">
                     @csrf
                     <div class="row mb-1 input-group custom-search-form justify-content-center">
-                        <input type="text" class="form-control form-control-sm col-md-4 me-1 border rounded-pill" id="search_nume" name="search_nume" placeholder="Nume" autofocus
+                        <input type="text" class="form-control form-control-sm col-md-1 me-2 border rounded-pill" id="search_numar" name="search_numar" placeholder="Număr" autofocus
+                                value="{{ $search_numar }}">
+                        <input type="text" class="form-control form-control-sm col-md-3 me-1 border rounded-pill" id="search_nume" name="search_nume" placeholder="Nume" autofocus
                                 value="{{ $search_nume }}">
                         <div class="col-lg-4 d-flex">
                             <label for="search_data" class="mb-0 align-self-center me-1">Data:</label>
@@ -50,10 +52,11 @@
                     <thead class="text-white rounded" style="background-color:#e66800;">
                         <tr class="" style="padding:2rem">
                             <th>Nr. Crt.</th>
+                            <th>Număr</th>
                             <th>Nume</th>
                             <th class="text-center">Data</th>
-                            <th class="text-center">Ora început</th>
-                            <th class="text-center">Ora sfârșit</th>
+                            <th class="text-center">Ora</th>
+                            <th class="text-center">Semnătura</th>
                             <th class="text-end">Acțiuni</th>
                         </tr>
                     </thead>
@@ -64,16 +67,23 @@
                                     {{ ($programari ->currentpage()-1) * $programari ->perpage() + $loop->index + 1 }}
                                 </td>
                                 <td>
-                                    <b>{{ $programare->pacient->nume ?? '' }}</b>
+                                    <b>{{ $programare->fisa_de_tratament->fisa_numar ?? '' }}</b>
+                                </td>
+                                <td>
+                                    <b>{{ $programare->fisa_de_tratament->nume ?? '' }}</b>
                                 </td>
                                 <td class="text-center">
                                     {{ $programare->data ? \Carbon\Carbon::parse($programare->data)->isoFormat('DD.MM.YYYY') : '' }}
                                 </td>
                                 <td class="text-center">
-                                    {{ $programare->ora_inceput ? \Carbon\Carbon::parse($programare->ora_inceput)->isoFormat('HH:mm') : '' }}
+                                    {{ $programare->ora ? \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') : '' }}
                                 </td>
                                 <td class="text-center">
-                                    {{ $programare->ora_sfarsit ? \Carbon\Carbon::parse($programare->ora_sfarsit)->isoFormat('HH:mm') : '' }}
+                                    <a href="{{ $programare->path() }}/semnare"
+                                        class="flex me-1"
+                                    >
+                                        <span class="badge bg-primary">Semnează</span>
+                                    </a>
                                 </td>
                                 <td class="d-flex justify-content-end">
                                     <a href="{{ $programare->path() }}"

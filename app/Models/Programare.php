@@ -17,13 +17,8 @@ class Programare extends Model
         return "/programari/{$this->id}";
     }
 
-    public function pacient()
+    public function fisa_de_tratament()
     {
-        return $this->belongsTo(Pacient::class, 'pacient_id');
-    }
-
-    public function servicii()
-    {
-        return $this->belongsToMany(Serviciu::class, 'programare_serviciu', 'programare_id', 'serviciu_id');
+        return $this->belongsTo(FisaDeTratament::class, 'fisa_de_tratament_id');
     }
 }
