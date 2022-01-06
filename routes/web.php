@@ -41,6 +41,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('fise-de-tratament', FisaDeTratamentController::class,  ['parameters' => ['fise-de-tratament' => 'fisa_de_tratament']]);
 
     Route::get('programari/afisare-saptamanal', [ProgramareController::class, 'afisareSaptamanal'])->name('programari.afisareSaptamanal');
-    Route::get('programari/{programare}/semnare', [ProgramareController::class, 'semnare']);
     Route::resource('programari', ProgramareController::class,  ['parameters' => ['programari' => 'programare']]);
 });

@@ -61,10 +61,10 @@ class ProgramareController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $programare = Programare::create($this->validateRequest($request));
 
-        return redirect('/programari')->with('status', 'Programarea pentru „' . ($programare->fisa_de_tratament->nume ?? '') . '” a fost adăugată cu succes!');
+        // return redirect('/programari')->with('status', 'Programarea pentru „' . ($programare->fisa_de_tratament->nume ?? '') . '” a fost adăugată cu succes!');
+        return redirect($programare->path())->with('status', 'Programarea pentru „' . ($programare->fisa_de_tratament->nume ?? '') . '” a fost adăugată cu succes!');
     }
 
     /**
@@ -100,9 +100,13 @@ class ProgramareController extends Controller
      */
     public function update(Request $request, Programare $programare)
     {
+        if(is_null($request->semnatura)){
+            $request->request->remove('semnatura');
+        }
+
         $programare->update($this->validateRequest($request));
 
-        return redirect('/programari')->with('status', 'Programarea pentru „' . ($programare->fisa_de_tratament->nume ?? '') . '” a fost modificată cu succes!');
+        return redirect($programare->path())->with('status', 'Programarea pentru „' . ($programare->fisa_de_tratament->nume ?? '') . '” a fost modificată cu succes!');
     }
 
     /**
@@ -138,11 +142,6 @@ class ProgramareController extends Controller
             [
             ]
         );
-    }
-
-    public function semnare(Programare $programare)
-    {
-        return view('programari.diverse.showSemnare', compact('programare'));
     }
 
     /**

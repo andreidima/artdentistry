@@ -56,7 +56,6 @@
                             <th>Nume</th>
                             <th class="text-center">Data</th>
                             <th class="text-center">Ora</th>
-                            <th class="text-center">Semnătura</th>
                             <th class="text-end">Acțiuni</th>
                         </tr>
                     </thead>
@@ -78,13 +77,13 @@
                                 <td class="text-center">
                                     {{ $programare->ora ? \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') : '' }}
                                 </td>
-                                <td class="text-center">
+                                {{-- <td class="text-center">
                                     <a href="{{ $programare->path() }}/semnare"
                                         class="flex me-1"
                                     >
                                         <span class="badge bg-primary">Semnează</span>
                                     </a>
-                                </td>
+                                </td> --}}
                                 <td class="d-flex justify-content-end">
                                     <a href="{{ $programare->path() }}"
                                         class="flex me-1"
