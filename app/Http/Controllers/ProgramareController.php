@@ -15,7 +15,7 @@ class ProgramareController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $search_numar = \Request::get('search_numar');
         $search_nume = \Request::get('search_nume');
@@ -38,6 +38,8 @@ class ProgramareController extends Controller
             ->latest()
             ->simplePaginate(25);
 
+        $request->session()->forget('programare_return_url');
+
         return view('programari.index', compact('programari', 'search_numar', 'search_nume', 'search_data'));
     }
 
@@ -46,9 +48,11 @@ class ProgramareController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $fise_de_tratament = FisaDeTratament::orderBy('fisa_numar')->get();
+
+        $request->session()->get('programare_return_url') ?? $request->session()->put('programare_return_url', url()->previous());
 
         return view('programari.create', compact('fise_de_tratament'));
     }
@@ -61,10 +65,27 @@ class ProgramareController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validateRequest($request);
+
+        if ($request->fisa_de_tratament){
+            $programare = Programare::create($request->except('nume', 'telefon'));
+        } else {
+            $fisa_de_tratament = FisaDeTratament::create(
+                [
+                    'nume' => $request->nume,
+                    'telefon' => $request->telefon
+                ]
+            );
+            $programare = Programare::create($request->except('nume', 'telefon'),
+                [
+                    'fisa_de_tratament' => $fisa_de_tratament->id
+                ]
+            );
+        }
         $programare = Programare::create($this->validateRequest($request));
 
-        // return redirect('/programari')->with('status', 'Programarea pentru „' . ($programare->fisa_de_tratament->nume ?? '') . '” a fost adăugată cu succes!');
-        return redirect($programare->path())->with('status', 'Programarea pentru „' . ($programare->fisa_de_tratament->nume ?? '') . '” a fost adăugată cu succes!');
+        return redirect($request->session()->get('programare_return_url') ?? ('/programari/afisare-saptamanal'))
+            ->with('status', 'Programarea pentru „' . ($programare->fisa_de_tratament->nume ?? '') . '” a fost adăugată cu succes!');
     }
 
     /**
@@ -73,7 +94,7 @@ class ProgramareController extends Controller
      * @param  \App\ServiceFisa  $programare
      * @return \Illuminate\Http\Response
      */
-    public function show(Programare $programare)
+    public function show(Request $request, Programare $programare)
     {
         return view('programari.show', compact('programare'));
     }
@@ -84,9 +105,11 @@ class ProgramareController extends Controller
      * @param  \App\Programare  $programare
      * @return \Illuminate\Http\Response
      */
-    public function edit(Programare $programare)
+    public function edit(Request $request, Programare $programare)
     {
         $fise_de_tratament = FisaDeTratament::orderBy('fisa_numar')->get();
+
+        $request->session()->get('salariat_return_url') ?? $request->session()->put('salariat_return_url', url()->previous());
 
         return view('programari.edit', compact('programare', 'fise_de_tratament'));
     }
@@ -106,7 +129,8 @@ class ProgramareController extends Controller
 
         $programare->update($this->validateRequest($request));
 
-        return redirect($programare->path())->with('status', 'Programarea pentru „' . ($programare->fisa_de_tratament->nume ?? '') . '” a fost modificată cu succes!');
+        return redirect($request->session()->get('programare_return_url') ?? ('/programari/afisare-saptamanal'))
+            ->with('status', 'Programarea pentru „' . ($programare->fisa_de_tratament->nume ?? '') . '” a fost modificată cu succes!');
     }
 
     /**
@@ -115,11 +139,11 @@ class ProgramareController extends Controller
      * @param  \App\Programare  $programare
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Programare $programare)
+    public function destroy(Request $request, Programare $programare)
     {
         $programare->delete();
 
-        return redirect('/programari')->with('status', 'Programarea pentru „' . ($programare->fisa_de_tratament->nume ?? '') . '” a fost ștearsă cu succes!');
+        return back()->with('status', 'Programarea pentru „' . ($programare->fisa_de_tratament->nume ?? '') . '” a fost ștearsă cu succes!');
     }
 
     /**
@@ -131,7 +155,9 @@ class ProgramareController extends Controller
     {
         return request()->validate(
             [
-                'fisa_de_tratament_id' => 'required',
+                'fisa_de_tratament' => 'nullable',
+                'nume' => 'required_without:fisa_de_tratament',
+                'telefon' => 'nullable',
                 'data' => 'nullable',
                 'ora' => 'nullable',
                 'evolutie_si_tratament' => 'nullable|max:500',
@@ -149,7 +175,7 @@ class ProgramareController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function afisareSaptamanal()
+    public function afisareSaptamanal(Request $request)
     {
         $search_data = \Request::get('search_data') ? \Carbon\Carbon::parse(\Request::get('search_data')) : \Carbon\Carbon::today();
         $data_de_cautat = \Carbon\Carbon::parse($search_data);
@@ -159,6 +185,8 @@ class ProgramareController extends Controller
             ->whereDate('data', '<=', $data_de_cautat->endOfWeek())
             ->orderBy('ora')
             ->get();
+
+        $request->session()->forget('programare_return_url');
 
         return view('programari.afisareSaptamanal', compact('programari', 'search_data'));
     }

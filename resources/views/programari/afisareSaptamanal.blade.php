@@ -3,7 +3,7 @@
 @section('content')
 <div class="container card" id="app1" style="border-radius: 40px 40px 40px 40px;">
     <div class="row card-header justify-content-between align-items-center" style="border-radius: 40px 40px 0px 0px;">
-        <div class="col-lg-6">
+        <div class="col-lg-3">
             <h4 class="mb-0">
                 <a href="programari">
                     <i class="fas fa-calendar-check me-1"></i>
@@ -14,7 +14,7 @@
         <div class="col-lg-6" id="app">
             <form class="needs-validation" novalidate method="GET" action="/programari/afisare-saptamanal">
                 @csrf
-                <div class="row mb-1 input-group custom-search-form justify-content-center">
+                <div class="row mb-1 input-group custom-search-form justify-content-center align-items-center">
                     <div class="col-lg-4 d-flex">
                         <label for="search_data" class="mb-0 align-self-center me-1">Data:</label>
                         <vue2-datepicker
@@ -26,18 +26,23 @@
                             :latime="{ width: '125px' }"
                         ></vue2-datepicker>
                     </div>
-                    <div class="col-lg-4 d-grid">
-                        <button class="btn btn-sm btn-primary text-white me-1 border border-dark rounded-pill" type="submit">
+                    <div class="col-lg-4 d-grid gap-2">
+                        <button class="btn btn-sm btn-primary text-white border border-dark rounded-3" type="submit">
                             <i class="fas fa-search text-white me-1"></i>Caută
                         </button>
                     </div>
-                    <div class="col-lg-4 d-grid">
-                        <a class="btn btn-sm bg-secondary text-white border border-dark rounded-pill" href="/programari/afisare-saptamanal" role="button">
+                    <div class="col-lg-4 d-grid gap-2">
+                        <a class="btn btn-sm btn-primary text-white border border-dark rounded-3" href="/programari/afisare-saptamanal" role="button">
                             <i class="far fa-trash-alt text-white me-1"></i>Resetează căutarea
                         </a>
                     </div>
                 </div>
             </form>
+        </div>
+        <div class="col-lg-3 text-end">
+            <a class="btn btn-sm bg-success text-white border border-dark rounded-3 col-md-8" href="{{ route('programari.create') }}" role="button">
+                <i class="fas fa-plus-square text-white me-1"></i>Adaugă programare
+            </a>
         </div>
     </div>
 
