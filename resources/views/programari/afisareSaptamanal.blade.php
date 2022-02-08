@@ -65,16 +65,43 @@
                         </thead>
                         @foreach ($programari->where('data', \Carbon\Carbon::parse($ziua)->isoformat('YYYY-MM-DD')) as $programare)
                             <tr>
-                                <td class="d-flex">
-                                    <div class="me-2">
-                                        <span class="px-1 text-white rounded-3" style="background-color:darkcyan;">
-                                            {{ $programare->ora ? \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') : '' }}
-                                        </span>
-                                    </div>
-                                    <div>
-                                        {{ $programare->fisa_de_tratament->nume }}
-                                        <br>
-                                        {{ $programare->fisa_de_tratament->telefon }}
+                                <td class="">
+                                    <div class="row">
+                                        <div class="col-12 d-flex">
+                                            <div class="me-2">
+                                                <span class="px-1 text-white rounded-3" style="background-color:darkcyan;">
+                                                    {{ $programare->ora ? \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') : '' }}
+                                                </span>
+                                            </div>
+                                            <div>
+                                                {{ $programare->fisa_de_tratament->nume }}
+                                                <br>
+                                                {{ $programare->fisa_de_tratament->telefon }}
+                                            </div>
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <a href="{{ $programare->path() }}/modifica"
+                                                class="flex me-1"
+                                            >
+                                                <span class="badge bg-primary">Modifică</span>
+                                            </a>
+                                            <div style="flex" class="">
+                                                <a
+                                                    href="#"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#stergeProgramare{{ $programare->id }}"
+                                                    title="Șterge Programare"
+                                                    >
+                                                    <span class="badge bg-danger">Șterge</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <a href="{{ $programare->fisa_de_tratament->path() }}/modifica"
+                                                class=""
+                                            >
+                                                <span class="badge bg-success">Fișa de tratament</span>
+                                            </a>
                                     </div>
                                 </td>
                             </tr>
@@ -85,5 +112,37 @@
         </div>
     </div>
 </div>
+
+    {{-- Modalele pentru stergere programare --}}
+    @foreach ($programari as $programare)
+        <div class="modal fade text-dark" id="stergeProgramare{{ $programare->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">Programare: <b>{{ $programare->pacient->nume ?? '' }}</b></h5>
+                    <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="text-align:left;">
+                    Ești sigur ca vrei să ștergi Programarea?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Renunță</button>
+
+                    <form method="POST" action="{{ $programare->path() }}">
+                        @method('DELETE')
+                        @csrf
+                        <button
+                            type="submit"
+                            class="btn btn-danger text-white"
+                            >
+                            Șterge Programare
+                        </button>
+                    </form>
+
+                </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
 
 @endsection

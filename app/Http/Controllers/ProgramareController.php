@@ -39,6 +39,7 @@ class ProgramareController extends Controller
             ->simplePaginate(25);
 
         $request->session()->forget('programare_return_url');
+        $request->session()->forget('fisa_de_tratament_return_url');
 
         return view('programari.index', compact('programari', 'search_numar', 'search_nume', 'search_data'));
     }
@@ -67,22 +68,19 @@ class ProgramareController extends Controller
     {
         $this->validateRequest($request);
 
-        if ($request->fisa_de_tratament){
-            $programare = Programare::create($request->except('nume', 'telefon'));
+        if ($request->fisa_de_tratament_id){
+            $programare = Programare::create($request->except('nume', 'telefon', 'date'));
         } else {
             $fisa_de_tratament = FisaDeTratament::create(
                 [
                     'nume' => $request->nume,
-                    'telefon' => $request->telefon
+                    'telefon' => $request->telefon,
+                    'user_id' => $request->user_id
                 ]
             );
-            $programare = Programare::create($request->except('nume', 'telefon'),
-                [
-                    'fisa_de_tratament' => $fisa_de_tratament->id
-                ]
-            );
+            $request->request->add(['fisa_de_tratament_id' => $fisa_de_tratament->id]);
+            $programare = Programare::create($request->except('nume', 'telefon', 'date'));
         }
-        $programare = Programare::create($this->validateRequest($request));
 
         return redirect($request->session()->get('programare_return_url') ?? ('/programari/afisare-saptamanal'))
             ->with('status', 'Programarea pentru „' . ($programare->fisa_de_tratament->nume ?? '') . '” a fost adăugată cu succes!');
@@ -109,7 +107,7 @@ class ProgramareController extends Controller
     {
         $fise_de_tratament = FisaDeTratament::orderBy('fisa_numar')->get();
 
-        $request->session()->get('salariat_return_url') ?? $request->session()->put('salariat_return_url', url()->previous());
+        $request->session()->get('programare_return_url') ?? $request->session()->put('programare_return_url', url()->previous());
 
         return view('programari.edit', compact('programare', 'fise_de_tratament'));
     }
@@ -127,7 +125,21 @@ class ProgramareController extends Controller
             $request->request->remove('semnatura');
         }
 
-        $programare->update($this->validateRequest($request));
+        $this->validateRequest($request);
+
+        if ($request->fisa_de_tratament_id){
+            $programare->update($request->except('nume', 'telefon', 'date'));
+        } else {
+            $fisa_de_tratament = FisaDeTratament::create(
+                [
+                    'nume' => $request->nume,
+                    'telefon' => $request->telefon,
+                    'user_id' => $request->user_id
+                ]
+            );
+            $request->request->add(['fisa_de_tratament_id' => $fisa_de_tratament->id]);
+            $programare->update($request->except('nume', 'telefon', 'date'));
+        }
 
         return redirect($request->session()->get('programare_return_url') ?? ('/programari/afisare-saptamanal'))
             ->with('status', 'Programarea pentru „' . ($programare->fisa_de_tratament->nume ?? '') . '” a fost modificată cu succes!');
@@ -153,12 +165,14 @@ class ProgramareController extends Controller
      */
     protected function validateRequest(Request $request)
     {
+        $request->request->add(['user_id' => $request->user()->id]);
+
         return request()->validate(
             [
-                'fisa_de_tratament' => 'nullable',
-                'nume' => 'required_without:fisa_de_tratament',
+                'fisa_de_tratament_id' => 'nullable',
+                'nume' => 'required_without:fisa_de_tratament_id',
                 'telefon' => 'nullable',
-                'data' => 'nullable',
+                'data' => 'required',
                 'ora' => 'nullable',
                 'evolutie_si_tratament' => 'nullable|max:500',
                 'cod' => 'nullable|max:500',
@@ -187,6 +201,7 @@ class ProgramareController extends Controller
             ->get();
 
         $request->session()->forget('programare_return_url');
+        $request->session()->forget('fisa_de_tratament_return_url');
 
         return view('programari.afisareSaptamanal', compact('programari', 'search_data'));
     }

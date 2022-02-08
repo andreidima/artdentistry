@@ -9,7 +9,7 @@
                 <select name="fisa_de_tratament_id"
                     class="form-select bg-white rounded-pill {{ $errors->has('fisa_de_tratament_id') ? 'is-invalid' : '' }}"
                 >
-                        <option value='' selected>Selectează</option>
+                        <option value='' selected></option>
                     @foreach ($fise_de_tratament as $fisa_de_tratament)
                         <option
                             value='{{ $fisa_de_tratament->id }}'

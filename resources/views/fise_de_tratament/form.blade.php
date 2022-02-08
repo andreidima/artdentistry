@@ -325,7 +325,7 @@
                 <button type="submit" class="btn btn-primary text-white me-2 rounded-pill">{{ $buttonText }}</button>
             </div>
             <div class="col-lg-4 py-2 d-grid">
-                <a class="btn btn-secondary rounded-pill" href="/fise-de-tratament">Renunță</a>
+                <a class="btn btn-secondary rounded-pill" href="{{ Session::get('fisa_de_tratament_return_url') }}">Renunță</a>
             </div>
         </div>
     </div>

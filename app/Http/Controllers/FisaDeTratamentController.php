@@ -12,7 +12,7 @@ class FisaDeTratamentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $search_nume = \Request::get('search_nume');
         $search_telefon = \Request::get('search_telefon');
@@ -28,6 +28,8 @@ class FisaDeTratamentController extends Controller
             ->latest()
             ->simplePaginate(25);
 
+        $request->session()->forget('fisa_de_tratament_return_url');
+
         return view('fise_de_tratament.index', compact('fise_de_tratament', 'search_nume', 'search_telefon'));
     }
 
@@ -36,8 +38,10 @@ class FisaDeTratamentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        $request->session()->get('fisa_de_tratament_return_url') ?? $request->session()->put('fisa_de_tratament_return_url', url()->previous());
+
         return view('fise_de_tratament.create');
     }
 
@@ -53,7 +57,8 @@ class FisaDeTratamentController extends Controller
 
         $fisa_de_tratament = FisaDeTratament::create($this->validateRequest($request));
 
-        return redirect('/fise-de-tratament')->with('status', 'Fișa de tratament pentru pacientul "' . $fisa_de_tratament->nume . '" a fost adăugată cu succes!');
+        return redirect($request->session()->get('fisa_de_tratament_return_url') ?? ('/fise-de-tratament'))
+            ->with('status', 'Fișa de tratament pentru pacientul "' . $fisa_de_tratament->nume . '" a fost adăugată cu succes!');
     }
 
     /**
@@ -62,7 +67,7 @@ class FisaDeTratamentController extends Controller
      * @param  \App\Models\FisaDeTratament  $fisa_de_tratament
      * @return \Illuminate\Http\Response
      */
-    public function show(FisaDeTratament $fisa_de_tratament)
+    public function show(Request $request, FisaDeTratament $fisa_de_tratament)
     {
         return view('fise_de_tratament.show', compact('fisa_de_tratament'));
     }
@@ -73,8 +78,10 @@ class FisaDeTratamentController extends Controller
      * @param  \App\Models\FisaDeTratament  $fisa_de_tratament
      * @return \Illuminate\Http\Response
      */
-    public function edit(FisaDeTratament $fisa_de_tratament)
+    public function edit(Request $request, FisaDeTratament $fisa_de_tratament)
     {
+        $request->session()->get('fisa_de_tratament_return_url') ?? $request->session()->put('fisa_de_tratament_return_url', url()->previous());
+
         return view('fise_de_tratament.edit', compact('fisa_de_tratament'));
     }
 
@@ -91,7 +98,8 @@ class FisaDeTratamentController extends Controller
 
         $fisa_de_tratament->update($this->validateRequest($request));
 
-        return redirect('/fise-de-tratament')->with('status', 'Fișa de tratament pentru pacientul "' . $fisa_de_tratament->nume . '" a fost modificată cu succes!');
+        return redirect($request->session()->get('fisa_de_tratament_return_url') ?? ('/fise-de-tratament'))
+            ->with('status', 'Fișa de tratament pentru pacientul "' . $fisa_de_tratament->nume . '" a fost modificată cu succes!');
     }
 
     /**
@@ -100,11 +108,11 @@ class FisaDeTratamentController extends Controller
      * @param  \App\Models\FisaDeTratament  $fisa_de_tratament
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FisaDeTratament $fisa_de_tratament)
+    public function destroy(Request $request, FisaDeTratament $fisa_de_tratament)
     {
         // $fisa_de_tratament->chestionar_evaluare_stare_generala->delete();
         $fisa_de_tratament->delete();
-        return redirect('/fise-de-tratament')->with('status', 'Fișa de tratament pentru pacientul "' . $fisa_de_tratament->nume . '" a fost ștearsă cu succes!');
+        return back()->with('status', 'Fișa de tratament pentru pacientul "' . $fisa_de_tratament->nume . '" a fost ștearsă cu succes!');
     }
 
     /**
