@@ -5,7 +5,7 @@
     <div class="row card-header justify-content-between align-items-center" style="border-radius: 40px 40px 0px 0px;">
         <div class="col-lg-3">
             <h4 class="mb-0">
-                <a href="programari">
+                <a href="/programari/afisare-saptamanal">
                     <i class="fas fa-calendar-check me-1"></i>
                     Programări
                 </a>
@@ -15,7 +15,7 @@
             <form class="needs-validation" novalidate method="GET" action="/programari/afisare-saptamanal">
                 @csrf
                 <div class="row mb-1 input-group custom-search-form justify-content-center align-items-center">
-                    <div class="col-lg-4 d-flex">
+                    <div class="col-lg-12 mb-1 d-flex justify-content-center">
                         <label for="search_data" class="mb-0 align-self-center me-1">Data:</label>
                         <vue2-datepicker
                             data-veche="{{ $search_data }}"
@@ -24,7 +24,11 @@
                             value-type="YYYY-MM-DD"
                             format="DD-MM-YYYY"
                             :latime="{ width: '125px' }"
+                            style="margin-right: 20px;"
                         ></vue2-datepicker>
+                        <small class="align-self-center">
+                            *Selectează orice zi din săptămâna dorită
+                        </small>
                     </div>
                     <div class="col-lg-4 d-grid gap-2">
                         <button class="btn btn-sm btn-primary text-white border border-dark rounded-3" type="submit">
@@ -65,7 +69,7 @@
                         </thead>
                         @foreach ($programari->where('data', \Carbon\Carbon::parse($ziua)->isoformat('YYYY-MM-DD')) as $programare)
                             <tr>
-                                <td class="">
+                                <td class="border border-2 border-dark">
                                     <div class="row">
                                         <div class="col-12 d-flex">
                                             <div class="me-2">
@@ -74,9 +78,9 @@
                                                 </span>
                                             </div>
                                             <div>
-                                                {{ $programare->fisa_de_tratament->nume }}
+                                                {{ $programare->fisa_de_tratament->nume ?? '' }}
                                                 <br>
-                                                {{ $programare->fisa_de_tratament->telefon }}
+                                                {{ $programare->fisa_de_tratament->telefon ?? ''}}
                                             </div>
                                         </div>
                                         <div class="col-12 d-flex justify-content-end">
@@ -97,11 +101,13 @@
                                             </div>
                                         </div>
                                         <div class="col-12 d-flex justify-content-end">
-                                            <a href="{{ $programare->fisa_de_tratament->path() }}/modifica"
-                                                class=""
-                                            >
-                                                <span class="badge bg-success">Fișa de tratament</span>
-                                            </a>
+                                            @if ($programare->fisa_de_tratament)
+                                                <a href="{{ $programare->fisa_de_tratament->path() }}/modifica"
+                                                    class=""
+                                                >
+                                                    <span class="badge bg-success">Fișa de tratament</span>
+                                                </a>
+                                            @endif
                                     </div>
                                 </td>
                             </tr>

@@ -36,4 +36,14 @@ class FisaDeTratament extends Model
     {
         return $this->hasOne(ChestionarEvaluareStareGenerala::class, 'fisa_de_tratament_id', 'id');
     }
+
+    /**
+     * Get all of the programari for the FisaDeTratament
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function programari()
+    {
+        return $this->hasMany(Programare::class, 'fisa_de_tratament_id', 'id');
+    }
 }

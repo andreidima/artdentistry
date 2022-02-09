@@ -51,7 +51,7 @@ class ProgramareController extends Controller
      */
     public function create(Request $request)
     {
-        $fise_de_tratament = FisaDeTratament::orderBy('fisa_numar')->get();
+        $fise_de_tratament = FisaDeTratament::orderBy('fisa_numar', 'desc')->get();
 
         $request->session()->get('programare_return_url') ?? $request->session()->put('programare_return_url', url()->previous());
 
@@ -69,17 +69,18 @@ class ProgramareController extends Controller
         $this->validateRequest($request);
 
         if ($request->fisa_de_tratament_id){
-            $programare = Programare::create($request->except('nume', 'telefon', 'date'));
+            $programare = Programare::create($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19'));
         } else {
             $fisa_de_tratament = FisaDeTratament::create(
                 [
+                    'fisa_numar' => FisaDeTratament::max('fisa_numar') + 1,
                     'nume' => $request->nume,
                     'telefon' => $request->telefon,
                     'user_id' => $request->user_id
                 ]
             );
             $request->request->add(['fisa_de_tratament_id' => $fisa_de_tratament->id]);
-            $programare = Programare::create($request->except('nume', 'telefon', 'date'));
+            $programare = Programare::create($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19'));
         }
 
         return redirect($request->session()->get('programare_return_url') ?? ('/programari/afisare-saptamanal'))
@@ -105,7 +106,7 @@ class ProgramareController extends Controller
      */
     public function edit(Request $request, Programare $programare)
     {
-        $fise_de_tratament = FisaDeTratament::orderBy('fisa_numar')->get();
+        $fise_de_tratament = FisaDeTratament::orderBy('fisa_numar', 'desc')->get();
 
         $request->session()->get('programare_return_url') ?? $request->session()->put('programare_return_url', url()->previous());
 
@@ -128,7 +129,7 @@ class ProgramareController extends Controller
         $this->validateRequest($request);
 
         if ($request->fisa_de_tratament_id){
-            $programare->update($request->except('nume', 'telefon', 'date'));
+            $programare->update($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19'));
         } else {
             $fisa_de_tratament = FisaDeTratament::create(
                 [
@@ -138,7 +139,7 @@ class ProgramareController extends Controller
                 ]
             );
             $request->request->add(['fisa_de_tratament_id' => $fisa_de_tratament->id]);
-            $programare->update($request->except('nume', 'telefon', 'date'));
+            $programare->update($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19'));
         }
 
         return redirect($request->session()->get('programare_return_url') ?? ('/programari/afisare-saptamanal'))
@@ -174,10 +175,12 @@ class ProgramareController extends Controller
                 'telefon' => 'nullable',
                 'data' => 'required',
                 'ora' => 'nullable',
-                'evolutie_si_tratament' => 'nullable|max:500',
+                'tratament' => 'nullable|max:2000',
                 'cod' => 'nullable|max:500',
                 'semnatura' => 'nullable',
-                'observatii' => 'nullable|max:1000',
+                'observatii' => 'nullable|max:2000',
+                'gdpr' => ($request->_method !== "PATCH") ? '' : 'required',
+                'covid_19' => ($request->_method !== "PATCH") ? '' : 'required',
             ],
             [
             ]

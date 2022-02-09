@@ -49,7 +49,7 @@
                                         Evoluție și tratament
                                     </td>
                                     <td>
-                                        {{ $programare->evolutie_si_tratament }}
+                                        {{ $programare->tratament }}
                                     </td>
                                 </tr>
                                 <tr>

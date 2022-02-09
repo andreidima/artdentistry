@@ -45,10 +45,10 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Evoluție și tratament
+                                    Tratament
                                 </td>
                                 <td>
-                                    {{ $programare->evolutie_si_tratament }}
+                                    {{ $programare->tratament }}
                                 </td>
                             </tr>
                             <tr>

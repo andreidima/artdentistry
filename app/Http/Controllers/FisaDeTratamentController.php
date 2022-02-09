@@ -110,7 +110,10 @@ class FisaDeTratamentController extends Controller
      */
     public function destroy(Request $request, FisaDeTratament $fisa_de_tratament)
     {
-        // $fisa_de_tratament->chestionar_evaluare_stare_generala->delete();
+        if (count($fisa_de_tratament->programari)){
+            return back()->with('error', 'Fișa de tratament a pacientului „' . ($fisa_de_tratament->nume ?? '') . '” nu poate fi ștearsă pentru că are programari adăugate. Ștergeți mai întâi programările');
+        }
+
         $fisa_de_tratament->delete();
         return back()->with('status', 'Fișa de tratament pentru pacientul "' . $fisa_de_tratament->nume . '" a fost ștearsă cu succes!');
     }
