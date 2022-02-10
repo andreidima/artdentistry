@@ -43,11 +43,6 @@
                                 <i class="fas fa-users me-1"></i>Pacienți
                             </a>
                         </li> --}}
-                        <li class="nav-item me-3">
-                            <a class="nav-link active" aria-current="page" href="{{ route('fise-de-tratament.index') }}">
-                                <i class="fas fa-file-alt me-1"></i>Fișe de tratament
-                            </a>
-                        </li>
                         {{-- <li class="nav-item me-3">
                             <a class="nav-link active" aria-current="page" href="{{ route('programari.afisareSaptamanal') }}">
                                 <i class="fas fa-calendar-check me-1"></i>Programări
@@ -62,6 +57,16 @@
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="{{ route('programari.afisareSaptamanal') }}">Vizualizare săptămânal</a></li>
                             </ul>
+                        </li>
+                        <li class="nav-item me-3">
+                            <a class="nav-link active" aria-current="page" href="{{ route('fise-de-tratament.index') }}">
+                                <i class="fas fa-file-alt me-1"></i>Fișe de tratament
+                            </a>
+                        </li>
+                        <li class="nav-item me-3">
+                            <a class="nav-link active" aria-current="page" href="{{ route('etichete.index') }}">
+                                <i class="fa fa-tags me-1"></i>Etichete
+                            </a>
                         </li>
                         {{-- <li class="nav-item me-3">
                             <a class="nav-link active" aria-current="page" href="{{ route('servicii.index') }}">
