@@ -121,6 +121,8 @@ class EtichetaController extends Controller
                 'cod_de_bare' => 'required',
                 'operator' => 'required|max:500',
                 'data' => 'required',
+                'descriere' => 'nullable|max:2000',
+                'observatii' => 'nullable|max:2000',
             ],
             [
             ]

@@ -21,4 +21,9 @@ class Programare extends Model
     {
         return $this->belongsTo(FisaDeTratament::class, 'fisa_de_tratament_id');
     }
+
+    public function etichete()
+    {
+        return $this->belongsToMany(Eticheta::class, 'eticheta_programare', 'programare_id', 'eticheta_id');
+    }
 }

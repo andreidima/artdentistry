@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Programare;
 use App\Models\FisaDeTratament;
+use App\Models\Eticheta;
 use Illuminate\Http\Request;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -207,5 +208,22 @@ class ProgramareController extends Controller
         $request->session()->forget('fisa_de_tratament_return_url');
 
         return view('programari.afisareSaptamanal', compact('programari', 'search_data'));
+    }
+
+    public function etichete(Request $request, Programare $programare, $etichetaId = null, $actiune = null)
+    {
+        // dd($actiune);
+        // echo 'Programare' . $programare . '<br>' . 'Eticheta' . $eticheta . '<br>' . 'Actiune' . $actiune;
+        switch ($actiune) {
+            case 'adauga':
+                echo 'adauga';
+                break;
+            case 'scoate':
+                $programare->etichete()->detach($etichetaId);
+                echo 'scoate';
+                break;
+            }
+
+        return view('programari.diverse.etichete', compact('programare'));
     }
 }

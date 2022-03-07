@@ -3,7 +3,7 @@
 <div class="row mb-0 p-3 d-flex border-radius: 0px 0px 40px 40px" id="app1">
     <div class="col-lg-12 mb-0">
         <div class="row mb-0 align-items-center">
-            <div class="col-lg-12 mb-4">
+            <div class="col-lg-3 mb-4">
                 <label for="cod_de_bare" class="mb-0 ps-3">Cod de bare:</label>
                 <input
                     type="text"
@@ -14,7 +14,7 @@
                     required
                     readonly>
             </div>
-            <div class="col-lg-12 mb-4">
+            <div class="col-lg-5 mb-4">
                 <label for="operator" class="mb-0 ps-3">Operator:</label>
                 <input
                     type="text"
@@ -24,7 +24,7 @@
                     value="{{ old('operator', $eticheta->operator) }}"
                     required>
             </div>
-            <div class="col-lg-12 mb-4">
+            <div class="col-lg-4 mb-4">
                 <label for="data" class="mb-0 ps-1">Data:</label>
                     <vue2-datepicker
                         data-veche="{{ old('data', ($eticheta->data ?? \Carbon\Carbon::now())) }}"
@@ -34,6 +34,16 @@
                         format="DD-MM-YYYY"
                         :latime="{ width: '125px' }"
                     ></vue2-datepicker>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <label for="descriere" class="mb-0 ps-3">Descriere:</label>
+                <textarea class="form-control bg-white {{ $errors->has('descriere') ? 'is-invalid' : '' }}"
+                    name="descriere" rows="3">{{ old('descriere', $eticheta->descriere) }}</textarea>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <label for="observatii" class="mb-0 ps-3">Observații:</label>
+                <textarea class="form-control bg-white {{ $errors->has('observatii') ? 'is-invalid' : '' }}"
+                    name="observatii" rows="3">{{ old('observatii', $eticheta->observatii) }}</textarea>
             </div>
         </div>
 

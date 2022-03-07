@@ -10,6 +10,7 @@ use App\Http\Controllers\ServiciuController;
 use App\Http\Controllers\VizualizareRamificatieServiciuController;
 use App\Http\Controllers\ProgramareController;
 use App\Http\Controllers\EtichetaController;
+use App\Http\Controllers\ProgramareEtichetaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('fise-de-tratament', FisaDeTratamentController::class,  ['parameters' => ['fise-de-tratament' => 'fisa_de_tratament']]);
 
     Route::get('programari/afisare-saptamanal', [ProgramareController::class, 'afisareSaptamanal'])->name('programari.afisareSaptamanal');
+    Route::any('programari/etichete/{programare}/{etichetaId?}/{actiune?}', [ProgramareController::class, 'etichete'])->name('programari.etichete');
     Route::resource('programari', ProgramareController::class,  ['parameters' => ['programari' => 'programare']]);
 
     Route::resource('etichete', EtichetaController::class,  ['parameters' => ['etichete' => 'eticheta']]);

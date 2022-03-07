@@ -101,6 +101,11 @@
                                             </div>
                                         </div>
                                         <div class="col-12 d-flex justify-content-end">
+                                            <a href="/programari/etichete/{{ $programare->id }}"
+                                                class="flex me-1"
+                                            >
+                                                <span class="badge bg-warning text-dark">Etichete</span>
+                                            </a>
                                             @if ($programare->fisa_de_tratament)
                                                 <a href="{{ $programare->fisa_de_tratament->path() }}/modifica"
                                                     class=""
@@ -108,6 +113,7 @@
                                                     <span class="badge bg-success">Fișa de tratament</span>
                                                 </a>
                                             @endif
+                                        </div>
                                     </div>
                                 </td>
                             </tr>
