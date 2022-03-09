@@ -132,10 +132,18 @@ class EtichetaController extends Controller
     public function pdfExportBarcode(Request $request, Eticheta $eticheta)
     {
         if ($request->view_type === 'barcode-html') {
-            return view('etichete.export.barcode-pdf', compact('eticheta'));
+            $validated = $request->validate([
+                'cantitate' => 'required|numeric|gt:0'
+            ]);
+            $cantitate = $request->cantitate;
+            return view('etichete.export.barcode-pdf', compact('eticheta', 'cantitate'));
         } elseif ($request->view_type === 'barcode-pdf') {
-            $pdf = \PDF::loadView('etichete.export.barcode-pdf', compact('eticheta'))
-                ->setPaper('a7', 'landscape');
+            $validated = $request->validate([
+                'cantitate' => 'required|numeric|gt:0'
+            ]);
+            $cantitate = $request->cantitate;
+            $pdf = \PDF::loadView('etichete.export.barcode-pdf', compact('eticheta', 'cantitate'))
+                ->setPaper('a4', 'portrait');
             // return $pdf->download('Eticheta ' . $eticheta->cod_de_bare . '.pdf');
             return $pdf->stream();
         }

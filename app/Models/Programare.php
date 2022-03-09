@@ -24,6 +24,6 @@ class Programare extends Model
 
     public function etichete()
     {
-        return $this->belongsToMany(Eticheta::class, 'eticheta_programare', 'programare_id', 'eticheta_id');
+        return $this->belongsToMany(Eticheta::class, 'eticheta_programare', 'programare_id', 'eticheta_id')->withTimestamps();
     }
 }

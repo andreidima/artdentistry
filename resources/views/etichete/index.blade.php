@@ -64,27 +64,44 @@
                                     {{ $eticheta->data ? \Carbon\Carbon::parse($eticheta->data)->isoFormat('DD.MM.YYYY') : '' }}
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ $eticheta->path() }}/barcode/barcode-pdf"
+                                    {{-- <a href="{{ $eticheta->path() }}/barcode/barcode-pdf"
                                         class="flex me-1"
                                     >
                                         <span class="badge bg-success">Printează</span>
-                                    </a>
+                                    </a> --}}
+                                        <form class="needs-validation" novalidate method="POST" action="{{ $eticheta->path() }}/barcode/barcode-pdf">
+                                            @csrf
+                                            <div class="d-flex justify-content-center">
+                                                <input type="text"
+                                                    class="form-control form-control-sm me-2 bg-white rounded-3 {{ $errors->has('cantitate') ? 'is-invalid' : '' }}"
+                                                    name="cantitate"
+                                                    style="width:50px"
+                                                    value="1">
+                                                <button type="submit"
+                                                    class="btn btn-sm bg-success text-white me-2 rounded-3 shadow">
+                                                    Printează
+                                                </button>
+                                            </div>
+                                        </form>
+
                                 </td>
-                                <td class="d-flex justify-content-end">
-                                    <a href="{{ $eticheta->path() }}/modifica"
-                                        class="flex me-1"
-                                    >
-                                        <span class="badge bg-primary">Modifică</span>
-                                    </a>
-                                    <div style="flex" class="">
-                                        <a
-                                            href="#"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#stergeEticheta{{ $eticheta->id }}"
-                                            title="Șterge Eticheta"
-                                            >
-                                            <span class="badge bg-danger">Șterge</span>
+                                <td>
+                                    <div class="d-flex justify-content-end">
+                                        <a href="{{ $eticheta->path() }}/modifica"
+                                            class="flex me-1"
+                                        >
+                                            <span class="badge bg-primary">Modifică</span>
                                         </a>
+                                        <div style="flex" class="">
+                                            <a
+                                                href="#"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#stergeEticheta{{ $eticheta->id }}"
+                                                title="Șterge Eticheta"
+                                                >
+                                                <span class="badge bg-danger">Șterge</span>
+                                            </a>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>

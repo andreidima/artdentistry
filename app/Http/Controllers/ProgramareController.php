@@ -210,17 +210,29 @@ class ProgramareController extends Controller
         return view('programari.afisareSaptamanal', compact('programari', 'search_data'));
     }
 
-    public function etichete(Request $request, Programare $programare, $etichetaId = null, $actiune = null)
+    public function etichete(Request $request, Programare $programare)
     {
         // dd($actiune);
         // echo 'Programare' . $programare . '<br>' . 'Eticheta' . $eticheta . '<br>' . 'Actiune' . $actiune;
-        switch ($actiune) {
+        switch ($request->input('action')) {
             case 'adauga':
-                echo 'adauga';
+                $etichetaId = Eticheta::where('cod_de_bare', $request->codDeBare)->value('id');
+                if(!isset($etichetaId)){
+                    return back()->with('error', 'Acest cod de bare nu există în aplicație');
+                } elseif ($programare->etichete()->find($etichetaId)){
+                    return back()->with('error', 'Nu puteți adăuga din nou acestă etichetă! Programarea are deja adaugată eticheta.');
+                } else {
+                    $programare->etichete()->attach($etichetaId);
+                    return back()->with('succes', 'Eticheta a fost adaugată cu succes Programării!');
+                }
+                echo 'adauga' . $request->codDeBare . '<br>';
+                // dd($etichetaId);
+                echo 'Id eticheta: ' . $etichetaId;
                 break;
             case 'scoate':
-                $programare->etichete()->detach($etichetaId);
-                echo 'scoate';
+                $programare->etichete()->detach($request->etichetaId);
+                return back()->with('succes', 'Eticheta a fost scoasă cu succes de la acestă Programare!');
+                echo 'scoate' . $request->etichetaId;
                 break;
             }
 

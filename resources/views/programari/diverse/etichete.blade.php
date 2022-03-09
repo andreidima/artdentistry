@@ -43,8 +43,8 @@
                                     <td class="text-center">
                                         {{ $eticheta->data ? \Carbon\Carbon::parse($eticheta->data)->isoFormat('DD.MM.YYYY') : '' }}
                                     </td>
-                                    <td class="d-flex justify-content-end">
-                                        <div style="flex" class="">
+                                    <td class="">
+                                        <div class="d-flex justify-content-end">
                                             <a
                                                 href="#"
                                                 data-bs-toggle="modal"
@@ -62,6 +62,42 @@
                             </tbody>
                     </table>
                 </div>
+            </div>
+
+            <div class="col-lg-4 m-4 mx-auto rounded-3" style="background-color:rgb(235, 234, 234)">
+                <form class="needs-validation" novalidate method="POST" action="/programari/etichete/{{ $programare->id }}">
+                    @csrf
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-1 text-center text-white rounded-3" style="background-color:#e66800;">
+                                <b>
+                                    Adaugă etichetă
+                                </b>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 px-4 py-1">
+                            <label for="cod_de_bare" class="mb-0 ps-3">Cod de bare:</label>
+                            <input
+                                type="text"
+                                class="form-control bg-white rounded-3 {{ $errors->has('cod_de_bare') ? 'is-invalid' : '' }}"
+                                name="codDeBare"
+                                placeholder=""
+                                value=""
+                                required
+                                autofocus>
+                        </div>
+                        <div class="col-lg-12 p-3 text-center">
+                            <button type="submit"
+                                name="action"
+                                value="adauga"
+                                class="btn btn-primary text-white me-2 rounded-3 shadow">
+                                Adaugă Etichetă
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
 
             </div>
         </div>
@@ -83,19 +119,22 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Renunță</button>
 
-                    <a class="btn" href="/programari/etichete/{{ $programare->id }}/{{ $eticheta->id }}/scoate">
+                    {{-- <a class="btn" href="/programari/etichete/{{ $programare->id }}/{{ $eticheta->id }}/scoate">
                             Scoate Eticheta
-                    </a>
-                    {{-- <form method="POST" action="/programari/{{ $programare->id }}/etichete/{{ $eticheta->id }}/scoate">
+                    </a> --}}
+                    <form method="POST" action="/programari/etichete/{{ $programare->id }}">
                         @method('DELETE')
                         @csrf
+                        <input type="hidden" name="etichetaId" value="{{ $eticheta->id }}">
                         <button
                             type="submit"
+                            name="action"
+                            value="scoate"
                             class="btn btn-danger text-white"
                             >
                             Scoate Eticheta
                         </button>
-                    </form> --}}
+                    </form>
 
                 </div>
                 </div>
