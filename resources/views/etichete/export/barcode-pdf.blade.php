@@ -70,9 +70,10 @@
             <tr>
                 @for ($i = 1; $i <= $cantitate; $i++)
                     <td>
+                        {{-- <br><br><br><br><br> --}}
                         <div style="
                             width:320px;
-                            heigth:200px;
+                            padding:40px 0px 40px 0px;
                             margin:0px 0px;
                                 -moz-border-radius: 10px;
                                 -webkit-border-radius: 10px;
