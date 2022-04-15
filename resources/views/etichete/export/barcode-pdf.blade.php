@@ -7,13 +7,13 @@
     <title>Barcode</title>
     <style>
         html {
-            margin: 5px 12px 0px 12px;
+            margin: 0px 0px 0px 0px;
         }
 
         body {
             font-family: DejaVu Sans, sans-serif;
             /* font-family: Arial, Helvetica, sans-serif; */
-            font-size: 12px;
+            font-size: 7px;
             margin: 0px;
         }
 
@@ -58,7 +58,7 @@
 
 <body>
     {{-- <div style="width:730px; height: 1030px; border-style: dashed ; border-width:2px; border-radius: 15px;"> --}}
-    <div style="width:730px; height: 1030px; margin:10px 40px;">
+    {{-- <div style="width:730px; height: 1030px; margin:10px 40px;"> --}}
     {{-- <div style="
         width:320px;
         margin:0px 0px;
@@ -68,19 +68,19 @@
         "> --}}
         <table>
             <tr>
-                @for ($i = 1; $i <= $cantitate; $i++)
+                {{-- @for ($i = 1; $i <= $cantitate; $i++) --}}
                     <td>
                         {{-- <br><br><br><br><br> --}}
                         <div style="
-                            width:320px;
-                            padding:40px 0px 40px 0px;
+                            width:200px;
+                            padding:0px 0px 0px 0px;
                             margin:0px 0px;
                                 -moz-border-radius: 10px;
                                 -webkit-border-radius: 10px;
                                 border-radius: 10px;
                         ">
-                            {!!DNS1D::getBarcodeHTML($eticheta->cod_de_bare, 'C39',2.48,55)!!}
-                            {{-- {!!DNS1D::getBarcodeHTML($produse->cod_de_bare, 'C39E', 1.95,55)!!}              --}}
+                            {!!DNS1D::getBarcodeHTML($eticheta->cod_de_bare, 'C39',1.55,20)!!}
+                            {{-- {!!DNS1D::getBarcodeHTML($produse->cod_de_bare, 'C39E', 1.95,55)!!} --}}
                             <div style="float:left">
                                 Cod bare: <b>{{ $eticheta->cod_de_bare }}</b>
                                 <br>
@@ -95,11 +95,11 @@
                         <br><br><br>
                     </td>
 
-                    @if($i%2 == 0)
+                    {{-- @if($i%2 == 0)
                         </tr>
                         <tr>
                     @endif
-                @endfor
+                @endfor --}}
             </tr>
     </div>
 </body>
