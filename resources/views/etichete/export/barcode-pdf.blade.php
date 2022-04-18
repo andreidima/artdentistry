@@ -79,9 +79,9 @@
                                 -webkit-border-radius: 0px;
                                 border-radius: 0px;
                         ">
-                            {!!DNS1D::getBarcodeHTML($eticheta->cod_de_bare, 'C128',2.45 ,40)!!}
+                            {!!DNS1D::getBarcodeHTML($eticheta->cod_de_bare, 'C128',2.45 ,50)!!}
                             {{-- {!!DNS1D::getBarcodeHTML($produse->cod_de_bare, 'C39E', 1.95,55)!!} --}}
-                            <div style="float:left; line-height:14px;">
+                            <div style="float:left; line-height:12px;">
                                 Cod bare:<b>{{ $eticheta->cod_de_bare }}</b>
                                 <br>
                                 Op.:<b>{{ $eticheta->operator }}</b>
