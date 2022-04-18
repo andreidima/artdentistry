@@ -34,7 +34,7 @@
         }
 
         th, td {
-            padding: 1px 1px;
+            padding: 0px 0px;
             border-width: 0px;
             border-style: solid;
 
@@ -66,41 +66,41 @@
             -webkit-border-radius: 10px;
             border-radius: 10px;
         "> --}}
-        <table>
-            <tr>
+        {{-- <table> --}}
+            {{-- <tr> --}}
                 {{-- @for ($i = 1; $i <= $cantitate; $i++) --}}
-                    <td>
+                    {{-- <td> --}}
                         {{-- <br><br><br><br><br> --}}
                         <div style="
-                            width:200px;
+                            width:170px;
                             padding:0px 0px 0px 0px;
                             margin:0px 0px;
-                                -moz-border-radius: 10px;
-                                -webkit-border-radius: 10px;
-                                border-radius: 10px;
+                                -moz-border-radius: 0px;
+                                -webkit-border-radius: 0px;
+                                border-radius: 0px;
                         ">
-                            {!!DNS1D::getBarcodeHTML($eticheta->cod_de_bare, 'C39',1.55,20)!!}
+                            {!!DNS1D::getBarcodeHTML($eticheta->cod_de_bare, 'C128',2.45 ,20)!!}
                             {{-- {!!DNS1D::getBarcodeHTML($produse->cod_de_bare, 'C39E', 1.95,55)!!} --}}
-                            <div style="float:left">
-                                Cod bare: <b>{{ $eticheta->cod_de_bare }}</b>
+                            <div style="float:left; line-height:6px;">
+                                Cod bare:<b>{{ $eticheta->cod_de_bare }}</b>
                                 <br>
-                                Op.: <b>{{ $eticheta->operator }}</b>
+                                Op.:<b>{{ $eticheta->operator }}</b>
                             </div>
-                            <div style="float:right; text-align:right">
-                                Sterilizare: <b> {{ $eticheta->data ? \Carbon\Carbon::parse($eticheta->data)->isoFormat('DD.MM.YYYY') : '' }}</b>
+                            <div style="float:right; text-align:right; line-height:6px;">
+                                Sterilizare:<b>{{ $eticheta->data ? \Carbon\Carbon::parse($eticheta->data)->isoFormat('DD.MM.YYYY') : '' }}</b>
                                 <br>
-                                Expirare: <b> {{ $eticheta->data ? \Carbon\Carbon::parse($eticheta->data)->addDays(60)->isoFormat('DD.MM.YYYY') : '' }} </b>
+                                Expirare:<b>{{ $eticheta->data ? \Carbon\Carbon::parse($eticheta->data)->addDays(60)->isoFormat('DD.MM.YYYY') : '' }} </b>
                             </div>
                         </div>
-                        <br><br><br>
-                    </td>
+                        {{-- <br><br><br> --}}
+                    {{-- </td> --}}
 
                     {{-- @if($i%2 == 0)
                         </tr>
                         <tr>
                     @endif
                 @endfor --}}
-            </tr>
-    </div>
+            {{-- </tr> --}}
+    {{-- </div> --}}
 </body>
 </html>

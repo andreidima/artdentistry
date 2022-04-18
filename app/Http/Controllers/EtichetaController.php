@@ -144,7 +144,8 @@ class EtichetaController extends Controller
             $cantitate = $request->cantitate;
             $pdf = \PDF::loadView('etichete.export.barcode-pdf', compact('eticheta', 'cantitate'))
                 // ->setPaper('a4', 'portrait');
-                ->setPaper('a8', 'landscape');
+                // ->setPaper('a8', 'landscape');
+                ->setPaper([0,0,127,28]);
             // return $pdf->download('Eticheta ' . $eticheta->cod_de_bare . '.pdf');
             return $pdf->stream();
         }
