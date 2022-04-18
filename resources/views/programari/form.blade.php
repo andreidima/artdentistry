@@ -77,7 +77,24 @@
                     ></vue2-datepicker>
             </div>
         </div>
-        <div class="row mb-0 align-items-center">
+
+        <div class="row mb-5 align-items-center justify-content-center">
+            <div class="col-lg-12 text-end"  id="">
+                <input class="btn btn-primary text-white me-2 rounded-3 shadow" type="button" value="Adaugă Rezultatele Consultației" v-on:click="rezultate_consultatie = !rezultate_consultatie">
+            </div>
+        </div>
+
+
+        <script type="application/javascript">
+            rezultateConsultatie = @json(old('rezultateConsultatie') ?? false);
+        </script>
+        <div v-cloak v-if="rezultate_consultatie" class="row justify-content-center">
+                        {{-- Daca validarea da eroare, se intoarce inapoi cu modificariGlobale=true, ca sa nu fie ascunse optiunile de modificari globale --}}
+                        <input
+                            type="hidden"
+                            name="rezultateConsultatie"
+                            value="true">
+
             <div class="col-lg-9 mb-4">
                 <label for="tratament" class="mb-0 ps-3">Tratament:</label>
                 <textarea class="form-control bg-white {{ $errors->has('tratament') ? 'is-invalid' : '' }}"
@@ -100,20 +117,19 @@
             </div>
             <div class="col-lg-12 mb-4">
                 <label for="semnatura" class="mb-0 ps-3">Semnătura:</label>
-                @if ($programare->semnatura)
+                {{-- @if ($programare->semnatura)
                     <br>
                     Semnătura actuala este:
                     <img src="{{ $programare->semnatura }}"/>
                     <br>
                     Dacă dorești să o schimbi, desenează alta:
-                @endif
+                @endif --}}
                             <vue-signature-pad
+                                semnatura-veche="{{ old('semnatura', ($programare->semnatura ?? '')) }}"
                                 nume-camp-db="semnatura">
                             </vue-signature-pad>
             </div>
-        </div>
 
-        <div class="row g-3">
             <div class="col-lg-12 border-start border-warning" style="border-width:5px !important"
             >
                 <div class="form-check">
@@ -125,9 +141,7 @@
                     </label>
                 </div>
             </div>
-        </div>
 
-        <div class="row g-3">
             <div class="col-lg-12 border-start border-warning" style="border-width:5px !important"
             >
                 <div class="form-check">

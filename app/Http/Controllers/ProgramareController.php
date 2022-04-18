@@ -180,8 +180,10 @@ class ProgramareController extends Controller
                 'cod' => 'nullable|max:500',
                 'semnatura' => 'nullable',
                 'observatii' => 'nullable|max:2000',
-                'gdpr' => ($request->_method !== "PATCH") ? '' : 'required',
-                'covid_19' => ($request->_method !== "PATCH") ? '' : 'required',
+                // 'gdpr' => ($request->_method !== "PATCH") ? '' : 'required',
+                // 'covid_19' => ($request->_method !== "PATCH") ? '' : 'required',
+                'gdpr' => 'required_with:semnatura',
+                'covid_19' => 'required_with:semnatura',
             ],
             [
             ]

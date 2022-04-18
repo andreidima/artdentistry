@@ -72,11 +72,11 @@
                                         <form class="needs-validation" novalidate method="POST" action="{{ $eticheta->path() }}/barcode/barcode-pdf">
                                             @csrf
                                             <div class="d-flex justify-content-center">
-                                                <input type="text"
+                                                {{-- <input type="text"
                                                     class="form-control form-control-sm me-2 bg-white rounded-3 {{ $errors->has('cantitate') ? 'is-invalid' : '' }}"
                                                     name="cantitate"
                                                     style="width:50px"
-                                                    value="1">
+                                                    value="1"> --}}
                                                 <button type="submit"
                                                     class="btn btn-sm bg-success text-white me-2 rounded-3 shadow">
                                                     Printează

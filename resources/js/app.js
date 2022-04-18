@@ -31,48 +31,51 @@ Vue.component('vue-signature-pad', require('./components/VueSignaturePad.vue').d
 
 if (document.querySelector('#app1')) {
     const app1 = new Vue({
-        el: '#app1'
-    });
-}
-
-if (document.querySelector('#programare')) {
-    const app1 = new Vue({
-        el: '#programare',
+        el: '#app1',
         data: {
-            servicii: servicii,
-            servicii_selectate: serviciiSelectate
-        },
-        methods: {
-            select: function (value, event) {
-                servicii_selectate = this.servicii_selectate;
-
-                if (event.target.checked) {
-                    this.servicii.forEach(function (serviciu) {
-                        if (serviciu.categorie_id == value) {
-                            if (!servicii_selectate.includes(serviciu.id)) {
-                                servicii_selectate.push(serviciu.id);
-                                console.log(serviciu.id);
-                            }
-                            console.log(servicii_selectate);
-                            // console.log(this.servicii_selectate[i].categorie_id);
-                        }
-                    });
-                } else {
-                    this.servicii.forEach(function (serviciu) {
-                        if (serviciu.categorie_id == value) {
-                            for (var i = servicii_selectate.length - 1; i >= 0; i--) {
-                                if (servicii_selectate[i] == serviciu.id) {
-                                    servicii_selectate.splice(i, 1);
-                                }
-                                // console.log(i);
-                                // console.log(this.servicii_selectate[i].categorie_id);
-                            }
-                        }
-                    });
-                }
-
-                this.servicii_selectate = servicii_selectate;
-            }
+            rezultate_consultatie: ((typeof rezultateConsultatie !== 'undefined') ? ((rezultateConsultatie == "true") ? true : false) : false)
         },
     });
 }
+
+// if (document.querySelector('#programare')) {
+//     const app1 = new Vue({
+//         el: '#programare',
+//         data: {
+//             servicii: servicii,
+//             servicii_selectate: serviciiSelectate
+//         },
+//         methods: {
+//             select: function (value, event) {
+//                 servicii_selectate = this.servicii_selectate;
+
+//                 if (event.target.checked) {
+//                     this.servicii.forEach(function (serviciu) {
+//                         if (serviciu.categorie_id == value) {
+//                             if (!servicii_selectate.includes(serviciu.id)) {
+//                                 servicii_selectate.push(serviciu.id);
+//                                 console.log(serviciu.id);
+//                             }
+//                             console.log(servicii_selectate);
+//                             // console.log(this.servicii_selectate[i].categorie_id);
+//                         }
+//                     });
+//                 } else {
+//                     this.servicii.forEach(function (serviciu) {
+//                         if (serviciu.categorie_id == value) {
+//                             for (var i = servicii_selectate.length - 1; i >= 0; i--) {
+//                                 if (servicii_selectate[i] == serviciu.id) {
+//                                     servicii_selectate.splice(i, 1);
+//                                 }
+//                                 // console.log(i);
+//                                 // console.log(this.servicii_selectate[i].categorie_id);
+//                             }
+//                         }
+//                     });
+//                 }
+
+//                 this.servicii_selectate = servicii_selectate;
+//             }
+//         },
+//     });
+// }
