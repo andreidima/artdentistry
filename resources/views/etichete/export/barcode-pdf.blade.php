@@ -13,7 +13,7 @@
         body {
             font-family: DejaVu Sans, sans-serif;
             /* font-family: Arial, Helvetica, sans-serif; */
-            font-size: 7px;
+            font-size: 12px;
             margin: 0px;
         }
 
@@ -79,14 +79,15 @@
                                 -webkit-border-radius: 0px;
                                 border-radius: 0px;
                         ">
-                            {!!DNS1D::getBarcodeHTML($eticheta->cod_de_bare, 'C128',2.45 ,20)!!}
+                            {!!DNS1D::getBarcodeHTML($eticheta->cod_de_bare, 'C128',2.45 ,40)!!}
                             {{-- {!!DNS1D::getBarcodeHTML($produse->cod_de_bare, 'C39E', 1.95,55)!!} --}}
-                            <div style="float:left; line-height:6px;">
+                            <div style="float:left; line-height:14px;">
                                 Cod bare:<b>{{ $eticheta->cod_de_bare }}</b>
                                 <br>
                                 Op.:<b>{{ $eticheta->operator }}</b>
-                            </div>
-                            <div style="float:right; text-align:right; line-height:6px;">
+                                <br>
+                            {{-- </div>
+                            <div style="float:right; text-align:right; line-height:6px;"> --}}
                                 Sterilizare:<b>{{ $eticheta->data ? \Carbon\Carbon::parse($eticheta->data)->isoFormat('DD.MM.YYYY') : '' }}</b>
                                 <br>
                                 Expirare:<b>{{ $eticheta->data ? \Carbon\Carbon::parse($eticheta->data)->addDays(60)->isoFormat('DD.MM.YYYY') : '' }} </b>
