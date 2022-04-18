@@ -70,7 +70,7 @@ class ProgramareController extends Controller
         $this->validateRequest($request);
 
         if ($request->fisa_de_tratament_id){
-            $programare = Programare::create($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19'));
+            $programare = Programare::create($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie'));
         } else {
             $fisa_de_tratament = FisaDeTratament::create(
                 [
@@ -81,7 +81,7 @@ class ProgramareController extends Controller
                 ]
             );
             $request->request->add(['fisa_de_tratament_id' => $fisa_de_tratament->id]);
-            $programare = Programare::create($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19'));
+            $programare = Programare::create($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie'));
         }
 
         return redirect($request->session()->get('programare_return_url') ?? ('/programari/afisare-saptamanal'))
