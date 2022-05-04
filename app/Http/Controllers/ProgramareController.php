@@ -7,6 +7,8 @@ use App\Models\FisaDeTratament;
 use App\Models\Eticheta;
 use Illuminate\Http\Request;
 
+use Carbon\Carbon;
+
 use Illuminate\Database\Eloquent\Builder;
 
 class ProgramareController extends Controller
@@ -130,7 +132,7 @@ class ProgramareController extends Controller
         $this->validateRequest($request);
 
         if ($request->fisa_de_tratament_id){
-            $programare->update($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19'));
+            $programare->update($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie'));
         } else {
             $fisa_de_tratament = FisaDeTratament::create(
                 [
@@ -140,7 +142,7 @@ class ProgramareController extends Controller
                 ]
             );
             $request->request->add(['fisa_de_tratament_id' => $fisa_de_tratament->id]);
-            $programare->update($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19'));
+            $programare->update($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie'));
         }
 
         return redirect($request->session()->get('programare_return_url') ?? ('/programari/afisare-saptamanal'))
@@ -197,8 +199,8 @@ class ProgramareController extends Controller
      */
     public function afisareSaptamanal(Request $request)
     {
-        $search_data = \Request::get('search_data') ? \Carbon\Carbon::parse(\Request::get('search_data')) : \Carbon\Carbon::today();
-        $data_de_cautat = \Carbon\Carbon::parse($search_data);
+        $search_data = $request->search_data ? Carbon::parse($request->search_data) : Carbon::today();
+        $data_de_cautat = Carbon::parse($search_data);
 
         $programari = Programare::with('fisa_de_tratament')
             ->whereDate('data', '>=', $data_de_cautat->startOfWeek())
@@ -210,6 +212,28 @@ class ProgramareController extends Controller
         $request->session()->forget('fisa_de_tratament_return_url');
 
         return view('programari.afisareSaptamanal', compact('programari', 'search_data'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function afisareLunar(Request $request)
+    {
+        $search_data = \Request::get('search_data') ? \Carbon\Carbon::parse(\Request::get('search_data')) : \Carbon\Carbon::today();
+        $data_de_cautat = \Carbon\Carbon::parse($search_data);
+
+        $programari = Programare::with('fisa_de_tratament')
+            ->whereDate('data', '>=', $data_de_cautat->startOfMonth())
+            ->whereDate('data', '<=', $data_de_cautat->endOfMonth())
+            ->orderBy('ora')
+            ->get();
+
+        $request->session()->forget('programare_return_url');
+        $request->session()->forget('fisa_de_tratament_return_url');
+
+        return view('programari.afisareLunar', compact('programari', 'search_data'));
     }
 
     public function etichete(Request $request, Programare $programare)

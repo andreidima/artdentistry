@@ -55,6 +55,8 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="{{ route('programari.afisareSaptamanal') }}">Vizualizare săptămânal</a></li>
                                 <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{{ route('programari.afisareLunar') }}">Vizualizare lunar</a></li>
+                                <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="{{ route('programari.index') }}">Administrare</a></li>
                             </ul>
                         </li>
