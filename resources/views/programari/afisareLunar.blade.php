@@ -60,15 +60,14 @@
                     <tr class="" style="padding:2rem">
                         <th class="px-0 text-center">Ora</th>
                         @for ($ziua = 1; $ziua <= \Carbon\Carbon::parse($search_data)->endOfMonth()->day; $ziua++)
-                                    @if (\Carbon\Carbon::parse($search_data)->startOfMonth()->addDays($ziua-1)->isWeekday())
-                                        <td class="px-0 text-center">
-                                    @else
-                                        <td class="px-0 text-center" style="background-color: darkcyan">
-                                    @endif
-                            {{-- <th class="px-0 text-center"> --}}
-                                {{ ucfirst(\Carbon\Carbon::parse($search_data)->startOfMonth()->addDays($ziua-1)->minDayName) }}
-                                <br>
-                                {{ $ziua }}
+                            @if (\Carbon\Carbon::parse($search_data)->startOfMonth()->addDays($ziua-1)->isWeekday())
+                                <td class="px-0 text-center">
+                            @else
+                                <td class="px-0 text-center" style="background-color: darkcyan">
+                            @endif
+                                    {{ ucfirst(\Carbon\Carbon::parse($search_data)->startOfMonth()->addDays($ziua-1)->minDayName) }}
+                                    <br>
+                                    {{ $ziua }}
                             </th>
                         @endfor
                     </tr>
@@ -83,14 +82,11 @@
                                 <b>{{ $ora }}</b>
                             </td>
                                 @for ($ziua = 1; $ziua <= \Carbon\Carbon::parse($search_data)->endOfMonth()->day; $ziua++)
-                                    {{-- @foreach ($programari->whereBetween('ora', [$ora . ':00:00' , $ora . ':59:59']) as $programari_per_ora) --}}
                                     @if (\Carbon\Carbon::parse($search_data)->startOfMonth()->addDays($ziua-1)->isWeekday())
                                         <td class="px-0 text-center">
                                     @else
                                         <td class="px-0 text-center" style="background-color: darkcyan">
                                     @endif
-                                            {{-- {{ $programare->ora }} --}}
-                                            {{-- {{ \Carbon\Carbon::parse($search_data)->startOfMonth()->addDays($ziua)->format('Y-m-d') }} --}}
                                             @foreach ($programari_per_ora->where('data', \Carbon\Carbon::parse($search_data)->startOfMonth()->addDays($ziua-1)->format('Y-m-d')) as $programare)
                                                 @if (!$loop->first)
                                                     <br>
@@ -102,13 +98,10 @@
                                                 </small>
                                             @endforeach
                                         </td>
-                                    {{-- @endforeach --}}
                                 @endfor
                         </tr>
                     @endfor
                 </tbody>
-
-
         </div>
     </div>
 </div>
