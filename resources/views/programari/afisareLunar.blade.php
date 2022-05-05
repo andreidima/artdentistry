@@ -54,124 +54,50 @@
 
         @include ('errors')
 
-        {{-- <div class="row d-flex justify-content-center"> --}}
-            {{-- @for ($ziua = \Carbon\Carbon::parse($search_data->startOfWeek()); $ziua->lessThan($search_data->endOfWeek()->subDays(2)); $ziua->addDay())
-                <div class="col-lg-2 table-responsive rounded">
-                    <table class="table table-striped table-hover table-sm rounded">
-                        <thead class="text-white rounded-3" style="background-color:#e66800;">
-                            <tr class="" style="padding:2rem">
-                                <th class="text-center rounded-3">
-                                    {{ \Carbon\Carbon::parse($ziua)->dayName }}
-                                    <br>
-                                    {{ \Carbon\Carbon::parse($ziua)->isoFormat('DD.MM.YYYY') }}
-                                </th>
-                            </tr>
-                        </thead>
-                        @foreach ($programari->where('data', \Carbon\Carbon::parse($ziua)->isoformat('YYYY-MM-DD')) as $programare)
-                            <tr>
-                                <td class="border border-2 border-dark">
-                                    <div class="row">
-                                        <div class="col-12 d-flex">
-                                            <div class="me-2">
-                                                <span class="px-1 text-white rounded-3" style="background-color:darkcyan;">
-                                                    {{ $programare->ora ? \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') : '' }}
-                                                </span>
-                                            </div>
-                                            <div>
-                                                {{ $programare->fisa_de_tratament->nume ?? '' }}
-                                                <br>
-                                                {{ $programare->fisa_de_tratament->telefon ?? ''}}
-                                            </div>
-                                        </div>
-                                        <div class="col-12 d-flex justify-content-end">
-                                            <a href="{{ $programare->path() }}/modifica"
-                                                class="flex me-1"
-                                            >
-                                                <span class="badge bg-primary">Modifică</span>
-                                            </a>
-                                            <div style="flex" class="">
-                                                <a
-                                                    href="#"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#stergeProgramare{{ $programare->id }}"
-                                                    title="Șterge Programare"
-                                                    >
-                                                    <span class="badge bg-danger">Șterge</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 d-flex justify-content-end">
-                                            <a href="/programari/etichete/{{ $programare->id }}"
-                                                class="flex me-1"
-                                            >
-                                                <span class="badge bg-warning text-dark">Etichete</span>
-                                            </a>
-                                            @if ($programare->fisa_de_tratament)
-                                                <a href="{{ $programare->fisa_de_tratament->path() }}/modifica"
-                                                    class=""
-                                                >
-                                                    <span class="badge bg-success">Fișa de tratament</span>
-                                                </a>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </table>
-                </div>
-            @endfor --}}
-
-
         <div class="table-responsive rounded mb-4">
             <table class="table table-striped table-hover table-sm rounded table-bordered">
                 <thead class="text-white rounded" style="background-color:#e66800;">
                     <tr class="" style="padding:2rem">
-                        <th style="min-width: 50px;">#</th>
-                        <th style="min-width: 170px;">Nume</th>
-                        @for ($ziua = 0; $ziua <= \Carbon\Carbon::parse($search_data_sfarsit)->diffInDays($search_data_inceput); $ziua++)
-                            <th class="text-center" style="min-width: 120px;">
-                                {{ \Carbon\Carbon::parse($search_data_inceput)->addDays($ziua)->isoFormat('DD.MM.YYYY') }}
+                        <th>Ora</th>
+                        @for ($ziua = 1; $ziua <= \Carbon\Carbon::parse($search_data)->endOfMonth()->day; $ziua++)
+                            <th class="text-center">
+                                {{ ucfirst(\Carbon\Carbon::parse($search_data)->startOfMonth()->addDays($ziua-1)->minDayName) }}
+                                <br>
+                                {{ $ziua }}
                             </th>
                         @endfor
-                        {{-- <th class="text-center" style="min-width: 120px;">
-                            Total
-                        </th> --}}
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($angajati as $angajat)
-                        {{-- @php
-                            $timp_total = \Carbon\Carbon::today();
-                        @endphp --}}
+                    @for ($ora = 8; $ora <=20; $ora++)
+                    @php
+                        $programari_per_ora = $programari->whereBetween('ora', [$ora . ':00:00' , $ora . ':59:59']);
+                    @endphp
                         <tr>
-                            <td style="">
-                                {{ $loop->iteration }}
+                            <td class="text-end text-white" style="background-color:#e66800;">
+                                <b>{{ $ora }}</b>
                             </td>
-                            <td style="">
-                                <div class="px-2"
-                                style="
-    position: absolute;
-    display: inline-block;
-    width: 160px;
-    background-color:#e66800;
-    color:white;
-    "
-    >
-                                    {{ $angajat->nume ?? '' }}
-                                </div>
-                            </td>
-
-                            @for ($ziua = 0; $ziua <= \Carbon\Carbon::parse($search_data_sfarsit)->diffInDays($search_data_inceput); $ziua++)
-                                <td class="text-center">
-                                    {{-- @if (\Carbon\Carbon::parse($search_data_inceput)->addDays($ziua)->isWeekday()) --}}
-                                        @forelse ($angajat->pontaj->where('data', \Carbon\Carbon::parse($search_data_inceput)->addDays($ziua)->toDateString()) as $pontaj)
-                                            <a href="/pontaje/{{ $pontaj->id }}/modifica" style="text-decoration: none;">
-                                                @switch($pontaj->concediu)
-                                                    @case(0)
-                                                        @if ($pontaj->ora_sosire && $pontaj->ora_plecare)
-
-
+                                @for ($ziua = 1; $ziua <= \Carbon\Carbon::parse($search_data)->endOfMonth()->day; $ziua++)
+                                    {{-- @foreach ($programari->whereBetween('ora', [$ora . ':00:00' , $ora . ':59:59']) as $programari_per_ora) --}}
+                                        <td class="text-center">
+                                            {{-- {{ $programare->ora }} --}}
+                                            {{-- {{ \Carbon\Carbon::parse($search_data)->startOfMonth()->addDays($ziua)->format('Y-m-d') }} --}}
+                                            @foreach ($programari_per_ora->where('data', \Carbon\Carbon::parse($search_data)->startOfMonth()->addDays($ziua-1)->format('Y-m-d')) as $programare)
+                                                @if (!$loop->first)
+                                                    <br>
+                                                @endif
+                                                <small>
+                                                    <a href="{{ $programare->path() }}/modifica">
+                                                        {{ \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') }}
+                                                    </a>
+                                                </small>
+                                            @endforeach
+                                        </td>
+                                    {{-- @endforeach --}}
+                                @endfor
+                        </tr>
+                    @endfor
+                </tbody>
 
 
         </div>

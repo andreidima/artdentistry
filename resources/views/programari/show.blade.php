@@ -80,7 +80,8 @@
 
                     <div class="form-row mb-2 px-2">
                         <div class="col-lg-12 d-flex justify-content-center">
-                            <a class="btn btn-primary text-white rounded-pill" href="/programari">Pagină programări</a>
+                            {{-- <a class="btn btn-primary text-white rounded-pill" href="/programari">Pagină programări</a> --}}
+                            <a class="btn btn-primary text-white rounded-pill" href="{{ url()->previous() }}">Înapoi</a>
                         </div>
                     </div>
 
