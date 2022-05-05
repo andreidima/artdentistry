@@ -60,7 +60,12 @@
                     <tr class="" style="padding:2rem">
                         <th class="px-0 text-center">Ora</th>
                         @for ($ziua = 1; $ziua <= \Carbon\Carbon::parse($search_data)->endOfMonth()->day; $ziua++)
-                            <th class="px-0 text-center">
+                                    @if (\Carbon\Carbon::parse($search_data)->startOfMonth()->addDays($ziua-1)->isWeekday())
+                                        <td class="px-0 text-center">
+                                    @else
+                                        <td class="px-0 text-center" style="background-color: darkcyan">
+                                    @endif
+                            {{-- <th class="px-0 text-center"> --}}
                                 {{ ucfirst(\Carbon\Carbon::parse($search_data)->startOfMonth()->addDays($ziua-1)->minDayName) }}
                                 <br>
                                 {{ $ziua }}
