@@ -78,22 +78,25 @@
                         $programari_per_ora = $programari->whereBetween('ora', [$ora . ':00:00' , $ora . ':59:59']);
                     @endphp
                         <tr>
-                            <td class="px-0 text-end text-white" style="background-color:#e66800;">
+                            <td class="px-0 py-0 text-end text-white" style="background-color:#e66800;">
                                 <b>{{ $ora }}</b>
                             </td>
                                 @for ($ziua = 1; $ziua <= \Carbon\Carbon::parse($search_data)->endOfMonth()->day; $ziua++)
                                     @if (\Carbon\Carbon::parse($search_data)->startOfMonth()->addDays($ziua-1)->isWeekday())
-                                        <td class="px-0 text-center">
+                                        <td class="px-0 py-0 text-start">
                                     @else
-                                        <td class="px-0 text-center" style="background-color: darkcyan">
+                                        <td class="px-0 py-0 text-start" style="background-color: darkcyan">
                                     @endif
                                             @foreach ($programari_per_ora->where('data', \Carbon\Carbon::parse($search_data)->startOfMonth()->addDays($ziua-1)->format('Y-m-d')) as $programare)
                                                 @if (!$loop->first)
                                                     <br>
                                                 @endif
-                                                <small>
-                                                    <a href="{{ $programare->path() }}/modifica">
+                                                <small style="white-space: nowrap;">
+                                                    <b>
                                                         {{ \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') }}
+                                                    </b>
+                                                    <a href="{{ $programare->path() }}/modifica">
+                                                        {{ $programare->fisa_de_tratament->nume }}
                                                     </a>
                                                 </small>
                                             @endforeach
