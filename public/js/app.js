@@ -5374,6 +5374,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vue_signature_pad__WEBPACK_IMPORTED_MODULE_0__["default"]);
@@ -5399,6 +5400,10 @@ vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vue_signature_pad__WEBPACK_IMPOR
   methods: {
     undo: function undo() {
       this.$refs.signaturePad.undoSignature();
+      this.signaturepad = null;
+    },
+    clear: function clear() {
+      this.$refs.signaturePad.clearSignature();
       this.signaturepad = null;
     },
     save: function save() {
@@ -65063,14 +65068,14 @@ var render = function() {
       "div",
       {
         staticClass: "container border border-1 p-0 mb-2",
-        staticStyle: { width: "400px", height: "200px" },
+        staticStyle: { width: "800px", height: "400px" },
         on: { click: _vm.save }
       },
       [
         _c("VueSignaturePad", {
           ref: "signaturePad",
           staticClass: "bg-white",
-          attrs: { width: "400px", height: "200px" },
+          attrs: { width: "800px", height: "400px" },
           model: {
             value: _vm.signaturepad,
             callback: function($$v) {
@@ -65090,7 +65095,7 @@ var render = function() {
           {
             staticClass: "btn-secondary rounded-3",
             attrs: { type: "button" },
-            on: { click: _vm.undo }
+            on: { click: _vm.clear }
           },
           [_vm._v("Șterge tabla de desen")]
         )

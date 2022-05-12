@@ -3,17 +3,18 @@
 
         <input type="text" :name=numeCampDb v-model="signaturepad" v-show="false">
 
-        <div class="container border border-1 p-0 mb-2" style="width:400px; height:200px" @click="save">
+        <div class="container border border-1 p-0 mb-2" style="width:800px; height:400px" @click="save">
             <VueSignaturePad
             class="bg-white"
             v-model="signaturepad"
-            width="400px" height="200px" ref="signaturePad" />
+            width="800px" height="400px" ref="signaturePad" />
         </div>
         <div class="container" style="width:400px;">
             <div class="mb-2 d-flex justify-content-center">
                 <!-- <button type="button" class="btn-secondary rounded-3" @click="undo">Șterge semnătura</button> -->
                 <!-- <button type="button" class="btn-success text-white rounded-3" @click="save">Salvează semnătura</button> -->
-                <button type="button" class="btn-secondary rounded-3" @click="undo">Șterge tabla de desen</button>
+                <!-- <button type="button" class="btn-secondary rounded-3" @click="undo">Șterge tabla de desen</button> -->
+                <button type="button" class="btn-secondary rounded-3" @click="clear">Șterge tabla de desen</button>
             </div>
             <!-- <div v-if="signaturepad" class="alert-success">
                 Semnătura a fost salvată
@@ -57,6 +58,10 @@ export default {
   methods: {
     undo() {
       this.$refs.signaturePad.undoSignature();
+      this.signaturepad = null;
+    },
+    clear() {
+      this.$refs.signaturePad.clearSignature();
       this.signaturepad = null;
     },
     save() {
