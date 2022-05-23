@@ -5453,6 +5453,12 @@ Vue.component('vue-signature-pad', __webpack_require__(/*! ./components/VueSigna
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+if (document.querySelector('#app')) {
+  var app = new Vue({
+    el: '#app'
+  });
+}
+
 if (document.querySelector('#app1')) {
   var app1 = new Vue({
     el: '#app1',

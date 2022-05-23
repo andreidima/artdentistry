@@ -29,6 +29,12 @@ Vue.component('vue-signature-pad', require('./components/VueSignaturePad.vue').d
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+if (document.querySelector('#app')) {
+    const app = new Vue({
+        el: '#app'
+    });
+}
+
 if (document.querySelector('#app1')) {
     const app1 = new Vue({
         el: '#app1',
