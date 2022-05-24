@@ -593,6 +593,33 @@
             <div class="col-auto">
                 * declar că am înțeles toate informațiile furnizate de către
             </div>
+            <div class="col-auto d-flex align-items-center">
+                <input
+                    type="text"
+                    id="fumat_nr_tigari"
+                    name="fumat_nr_tigari"
+                    class="me-2 form-control bg-white rounded-3 {{ $errors->has('fumat_nr_tigari') ? 'is-invalid' : '' }}"
+                    value="{{ old('fumat_nr_tigari', $chestionar->fumat_nr_tigari) }}">
+                **,
+            </div>
+            <div class="col-auto">
+            </div>
+            <div class="col-auto">
+                mai sus-enumerate, că am prezentat medicului dentist doar informații adevărate și că îmi exprim acordul informat pentru efectuarea actului medical.
+                <br>
+                * Numele și prenumele pacientului/reprezentantului legal.
+                <br>
+                ** Numele și prenumele medicului dentist care a informat pacientul.
+            </div>
+            <div class="col-lg-12 mb-2 align-items-center">
+                <vue-signature-pad
+                    semnatura-veche="{{ old('semnatura', ($programare->semnatura ?? '')) }}"
+                    nume-camp-db="semnatura">
+                </vue-signature-pad>
+            </div>
+            <div class="col-auto">
+                Data
+            </div>
             <div class="col-auto">
                 <input
                     type="text"
@@ -602,11 +629,16 @@
                     value="{{ old('fumat_nr_tigari', $chestionar->fumat_nr_tigari) }}">
             </div>
             <div class="col-auto">
-                **, mai sus-enumerate, că am prezentat medicului dentist doar informații adevărate și că îmi exprim acordul informat pentru efectuarea actului medical.
-                <br>
-                * Numele și prenumele pacientului/reprezentantului legal.
-                <br>
-                ** Numele și prenumele medicului dentist care a informat pacientul.
+                ora
+            </div>
+            <div class="col-auto mb-2 d-flex align-items-center">
+                <input
+                    type="text"
+                    id="fumat_nr_tigari"
+                    name="fumat_nr_tigari"
+                    class="me-2 form-control bg-white rounded-3 {{ $errors->has('fumat_nr_tigari') ? 'is-invalid' : '' }}"
+                    value="{{ old('fumat_nr_tigari', $chestionar->fumat_nr_tigari) }}">
+                **,
             </div>
         </div>
 
