@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PacientController;
 use App\Http\Controllers\FisaDeTratamentController;
 use App\Http\Controllers\ChestionarEvaluareStareGeneralaController;
+use App\Http\Controllers\ChestionarAcordulPacientuluiInformatController;
 use App\Http\Controllers\ServiciuCategorieController;
 use App\Http\Controllers\ServiciuController;
 use App\Http\Controllers\VizualizareRamificatieServiciuController;
@@ -39,8 +40,8 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::get('programari/afisare-tabel', [ProgramareController::class, 'afisareTabel'])->name('programari.afisare_tabel');
     // Route::resource('programari', ProgramareController::class,  ['parameters' => ['programari' => 'programare']]);
 
-    Route::resource('fise-de-tratament/{fisa_de_tratament}/chestionar-acordul-pacientului-informat', ChestionarAcordulPacientuluiInformatController::class,  ['parameters' => ['chestionar-acordul-pacientului-informat' => 'acord']]);
     Route::resource('fise-de-tratament/{fisa_de_tratament}/chestionar-evaluare-stare-generala', ChestionarEvaluareStareGeneralaController::class,  ['parameters' => ['chestionar-evaluare-stare-generala' => 'chestionar']]);
+    Route::resource('fise-de-tratament/{fisa_de_tratament}/chestionar-acordul-pacientului-informat', ChestionarAcordulPacientuluiInformatController::class,  ['parameters' => ['chestionar-acordul-pacientului-informat' => 'chestionar']]);
     Route::resource('fise-de-tratament', FisaDeTratamentController::class,  ['parameters' => ['fise-de-tratament' => 'fisa_de_tratament']]);
 
     Route::get('programari/afisare-zilnic', [ProgramareController::class, 'afisareZilnic'])->name('programari.afisareZilnic');

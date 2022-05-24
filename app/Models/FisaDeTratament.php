@@ -38,6 +38,16 @@ class FisaDeTratament extends Model
     }
 
     /**
+     * Get the chestionar_acordul_pacientului_informat associated with the FisaDeTratament
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function chestionar_acordul_pacientului_informat()
+    {
+        return $this->hasOne(ChestionarAcordulPacientuluiInformat::class, 'fisa_de_tratament_id', 'id');
+    }
+
+    /**
      * Get all of the programari for the FisaDeTratament
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

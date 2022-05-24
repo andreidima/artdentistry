@@ -44,7 +44,8 @@
                             <th>Număr</th>
                             <th>Nume</th>
                             <th>Telefon</th>
-                            <th class="text-center">Chestionar</th>
+                            <th class="text-center small">Acordul Pacientului Informat</th>
+                            <th class="text-center small">Evaluare Stare Generală</th>
                             <th class="text-end">Acțiuni</th>
                         </tr>
                     </thead>
@@ -62,6 +63,17 @@
                                 </td>
                                 <td>
                                     {{ $fisa_de_tratament->telefon }}
+                                </td>
+                                <td class="text-center">
+                                    @if ($fisa_de_tratament->chestionar_acordul_pacientului_informat)
+                                        <a href="{{ $fisa_de_tratament->path() }}/chestionar-acordul-pacientului-informat/{{ $fisa_de_tratament->chestionar_acordul_pacientului_informat->id }}/modifica">
+                                            <span class="badge bg-primary">Modifică</span>
+                                        </a>
+                                    @else
+                                        <a href="{{ $fisa_de_tratament->path() }}/chestionar-acordul-pacientului-informat/adauga">
+                                            <span class="badge bg-success">Adaugă</span>
+                                        </a>
+                                    @endif
                                 </td>
                                 <td class="text-center">
                                     @if ($fisa_de_tratament->chestionar_evaluare_stare_generala)
