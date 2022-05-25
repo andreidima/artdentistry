@@ -53,7 +53,6 @@
     <div class="card-body px-0 py-3">
 
         @include ('errors')
-
         <div class="table-responsive rounded mb-4">
             <table class="table table-striped table-hover table-sm rounded table-bordered">
                 <thead class="text-white rounded" style="background-color:#e66800;">
@@ -75,7 +74,10 @@
                 <tbody>
                     @for ($ora = 8; $ora <=20; $ora++)
                     @php
-                        $programari_per_ora = $programari->whereBetween('ora', [$ora . ':00:00' , $ora . ':59:59']);
+                        // $ora = \Carbon\Carbon::today()->addHours($ora);
+                        // dd(\Carbon\Carbon::today()->addHours($ora)->toTimeString(), \Carbon\Carbon::today()->addHours($ora)->endOfHour()->toTimeString());
+                        // $programari_per_ora = $programari->whereBetween('ora', [$ora . ':00:00' , $ora . ':59:59']);
+                        $programari_per_ora = $programari->whereBetween('ora', [\Carbon\Carbon::today()->addHours($ora)->toTimeString() , \Carbon\Carbon::today()->addHours($ora)->endOfHour()->toTimeString()]);
                     @endphp
                         <tr>
                             <td class="px-0 py-0 text-end text-white" style="background-color:#e66800;">

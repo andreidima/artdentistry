@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ChestionarEvaluareStareGenerala;
+use App\Models\ChestionarAcordulPacientuluiInformat;
 use App\Models\FisaDeTratament;
 
 use Illuminate\Http\Request;
@@ -71,6 +71,8 @@ class ChestionarAcordulPacientuluiInformatController extends Controller
         // $request->request->add(['user_id' => $request->user()->id]);
         $chestionar->update($this->validateRequest($request));
 
+        // dd($request, $chestionar);
+
         return redirect('/fise-de-tratament')->with('status', 'Chestionarul pentru „' . ($chestionar->fisa_de_tratament->nume ?? '') . '” a fost modificat cu succes!');
     }
 
@@ -104,7 +106,7 @@ class ChestionarAcordulPacientuluiInformatController extends Controller
                 'reprezentant_legal_calitate' => 'nullable|max:500',
                 'act_medical' => 'nullable|max:2000',
                 'date_stare_sanatate' => 'nullable|numeric|integer|between:0,1',
-                'diagnostiv' => 'nullable|numeric|integer|between:0,1',
+                'diagnostic' => 'nullable|numeric|integer|between:0,1',
                 'prognostic' => 'nullable|numeric|integer|between:0,1',
                 'natura_scop_act_medical' => 'nullable|numeric|integer|between:0,1',
                 'interventie_si_strategie' => 'nullable|numeric|integer|between:0,1',
@@ -126,14 +128,30 @@ class ChestionarAcordulPacientuluiInformatController extends Controller
                 'informare_in_continuare' => 'nullable|numeric|integer|between:0,1',
                 'acceptare_subsemnat' => 'nullable|max:200',
                 'acceptare_informatii_furnizate_de' => 'nullable|max:200',
-                'acceptare_semnatura' => 'nullable|max:2000',
+                'acceptare_semnatura' => 'nullable',
                 'acceptare_data' => 'nullable|max:100',
                 'acceptare_ora' => 'nullable|max:100',
                 'refuz_subsemnat' => 'nullable|max:200',
                 'refuz_informatii_furnizate_de' => 'nullable|max:200',
-                'refuz_semnatura' => 'nullable|max:2000',
+                'refuz_semnatura' => 'nullable',
                 'refuz_data' => 'nullable|max:100',
                 'refuz_ora' => 'nullable|max:100',
+                'ingrijiri_sanatate_nume' => 'nullable|max:100',
+                'personal_medical_nume_1' => 'nullable|max:100',
+                'personal_medical_profesie_1' => 'nullable|max:100',
+                'personal_medical_grad_profesional_1' => 'nullable|max:100',
+                'personal_medical_nume_2' => 'nullable|max:100',
+                'personal_medical_profesie_2' => 'nullable|max:100',
+                'personal_medical_grad_profesional_2' => 'nullable|max:100',
+                'personal_medical_nume_3' => 'nullable|max:100',
+                'personal_medical_profesie_3' => 'nullable|max:100',
+                'personal_medical_grad_profesional_3' => 'nullable|max:100',
+                'personal_medical_nume_4' => 'nullable|max:100',
+                'personal_medical_profesie_4' => 'nullable|max:100',
+                'personal_medical_grad_profesional_4' => 'nullable|max:100',
+                'personal_medical_nume_5' => 'nullable|max:100',
+                'personal_medical_profesie_5' => 'nullable|max:100',
+                'personal_medical_grad_profesional_5' => 'nullable|max:100',
             ],
             [
 

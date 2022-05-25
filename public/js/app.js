@@ -5459,14 +5459,18 @@ if (document.querySelector('#app')) {
   });
 }
 
-if (document.querySelector('#app1')) {
-  var app1 = new Vue({
-    el: '#app1',
+;
+
+if (document.querySelector('#programare')) {
+  var _app = new Vue({
+    el: '#programare',
     data: {
       rezultate_consultatie: typeof rezultateConsultatie !== 'undefined' ? rezultateConsultatie == "true" ? true : false : false
     }
   });
-} // if (document.querySelector('#programare')) {
+}
+
+; // if (document.querySelector('#programare')) {
 //     const app1 = new Vue({
 //         el: '#programare',
 //         data: {
@@ -65047,7 +65051,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "app" } }, [
+  return _c("div", [
     _c("input", {
       directives: [
         {

@@ -12,7 +12,7 @@
                 {{ \Carbon\Carbon::parse($search_data_sfarsit)->isoFormat('DD.MM.YYYY') ?? '' }}
             </h4>
         </div>
-        <div class="col-lg-6" id="app1">
+        <div class="col-lg-6" id="app">
             <form class="needs-validation" novalidate method="GET" action="{{ route('pontaje.afisare_lunar') }}">
                 @csrf
                 <div class="row mb-1 input-group custom-search-form justify-content-center">

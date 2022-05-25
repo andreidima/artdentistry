@@ -11,7 +11,7 @@
 
                 <div class="card-body py-2 border border-secondary"
                     style="border-radius: 0px 0px 40px 40px;"
-                    id="app1"
+                    id="app"
                 >
 
             @include ('errors')

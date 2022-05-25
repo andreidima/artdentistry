@@ -1,6 +1,6 @@
 @csrf
 
-<div class="row mb-0 d-flex border-radius: 0px 0px 40px 40px" id="app1">
+<div class="row mb-0 d-flex border-radius: 0px 0px 40px 40px" id="app">
     <div class="col-lg-12 px-2 mb-0">
         <div class="row">
             <div class="col-lg-12 mb-2">

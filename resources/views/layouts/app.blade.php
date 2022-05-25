@@ -25,7 +25,7 @@
 </head>
 <body>
     @auth
-    <div id="app">
+    <div>
         <nav class="navbar navbar-expand-lg navbar-dark shadow-sm" style="background-color: darkcyan">
             <div class="container">
                 <a class="navbar-brand me-5" href="{{ url('/') }}">

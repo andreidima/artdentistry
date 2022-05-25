@@ -33,16 +33,16 @@ if (document.querySelector('#app')) {
     const app = new Vue({
         el: '#app'
     });
-}
+};
 
-if (document.querySelector('#app1')) {
-    const app1 = new Vue({
-        el: '#app1',
+if (document.querySelector('#programare')) {
+    const app = new Vue({
+        el: '#programare',
         data: {
             rezultate_consultatie: ((typeof rezultateConsultatie !== 'undefined') ? ((rezultateConsultatie == "true") ? true : false) : false)
         },
     });
-}
+};
 
 // if (document.querySelector('#programare')) {
 //     const app1 = new Vue({

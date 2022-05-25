@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div>
 
         <input type="text" :name=numeCampDb v-model="signaturepad" v-show="false">
 

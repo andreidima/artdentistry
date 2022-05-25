@@ -114,6 +114,8 @@ class FisaDeTratamentController extends Controller
             return back()->with('error', 'Fișa de tratament a pacientului „' . ($fisa_de_tratament->nume ?? '') . '” nu poate fi ștearsă pentru că are programari adăugate. Ștergeți mai întâi programările');
         }
 
+        $fisa_de_tratament->chestionar_evaluare_stare_generala()->delete();
+        $fisa_de_tratament->chestionar_acordul_pacientului_informat()->delete();
         $fisa_de_tratament->delete();
         return back()->with('status', 'Fișa de tratament pentru pacientul "' . $fisa_de_tratament->nume . '" a fost ștearsă cu succes!');
     }

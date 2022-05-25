@@ -6,7 +6,7 @@
             <div class="col-lg-3">
                 <h4 class="mb-0"><a href="{{ route('etichete.index') }}"><i class="fa fa-tags me-1"></i>Etichete</a></h4>
             </div>
-            <div class="col-lg-6" id="app1">
+            <div class="col-lg-6" id="app">
                 <form class="needs-validation" novalidate method="GET" action="{{ route('etichete.index') }}">
                     @csrf
                     <div class="row mb-1 input-group custom-search-form justify-content-center">

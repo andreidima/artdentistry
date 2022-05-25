@@ -1,6 +1,6 @@
 @csrf
 
-<div class="row mb-0 d-flex border-radius: 0px 0px 40px 40px" id="app1">
+<div class="row mb-0 d-flex border-radius: 0px 0px 40px 40px" id="app">
     <div class="col-lg-12 px-4 py-2 mb-0">
         <div class="row px-2 py-2 align-items-center d-flex justify-content-center"
             style="background-color:lightyellow; border-left:6px solid; border-color:goldenrod"
