@@ -903,6 +903,20 @@
             </div>
         </div>
 
+        <div class="row mb-4 rounded-3 align-items-center" style="border:1px solid #e9ecef; border-left:0.25rem darkcyan solid; background-color:rgb(241, 250, 250)">
+            <div class="col-lg-12 mb-2 d-flex align-items-left">
+                <div class="form-check">
+                    {{-- <input type="hidden" name="gdpr" value="0"> --}}
+                    <input type="checkbox" class="form-check-input {{ $errors->has('gdpr') ? 'is-invalid' : '' }}" name="gdpr" id="gdpr" value="1" required
+                    {{ old('gdpr', ($chestionar->gdpr ?? "0")) === 1 ? 'checked' : '' }}>
+                    <label class="form-check-label" for="gdpr">
+                        * Sunt de acord cu prelucrarea datelor mele personale în conformitate cu Regulamentul (UE) 2016-679 - privind protecţia persoanelor fizice în ceea ce priveşte
+                        prelucrarea datelor cu caracter personal şi privind libera circulaţie a acestor date şi de abrogare a Directivei 95/46/CE ale cărei prevederi le-am citit şi le cunosc.
+                    </label>
+                </div>
+            </div>
+        </div>
+
 
         <div class="row">
             <div class="col-lg-12 mb-2 d-flex justify-content-center">

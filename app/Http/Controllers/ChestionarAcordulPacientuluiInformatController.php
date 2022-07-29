@@ -152,6 +152,7 @@ class ChestionarAcordulPacientuluiInformatController extends Controller
                 'personal_medical_nume_5' => 'nullable|max:100',
                 'personal_medical_profesie_5' => 'nullable|max:100',
                 'personal_medical_grad_profesional_5' => 'nullable|max:100',
+                'gdpr' => 'required',
             ],
             [
 
