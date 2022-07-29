@@ -13,7 +13,7 @@
         <div class="container" style="width:400px;">
             <div class="mb-2 d-flex justify-content-center">
                 <!-- <button type="button" class="btn-secondary rounded-3" @click="undo">Șterge semnătura</button> -->
-                <!-- <button type="button" class="btn-success text-white rounded-3 me-2" @click="save">Salvează semnătura</button> -->
+                <button type="button" class="btn-success text-white rounded-3 me-2" @click="save">Salvează semnătura</button>
                 <!-- <button type="button" class="btn-secondary rounded-3" @click="undo">Șterge tabla de desen</button> -->
                 <button type="button" class="btn-secondary rounded-3" @click="clear">Șterge tabla de desen</button>
             </div>
