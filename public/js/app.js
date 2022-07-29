@@ -65115,16 +65115,6 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn-success text-white rounded-3 me-2",
-            attrs: { type: "button" },
-            on: { click: _vm.save }
-          },
-          [_vm._v("Salvează semnătura")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
             staticClass: "btn-secondary rounded-3",
             attrs: { type: "button" },
             on: { click: _vm.clear }
