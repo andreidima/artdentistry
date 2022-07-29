@@ -5375,6 +5375,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vue_signature_pad__WEBPACK_IMPORTED_MODULE_0__["default"]);
@@ -5383,7 +5387,8 @@ vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vue_signature_pad__WEBPACK_IMPOR
   name: 'MySignaturePad',
   data: function data() {
     return {
-      signaturepad: null //   signaturepad: 'asd',
+      signaturepad: null,
+      semnatura_salvata: null //   signaturepad: 'asd',
 
     };
   },
@@ -5405,6 +5410,7 @@ vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vue_signature_pad__WEBPACK_IMPOR
     clear: function clear() {
       this.$refs.signaturePad.clearSignature();
       this.signaturepad = null;
+      this.semnatura_salvata = null;
     },
     save: function save() {
       var _this$$refs$signature = this.$refs.signaturePad.saveSignature(),
@@ -5414,6 +5420,7 @@ vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vue_signature_pad__WEBPACK_IMPOR
 
 
       this.signaturepad = data;
+      this.semnatura_salvata = "DA";
     }
   }
 });
@@ -65079,7 +65086,12 @@ var render = function() {
       {
         staticClass: "container border border-1 p-0 mb-2",
         staticStyle: { width: "800px", height: "400px" },
-        on: { click: _vm.save }
+        on: {
+          mousedown: function($event) {
+            _vm.semnatura_salvata = "NU"
+          },
+          mouseup: _vm.save
+        }
       },
       [
         _c("VueSignaturePad", {
@@ -65109,7 +65121,19 @@ var render = function() {
           },
           [_vm._v("Șterge tabla de desen")]
         )
-      ])
+      ]),
+      _vm._v(" "),
+      _vm.semnatura_salvata == "DA"
+        ? _c("div", { staticClass: "alert-success text-center" }, [
+            _vm._v("\n              Semnătura a fost salvată\n          ")
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.semnatura_salvata == "NU"
+        ? _c("div", { staticClass: "alert-danger text-center" }, [
+            _vm._v("\n              Semnătura nu este salvată\n          ")
+          ])
+        : _vm._e()
     ])
   ])
 }

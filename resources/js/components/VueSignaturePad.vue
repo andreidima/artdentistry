@@ -3,7 +3,8 @@
 
         <input type="text" :name=numeCampDb v-model="signaturepad" v-show="false">
 
-        <div class="container border border-1 p-0 mb-2" style="width:800px; height:400px" @click="save">
+        <!-- <div class="container border border-1 p-0 mb-2" style="width:800px; height:400px" @click="save"> -->
+        <div class="container border border-1 p-0 mb-2" style="width:800px; height:400px" @mousedown="semnatura_salvata = 'NU'" @mouseup="save">
             <VueSignaturePad
             class="bg-white"
             v-model="signaturepad"
@@ -16,9 +17,12 @@
                 <!-- <button type="button" class="btn-secondary rounded-3" @click="undo">Șterge tabla de desen</button> -->
                 <button type="button" class="btn-secondary rounded-3" @click="clear">Șterge tabla de desen</button>
             </div>
-            <!-- <div v-if="signaturepad" class="alert-success">
+            <div v-if="semnatura_salvata == 'DA'" class="alert-success text-center">
                 Semnătura a fost salvată
-            </div> -->
+            </div>
+            <div v-if="semnatura_salvata == 'NU'" class="alert-danger text-center">
+                Semnătura nu este salvată
+            </div>
         </div>
 
   </div>
@@ -38,6 +42,7 @@ export default {
   data() {
     return {
       signaturepad: null,
+      semnatura_salvata: null,
     //   signaturepad: 'asd',
     }
   },
@@ -63,12 +68,14 @@ export default {
     clear() {
       this.$refs.signaturePad.clearSignature();
       this.signaturepad = null;
+      this.semnatura_salvata = null;
     },
     save() {
       const { isEmpty, data } = this.$refs.signaturePad.saveSignature();
     //   console.log(isEmpty);
     //   console.log(data);
       this.signaturepad = data;
+      this.semnatura_salvata = "DA"
     }
   }
 };
