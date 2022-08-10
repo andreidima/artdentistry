@@ -45,6 +45,14 @@
                             </tr>
                             <tr>
                                 <td>
+                                    Notiță
+                                </td>
+                                <td>
+                                    {{ $programare->notita }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     Tratament
                                 </td>
                                 <td>

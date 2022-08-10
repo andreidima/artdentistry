@@ -39,8 +39,32 @@ if (document.querySelector('#programare')) {
     const app = new Vue({
         el: '#programare',
         data: {
-            rezultate_consultatie: ((typeof rezultateConsultatie !== 'undefined') ? ((rezultateConsultatie == "true") ? true : false) : false)
+            rezultate_consultatie: ((typeof rezultateConsultatie !== 'undefined') ? ((rezultateConsultatie == "true") ? true : false) : false),
+
+            fise_de_tratament: fiseDeTratament,
+            fisa_de_tratament_nume_autocomplete: '',
+            fise_de_tratament_lista_autocomplete: [],
+            fisa_de_tratament_id: fisaDeTratamentIdVechi,
         },
+        created: function () {
+            if (this.fisa_de_tratament_id) {
+                this.fisa_de_tratament_nume_autocomplete = this.fise_de_tratament.find(item => item.id === this.fisa_de_tratament_id).nume;
+            }
+        },
+        methods: {
+
+            // Autocomplete pentru datele pacientului folosind fise_de_tratament trime din start in vuejs
+            autoComplete: function () {
+                this.fise_de_tratament_lista_autocomplete = [];
+                if (this.fisa_de_tratament_nume_autocomplete.length > 2) {
+                    for (var i = 0; i < this.fise_de_tratament.length; i++) {
+                        if (this.fise_de_tratament[i].nume.toLowerCase().includes(this.fisa_de_tratament_nume_autocomplete.toLowerCase())) {
+                            this.fise_de_tratament_lista_autocomplete.push(this.fise_de_tratament[i]);
+                        }
+                    }
+                }
+            },
+        }
     });
 };
 

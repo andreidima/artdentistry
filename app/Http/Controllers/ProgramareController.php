@@ -54,7 +54,7 @@ class ProgramareController extends Controller
      */
     public function create(Request $request)
     {
-        $fise_de_tratament = FisaDeTratament::orderBy('fisa_numar', 'desc')->get();
+        $fise_de_tratament = FisaDeTratament::select('id', 'fisa_numar', 'nume')->orderBy('fisa_numar', 'desc')->get();
 
         $request->session()->get('programare_return_url') ?? $request->session()->put('programare_return_url', url()->previous());
 
@@ -72,7 +72,7 @@ class ProgramareController extends Controller
         $this->validateRequest($request);
 
         if ($request->fisa_de_tratament_id){
-            $programare = Programare::create($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie'));
+            $programare = Programare::create($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie', 'fisa_de_tratament_nume_autocomplete'));
         } else {
             $fisa_de_tratament = FisaDeTratament::create(
                 [
@@ -83,7 +83,7 @@ class ProgramareController extends Controller
                 ]
             );
             $request->request->add(['fisa_de_tratament_id' => $fisa_de_tratament->id]);
-            $programare = Programare::create($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie'));
+            $programare = Programare::create($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie', 'fisa_de_tratament_nume_autocomplete'));
         }
 
         return redirect($request->session()->get('programare_return_url') ?? ('/programari/afisare-saptamanal'))
@@ -111,7 +111,7 @@ class ProgramareController extends Controller
      */
     public function edit(Request $request, Programare $programare)
     {
-        $fise_de_tratament = FisaDeTratament::orderBy('fisa_numar', 'desc')->get();
+        $fise_de_tratament = FisaDeTratament::select('id', 'fisa_numar', 'nume')->orderBy('fisa_numar', 'desc')->get();
 
         $request->session()->get('programare_return_url') ?? $request->session()->put('programare_return_url', url()->previous());
 
@@ -134,7 +134,7 @@ class ProgramareController extends Controller
         $this->validateRequest($request);
 
         if ($request->fisa_de_tratament_id){
-            $programare->update($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie'));
+            $programare->update($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie', 'fisa_de_tratament_nume_autocomplete'));
         } else {
             $fisa_de_tratament = FisaDeTratament::create(
                 [
@@ -144,7 +144,7 @@ class ProgramareController extends Controller
                 ]
             );
             $request->request->add(['fisa_de_tratament_id' => $fisa_de_tratament->id]);
-            $programare->update($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie'));
+            $programare->update($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie', 'fisa_de_tratament_nume_autocomplete'));
         }
 
         return redirect($request->session()->get('programare_return_url') ?? ('/programari/afisare-saptamanal'))
@@ -179,7 +179,8 @@ class ProgramareController extends Controller
                 'nume' => 'required_without:fisa_de_tratament_id',
                 'telefon' => 'nullable',
                 'data' => 'required',
-                'ora' => 'nullable',
+                'ora' => 'required',
+                'notita' => 'nullable|max:500',
                 'tratament' => 'nullable|max:2000',
                 'cod' => 'nullable|max:500',
                 'semnatura' => 'nullable',

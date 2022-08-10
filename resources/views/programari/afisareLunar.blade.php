@@ -53,16 +53,16 @@
     <div class="card-body px-0 py-3">
 
         @include ('errors')
-        <div class="table-responsive rounded mb-4">
+        <div class="table-responsive rounded mb-4" style="height: 90vh">
             <table class="table table-striped table-hover table-sm rounded table-bordered">
-                <thead class="text-white rounded" style="background-color:#e66800;">
-                    <tr class="" style="padding:2rem">
-                        <th class="px-0 text-center">Ora</th>
+                <thead class="text-white rounded" style="">
+                    <tr class="" style="background-color:#e66800; padding:2rem; position: sticky; top: 0; z-index: 1;">
+                        <th class="px-3 text-center" style="">Ora</th>
                         @for ($ziua = 1; $ziua <= \Carbon\Carbon::parse($search_data)->endOfMonth()->day; $ziua++)
                             @if (\Carbon\Carbon::parse($search_data)->startOfMonth()->addDays($ziua-1)->isWeekday())
-                                <td class="px-0 text-center">
+                                <th class="px-0 text-center" style="">
                             @else
-                                <td class="px-0 text-center" style="background-color: darkcyan">
+                                <th class="px-0 text-center" style="background-color: darkcyan; ">
                             @endif
                                     {{ ucfirst(\Carbon\Carbon::parse($search_data)->startOfMonth()->addDays($ziua-1)->minDayName) }}
                                     <br>
@@ -80,8 +80,8 @@
                         $programari_per_ora = $programari->whereBetween('ora', [\Carbon\Carbon::today()->addHours($ora)->toTimeString() , \Carbon\Carbon::today()->addHours($ora)->endOfHour()->toTimeString()]);
                     @endphp
                         <tr>
-                            <td class="px-0 py-0 text-end text-white" style="background-color:#e66800;">
-                                <b>{{ $ora }}</b>
+                            <td class="px-0 py-0 text-start text-white" style="background-color:#e66800; position: sticky; left: 0;">
+                                <b>{{ $ora }}:00</b>
                             </td>
                                 @for ($ziua = 1; $ziua <= \Carbon\Carbon::parse($search_data)->endOfMonth()->day; $ziua++)
                                     @if (\Carbon\Carbon::parse($search_data)->startOfMonth()->addDays($ziua-1)->isWeekday())
@@ -90,23 +90,37 @@
                                         <td class="px-0 py-0 text-start" style="background-color: darkcyan">
                                     @endif
                                             @foreach ($programari_per_ora->where('data', \Carbon\Carbon::parse($search_data)->startOfMonth()->addDays($ziua-1)->format('Y-m-d')) as $programare)
-                                                @if (!$loop->first)
+                                                {{-- @if (!$loop->first)
                                                     <br>
-                                                @endif
-                                                <small style="white-space: nowrap;">
-                                                    <b>
-                                                        {{ \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') }}
-                                                    </b>
-                                                    <a href="{{ $programare->path() }}/modifica">
-                                                        {{ $programare->fisa_de_tratament->nume }}
-                                                    </a>
-                                                </small>
+                                                @endif --}}
+                                                <div class="mb-2" style="line-height:1;">
+                                                    <small style="white-space: nowrap;">
+                                                        <b>
+                                                            {{ \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') }}
+                                                        </b>
+                                                        <a href="{{ $programare->path() }}/modifica">
+                                                            {{ $programare->fisa_de_tratament->nume }}
+                                                        </a>
+                                                    </small>
+                                                    @if ($programare->notita)
+                                                        <small>
+                                                            ({{ $programare->notita ?? ''}})
+                                                        </small>
+                                                    @endif
+                                                </div>
+                                                {{-- @if ($programare->notita) --}}
+                                                    {{-- <br>
+                                                    <div class="ms-0 mb-0">
+                                                        {{ $programare->notita ?? ''}}
+                                                    </div> --}}
+                                                {{-- @endif --}}
                                             @endforeach
                                         </td>
                                 @endfor
                         </tr>
                     @endfor
                 </tbody>
+            </table>
         </div>
     </div>
 </div>
