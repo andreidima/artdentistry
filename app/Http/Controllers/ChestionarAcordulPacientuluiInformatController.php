@@ -15,9 +15,10 @@ class ChestionarAcordulPacientuluiInformatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(FisaDeTratament $fisa_de_tratament)
+    public function create(Request $request, FisaDeTratament $fisa_de_tratament)
     {
-        // dd('Adaugare', $fisa_de_tratament);
+        $request->session()->get('fisa_de_tratament_return_url') ?? $request->session()->put('fisa_de_tratament_return_url', url()->previous());
+
         return view('chestionareAcordulPacientuluiInformat.create', compact('fisa_de_tratament'));
     }
 
@@ -34,18 +35,8 @@ class ChestionarAcordulPacientuluiInformatController extends Controller
         $chestionar = ChestionarAcordulPacientuluiInformat::create($this->validateRequest($request));
         // dd($chestionar);
 
-        return redirect('/fise-de-tratament')->with('status', 'Chestionarul pentru „' . ($chestionar->fisa_de_tratament->nume ?? '') . '” a fost adăugat cu succes!');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\FirmaSalariat  $salariat
-     * @return \Illuminate\Http\Response
-     */
-    public function show(FirmaSalariat $salariat)
-    {
-        return view('firme.salariati.show', compact('salariat'));
+        return redirect($request->session()->get('fisa_de_tratament_return_url') ?? ('/fise-de-tratament'))
+            ->with('status', 'Chestionarul pentru „' . ($chestionar->fisa_de_tratament->nume ?? '') . '” a fost adăugat cu succes!');
     }
 
     /**
@@ -54,8 +45,10 @@ class ChestionarAcordulPacientuluiInformatController extends Controller
      * @param  \App\FisaDeTratament  $fisa_de_tratament
      * @return \Illuminate\Http\Response
      */
-    public function edit(FisaDeTratament $fisa_de_tratament, ChestionarAcordulPacientuluiInformat $chestionar)
+    public function edit(Request $request, FisaDeTratament $fisa_de_tratament, ChestionarAcordulPacientuluiInformat $chestionar)
     {
+        $request->session()->get('fisa_de_tratament_return_url') ?? $request->session()->put('fisa_de_tratament_return_url', url()->previous());
+
         return view('chestionareAcordulPacientuluiInformat.edit', compact('fisa_de_tratament', 'chestionar'));
     }
 
@@ -73,20 +66,8 @@ class ChestionarAcordulPacientuluiInformatController extends Controller
 
         // dd($request, $chestionar);
 
-        return redirect('/fise-de-tratament')->with('status', 'Chestionarul pentru „' . ($chestionar->fisa_de_tratament->nume ?? '') . '” a fost modificat cu succes!');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\FisaDeTratament  $fisa_de_tratament
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(FirmaSalariat $salariat)
-    {
-        $salariat->delete();
-
-        return redirect('/firme/salariati')->with('status', 'Salariatul „' . ($salariat->nume ?? '') . '” a fost șters cu succes!');
+        return redirect($request->session()->get('fisa_de_tratament_return_url') ?? ('/fise-de-tratament'))
+            ->with('status', 'Chestionarul pentru „' . ($chestionar->fisa_de_tratament->nume ?? '') . '” a fost modificat cu succes!');
     }
 
     /**
