@@ -275,7 +275,7 @@
 
                     <div class="form-row mb-2 px-2">
                         <div class="col-lg-12 d-flex justify-content-center">
-                            <a class="btn btn-primary text-white btn-sm rounded-pill" href="/fise-de-tratament">Pagină fișe de tratament</a>
+                            <a class="btn btn-primary text-white btn-sm rounded-pill" href="{{ url()->previous() }}">Înapoi</a>
                         </div>
                     </div>
 
