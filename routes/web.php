@@ -53,4 +53,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('etichete', EtichetaController::class,  ['parameters' => ['etichete' => 'eticheta']]);
     Route::post('etichete/{eticheta}/barcode/{view_type}', [EtichetaController::class, 'pdfExportBarcode']);
+
+
+    // Cardiologie
+    Route::prefix('cardiologie')->name('cardiologie.')->group(function () {
+        Route::resource('programari', App\Http\Controllers\Cardiologie\ProgramareController::class,  ['parameters' => ['programari' => 'programare']]);
+    });
 });

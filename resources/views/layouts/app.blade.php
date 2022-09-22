@@ -71,6 +71,18 @@
                                 <i class="fa fa-tags me-1"></i>Etichete
                             </a>
                         </li>
+                        <li class="nav-item me-3 dropdown">
+                            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-calendar-check me-1"></i>Programări Cardiologie
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                {{-- <li><a class="dropdown-item" href="{{ route('cardiologie.programari.afisareSaptamanal') }}">Vizualizare săptămânal</a></li> --}}
+                                <li><hr class="dropdown-divider"></li>
+                                {{-- <li><a class="dropdown-item" href="{{ route('cardiologie.programari.afisareLunar') }}">Vizualizare lunar</a></li> --}}
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{{ route('cardiologie.programari.index') }}">Administrare</a></li>
+                            </ul>
+                        </li>
                         {{-- <li class="nav-item me-3">
                             <a class="nav-link active" aria-current="page" href="{{ route('servicii.index') }}">
                                 <i class="fas fa-tooth me-1"></i>Servicii
