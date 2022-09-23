@@ -146,8 +146,9 @@ class ProgramareController extends Controller
             ]
         );
 
-        $request2 = \array_diff_key($request, ['gdpr' => '', 'covid_19' => '']);
-        dd($request, $request2);
+        $request = \array_diff_key($request, ['gdpr' => '', 'covid_19' => '']);
+dd($request);
+        return $request;
     }
 
     /**
