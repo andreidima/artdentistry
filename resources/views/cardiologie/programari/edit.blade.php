@@ -18,7 +18,7 @@
                         @method('PATCH')
 
 
-                                @include ('programari.form', [
+                                @include ('cardiologie.programari.form', [
                                     'buttonText' => 'Modifică Programarea'
                                 ])
 

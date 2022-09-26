@@ -57,8 +57,7 @@ class ProgramareController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validateRequest($request);
-        $programare = Programare::create($request->except('gdpr', 'covid_19'));
+        $programare = Programare::create($this->validateRequest());
 
         return redirect($request->session()->get('cardiologie_programare_return_url') ?? ('cardiologie/programari/afisare-saptamanal'))
             ->with('status', 'Programarea pentru „' . ($programare->nume ?? '') . '” a fost adăugată cu succes!');
@@ -99,9 +98,7 @@ class ProgramareController extends Controller
      */
     public function update(Request $request, Programare $programare)
     {
-        is_null($request->semnatura) ? $request->request->remove('semnatura') : '';
-
-        $programare->update($this->validateRequest($request));
+        $programare->update($this->validateRequest());
 
         return redirect($request->session()->get('cardiologie_programare_return_url') ?? ('cardiologie/programari/afisare-saptamanal'))
             ->with('status', 'Programarea pentru „' . ($programare->nume ?? '') . '” a fost modificată cu succes!');
@@ -125,10 +122,8 @@ class ProgramareController extends Controller
      *
      * @return array
      */
-    protected function validateRequest(Request $request)
+    protected function validateRequest()
     {
-        $request->request->add(['user_id' => $request->user()->id]);
-
         $request = request()->validate(
             [
                 'nume' => 'nullable|max:500',
@@ -139,15 +134,15 @@ class ProgramareController extends Controller
                 'semnatura' => 'nullable',
                 'observatii' => 'nullable|max:2000',
                 'gdpr' => 'required_with:semnatura',
-                'covid_19' => 'required_with:semnatura',
-                'user_id' => 'nullable',
+                'covid_19' => 'required_with:semnatura'
             ],
             [
             ]
         );
 
+        $request["user_id"] = request()->user()->id;
         $request = \array_diff_key($request, ['gdpr' => '', 'covid_19' => '']);
-dd($request);
+
         return $request;
     }
 

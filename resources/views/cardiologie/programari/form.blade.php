@@ -102,7 +102,7 @@
         <div class="row">
             <div class="col-lg-12 py-3 d-flex justify-content-center">
                 <button type="submit" class="btn btn-primary text-white me-2 rounded-3 shadow">{{ $buttonText }}</button>
-                <a class="btn btn-secondary rounded-3 shadow" href="{{ Session::get('programare_return_url') }}">Renunță</a>
+                <a class="btn btn-secondary rounded-3 shadow" href="{{ Session::get('cardiologie_programare_return_url') }}">Renunță</a>
             </div>
         </div>
     </div>

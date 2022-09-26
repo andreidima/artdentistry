@@ -36,7 +36,7 @@
                         </button>
                     </div>
                     <div class="col-lg-4 d-grid gap-2">
-                        <a class="btn btn-sm btn-primary text-white border border-dark rounded-3" href="/programari/afisare-saptamanal" role="button">
+                        <a class="btn btn-sm btn-primary text-white border border-dark rounded-3" href="/cardiologie/programari/afisare-saptamanal" role="button">
                             <i class="far fa-trash-alt text-white me-1"></i>Resetează căutarea
                         </a>
                     </div>
@@ -44,7 +44,7 @@
             </form>
         </div>
         <div class="col-lg-3 text-end">
-            <a class="btn btn-sm bg-success text-white border border-dark rounded-3 col-md-8" href="{{ route('programari.create') }}" role="button">
+            <a class="btn btn-sm bg-success text-white border border-dark rounded-3 col-md-8" href="{{ route('cardiologie.programari.create') }}" role="button">
                 <i class="fas fa-plus-square text-white me-1"></i>Adaugă programare
             </a>
         </div>
@@ -167,10 +167,10 @@
                                                     </span>
                                                 </div>
                                                 <div style="font-size:90%; line-height:1.2;">
-                                                    {{ $programare->fisa_de_tratament->nume ?? '' }}
-                                                    @if ($programare->fisa_de_tratament->telefon)
+                                                    {{ $programare->nume ?? '' }}
+                                                    @if ($programare->telefon)
                                                         <br>
-                                                        {{ $programare->fisa_de_tratament->telefon ?? ''}}
+                                                        {{ $programare->telefon ?? ''}}
                                                     @endif
                                                     @if ($programare->notita)
                                                         <br>
@@ -196,7 +196,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-12 py-0 px-1 d-flex justify-content-end">
-                                                <a href="/programari/etichete/{{ $programare->id }}"
+                                                {{-- <a href="/programari/etichete/{{ $programare->id }}"
                                                     class="flex me-1"
                                                 >
                                                     <span class="badge bg-warning px-1 text-dark">Etichete</span>
@@ -207,7 +207,7 @@
                                                     >
                                                         <span class="badge bg-success px-1">Fișa de tratament</span>
                                                     </a>
-                                                @endif
+                                                @endif --}}
                                             </div>
                                         </div>
                                 @endforeach
@@ -230,7 +230,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header bg-danger">
-                    <h5 class="modal-title text-white" id="exampleModalLabel">Programare: <b>{{ $programare->pacient->nume ?? '' }}</b></h5>
+                    <h5 class="modal-title text-white" id="exampleModalLabel">Programare: <b>{{ $programare->nume ?? '' }}</b></h5>
                     <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" style="text-align:left;">

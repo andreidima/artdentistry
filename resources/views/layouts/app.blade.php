@@ -76,9 +76,9 @@
                                 <i class="fas fa-calendar-check me-1"></i>Programări Cardiologie
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                {{-- <li><a class="dropdown-item" href="{{ route('cardiologie.programari.afisareSaptamanal') }}">Vizualizare săptămânal</a></li> --}}
+                                <li><a class="dropdown-item" href="{{ route('cardiologie.programari.afisareSaptamanal') }}">Vizualizare săptămânal</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                {{-- <li><a class="dropdown-item" href="{{ route('cardiologie.programari.afisareLunar') }}">Vizualizare lunar</a></li> --}}
+                                <li><a class="dropdown-item" href="{{ route('cardiologie.programari.afisareLunar') }}">Vizualizare lunar</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="{{ route('cardiologie.programari.index') }}">Administrare</a></li>
                             </ul>

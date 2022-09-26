@@ -24,7 +24,15 @@
                                     Pacient
                                 </td>
                                 <td>
-                                    {{ $programare->fisa_de_tratament->nume }}
+                                    {{ $programare->nume }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="">
+                                    Telefon
+                                </td>
+                                <td>
+                                    {{ $programare->telefon }}
                                 </td>
                             </tr>
                             <tr>
@@ -53,22 +61,6 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Tratament
-                                </td>
-                                <td>
-                                    {{ $programare->tratament }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Cod
-                                </td>
-                                <td>
-                                    {{ $programare->cod }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
                                     Semnătura
                                 </td>
                                 <td>
@@ -88,7 +80,6 @@
 
                     <div class="form-row mb-2 px-2">
                         <div class="col-lg-12 d-flex justify-content-center">
-                            {{-- <a class="btn btn-primary text-white rounded-pill" href="/programari">Pagină programări</a> --}}
                             <a class="btn btn-primary text-white rounded-pill" href="{{ url()->previous() }}">Înapoi</a>
                         </div>
                     </div>
