@@ -59,6 +59,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::prefix('cardiologie')->name('cardiologie.')->group(function () {
         Route::get('programari/afisare-saptamanal', [App\Http\Controllers\Cardiologie\ProgramareController::class, 'afisareSaptamanal'])->name('programari.afisareSaptamanal');
         Route::get('programari/afisare-lunar', [App\Http\Controllers\Cardiologie\ProgramareController::class, 'afisareLunar'])->name('programari.afisareLunar');
+
         Route::resource('programari', App\Http\Controllers\Cardiologie\ProgramareController::class,  ['parameters' => ['programari' => 'programare']]);
+
+        Route::resource('programari/{programare}/buletin-ecocardiografic', App\Http\Controllers\Cardiologie\BuletinEcocardiograficController::class, ['parameters' => ['buletin-ecocardiografic' => 'buletin_ecocardiografic']]);
     });
 });

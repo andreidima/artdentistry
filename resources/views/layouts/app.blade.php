@@ -72,7 +72,7 @@
                             </a>
                         </li>
                         <li class="nav-item me-3 dropdown">
-                            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link active dropdown-toggle rounded-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #00b7ff">
                                 <i class="fas fa-calendar-check me-1"></i>Programări Cardiologie
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">

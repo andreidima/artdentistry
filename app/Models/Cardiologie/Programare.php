@@ -16,4 +16,14 @@ class Programare extends Model
     {
         return "/cardiologie/programari/{$this->id}";
     }
+
+    /**
+     * Get the buletin_ecocardiografic associated with the Programare
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function buletin_ecocardiografic()
+    {
+        return $this->hasOne(BuletinEcocardiografic::class, 'programare_id');
+    }
 }

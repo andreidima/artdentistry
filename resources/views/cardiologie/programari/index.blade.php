@@ -47,7 +47,7 @@
 
             <div class="table-responsive rounded">
                 <table class="table table-striped table-hover table-sm rounded">
-                    <thead class="text-white rounded" style="background-color:#e66800;">
+                    <thead class="text-white rounded" style="background-color:#00b7ff;">
                         <tr class="" style="padding:2rem">
                             <th>Nr. Crt.</th>
                             <th>Nume</th>

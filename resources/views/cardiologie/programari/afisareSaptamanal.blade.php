@@ -5,14 +5,14 @@
     <div class="row card-header justify-content-between align-items-center" style="border-radius: 40px 40px 0px 0px;">
         <div class="col-lg-3">
             <h4 class="mb-0">
-                <a href="/programari/afisare-saptamanal">
+                <a href="/cardiologie/programari/afisare-saptamanal">
                     <i class="fas fa-calendar-check me-1"></i>
-                    Programări
+                    Cardiologie / Programări
                 </a>
             </h4>
         </div>
         <div class="col-lg-6" id="app">
-            <form class="needs-validation" novalidate method="GET" action="/programari/afisare-saptamanal">
+            <form class="needs-validation" novalidate method="GET" action="/cardiologie/programari/afisare-saptamanal">
                 @csrf
                 <div class="row mb-1 input-group custom-search-form justify-content-center align-items-center">
                     <div class="col-lg-12 mb-1 d-flex justify-content-center">
@@ -133,7 +133,7 @@
         <div class="table-responsive rounded mb-4"  style="height: 90vh">
             <table class="table table-striped table-hover table-sm rounded table-bordered">
                 <thead class="rounded" style="">
-                    <tr class="text-white border border-0" style="background-color:#e66800; padding:2rem; position: sticky; top: 0px;">
+                    <tr class="text-white border border-0" style="background-color:#00b7ff; padding:2rem; position: sticky; top: 0px;">
                             <th>
                                 Ora
                             </th>
@@ -149,7 +149,7 @@
                 <tbody>
                     @for ($ora = (\Carbon\Carbon::parse($programari->min('ora'))->hour < 9 ? \Carbon\Carbon::parse($programari->min('ora'))->hour : 9); $ora <= (\Carbon\Carbon::parse($programari->max('ora'))->hour > 18 ? \Carbon\Carbon::parse($programari->max('ora'))->hour : 18) ; $ora ++)
                         <tr class="">
-                            <td class="text-white" style="background-color:#e66800;">
+                            <td class="text-white" style="background-color:#00b7ff;">
                                 {{ $ora }}:00
                             </td>
                             @for ($ziua = \Carbon\Carbon::parse($search_data->startOfWeek()); $ziua->lessThan($search_data->endOfWeek()->subDays(2)); $ziua->addDay())
@@ -196,12 +196,14 @@
                                                 </div>
                                             </div>
                                             <div class="col-12 py-0 px-1 d-flex justify-content-end">
-                                                {{-- <a href="/programari/etichete/{{ $programare->id }}"
-                                                    class="flex me-1"
-                                                >
-                                                    <span class="badge bg-warning px-1 text-dark">Etichete</span>
-                                                </a>
-                                                @if ($programare->fisa_de_tratament)
+                                                @if (!$programare->buletin_ecocardiografic)
+                                                    <a class="flex me-1" href="/cardiologie/programari/{{ $programare->id }}/buletin-ecocardiografic/adauga">
+                                                @else
+                                                    <a class="flex me-1" href="/cardiologie/programari/{{ $programare->id }}/buletin-ecocardiografic/{{ $programare->buletin_ecocardiografic->id }}/modifica">
+                                                @endif
+                                                        <span class="badge bg-success px-1 text-dark">Buletin ecocardiografic</span>
+                                                    </a>
+                                                {{-- @if ($programare->fisa_de_tratament)
                                                     <a href="{{ $programare->fisa_de_tratament->path() }}/modifica"
                                                         class=""
                                                     >
