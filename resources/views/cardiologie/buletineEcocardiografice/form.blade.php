@@ -13,9 +13,47 @@
         <div class="row mb-4 rounded-3 d-flex align-items-center" style="">
             <div class="col-lg-12 align-items-center">
                 <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-lg-3 px-1 d-flex">
+                        <label for="nume" class="col-form-label pe-1">Nume</label>
+                        <input
+                            type="text"
+                            class="form-control rounded-3 {{ $errors->has('nume') ? 'is-invalid' : '' }}"
+                            value="{{ old('nume', $programare->nume) }}"
+                            disabled>
+                        <label for="nume" class="col-form-label ps-1">,</label>
+                    </div>
+                    <div class="col-lg-2 px-1 d-flex">
+                        <label for="varsta" class="col-form-label pe-1">vârsta</label>
+                        <input
+                            type="text"
+                            class="form-control rounded-3 {{ $errors->has('varsta') ? 'is-invalid' : '' }}"
+                            value="{{ old('varsta', $buletin_ecocardiografic->varsta) }}">
+                        <label for="varsta" class="col-form-label ps-1">,</label>
+                    </div>
+                    <div class="col-lg-2 px-1 d-flex">
+                        <label for="data" class="col-form-label pe-1">data</label>
+                        <vue2-datepicker
+                            data-veche="{{ old('data', ($buletin_ecocardiografic->data ?? \Carbon\Carbon::now()->toDateString())) }}"
+                            class="{{ $errors->has('data') ? 'form-control is-invalid' : '' }}"
+                            nume-camp-db="data"
+                            tip="date"
+                            value-type="YYYY-MM-DD"
+                            format="DD-MM-YYYY"
+                            :latime="{ width: '125px' }"
+                        ></vue2-datepicker>
+                    </div>
+                </div>
+                {{-- <div class="row d-flex justify-content-center align-items-center">
                     <div class="col-auto align-self-center">
                         <h5 class="mb-0">
                             Nume
+                            <input
+                                type="text"
+                                id="varsta"
+                                name="varsta"
+                                class="form-control bg-white rounded-3 {{ $errors->has('varsta') ? 'is-invalid' : '' }}"
+                                value="{{ old('varsta', $buletin_ecocardiografic->varsta) }}"
+                                >
                             <span class="badge bg-info"><b>{{ $programare->nume }}</b></span>, varsta
                         </h5>
                     </div>
@@ -32,7 +70,7 @@
                         type="hidden"
                         name="programare_id"
                         value="{{ $programare->id }}">
-                </div>
+                </div> --}}
             </div>
         </div>
 
@@ -973,6 +1011,13 @@
                         </select>
                     </div>
                 </div>
+            </div>
+
+            <div class="col-lg-12 py-1 mb-4 align-items-center" style="background-color: #ffebbe">
+                <vue-tiptap
+                text-vechi="{{ old('anexa') == '' ? $buletin_ecocardiografic->anexa : old('anexa') }}"
+                nume-camp-db="anexa"
+                ></vue-tiptap>
             </div>
         </div>
 
