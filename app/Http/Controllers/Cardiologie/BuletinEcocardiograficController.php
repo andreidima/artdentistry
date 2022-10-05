@@ -43,6 +43,7 @@ class BuletinEcocardiograficController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $buletin_ecocardiografic = BuletinEcocardiografic::create($this->validateRequest());
 
         return redirect($request->session()->get('cardiologie_programare_return_url') ?? ('cardiologie/programari/afisare-saptamanal'))
@@ -190,7 +191,7 @@ class BuletinEcocardiograficController extends Controller
                 'ia' => 'nullable|max:50',
                 'ip' => 'nullable|max:50',
                 'it' => 'nullable|max:50',
-                'concluzii' => 'nullable|max:50',
+                'concluzii' => 'nullable|max:2000',
                 'data' => 'nullable|max:50',
             ],
             [

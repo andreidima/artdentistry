@@ -14,6 +14,11 @@
             <div class="col-lg-12 align-items-center">
                 <div class="row d-flex justify-content-center align-items-center">
                     <div class="col-lg-3 px-1 d-flex">
+                            {{-- Cheia straina ce se salveaza in tabelul cardiologie buletine ecocardiografice --}}
+                            <input
+                                type="hidden"
+                                name="programare_id"
+                                value="{{ $programare->id }}">
                         <label for="nume" class="col-form-label pe-1">Nume</label>
                         <input
                             type="text"
@@ -1013,14 +1018,33 @@
                 </div>
             </div>
 
-            <div class="col-lg-12 py-1 mb-4 align-items-center" style="background-color: #ffebbe">
+            {{-- <div class="col-lg-12 py-1 mb-4 align-items-center" style="background-color: #ffebbe">
                 <vue-tiptap
-                text-vechi="{{ old('anexa') == '' ? $buletin_ecocardiografic->anexa : old('anexa') }}"
-                nume-camp-db="anexa"
+                text-vechi="{{ old('concluzii') == '' ? $buletin_ecocardiografic->concluzii : old('concluzii') }}"
+                nume-camp-db="concluzii"
                 ></vue-tiptap>
+            </div> --}}
+
+
+
+            <div class="col-lg-12 py-1 mb-4 align-items-center" style="background-color: #cfbeff">
+                <label for="concluzii" class="mb-0">Concluzii:</label>
+                <tinymce-vue
+                inputvalue="{{ old('concluzii') == '' ? $buletin_ecocardiografic->concluzii : old('concluzii') }}"
+                inputname="concluzii"
+                ></tinymce-vue>
             </div>
         </div>
 
+
+    {{-- TinyMCE --}}
+    {{-- <script src="https://cdn.tiny.cloud/1/qfvel52dls643trvhfl7htj92heo6mggf0lwt3uha1vnos13/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+      tinymce.init({
+        selector: '#mytextarea'
+      });
+    </script>
+    <textarea id="mytextarea" name="concluzii">Hello, World!</textarea> --}}
 
         <div class="row">
             <div class="col-lg-12 mb-2 d-flex justify-content-center">

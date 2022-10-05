@@ -23,6 +23,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('vue2-datepicker', require('./components/DatePicker.vue').default);
 Vue.component('vue-signature-pad', require('./components/VueSignaturePad.vue').default);
 Vue.component('vue-tiptap', require('./components/Tiptap.vue').default);
+Vue.component('tinymce-vue', require('./components/TinyMCE.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
