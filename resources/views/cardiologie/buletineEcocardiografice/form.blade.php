@@ -31,6 +31,7 @@
                         <label for="varsta" class="col-form-label pe-1">vârsta</label>
                         <input
                             type="text"
+                            name="varsta"
                             class="form-control rounded-3 {{ $errors->has('varsta') ? 'is-invalid' : '' }}"
                             value="{{ old('varsta', $buletin_ecocardiografic->varsta) }}">
                         <label for="varsta" class="col-form-label ps-1">,</label>
@@ -903,15 +904,15 @@
                 </div>
                 <div class="row justify-content-start mb-5">
                     <div class="col-lg-6 px-1 text-end">
-                        <label for="valva_aortica_som" class="col-form-label">SOM(cm<sup>2</sup>)</label>
+                        <label for="valva_aortica_soacont" class="col-form-label">SOAcont(cm<sup>2</sup>)</label>
                     </div>
                     <div class="col-lg-2 px-0">
                         <input
                             type="text"
-                            id="valva_aortica_som"
-                            name="valva_aortica_som"
-                            class="form-control bg-white rounded-3 {{ $errors->has('valva_aortica_som') ? 'is-invalid' : '' }}"
-                            value="{{ old('valva_aortica_som', $buletin_ecocardiografic->valva_aortica_som) }}">
+                            id="valva_aortica_soacont"
+                            name="valva_aortica_soacont"
+                            class="form-control bg-white rounded-3 {{ $errors->has('valva_aortica_soacont') ? 'is-invalid' : '' }}"
+                            value="{{ old('valva_aortica_soacont', $buletin_ecocardiografic->valva_aortica_soacont) }}">
                     </div>
                 </div>
                 <div class="row justify-content-start">
@@ -979,40 +980,40 @@
                         <label for="im" class="mb-0 pe-1">IM (grad)</label>
                         <select name="im" class="form-select bg-white rounded-3 {{ $errors->has('im') ? 'is-invalid' : '' }}" style="width: 120px">
                             <option value='' selected>Selectează</option>
-                            <option value='I' {{ (old('im', $buletin_ecocardiografic->im) == 2) ? 'selected' : '' }}> I </option>
-                            <option value='II' {{ (old('im', $buletin_ecocardiografic->im) == 1) ? 'selected' : '' }}> II </option>
-                            <option value='III' {{ (old('im', $buletin_ecocardiografic->im) == 2) ? 'selected' : '' }}> III </option>
-                            <option value='IV' {{ (old('im', $buletin_ecocardiografic->im) == 1) ? 'selected' : '' }}> IV </option>
+                            <option value='I' {{ (old('im', $buletin_ecocardiografic->im) === 'I') ? 'selected' : '' }}> I </option>
+                            <option value='II' {{ (old('im', $buletin_ecocardiografic->im) === 'II') ? 'selected' : '' }}> II </option>
+                            <option value='III' {{ (old('im', $buletin_ecocardiografic->im) === 'III') ? 'selected' : '' }}> III </option>
+                            <option value='IV' {{ (old('im', $buletin_ecocardiografic->im) === 'IV') ? 'selected' : '' }}> IV </option>
                         </select>
                     </div>
                     <div class="col-lg-3 d-flex align-items-center">
                         <label for="ia" class="mb-0 pe-1">IA (grad)</label>
                         <select name="ia" class="form-select bg-white rounded-3 {{ $errors->has('im') ? 'is-invalid' : '' }}" style="width: 120px">
                             <option value='' selected>Selectează</option>
-                            <option value='I' {{ (old('ia', $buletin_ecocardiografic->ia) == 2) ? 'selected' : '' }}> I </option>
-                            <option value='II' {{ (old('ia', $buletin_ecocardiografic->ia) == 1) ? 'selected' : '' }}> II </option>
-                            <option value='III' {{ (old('ia', $buletin_ecocardiografic->ia) == 2) ? 'selected' : '' }}> III </option>
-                            <option value='IV' {{ (old('ia', $buletin_ecocardiografic->ia) == 1) ? 'selected' : '' }}> IV </option>
+                            <option value='I' {{ (old('ia', $buletin_ecocardiografic->ia) === 'I') ? 'selected' : '' }}> I </option>
+                            <option value='II' {{ (old('ia', $buletin_ecocardiografic->ia) === 'II') ? 'selected' : '' }}> II </option>
+                            <option value='III' {{ (old('ia', $buletin_ecocardiografic->ia) === 'III') ? 'selected' : '' }}> III </option>
+                            <option value='IV' {{ (old('ia', $buletin_ecocardiografic->ia) === 'IV') ? 'selected' : '' }}> IV </option>
                         </select>
                     </div>
                     <div class="col-lg-3 d-flex align-items-center">
                         <label for="ip" class="mb-0 pe-1">IP (grad)</label>
                         <select name="ip" class="form-select bg-white rounded-3 {{ $errors->has('im') ? 'is-invalid' : '' }}" style="width: 120px">
                             <option value='' selected>Selectează</option>
-                            <option value='I' {{ (old('ip', $buletin_ecocardiografic->ip) == 2) ? 'selected' : '' }}> I </option>
-                            <option value='II' {{ (old('ip', $buletin_ecocardiografic->ip) == 1) ? 'selected' : '' }}> II </option>
-                            <option value='III' {{ (old('ip', $buletin_ecocardiografic->ip) == 2) ? 'selected' : '' }}> III </option>
-                            <option value='IV' {{ (old('ip', $buletin_ecocardiografic->ip) == 1) ? 'selected' : '' }}> IV </option>
+                            <option value='I' {{ (old('ip', $buletin_ecocardiografic->ip) === 'I') ? 'selected' : '' }}> I </option>
+                            <option value='II' {{ (old('ip', $buletin_ecocardiografic->ip) === 'II') ? 'selected' : '' }}> II </option>
+                            <option value='III' {{ (old('ip', $buletin_ecocardiografic->ip) === 'III') ? 'selected' : '' }}> III </option>
+                            <option value='IV' {{ (old('ip', $buletin_ecocardiografic->ip) === 'IV') ? 'selected' : '' }}> IV </option>
                         </select>
                     </div>
                     <div class="col-lg-3 d-flex align-items-center">
                         <label for="it" class="mb-0 pe-1">IT (grad)</label>
                         <select name="it" class="form-select bg-white rounded-3 {{ $errors->has('im') ? 'is-invalid' : '' }}" style="width: 120px">
                             <option value='' selected>Selectează</option>
-                            <option value='I' {{ (old('it', $buletin_ecocardiografic->it) == 2) ? 'selected' : '' }}> I </option>
-                            <option value='II' {{ (old('it', $buletin_ecocardiografic->it) == 1) ? 'selected' : '' }}> II </option>
-                            <option value='III' {{ (old('it', $buletin_ecocardiografic->it) == 2) ? 'selected' : '' }}> III </option>
-                            <option value='IV' {{ (old('it', $buletin_ecocardiografic->it) == 1) ? 'selected' : '' }}> IV </option>
+                            <option value='I' {{ (old('it', $buletin_ecocardiografic->it) === 'I') ? 'selected' : '' }}> I </option>
+                            <option value='II' {{ (old('it', $buletin_ecocardiografic->it) === 'II') ? 'selected' : '' }}> II </option>
+                            <option value='III' {{ (old('it', $buletin_ecocardiografic->it) === 'III') ? 'selected' : '' }}> III </option>
+                            <option value='IV' {{ (old('it', $buletin_ecocardiografic->it) === 'IV') ? 'selected' : '' }}> IV </option>
                         </select>
                     </div>
                 </div>

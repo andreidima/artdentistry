@@ -62,6 +62,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::resource('programari', App\Http\Controllers\Cardiologie\ProgramareController::class,  ['parameters' => ['programari' => 'programare']]);
 
+        Route::get('programari/{programare}/buletin-ecocardiografic-export/{buletin_ecocardiografic}/{view_type}', [App\Http\Controllers\Cardiologie\BuletinEcocardiograficController::class, 'exportPdf']);
         Route::resource('programari/{programare}/buletin-ecocardiografic', App\Http\Controllers\Cardiologie\BuletinEcocardiograficController::class, ['parameters' => ['buletin-ecocardiografic' => 'buletin_ecocardiografic']]);
     });
 });

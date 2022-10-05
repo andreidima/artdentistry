@@ -197,12 +197,17 @@
                                             </div>
                                             <div class="col-12 py-0 px-1 d-flex justify-content-end">
                                                 @if (!$programare->buletin_ecocardiografic)
-                                                    <a class="flex me-1" href="/cardiologie/programari/{{ $programare->id }}/buletin-ecocardiografic/adauga">
-                                                @else
-                                                    <a class="flex me-1" href="/cardiologie/programari/{{ $programare->id }}/buletin-ecocardiografic/{{ $programare->buletin_ecocardiografic->id }}/modifica">
-                                                @endif
-                                                        <span class="badge bg-success px-1 text-dark">Buletin ecocardiografic</span>
+                                                    <a class="" href="/cardiologie/programari/{{ $programare->id }}/buletin-ecocardiografic/adauga">
+                                                        <span class="badge bg-success px-1">Buletin ecocardiografic</span>
                                                     </a>
+                                                @else
+                                                    <a class="" href="/cardiologie/programari/{{ $programare->id }}/buletin-ecocardiografic/{{ $programare->buletin_ecocardiografic->id }}/modifica">
+                                                        <span class="badge bg-success px-1">Buletin ecocardiografic</span>
+                                                    </a>
+                                                    <a class="" href="/cardiologie/programari/{{ $programare->id }}/buletin-ecocardiografic-export/{{$programare->buletin_ecocardiografic->id}}/export-pdf" target="_blank">
+                                                        <span class="badge bg-white text-danger border border-danger  px-1">PDF</span>
+                                                    </a>
+                                                @endif
                                                 {{-- @if ($programare->fisa_de_tratament)
                                                     <a href="{{ $programare->fisa_de_tratament->path() }}/modifica"
                                                         class=""

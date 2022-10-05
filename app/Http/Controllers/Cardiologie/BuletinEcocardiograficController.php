@@ -85,6 +85,7 @@ class BuletinEcocardiograficController extends Controller
      */
     public function update(Request $request, Programare $programare, BuletinEcocardiografic $buletin_ecocardiografic)
     {
+        // dd($buletin_ecocardiografic, $this->validateRequest());
         $buletin_ecocardiografic->update($this->validateRequest());
 
         return redirect($request->session()->get('cardiologie_programare_return_url') ?? ('cardiologie/programari/afisare-saptamanal'))
@@ -99,9 +100,9 @@ class BuletinEcocardiograficController extends Controller
      */
     public function destroy(Request $request, Programare $programare)
     {
-        $programare->delete();
+        // $programare->delete();
 
-        return back()->with('status', 'Programarea pentru „' . ($programare->nume ?? '') . '” a fost ștearsă cu succes!');
+        // return back()->with('status', 'Programarea pentru „' . ($programare->nume ?? '') . '” a fost ștearsă cu succes!');
     }
 
     /**
@@ -204,4 +205,16 @@ class BuletinEcocardiograficController extends Controller
         return $request;
     }
 
+    public function exportPdf(Request $request, Programare $programare, BuletinEcocardiografic $buletin_ecocardiografic)
+    {
+        if ($request->view_type === 'export-html') {
+            return view('cardiologie.buletineEcocardiografice.diverse.exportPdf', compact('programare', 'buletin_ecocardiografic'));
+        } elseif ($request->view_type === 'export-pdf') {
+            $pdf = \PDF::loadView('cardiologie.buletineEcocardiografice.diverse.exportPdf', compact('programare', 'buletin_ecocardiografic'))
+                ->setPaper('a4', 'portrait');
+            $pdf->getDomPDF()->set_option("enable_php", true);
+            // return $pdf->download('Raport SSM - salariati.pdf');
+            return $pdf->stream();
+        }
+    }
 }
