@@ -62,7 +62,10 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::resource('programari', App\Http\Controllers\Cardiologie\ProgramareController::class,  ['parameters' => ['programari' => 'programare']]);
 
-        Route::get('programari/{programare}/buletin-ecocardiografic-export/{buletin_ecocardiografic}/{view_type}', [App\Http\Controllers\Cardiologie\BuletinEcocardiograficController::class, 'exportPdf']);
         Route::resource('programari/{programare}/buletin-ecocardiografic', App\Http\Controllers\Cardiologie\BuletinEcocardiograficController::class, ['parameters' => ['buletin-ecocardiografic' => 'buletin_ecocardiografic']]);
+        Route::get('programari/{programare}/buletin-ecocardiografic-export/{buletin_ecocardiografic}/{view_type}', [App\Http\Controllers\Cardiologie\BuletinEcocardiograficController::class, 'exportPdf']);
+
+        Route::resource('programari/{programare}/fisa-consultatie', App\Http\Controllers\Cardiologie\FisaConsultatieController::class, ['parameters' => ['fisa-consultatie' => 'fisa_consultatie']]);
+        Route::get('programari/{programare}/fisa-consultatie-export/{fisa_consultatie}/{view_type}', [App\Http\Controllers\Cardiologie\FisaConsultatieController::class, 'exportPdf']);
     });
 });

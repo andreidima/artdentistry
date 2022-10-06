@@ -111,3 +111,20 @@ if (document.querySelector('#programare')) {
 //         },
 //     });
 // }
+
+
+if (document.querySelector('#medicamente')) {
+    const app = new Vue({
+        el: '#medicamente',
+        data: {
+            medicamente_nume: ((typeof medicamenteNumeVechi !== 'undefined') ? medicamenteNumeVechi : ''),
+            medicamente_dimineata: ((typeof medicamenteDimineataVechi !== 'undefined') ? medicamenteDimineataVechi : ''),
+            medicamente_pranz: ((typeof medicamentePranzVechi !== 'undefined') ? medicamentePranzVechi : ''),
+            medicamente_seara: ((typeof medicamenteSearaVechi !== 'undefined') ? medicamenteSearaVechi : ''),
+        },
+        created: function () {
+        },
+        methods: {
+        }
+    });
+};

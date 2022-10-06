@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class BuletinEcocardiografic extends Model
+class FisaConsultatie extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'cardiologie_buletine_ecocardiografice';
+    protected $table = 'cardiologie_fise_consultatie';
     protected $guarded = [];
 
     public function path()
     {
-        return "/cardiologie/buletine-ecocardiografice/{$this->id}";
+        return "/cardiologie/fise-consultatie/{$this->id}";
     }
 
     /**

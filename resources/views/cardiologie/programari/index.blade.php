@@ -54,6 +54,7 @@
                             <th class="text-center">Data</th>
                             <th class="text-center">Ora</th>
                             <th class="text-center">Buletin<br>ecocardiografic</th>
+                            <th class="text-center">Fișă<br>consultație</th>
                             <th class="text-end">Acțiuni</th>
                         </tr>
                     </thead>
@@ -83,6 +84,22 @@
                                                 <span class="badge bg-primary">Modifică</span>
                                             </a>
                                             <a class="" href="/cardiologie/programari/{{ $programare->id }}/buletin-ecocardiografic-export/{{$programare->buletin_ecocardiografic->id}}/export-pdf" target="_blank">
+                                                <span class="badge bg-white text-danger border border-danger  px-1">PDF</span>
+                                            </a>
+                                        @endif
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="col-12 py-0 px-1 d-flex justify-content-center">
+                                        @if (!$programare->fisa_consultatie)
+                                            <a class="flex me-1" href="/cardiologie/programari/{{ $programare->id }}/fisa-consultatie/adauga">
+                                                <span class="badge bg-success">Adaugă</span>
+                                            </a>
+                                        @else
+                                            <a class="" href="/cardiologie/programari/{{ $programare->id }}/fisa-consultatie/{{ $programare->fisa_consultatie->id }}/modifica">
+                                                <span class="badge bg-primary">Modifică</span>
+                                            </a>
+                                            <a class="" href="/cardiologie/programari/{{ $programare->id }}/fisa-consultatie-export/{{$programare->fisa_consultatie->id}}/export-pdf" target="_blank">
                                                 <span class="badge bg-white text-danger border border-danger  px-1">PDF</span>
                                             </a>
                                         @endif
