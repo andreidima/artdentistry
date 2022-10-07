@@ -5,7 +5,10 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Cardiologie\Programare;
 use App\Models\Cardiologie\FisaConsultatie;
+use App\Models\Cardiologie\FisaConsultatieMedicament;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Arr;
 
 use Carbon\Carbon;
 
@@ -43,8 +46,20 @@ class FisaConsultatieController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+
         $fisa_consultatie = FisaConsultatie::create($this->validateRequest());
+        // dd($request);
+
+        // salvare medicamente
+        for ($i = 1; $i <= $request->numar_medicamente; $i++) {
+            $medicament = new FisaConsultatieMedicament;
+            $medicament->fisa_consultatie_id = $fisa_consultatie->id;
+            $medicament->nume = $request->medicamente['nume'][$i];
+            $medicament->dimineata = $request->medicamente['dimineata'][$i];
+            $medicament->pranz = $request->medicamente['pranz'][$i];
+            $medicament->seara = $request->medicamente['seara'][$i];
+            $medicament->save();
+        }
 
         return redirect($request->session()->get('cardiologie_programare_return_url') ?? ('cardiologie/programari/afisare-saptamanal'))
             ->with('status', 'Fișa Consultație pentru „' . ($fisa_consultatie->programare->nume ?? '') . '” a fost adăugată cu succes!');
@@ -72,6 +87,30 @@ class FisaConsultatieController extends Controller
     public function edit(Request $request, Programare $programare, FisaConsultatie $fisa_consultatie)
     {
         $request->session()->get('cardiologie_programare_return_url') ?? $request->session()->put('cardiologie_programare_return_url', url()->previous());
+        // $fisa_consultatie = FisaConsultatie::with('medicamente')->find($fisa_consultatie->id);
+
+        // dd($fisa_consultatie, $fisa_consultatie2, $fisa_consultatie->id);
+
+        dd($fisa_consultatie->medicamente);
+
+        // Incarcare medicamente in fisa_consultatie
+        $medicamente = [
+            'nume' => [],
+            'dimineata' => [],
+            'pranz' => [],
+            'seara' => [],
+        ];
+        $i = 1;
+        foreach ($fisa_consultatie->medicamente as $medicament){
+            $medicamente['nume'] = Arr::add($medicamente['nume'], $i, $medicament->nume);
+            $medicamente['dimineata'] = Arr::add($medicamente['dimineata'], $i, $medicament->dimineata);
+            $medicamente['pranz'] = Arr::add($medicamente['pranz'], $i, $medicament->pranz);
+            $medicamente['seara'] = Arr::add($medicamente['seara'], $i, $medicament->seara);
+            $i++;
+        }
+        $fisa_consultatie->medicamente = $medicamente;
+// echo count($fisa_consultatie->medicamente['nume']);
+        // dd($fisa_consultatie, $fisa_consultatie->medicamente);
 
         return view('cardiologie.fiseConsultatie.edit', compact('programare', 'fisa_consultatie'));
     }
@@ -123,13 +162,17 @@ class FisaConsultatieController extends Controller
                 'ekg' => 'nullable|max:2000',
                 'tratament_efectuat' => 'nullable|max:2000',
                 'data' => 'nullable|max:50',
+                'medicamente.nume.*' => 'required|max:200',
+                'medicamente.dimineata.*' => 'nullable|max:200',
+                'medicamente.pranz.*' => 'nullable|max:200',
+                'medicamente.seara.*' => 'nullable|max:200',
             ],
             [
             ]
         );
 
         $request["user_id"] = request()->user()->id;
-        // $request = \array_diff_key($request, ['gdpr' => '', 'covid_19' => '']);
+        $request = \array_diff_key($request, ['medicamente' => '', 'numar_medicamente' => '']);
 
         return $request;
     }

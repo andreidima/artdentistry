@@ -28,4 +28,14 @@ class FisaConsultatie extends Model
     {
         return $this->belongsTo(Programare::class, 'programare_id');
     }
+
+    /**
+     * Get all of the medicamente for the FisaConsultatie
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function medicamente()
+    {
+        return $this->hasMany(FisaConsultatieMedicament::class, 'fisa_consultatie_id', 'id');
+    }
 }

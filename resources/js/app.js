@@ -121,10 +121,20 @@ if (document.querySelector('#medicamente')) {
             medicamente_dimineata: ((typeof medicamenteDimineataVechi !== 'undefined') ? medicamenteDimineataVechi : ''),
             medicamente_pranz: ((typeof medicamentePranzVechi !== 'undefined') ? medicamentePranzVechi : ''),
             medicamente_seara: ((typeof medicamenteSearaVechi !== 'undefined') ? medicamenteSearaVechi : ''),
+
+            numar_medicamente: ((typeof numarMedicamente !== 'undefined') ? numarMedicamente : '')
         },
         created: function () {
         },
         methods: {
+            stergeMedicament: function (medicament) {
+                this.$delete(this.medicamente_nume, medicament);
+                this.$delete(this.medicamente_dimineata, medicament);
+                this.$delete(this.medicamente_pranz, medicament);
+                this.$delete(this.medicamente_seara, medicament);
+
+                this.numar_medicamente--;
+            }
         }
     });
 };
