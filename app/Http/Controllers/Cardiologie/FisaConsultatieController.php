@@ -87,11 +87,6 @@ class FisaConsultatieController extends Controller
     public function edit(Request $request, Programare $programare, FisaConsultatie $fisa_consultatie)
     {
         $request->session()->get('cardiologie_programare_return_url') ?? $request->session()->put('cardiologie_programare_return_url', url()->previous());
-        // $fisa_consultatie = FisaConsultatie::with('medicamente')->find($fisa_consultatie->id);
-
-        // dd($fisa_consultatie, $fisa_consultatie2, $fisa_consultatie->id);
-
-        dd($fisa_consultatie->medicamente);
 
         // Incarcare medicamente in fisa_consultatie
         $medicamente = [
@@ -109,8 +104,6 @@ class FisaConsultatieController extends Controller
             $i++;
         }
         $fisa_consultatie->medicamente = $medicamente;
-// echo count($fisa_consultatie->medicamente['nume']);
-        // dd($fisa_consultatie, $fisa_consultatie->medicamente);
 
         return view('cardiologie.fiseConsultatie.edit', compact('programare', 'fisa_consultatie'));
     }
