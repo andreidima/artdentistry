@@ -92,6 +92,10 @@
         <div class="row mb-2 rounded-3" style="">
             <div class="col-lg-12 py-1 mb-4 align-items-center">
                 <label for="" class="mb-0 ps-3">Tratament recomandat conform schemei:</label>
+                {{-- @php
+                    echo count($fisa_consultatie->medicamente['nume']);
+                    dd($fisa_consultatie->medicamente['nume']);
+                @endphp --}}
 
                     <div class="row" id="medicamente">
 

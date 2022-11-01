@@ -46,9 +46,7 @@ class FisaConsultatieController extends Controller
      */
     public function store(Request $request)
     {
-
         $fisa_consultatie = FisaConsultatie::create($this->validateRequest());
-        // dd($request);
 
         // salvare medicamente
         for ($i = 1; $i <= $request->numar_medicamente; $i++) {
@@ -117,7 +115,24 @@ class FisaConsultatieController extends Controller
      */
     public function update(Request $request, Programare $programare, FisaConsultatie $fisa_consultatie)
     {
+        // dd($request);
         $fisa_consultatie->update($this->validateRequest());
+
+        // Stergerea medicamentelor
+        foreach ($fisa_consultatie->medicamente as $medicament) {
+                $medicament->delete();
+        }
+
+        // Adaugarea medicamentelor din nou
+        for ($i = 1; $i <= $request->numar_medicamente; $i++) {
+            $medicament = new FisaConsultatieMedicament;
+            $medicament->fisa_consultatie_id = $fisa_consultatie->id;
+            $medicament->nume = $request->medicamente['nume'][$i];
+            $medicament->dimineata = $request->medicamente['dimineata'][$i];
+            $medicament->pranz = $request->medicamente['pranz'][$i];
+            $medicament->seara = $request->medicamente['seara'][$i];
+            $medicament->save();
+        }
 
         return redirect($request->session()->get('cardiologie_programare_return_url') ?? ('cardiologie/programari/afisare-saptamanal'))
             ->with('status', 'Fișa Consultație pentru „' . ($fisa_consultatie->programare->nume ?? '') . '” a fost modificată cu succes!');
