@@ -19,7 +19,7 @@
 
 
                                 @include ('cardiologie.fiseConsultatie.form', [
-                                    'buttonText' => 'Salvează'
+                                    'buttonText' => 'Salvează Fișa de Consultație'
                                 ])
 
                     </form>

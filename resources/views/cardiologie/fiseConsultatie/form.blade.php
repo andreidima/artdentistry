@@ -51,7 +51,7 @@
             </div>
         </div>
 
-        {{-- <div class="row mb-2 rounded-3" style="">
+        <div class="row mb-2 rounded-3" style="">
             <div class="col-lg-6 py-1 mb-4 align-items-center">
                 <label for="motive_prezentare" class="mb-0 ps-3">Motivele prezentării: evaluare cardiovasculară</label>
                 <textarea class="form-control bg-white {{ $errors->has('motive_prezentare') ? 'is-invalid' : '' }}"
@@ -87,81 +87,116 @@
                 <textarea class="form-control bg-white {{ $errors->has('tratament_efectuat') ? 'is-invalid' : '' }}"
                     name="tratament_efectuat" rows="3">{{ old('tratament_efectuat', $fisa_consultatie->tratament_efectuat) }}</textarea>
             </div>
-        </div> --}}
-
+        </div>
+@php
+    dd($fisa_consultatie->medicamente);
+@endphp
         <div class="row mb-2 rounded-3" style="">
-            <div class="col-lg-12 py-1 mb-4 align-items-center">
+            <div class="col-lg-12 p-3 mb-4 align-items-center">
                 <label for="" class="mb-0 ps-3">Tratament recomandat conform schemei:</label>
-                {{-- @php
-                    echo count($fisa_consultatie->medicamente['nume']);
-                    dd($fisa_consultatie->medicamente['nume']);
-                @endphp --}}
+                <div class="row" id="medicamente">
+                    <div class="form-group col-lg-12 justify-content-end">
+                            <script type="application/javascript">
+                                medicamenteNumeVechi={!! json_encode(\Illuminate\Support\Arr::flatten(old('medicamente.nume', ($fisa_consultatie->medicamente['nume'] ?? [])))) !!}
+                                medicamenteDimineataVechi={!! json_encode(\Illuminate\Support\Arr::flatten(old('medicamente.dimineata', ($fisa_consultatie->medicamente['dimineata'] ?? [])))) !!}
+                                medicamentePranzVechi={!! json_encode(\Illuminate\Support\Arr::flatten(old('medicamente.pranz', ($fisa_consultatie->medicamente['pranz'] ?? [])))) !!}
+                                medicamenteSearaVechi={!! json_encode(\Illuminate\Support\Arr::flatten(old('medicamente.seara', ($fisa_consultatie->medicamente['seara'] ?? [])))) !!}
 
-                    <div class="row" id="medicamente">
-
-                                        <div class="form-group col-lg-12 justify-content-end m-0">
-                                                <script type="application/javascript">
-                                                    medicamenteNumeVechi={!! json_encode(\Illuminate\Support\Arr::flatten(old('medicamente.nume', ($fisa_consultatie->medicamente['nume'] ?? [])))) !!}
-                                                    medicamenteDimineataVechi={!! json_encode(\Illuminate\Support\Arr::flatten(old('medicamente.dimineata', ($fisa_consultatie->medicamente['dimineata'] ?? [])))) !!}
-                                                    medicamentePranzVechi={!! json_encode(\Illuminate\Support\Arr::flatten(old('medicamente.pranz', ($fisa_consultatie->medicamente['pranz'] ?? [])))) !!}
-                                                    medicamenteSearaVechi={!! json_encode(\Illuminate\Support\Arr::flatten(old('medicamente.seara', ($fisa_consultatie->medicamente['seara'] ?? [])))) !!}
-
-                                                    numarMedicamente = {!! json_encode(intval(old('numar_medicamente', (count($fisa_consultatie->medicamente['nume']) ?? 0)))) !!}
-                                                </script>
-                                            <div>
-                                                <div v-for="medicament in numar_medicamente" :key="medicament">
-                                                    <div class="form-row align-items-start mb-2" style="background-color:#005757; border-radius: 10px 10px 10px 10px;">
-                                                        <div class="col-lg-2">
-                                                            <div class="row">
-                                                                <div class="form-group col-lg-12 mb-0 pb-0">
-                                                                    Medicament @{{ medicament }}:
-                                                                    <br>
-                                                                    <button  type="button" class="btn m-0 p-0 mb-1" @click="stergeMedicament(medicament-1)">
-                                                                        <span class="px-1" style="background-color:red; color:white; border-radius:20px">
-                                                                            Șterge medicamentul
-                                                                        </span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-10">
-                                                            <div class="row">
-                                                                <div class="col-lg-3">
-                                                                    <input type="text"
-                                                                        class="form-control"
-                                                                        :name="'medicamente[nume][' + medicament + ']'"
-                                                                        v-model="medicamente_nume[medicament-1]">
-                                                                </div>
-                                                                <div class="col-lg-3">
-                                                                    <input type="text"
-                                                                        class="form-control"
-                                                                        :name="'medicamente[dimineata][' + medicament + ']'"
-                                                                        v-model="medicamente_dimineata[medicament-1]">
-                                                                </div>
-                                                                <div class="col-lg-3">
-                                                                    <input type="text"
-                                                                        class="form-control"
-                                                                        :name="'medicamente[pranz][' + medicament + ']'"
-                                                                        v-model="medicamente_pranz[medicament-1]">
-                                                                </div>
-                                                                <div class="col-lg-3">
-                                                                    <input type="text"
-                                                                        class="form-control"
-                                                                        :name="'medicamente[seara][' + medicament + ']'"
-                                                                        v-model="medicamente_seara[medicament-1]">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <input type="hidden" name="numar_medicamente" v-model="numar_medicamente">
-                                                    <button type="button" class="btn btn-success" @click="numar_medicamente++">Adaugă medicament</button>
+                                numarMedicamente = {!! json_encode(intval(old('numar_medicamente', ($fisa_consultatie->medicamente->count() ? count($fisa_consultatie->medicamente['nume']) : 0)))) !!}
+                            </script>
+                        <div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="row mb-0">
+                                        <div class="col-lg-3 text-center border border-dark border-1">
+                                            Medicament
+                                        </div>
+                                        <div class="col-lg-2 text-center border border-dark border-1">
+                                            Dimineata
+                                        </div>
+                                        <div class="col-lg-2 text-center border border-dark border-1">
+                                            Prânz
+                                        </div>
+                                        <div class="col-lg-2 text-center border border-dark border-1">
+                                            Seara
+                                        </div>
+                                        <div class="col-lg-1">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-for="medicament in numar_medicamente" :key="medicament">
+                                <div class="row align-items-start mb-0">
+                                    {{-- <div class="col-lg-2">
+                                        <div class="row">
+                                            <div class="form-group col-lg-12 mb-0 pb-0">
+                                                <span class="text-white"> Medicament @{{ medicament }}:</span>
+                                                <br>
+                                                <button  type="button" class="btn m-0 p-0 mb-1" @click="stergeMedicament(medicament-1)">
+                                                    <span class="px-1" style="background-color:red; color:white; border-radius:20px">
+                                                        Șterge medicamentul
+                                                    </span>
+                                                </button>
                                             </div>
                                         </div>
+                                    </div> --}}
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            {{-- <div class="col-lg-3">
+                                                <span class="text-white"> Medicament @{{ medicament }}:</span>
+                                                <br>
+                                                <button  type="button" class="btn m-0 p-0 mb-1" @click="stergeMedicament(medicament-1)">
+                                                    <span class="px-1" style="background-color:red; color:white; border-radius:20px">
+                                                        Șterge medicamentul
+                                                    </span>
+                                                </button>
+                                            </div> --}}
+                                            <div class="col-lg-3 border border-dark border-1">
+                                                <input type="text"
+                                                    class="form-control"
+                                                    :name="'medicamente[nume][' + medicament + ']'"
+                                                    v-model="medicamente_nume[medicament-1]">
+                                            </div>
+                                            <div class="col-lg-2 border border-dark border-1">
+                                                <input type="text"
+                                                    class="form-control"
+                                                    :name="'medicamente[dimineata][' + medicament + ']'"
+                                                    v-model="medicamente_dimineata[medicament-1]">
+                                            </div>
+                                            <div class="col-lg-2 border border-dark border-1">
+                                                <input type="text"
+                                                    class="form-control"
+                                                    :name="'medicamente[pranz][' + medicament + ']'"
+                                                    v-model="medicamente_pranz[medicament-1]">
+                                            </div>
+                                            <div class="col-lg-2 border border-dark border-1">
+                                                <input type="text"
+                                                    class="form-control"
+                                                    :name="'medicamente[seara][' + medicament + ']'"
+                                                    v-model="medicamente_seara[medicament-1]">
+                                            </div>
+                                            <div class="col-lg-1 d-flex align-items-center border border-dark border-1">
+                                                {{-- <span class="text-white"> Medicament @{{ medicament }}:</span> --}}
+                                                <button  type="button" class="btn m-0 p-0 mb-1" @click="stergeMedicament(medicament-1)">
+                                                    <span class="px-1 badge" style="background-color:red; color:white; border-radius:20px">
+                                                        Șterge
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-10 d-flex justify-content-center py-1">
+                                    <input type="hidden" name="numar_medicamente" v-model="numar_medicamente">
+                                    <button type="button" class="btn btn-sm btn-success text-white" @click="numar_medicamente++">Adaugă medicament</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-
+                </div>
+            </div>
         </div>
 
         <div class="row">
