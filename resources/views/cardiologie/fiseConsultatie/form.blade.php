@@ -89,21 +89,27 @@
             </div>
         </div>
 @php
-    dd($fisa_consultatie->medicamente);
+    // echo $fisa_consultatie->medicamente ? 'da' : 'nu';
+    // dd($fisa_consultatie->medicamente['nume'], \Illuminate\Support\Arr::flatten($fisa_consultatie->medicamente['nume']));
+    // dd(is_array($fisa_consultatie->medicamente));
 @endphp
-        <div class="row mb-2 rounded-3" style="">
-            <div class="col-lg-12 p-3 mb-4 align-items-center">
+        <div class="row mb-5 rounded-3" style="background-color:#90deff">
+            <div class="col-lg-12 py-2 px-4 mb-0 align-items-center">
                 <label for="" class="mb-0 ps-3">Tratament recomandat conform schemei:</label>
-                <div class="row" id="medicamente">
-                    <div class="form-group col-lg-12 justify-content-end">
+                <div class="row mb-0" id="medicamente">
+                    <div class="form-group col-lg-12 mb-0 justify-content-end">
                             <script type="application/javascript">
                                 medicamenteNumeVechi={!! json_encode(\Illuminate\Support\Arr::flatten(old('medicamente.nume', ($fisa_consultatie->medicamente['nume'] ?? [])))) !!}
                                 medicamenteDimineataVechi={!! json_encode(\Illuminate\Support\Arr::flatten(old('medicamente.dimineata', ($fisa_consultatie->medicamente['dimineata'] ?? [])))) !!}
                                 medicamentePranzVechi={!! json_encode(\Illuminate\Support\Arr::flatten(old('medicamente.pranz', ($fisa_consultatie->medicamente['pranz'] ?? [])))) !!}
                                 medicamenteSearaVechi={!! json_encode(\Illuminate\Support\Arr::flatten(old('medicamente.seara', ($fisa_consultatie->medicamente['seara'] ?? [])))) !!}
 
-                                numarMedicamente = {!! json_encode(intval(old('numar_medicamente', ($fisa_consultatie->medicamente->count() ? count($fisa_consultatie->medicamente['nume']) : 0)))) !!}
-                            </script>
+                                // Se verifica daca „is_array($fisa_consultatie->medicamente)”, pentru ca la create este o colectie goala, iar la edit este un array
+                                numarMedicamente = {!! json_encode(intval(old('numar_medicamente', (is_array($fisa_consultatie->medicamente) ? count($fisa_consultatie->medicamente['nume']) : 0)))) !!}
+                                </script>
+
+                                {{-- numarMedicamente = {!! json_encode(intval(old('numar_medicamente', ($fisa_consultatie->medicamente->count() ? count($fisa_consultatie->medicamente['nume']) : 0)))) !!}
+                                numarMedicamente = {!! json_encode(intval(old('numar_medicamente', (count(\Illuminate\Support\Arr::flatten($fisa_consultatie->medicamente)) ?? 0)))) !!} --}}
                         <div>
                             <div class="row">
                                 <div class="col-lg-12">
@@ -190,7 +196,7 @@
                             <div class="row">
                                 <div class="col-lg-10 d-flex justify-content-center py-1">
                                     <input type="hidden" name="numar_medicamente" v-model="numar_medicamente">
-                                    <button type="button" class="btn btn-sm btn-success text-white" @click="numar_medicamente++">Adaugă medicament</button>
+                                    <button type="button" class="btn btn-success text-white" @click="numar_medicamente++">Adaugă medicament</button>
                                 </div>
                             </div>
                         </div>
@@ -201,8 +207,8 @@
 
         <div class="row">
             <div class="col-lg-12 mb-2 d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary text-white me-3 rounded-3">{{ $buttonText }}</button>
-                <a class="btn btn-secondary rounded-3" href="{{ Session::get('cardiologie_programare_return_url') }}">Renunță</a>
+                <button type="submit" class="btn btn-lg btn-primary text-white me-3 rounded-3">{{ $buttonText }}</button>
+                <a class="btn btn-lg btn-secondary rounded-3" href="{{ Session::get('cardiologie_programare_return_url') }}">Renunță</a>
             </div>
         </div>
     </div>
