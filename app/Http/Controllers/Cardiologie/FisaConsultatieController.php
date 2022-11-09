@@ -187,6 +187,7 @@ class FisaConsultatieController extends Controller
 
     public function exportPdf(Request $request, Programare $programare, FisaConsultatie $fisa_consultatie)
     {
+        // dd($fisa_consultatie->medicamente->count());
         if ($request->view_type === 'export-html') {
             return view('cardiologie.fiseConsultatie.diverse.exportPdf', compact('programare', 'fisa_consultatie'));
         } elseif ($request->view_type === 'export-pdf') {
