@@ -205,21 +205,21 @@
                                                         <span class="badge bg-success px-1">Buletin ecocardiografic</span>
                                                     </a>
                                                     <a class="" href="/cardiologie/programari/{{ $programare->id }}/buletin-ecocardiografic-export/{{$programare->buletin_ecocardiografic->id}}/export-pdf" target="_blank">
-                                                        <span class="badge bg-white text-danger border border-danger  px-1">PDF</span>
+                                                        <span class="badge bg-white text-danger border border-danger px-1">PDF</span>
                                                     </a>
                                                 @endif
                                             </div>
                                             <div class="col-12 py-0 px-1 d-flex justify-content-end">
                                                 @if (!$programare->fisa_consultatie)
-                                                    <a class="flex me-1" href="/cardiologie/programari/{{ $programare->id }}/fisa-consultatie/adauga">
-                                                        <span class="badge bg-success">Fișă consultație</span>
+                                                    <a class="" href="/cardiologie/programari/{{ $programare->id }}/fisa-consultatie/adauga">
+                                                        <span class="badge bg-success px-1">Fișă consultație</span>
                                                     </a>
                                                 @else
                                                     <a class="" href="/cardiologie/programari/{{ $programare->id }}/fisa-consultatie/{{ $programare->fisa_consultatie->id }}/modifica">
-                                                        <span class="badge bg-success">Fișă consultație</span>
+                                                        <span class="badge bg-success px-1">Fișă consultație</span>
                                                     </a>
                                                     <a class="" href="/cardiologie/programari/{{ $programare->id }}/fisa-consultatie-export/{{$programare->fisa_consultatie->id}}/export-pdf" target="_blank">
-                                                        <span class="badge bg-white text-danger border border-danger  px-1">PDF</span>
+                                                        <span class="badge bg-white text-danger border border-danger px-1">PDF</span>
                                                     </a>
                                                 @endif
                                             </div>
