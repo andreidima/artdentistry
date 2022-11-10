@@ -208,13 +208,20 @@
                                                         <span class="badge bg-white text-danger border border-danger  px-1">PDF</span>
                                                     </a>
                                                 @endif
-                                                {{-- @if ($programare->fisa_de_tratament)
-                                                    <a href="{{ $programare->fisa_de_tratament->path() }}/modifica"
-                                                        class=""
-                                                    >
-                                                        <span class="badge bg-success px-1">Fișa de tratament</span>
+                                            </div>
+                                            <div class="col-12 py-0 px-1 d-flex justify-content-end">
+                                                @if (!$programare->fisa_consultatie)
+                                                    <a class="flex me-1" href="/cardiologie/programari/{{ $programare->id }}/fisa-consultatie/adauga">
+                                                        <span class="badge bg-success">Fișă consultație</span>
                                                     </a>
-                                                @endif --}}
+                                                @else
+                                                    <a class="" href="/cardiologie/programari/{{ $programare->id }}/fisa-consultatie/{{ $programare->fisa_consultatie->id }}/modifica">
+                                                        <span class="badge bg-success">Fișă consultație</span>
+                                                    </a>
+                                                    <a class="" href="/cardiologie/programari/{{ $programare->id }}/fisa-consultatie-export/{{$programare->fisa_consultatie->id}}/export-pdf" target="_blank">
+                                                        <span class="badge bg-white text-danger border border-danger  px-1">PDF</span>
+                                                    </a>
+                                                @endif
                                             </div>
                                         </div>
                                 @endforeach
