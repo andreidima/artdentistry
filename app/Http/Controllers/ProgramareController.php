@@ -11,8 +11,12 @@ use Carbon\Carbon;
 
 use Illuminate\Database\Eloquent\Builder;
 
+use App\Traits\TrimiteSmsTrait;
+
 class ProgramareController extends Controller
 {
+    use TrimiteSmsTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -86,6 +90,13 @@ class ProgramareController extends Controller
             $programare = Programare::create($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie', 'fisa_de_tratament_nume_autocomplete'));
         }
 
+        // Trimitere Sms la inregistrare programare
+        $mesaj = 'Programarea pentru ' . $request->nume . ' a fost inregistrata. ' .
+                    'Va asteptam la cabinet in data de ' . \Carbon\Carbon::parse($programare->data)->isoFormat('DD.MM.YYYY') .
+                    ', la ora ' . \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') . '. ' .
+                    'Cu stima, ArtDentistry!';
+        $this->trimiteSms('Programari', 'Inregistrare', $programare->id, [$request->telefon], $mesaj);
+
         return redirect($request->session()->get('programare_return_url') ?? ('/programari/afisare-saptamanal'))
             ->with('status', 'Programarea pentru „' . ($programare->fisa_de_tratament->nume ?? '') . '” a fost adăugată cu succes!');
     }
@@ -145,6 +156,15 @@ class ProgramareController extends Controller
             );
             $request->request->add(['fisa_de_tratament_id' => $fisa_de_tratament->id]);
             $programare->update($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie', 'fisa_de_tratament_nume_autocomplete'));
+        }
+
+        // Trimitere Sms la modificare programare
+        if (($programare->wasChanged(['fisa_de_tratament_id', 'data', 'ora'])) || (!$request->fisa_de_tratament_id)) {
+            $mesaj = 'Programarea pentru ' . $programare->fisa_de_tratament->nume . ' a fost modificata. ' .
+                        'Va asteptam la cabinet in data de ' . \Carbon\Carbon::parse($programare->data)->isoFormat('DD.MM.YYYY') .
+                        ', la ora ' . \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') . '. ' .
+                        'Cu stima, ArtDentistry!';
+            $this->trimiteSms('Programari', 'Modificare', $programare->id, [$programare->fisa_de_tratament->telefon], $mesaj);
         }
 
         return redirect($request->session()->get('programare_return_url') ?? ('/programari/afisare-saptamanal'))

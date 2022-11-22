@@ -10,8 +10,12 @@ use Carbon\Carbon;
 
 use Illuminate\Database\Eloquent\Builder;
 
+use App\Traits\TrimiteSmsTrait;
+
 class ProgramareController extends Controller
 {
+    use TrimiteSmsTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -59,6 +63,13 @@ class ProgramareController extends Controller
     {
         $programare = Programare::create($this->validateRequest());
 
+        // Trimitere Sms la inregistrare programare
+        $mesaj = 'Programarea pentru ' . $programare->nume . ' a fost inregistrata. ' .
+                    'Va asteptam la cabinet in data de ' . \Carbon\Carbon::parse($programare->data)->isoFormat('DD.MM.YYYY') .
+                    ', la ora ' . \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') . '. ' .
+                    'Cu stima, ArtDentistry!';
+        $this->trimiteSms('Programari Cardiologie', 'Inregistrare', $programare->id, [$request->telefon], $mesaj);
+
         return redirect($request->session()->get('cardiologie_programare_return_url') ?? ('cardiologie/programari/afisare-saptamanal'))
             ->with('status', 'Programarea pentru „' . ($programare->nume ?? '') . '” a fost adăugată cu succes!');
     }
@@ -99,6 +110,15 @@ class ProgramareController extends Controller
     public function update(Request $request, Programare $programare)
     {
         $programare->update($this->validateRequest());
+
+        // Trimitere Sms la modificare programare
+        if ($programare->wasChanged(['nume', 'telefon', 'data', 'ora'])) {
+            $mesaj = 'Programarea pentru ' . $programare->nume . ' a fost modificata. ' .
+                        'Va asteptam la cabinet in data de ' . \Carbon\Carbon::parse($programare->data)->isoFormat('DD.MM.YYYY') .
+                        ', la ora ' . \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') . '. ' .
+                        'Cu stima, ArtDentistry!';
+            $this->trimiteSms('Programari Cardiologie', 'Modificare', $programare->id, [$programare->telefon], $mesaj);
+        }
 
         return redirect($request->session()->get('cardiologie_programare_return_url') ?? ('cardiologie/programari/afisare-saptamanal'))
             ->with('status', 'Programarea pentru „' . ($programare->nume ?? '') . '” a fost modificată cu succes!');

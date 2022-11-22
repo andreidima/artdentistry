@@ -10,6 +10,12 @@ trait TrimiteSmsTrait {
         //     echo $telefon . '<br>';
         // }
         // dd($categorie, $subcategorie, $referinta_id, $telefoane, $mesaj);
+
+        // Referitor la diacritice, puteti face conversia unui string cu diacritice intr-unul fara diacritice, in mod automatizat cu aceasta functie PHP:
+        $transliterator = \Transliterator::createFromRules(':: Any-Latin; :: Latin-ASCII; :: NFD; :: [:Nonspacing Mark:] Remove; :: NFC;', \Transliterator::FORWARD);
+        // $textFaraDiacritice = $transliterator->transliterate($textCuDiacritice);
+        $mesaj = $transliterator->transliterate($mesaj);
+
         // Setarea trimiterii live sau testarea sms-ului
         $test = 1; // sms-ul nu se trimite
         // $test = 0; // sms-ul se trimite
@@ -31,7 +37,6 @@ trait TrimiteSmsTrait {
             //  pentru a putea interpreta statutul trimiterii
             //   - Pentru HTTPS utilizati https://secure.smslink.ro
             // ----------------------------------------------------------------------------
-            // $mesaj = "Salutare domnule";
             $content = file_get_contents("http://www.smslink.ro/sms/gateway/communicate/?" .
                 "connection_id=" . config('sms_link.connection_id') . "&password=" . config('sms_link.password') .
                 "&to=" . urlencode($telefon) .
