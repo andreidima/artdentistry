@@ -38,4 +38,9 @@ class Programare extends Model
     {
         return $this->hasOne(FisaConsultatie::class, 'programare_id');
     }
+
+    public function sms_confirmare()
+    {
+        return $this->hasMany(\App\Models\MesajTrimisSms::class, 'referinta_id', 'id')->where('categorie', 'Programari Cardiologie')->where('subcategorie', 'Confirmare');
+    }
 }

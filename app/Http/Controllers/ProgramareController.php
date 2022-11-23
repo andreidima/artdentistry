@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Programare;
+use App\Models\ProgramareIstoric;
 use App\Models\FisaDeTratament;
 use App\Models\Eticheta;
 use Illuminate\Http\Request;
@@ -75,9 +76,8 @@ class ProgramareController extends Controller
     {
         $this->validateRequest($request);
 
-        if ($request->fisa_de_tratament_id){
-            $programare = Programare::create($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie', 'fisa_de_tratament_nume_autocomplete'));
-        } else {
+        // Daca nu se ataseaza programarea la o fisa de tratament deja existenta, se creaza acum fisa de tratament pentru client nou
+        if (!$request->fisa_de_tratament_id){
             $fisa_de_tratament = FisaDeTratament::create(
                 [
                     'fisa_numar' => FisaDeTratament::max('fisa_numar') + 1,
@@ -87,8 +87,16 @@ class ProgramareController extends Controller
                 ]
             );
             $request->request->add(['fisa_de_tratament_id' => $fisa_de_tratament->id]);
-            $programare = Programare::create($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie', 'fisa_de_tratament_nume_autocomplete'));
         }
+
+        $programare = Programare::create($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie', 'fisa_de_tratament_nume_autocomplete'));
+
+        // Salvare in istoric
+        $programare_istoric = new ProgramareIstoric;
+        $programare_istoric->fill($programare->makeHidden(['created_at', 'updated_at'])->attributesToArray());
+        $programare_istoric->operatie = 'Adaugare';
+        $programare_istoric->operatie_user_id = auth()->user()->id ?? null;
+        $programare_istoric->save();
 
         // Trimitere Sms la inregistrare programare
         $mesaj = 'Programarea pentru ' . $request->nume . ' a fost inregistrata. ' .
@@ -144,9 +152,8 @@ class ProgramareController extends Controller
 
         $this->validateRequest($request);
 
-        if ($request->fisa_de_tratament_id){
-            $programare->update($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie', 'fisa_de_tratament_nume_autocomplete'));
-        } else {
+        // Daca nu se ataseaza programarea la o fisa de tratament deja existenta, se creaza acum fisa de tratament pentru client nou
+        if (!$request->fisa_de_tratament_id){
             $fisa_de_tratament = FisaDeTratament::create(
                 [
                     'nume' => $request->nume,
@@ -155,8 +162,16 @@ class ProgramareController extends Controller
                 ]
             );
             $request->request->add(['fisa_de_tratament_id' => $fisa_de_tratament->id]);
-            $programare->update($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie', 'fisa_de_tratament_nume_autocomplete'));
         }
+
+        $programare->update($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie', 'fisa_de_tratament_nume_autocomplete'));
+
+        // Salvare in istoric
+        $programare_istoric = new ProgramareIstoric;
+        $programare_istoric->fill($programare->makeHidden(['created_at', 'updated_at'])->attributesToArray());
+        $programare_istoric->operatie = 'Modificare';
+        $programare_istoric->operatie_user_id = auth()->user()->id ?? null;
+        $programare_istoric->save();
 
         // Trimitere Sms la modificare programare
         if (($programare->wasChanged(['fisa_de_tratament_id', 'data', 'ora'])) || (!$request->fisa_de_tratament_id)) {
@@ -181,6 +196,13 @@ class ProgramareController extends Controller
     {
         $programare->delete();
 
+        // Salvare in istoric
+        $programare_istoric = new ProgramareIstoric;
+        $programare_istoric->fill($programare->makeHidden(['created_at', 'updated_at'])->attributesToArray());
+        $programare_istoric->operatie = 'Stergere';
+        $programare_istoric->operatie_user_id = auth()->user()->id ?? null;
+        $programare_istoric->save();
+
         return back()->with('status', 'Programarea pentru „' . ($programare->fisa_de_tratament->nume ?? '') . '” a fost ștearsă cu succes!');
     }
 
@@ -191,7 +213,11 @@ class ProgramareController extends Controller
      */
     protected function validateRequest(Request $request)
     {
-        $request->request->add(['user_id' => $request->user()->id]);
+        // Se adauga doar la adaugare, iar la modificare nu se schimba
+        if ($request->isMethod('post')) {
+            $request->request->add(['user_id' => $request->user()->id]);
+            $request->request->add(['cheie_unica' => uniqid()]);
+        }
 
         return request()->validate(
             [
@@ -209,6 +235,9 @@ class ProgramareController extends Controller
                 // 'covid_19' => ($request->_method !== "PATCH") ? '' : 'required',
                 'gdpr' => 'required_with:semnatura',
                 'covid_19' => 'required_with:semnatura',
+                'user_id' => '',
+                'confirmare' => '',
+                'cheie_unica' => '',
             ],
             [
             ]

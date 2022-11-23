@@ -12,8 +12,8 @@ use App\Http\Controllers\VizualizareRamificatieServiciuController;
 use App\Http\Controllers\ProgramareController;
 use App\Http\Controllers\EtichetaController;
 use App\Http\Controllers\ProgramareEtichetaController;
-
 use App\Http\Controllers\MesajTrimisSmsController;
+use App\Http\Controllers\SmsConfirmareProgramareController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +27,11 @@ use App\Http\Controllers\MesajTrimisSmsController;
 */
 
 Auth::routes(['register' => false, 'password.request' => false, 'reset' => false]);
+
+// Trimitere Cron joburi din Cpanel
+Route::any('/cron-jobs/trimitere-automata-sms-cerere-confirmare-programare/{key}', [SmsConfirmareProgramareController::class, 'cronJobTrimitereAutomataSmsCerereConfirmareProgramare']);
+Route::get('status-programare/{cheie_unica}', [SmsConfirmareProgramareController::class, 'statusProgramare']);
+
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', function () {
@@ -72,4 +77,19 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::resource('mesaje-trimise-sms', MesajTrimisSmsController::class,  ['parameters' => ['mesaje-trimise-sms' => 'mesaj_trimis_sms']]);
+
+    Route::get('generare-chei-unice-acolo-unde-lipsesc', function(){
+        $programari = \App\Models\Programare::where('cheie_unica', null)->get();
+        foreach ($programari as $programare){
+            // echo $programare->id . '<br>';
+            $programare->cheie_unica = uniqid();
+            $programare->save();
+        }
+        $programari = \App\Models\Cardiologie\Programare::where('cheie_unica', null)->get();
+        foreach ($programari as $programare){
+            // echo $programare->id . '<br>';
+            $programare->cheie_unica = uniqid();
+            $programare->save();
+        }
+    });
 });

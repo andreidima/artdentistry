@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Cardiologie;
 use App\Http\Controllers\Controller;
 
 use App\Models\Cardiologie\Programare;
+use App\Models\Cardiologie\ProgramareIstoric;
 use Illuminate\Http\Request;
 
 use Carbon\Carbon;
@@ -61,7 +62,14 @@ class ProgramareController extends Controller
      */
     public function store(Request $request)
     {
-        $programare = Programare::create($this->validateRequest());
+        $programare = Programare::create($this->validateRequest($request));
+
+        // Salvare in istoric
+        $programare_istoric = new ProgramareIstoric;
+        $programare_istoric->fill($programare->makeHidden(['created_at', 'updated_at', 'deleted_at'])->attributesToArray());
+        $programare_istoric->operatie = 'Adaugare';
+        $programare_istoric->operatie_user_id = auth()->user()->id ?? null;
+        $programare_istoric->save();
 
         // Trimitere Sms la inregistrare programare
         $mesaj = 'Programarea pentru ' . $programare->nume . ' a fost inregistrata. ' .
@@ -109,7 +117,14 @@ class ProgramareController extends Controller
      */
     public function update(Request $request, Programare $programare)
     {
-        $programare->update($this->validateRequest());
+        $programare->update($this->validateRequest($request));
+
+        // Salvare in istoric
+        $programare_istoric = new ProgramareIstoric;
+        $programare_istoric->fill($programare->makeHidden(['created_at', 'updated_at', 'deleted_at'])->attributesToArray());
+        $programare_istoric->operatie = 'Modificare';
+        $programare_istoric->operatie_user_id = auth()->user()->id ?? null;
+        $programare_istoric->save();
 
         // Trimitere Sms la modificare programare
         if ($programare->wasChanged(['nume', 'telefon', 'data', 'ora'])) {
@@ -134,6 +149,13 @@ class ProgramareController extends Controller
     {
         $programare->delete();
 
+        // Salvare in istoric
+        $programare_istoric = new ProgramareIstoric;
+        $programare_istoric->fill($programare->makeHidden(['created_at', 'updated_at', 'deleted_at'])->attributesToArray());
+        $programare_istoric->operatie = 'Stergere';
+        $programare_istoric->operatie_user_id = auth()->user()->id ?? null;
+        $programare_istoric->save();
+
         return back()->with('status', 'Programarea pentru „' . ($programare->nume ?? '') . '” a fost ștearsă cu succes!');
     }
 
@@ -142,8 +164,14 @@ class ProgramareController extends Controller
      *
      * @return array
      */
-    protected function validateRequest()
+    protected function validateRequest(Request $request)
     {
+        // Se adauga doar la adaugare, iar la modificare nu se schimba
+        if ($request->isMethod('post')) {
+            $request->request->add(['user_id' => $request->user()->id]);
+            $request->request->add(['cheie_unica' => uniqid()]);
+        }
+
         $request = request()->validate(
             [
                 'nume' => 'nullable|max:500',
@@ -154,13 +182,15 @@ class ProgramareController extends Controller
                 'semnatura' => 'nullable',
                 'observatii' => 'nullable|max:2000',
                 'gdpr' => 'required_with:semnatura',
-                'covid_19' => 'required_with:semnatura'
+                'covid_19' => 'required_with:semnatura',
+                'user_id' => '',
+                'confirmare' => '',
+                'cheie_unica' => '',
             ],
             [
             ]
         );
 
-        $request["user_id"] = request()->user()->id;
         $request = \array_diff_key($request, ['gdpr' => '', 'covid_19' => '']);
 
         return $request;

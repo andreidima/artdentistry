@@ -26,4 +26,9 @@ class Programare extends Model
     {
         return $this->belongsToMany(Eticheta::class, 'eticheta_programare', 'programare_id', 'eticheta_id')->withTimestamps();
     }
+
+    public function sms_confirmare()
+    {
+        return $this->hasMany(MesajTrimisSms::class, 'referinta_id', 'id')->where('categorie', 'Programari')->where('subcategorie', 'Confirmare');
+    }
 }
