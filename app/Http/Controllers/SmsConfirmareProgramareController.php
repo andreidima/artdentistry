@@ -49,7 +49,7 @@ class SmsConfirmareProgramareController extends Controller
                             ', ora ' . Carbon::parse($programare->ora)->isoFormat('HH:mm') .
                             '. Cu stima, ArtDentistry!';
                 // echo $programare->id . '<br>' . $programare->telefon . '<br>' . $mesaj . '<br><br>';
-                $this->trimiteSms('Programari Cardiologie', 'Confirmare', $programare->id, [$programare->fisa_de_tratament->telefon ?? ''], $mesaj);
+                $this->trimiteSms('Programari Cardiologie', 'Confirmare', $programare->id, [$programare->telefon ?? ''], $mesaj);
             }
 
         } else {
