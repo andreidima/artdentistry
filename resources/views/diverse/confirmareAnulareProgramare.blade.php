@@ -8,8 +8,14 @@
                 <div class="p-2 text-white" style="border-radius: 40px 40px 0px 0px; background-color:darkcyan"
                 >
                     <div class="row">
-                        <div class="col-lg-12 d-flex justify-content-center">
-                            <h3 class="my-2 text-center"><i class="fas fa-calendar-check me-1 fs-3"></i>Programarea dumneavoastră la ArtDentistry</h3>
+                        <div class="col-lg-12 mb-0 py-3 d-flex justify-content-center">
+                            <img src="{{url('/imagini/logo.png')}}" alt="Logo PDF" height="50px" class="bg-white rounded-3 px-1">
+                        </div>
+                        <div class="col-lg-12 d-flex justify-content-center" style="">
+                            <h3 class="my-2 text-center">
+                                {{-- <i class="fas fa-calendar-check me-1 fs-3"></i> --}}
+                                Programarea dumneavoastră la ArtDentistry
+                            </h3>
                         </div>
                     </div>
                 </div>

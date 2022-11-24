@@ -165,6 +165,16 @@
                                                     <span class="px-1 text-white rounded-3" style="background-color:darkcyan;">
                                                         {{ $programare->ora ? \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') : '' }}
                                                     </span>
+                                                    <br>
+                                                    @if (\Carbon\Carbon::parse($programare->data) == \Carbon\Carbon::today())
+                                                        @if (is_null($programare->confirmare))
+                                                            <i class="fas fa-question px-3 py-1 text-warning fs-4"></i>
+                                                        @elseif ($programare->confirmare == 0)
+                                                            <i class="fas fa-thumbs-down px-3 py-1 text-danger fs-4"></i>
+                                                        @elseif ($programare->confirmare == 1)
+                                                            <i class="fas fa-thumbs-up px-3 py-1 text-success fs-4"></i>
+                                                        @endif
+                                                    @endif
                                                 </div>
                                                 <div style="font-size:90%; line-height:1.2;">
                                                     {{ $programare->fisa_de_tratament->nume ?? '' }}
