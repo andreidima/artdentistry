@@ -79,7 +79,21 @@ class SmsConfirmareProgramareController extends Controller
                     $programare_istoric = new \App\Models\Cardiologie\ProgramareIstoric;
                 }
                 $programare_istoric->fill($programare->makeHidden(['created_at', 'updated_at', 'deleted_at'])->attributesToArray());
-                $programare_istoric->operatie = 'Confirmare Anulare';
+                $programare_istoric->operatie = 'Confirmare Anulare - Apasare buton';
+                $programare_istoric->operatie_user_id = auth()->user()->id ?? null;
+                $programare_istoric->save();
+            } else { // Se salveaza timestamp doar faptul ca a fost accesat linkul
+                $programare->confirmare_link_accesat_timestamp = Carbon::now();
+                $programare->save();
+
+                // Salvare in istoric
+                if ($programare->getTable() == "programari"){
+                    $programare_istoric = new \App\Models\ProgramareIstoric;
+                } else {
+                    $programare_istoric = new \App\Models\Cardiologie\ProgramareIstoric;
+                }
+                $programare_istoric->fill($programare->makeHidden(['created_at', 'updated_at', 'deleted_at'])->attributesToArray());
+                $programare_istoric->operatie = 'Confirmare Anulare - Accesare link';
                 $programare_istoric->operatie_user_id = auth()->user()->id ?? null;
                 $programare_istoric->save();
             }
