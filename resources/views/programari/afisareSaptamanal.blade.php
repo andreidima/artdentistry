@@ -167,17 +167,15 @@
                                                     </span>
                                                     <br>
                                                     @php
-                                                        // dd ($programare->sms_confirmare()->exists())
+                                                        // dd ($programare->confirmare)
                                                     @endphp
                                                     @if ((\Carbon\Carbon::parse($programare->data) == \Carbon\Carbon::today()) || (\Carbon\Carbon::parse($programare->data) == \Carbon\Carbon::tomorrow()))
-                                                        @if (($programare->sms_confirmare()->first()->trimis ?? '') == 1)
-                                                            @if (is_null($programare->confirmare))
-                                                                <i class="fas fa-question px-3 py-1 text-warning fs-4"></i>
-                                                            @elseif ($programare->confirmare == 0)
-                                                                <i class="fas fa-thumbs-down px-3 py-1 text-danger fs-4"></i>
-                                                            @elseif ($programare->confirmare == 1)
-                                                                <i class="fas fa-thumbs-up px-3 py-1 text-success fs-4"></i>
-                                                            @endif
+                                                        @if (is_null($programare->confirmare) && ($programare->sms_confirmare()->first()->trimis ?? '') == 1)
+                                                            <i class="fas fa-question px-3 py-1 text-warning fs-4"></i>
+                                                        @elseif (!is_null($programare->confirmare) && ($programare->confirmare == 0))
+                                                            <i class="fas fa-thumbs-down px-3 py-1 text-danger fs-4"></i>
+                                                        @elseif (!is_null($programare->confirmare) && ($programare->confirmare == 1))
+                                                            <i class="fas fa-thumbs-up px-3 py-1 text-success fs-4"></i>
                                                         @endif
                                                     @endif
                                                 </div>
