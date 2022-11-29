@@ -23,7 +23,7 @@ class SmsConfirmareProgramareController extends Controller
             $programari = Programare::with('fisa_de_tratament')
                 ->whereDate('data', '=', Carbon::tomorrow()->todatestring())
                 ->whereDate('created_at', '<', Carbon::today()->todatestring()) // sa fie cel putin cu 2 zile in urma facuta programarea
-                ->doesntHave('sms_confirmare') // sms-ul nu a fost deja trimis
+                // ->doesntHave('sms_confirmare') // sms-ul nu a fost deja trimis
                 ->whereNull('confirmare') // nu sunt confirmate deja de administratorii aplicatiei
                 ->get();
 
@@ -40,7 +40,7 @@ class SmsConfirmareProgramareController extends Controller
             $programari = \App\Models\Cardiologie\Programare::
                 whereDate('data', '=', Carbon::tomorrow()->todatestring())
                 ->whereDate('created_at', '<', Carbon::today()->todatestring()) // sa fie cel putin cu 2 zile in urma facuta programarea
-                ->doesntHave('sms_confirmare') // sms-ul nu a fost deja trimis
+                // ->doesntHave('sms_confirmare') // sms-ul nu a fost deja trimis
                 ->whereNull('confirmare') // nu sunt confirmate deja de administratorii aplicatiei
                 ->get();
 

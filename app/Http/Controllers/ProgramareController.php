@@ -164,6 +164,11 @@ class ProgramareController extends Controller
             $request->request->add(['fisa_de_tratament_id' => $fisa_de_tratament->id]);
         }
 
+        // Daca data programarii se modifica la minim 2 zile peste ziua curenta, se sterge confirmarea
+        if ( (Carbon::today()->diffInDays(Carbon::parse($request->data), false)) >= 2 ){
+            $request->request->add(['confirmare' => null]);
+        }
+
         $programare->update($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie', 'fisa_de_tratament_nume_autocomplete'));
 
         // Salvare in istoric
