@@ -78,18 +78,36 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('mesaje-trimise-sms', MesajTrimisSmsController::class,  ['parameters' => ['mesaje-trimise-sms' => 'mesaj_trimis_sms']]);
 
-    Route::get('generare-chei-unice-acolo-unde-lipsesc', function(){
-        $programari = \App\Models\Programare::where('cheie_unica', null)->get();
-        foreach ($programari as $programare){
-            // echo $programare->id . '<br>';
-            $programare->cheie_unica = uniqid();
-            $programare->save();
+    // Route::get('generare-chei-unice-acolo-unde-lipsesc', function(){
+    //     $programari = \App\Models\Programare::where('cheie_unica', null)->get();
+    //     foreach ($programari as $programare){
+    //         // echo $programare->id . '<br>';
+    //         $programare->cheie_unica = uniqid();
+    //         $programare->save();
+    //     }
+    //     $programari = \App\Models\Cardiologie\Programare::where('cheie_unica', null)->get();
+    //     foreach ($programari as $programare){
+    //         // echo $programare->id . '<br>';
+    //         $programare->cheie_unica = uniqid();
+    //         $programare->save();
+    //     }
+    // });
+
+    Route::get('toate-numerele-de-telefon-din-aplicatie', function(){
+        $telefoane = \App\Models\FisaDeTratament::select('telefon')->distinct()->get();
+        foreach ($telefoane as $telefon){
+            echo $telefon->telefon;
+            echo ',<br>';
         }
-        $programari = \App\Models\Cardiologie\Programare::where('cheie_unica', null)->get();
-        foreach ($programari as $programare){
-            // echo $programare->id . '<br>';
-            $programare->cheie_unica = uniqid();
-            $programare->save();
+
+        $telefoane_cardiologie = \App\Models\Cardiologie\Programare::select('telefon')->distinct()->get();
+        foreach ($telefoane_cardiologie as $telefon){
+            echo $telefon->telefon;
+            echo ',<br>';
         }
+
+        dd($telefoane, $telefoane_cardiologie);
     });
+
+
 });
