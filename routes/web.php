@@ -97,13 +97,13 @@ Route::group(['middleware' => 'auth'], function () {
         $telefoane = \App\Models\FisaDeTratament::select('telefon')->distinct()->get();
         foreach ($telefoane as $telefon){
             echo $telefon->telefon;
-            echo ',<br>';
+            echo '<br>';
         }
 
         $telefoane_cardiologie = \App\Models\Cardiologie\Programare::select('telefon')->distinct()->get();
         foreach ($telefoane_cardiologie as $telefon){
             echo $telefon->telefon;
-            echo ',<br>';
+            echo '<br>';
         }
 
         dd($telefoane, $telefoane_cardiologie);
