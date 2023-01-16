@@ -166,9 +166,10 @@
                                                         {{ $programare->ora ? \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') : '' }}
                                                     </span>
                                                     <br>
-                                                    @if (\Carbon\Carbon::parse($programare->data) == \Carbon\Carbon::today())
+                                                    {{-- @if (\Carbon\Carbon::parse($programare->data) == \Carbon\Carbon::today()) --}}
+                                                    @if ((\Carbon\Carbon::parse($programare->data) == \Carbon\Carbon::today()) || (\Carbon\Carbon::parse($programare->data) == \Carbon\Carbon::tomorrow()))
                                                         @if (is_null($programare->confirmare))
-                                                            <i class="fas fa-question px-3 py-1 text-warning fs-4" title="Statut confirmare programare"></i>
+                                                            <i class="fas fa-question px-3 py-1 fs-4 text-secondary" title="Statut confirmare programare"></i>
                                                         @elseif ($programare->confirmare == 0)
                                                             <i class="fas fa-thumbs-down px-3 py-1 text-danger fs-4" title="Statut confirmare programare"></i>
                                                         @elseif ($programare->confirmare == 1)
@@ -184,7 +185,13 @@
                                                     @endif
                                                     @if ($programare->notita)
                                                         <br>
-                                                        ({{ $programare->notita ?? ''}})
+                                                        @if (str_contains(strtolower($programare->notita), 'holtter'))
+                                                            <b style="color:red">
+                                                                ({{ $programare->notita ?? ''}})
+                                                            </b>
+                                                        @else
+                                                            ({{ $programare->notita ?? ''}})
+                                                        @endif
                                                     @endif
                                                 </div>
                                             </div>

@@ -138,3 +138,30 @@ if (document.querySelector('#medicamente')) {
         }
     });
 };
+
+if (document.querySelector('#programareCardiologie')) {
+    const app = new Vue({
+        el: '#programareCardiologie',
+        data: {
+            proramariCardiologieVechiDistincte: programariCardiologie,
+            programareNumeAutocomplete: programareNumeVechi,
+            programareTelefonAutocomplete: programareTelefonVechi,
+            programareListaAutocomplete: [],
+        },
+        methods: {
+            // Autocomplete pentru datele pacientului folosind fise_de_tratament trime din start in vuejs
+            autoComplete: function () {
+                this.programareListaAutocomplete = [];
+                if (this.programareNumeAutocomplete.length > 2) {
+                    console.log('mai mult de 2 caractere');
+                    for (var i = 0; i < this.proramariCardiologieVechiDistincte.length; i++) {
+                        if (this.proramariCardiologieVechiDistincte[i].nume.toLowerCase().includes(this.programareNumeAutocomplete.toLowerCase())) {
+                            console.log('s-a gasit asemanare');
+                            this.programareListaAutocomplete.push(this.proramariCardiologieVechiDistincte[i]);
+                        }
+                    }
+                }
+            },
+        }
+    });
+};

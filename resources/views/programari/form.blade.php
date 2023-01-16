@@ -110,7 +110,7 @@
                         value-type="HH:mm"
                         format="HH:mm"
                         :hours="[8,9,10,11,12,13,14,15,16,17,18,19,20]"
-                        :minute-step="10"
+                        :minute-step="5"
                         :latime="{ width: '90px' }"
                     ></vue2-datepicker>
             </div>

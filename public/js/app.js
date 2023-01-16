@@ -12907,7 +12907,7 @@ if (document.querySelector('#medicamente')) {
   var _app2 = new Vue({
     el: '#medicamente',
     data: {
-      medicamente_nume: typeof medicamenteNumeVechi !== 'undefined' ? medicamenteNumeVechi : '',
+      // medicamente_nume: ((typeof medicamenteNumeVechi !== 'undefined') ? medicamenteNumeVechi : ''),
       medicamente_dimineata: typeof medicamenteDimineataVechi !== 'undefined' ? medicamenteDimineataVechi : '',
       medicamente_pranz: typeof medicamentePranzVechi !== 'undefined' ? medicamentePranzVechi : '',
       medicamente_seara: typeof medicamenteSearaVechi !== 'undefined' ? medicamenteSearaVechi : '',
@@ -12921,6 +12921,37 @@ if (document.querySelector('#medicamente')) {
         this.$delete(this.medicamente_pranz, medicament);
         this.$delete(this.medicamente_seara, medicament);
         this.numar_medicamente--;
+      }
+    }
+  });
+}
+
+;
+
+if (document.querySelector('#programareCardiologie')) {
+  var _app3 = new Vue({
+    el: '#programareCardiologie',
+    data: {
+      proramariCardiologieVechiDistincte: programariCardiologie,
+      programareNumeAutocomplete: programareNumeVechi,
+      programareTelefonAutocomplete: programareTelefonVechi,
+      programareListaAutocomplete: []
+    },
+    methods: {
+      // Autocomplete pentru datele pacientului folosind fise_de_tratament trime din start in vuejs
+      autoComplete: function autoComplete() {
+        this.programareListaAutocomplete = [];
+
+        if (this.programareNumeAutocomplete.length > 2) {
+          console.log('mai mult de 2 caractere');
+
+          for (var i = 0; i < this.proramariCardiologieVechiDistincte.length; i++) {
+            if (this.proramariCardiologieVechiDistincte[i].nume.toLowerCase().includes(this.programareNumeAutocomplete.toLowerCase())) {
+              console.log('s-a gasit asemanare');
+              this.programareListaAutocomplete.push(this.proramariCardiologieVechiDistincte[i]);
+            }
+          }
+        }
       }
     }
   });

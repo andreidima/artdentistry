@@ -1,22 +1,57 @@
 @csrf
 
-<div class="row mb-0 p-3 d-flex border-radius: 0px 0px 40px 40px" id="app">
+<div class="row mb-0 p-3 d-flex border-radius: 0px 0px 40px 40px" id="programareCardiologie">
     <div class="col-lg-12 mb-0">
-        <div class="row mb-0 align-items-center">
+        <div class="row mb-0 align-top">
             <div class="col-lg-7 mb-4">
+                <script type="application/javascript">
+                    programariCardiologie={!! json_encode($programariCardiologie) !!}
+
+                    programareNumeVechi={!! json_encode(old('nume', $programare->nume)) !!}
+                    programareTelefonVechi={!! json_encode(old('telefon', $programare->telefon)) !!}
+                </script>
                 <label for="nume" class="mb-0 ps-3">Nume:</label>
-                <input
+                {{-- <input
                     type="text"
                     class="form-control bg-white rounded-pill {{ $errors->has('nume') ? 'is-invalid' : '' }}"
                     name="nume"
                     placeholder=""
                     value="{{ old('nume', $programare->nume) }}"
+                    required> --}}
+                <input
+                    type="text"
+                    v-model="programareNumeAutocomplete"
+                    v-on:keyup="autoComplete()"
+                    class="form-control bg-white rounded-pill {{ $errors->has('nume') ? 'is-invalid' : '' }}"
+                    name="nume"
+                    placeholder=""
+                    value="{{ old('nume') }}"
+                    autocomplete="off"
                     required>
+                <div v-cloak v-if="programareListaAutocomplete.length" class="panel-footer">
+                    <div class="list-group">
+                            <button class="list-group-item list-group-item list-group-item-action py-0"
+                                v-for="programare in programareListaAutocomplete"
+                                v-on:click="
+                                    programareNumeAutocomplete = programare.nume;
+                                    programareTelefonAutocomplete = programare.telefon;
+
+                                    programareListaAutocomplete = ''
+                                ">
+                                    @{{ programare.nume }} - @{{ programare.telefon }}
+                            </button>
+                        </li>
+                    </div>
+                </div>
+                <small class="ps-3">
+                    Introdu minim 3 caractere pentru completare automată
+                </small>
             </div>
             <div class="col-lg-5 mb-4">
                 <label for="telefon" class="mb-0 ps-3">Telefon:</label>
                 <input
                     type="text"
+                    v-model="programareTelefonAutocomplete"
                     class="form-control bg-white rounded-pill {{ $errors->has('telefon') ? 'is-invalid' : '' }}"
                     name="telefon"
                     placeholder=""
@@ -47,7 +82,7 @@
                         value-type="HH:mm"
                         format="HH:mm"
                         :hours="[8,9,10,11,12,13,14,15,16,17,18,19,20]"
-                        :minute-step="10"
+                        :minute-step="5"
                         :latime="{ width: '90px' }"
                     ></vue2-datepicker>
             </div>

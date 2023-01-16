@@ -123,41 +123,41 @@ Route::group(['middleware' => 'auth'], function () {
                 </style>';
 
         echo '<table style="border: 1px solid black">';
-        echo
-                '<tr style="font-size:100%">
-                    <td>
-                        #
-                    </td>
-                    <td>
-                        Cod de bare
-                    </td>
-                    <td>
-                        cod
-                    </td>
-                    <td>
-                        den
-                    </td>
-                    <td>
-                        um
-                    </td>
-                    <td>
-                        scriptic
-                    </td>
-                    <td>
-                        faptic
-                    </td>
-                    <td>
-                        De transferat
-                    </td>
-                    <td>
-                        pret
-                    </td>
-                </tr>';
+        // echo
+        //         '<tr style="font-size:100%">
+        //             <td>
+        //                 #
+        //             </td>
+        //             <td>
+        //                 Cod de bare
+        //             </td>
+        //             <td>
+        //                 cod
+        //             </td>
+        //             <td>
+        //                 den
+        //             </td>
+        //             <td>
+        //                 um
+        //             </td>
+        //             <td>
+        //                 scriptic
+        //             </td>
+        //             <td>
+        //                 faptic
+        //             </td>
+        //             <td>
+        //                 De transferat
+        //             </td>
+        //             <td>
+        //                 pret
+        //             </td>
+        //         </tr>';
         foreach ($barcoduri as $key=>$barcod){
             echo
                 '<tr style="page-break-inside: avoid;">
                     <td>' .
-                        $key .
+                        ($key + 1) .
                     '</td>
                     <td style="padding:20px">' .
                         DNS1D::getBarcodeHTML($barcod->a, 'C128',2.45 ,50) .

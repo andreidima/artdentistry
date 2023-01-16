@@ -49,9 +49,11 @@ class ProgramareController extends Controller
      */
     public function create(Request $request)
     {
+        $programariCardiologie = Programare::select('nume', 'telefon')->whereNotNull('nume')->distinct()->orderBy('nume')->get();
+
         $request->session()->get('cardiologie_programare_return_url') ?? $request->session()->put('cardiologie_programare_return_url', url()->previous());
 
-        return view('cardiologie.programari.create');
+        return view('cardiologie.programari.create', compact('programariCardiologie'));
     }
 
     /**
@@ -103,9 +105,11 @@ class ProgramareController extends Controller
      */
     public function edit(Request $request, Programare $programare)
     {
+        $programariCardiologie = Programare::select('nume', 'telefon')->whereNotNull('nume')->distinct()->orderBy('nume')->get();
+
         $request->session()->get('cardiologie_programare_return_url') ?? $request->session()->put('cardiologie_programare_return_url', url()->previous());
 
-        return view('cardiologie.programari.edit', compact('programare'));
+        return view('cardiologie.programari.edit', compact('programare', 'programariCardiologie'));
     }
 
     /**
