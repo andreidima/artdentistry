@@ -28,9 +28,11 @@ class SmsConfirmareProgramareController extends Controller
                 ->get();
 
             foreach ($programari as $programare){
-                $mesaj = 'Accesati ' . url('/status-programare/' . $programare->cheie_unica) . ', pentru a confirma sau anula programarea din ' . Carbon::parse($programare->data)->isoFormat('DD.MM.YYYY') .
-                            ', ora ' . Carbon::parse($programare->ora)->isoFormat('HH:mm') .
-                            '. Cu stima, ArtDentistry!';
+                // $mesaj = 'Accesati ' . url('/status-programare/' . $programare->cheie_unica) . ', pentru a confirma sau anula programarea din ' . Carbon::parse($programare->data)->isoFormat('DD.MM.YYYY') .
+                //             ', ora ' . Carbon::parse($programare->ora)->isoFormat('HH:mm') .
+                //             '. Cu stima, ArtDentistry!';
+                $mesaj = 'Accesati ' . url('/status-programare/' . $programare->cheie_unica) . ' si confirmati programarea la Artdentistry din ' . Carbon::parse($programare->data)->isoFormat('DD.MM.YYYY') .
+                            '. Nu raspundeti prin sms';
                 // echo $programare->id . '<br>' . $programare->fisa_de_tratament->telefon . '<br>' . $mesaj . '<br><br>';
                 $this->trimiteSms('Programari', 'Confirmare', $programare->id, [$programare->fisa_de_tratament->telefon ?? ''], $mesaj);
             }
@@ -45,9 +47,8 @@ class SmsConfirmareProgramareController extends Controller
                 ->get();
 
             foreach ($programari as $programare){
-                $mesaj = 'Accesati ' . url('/status-programare/' . $programare->cheie_unica) . ', pentru a confirma sau anula programarea din ' . Carbon::parse($programare->data)->isoFormat('DD.MM.YYYY') .
-                            ', ora ' . Carbon::parse($programare->ora)->isoFormat('HH:mm') .
-                            '. Cu stima, ArtDentistry!';
+                $mesaj = 'Accesati ' . url('/status-programare/' . $programare->cheie_unica) . ' si confirmati programarea la Artdentistry din ' . Carbon::parse($programare->data)->isoFormat('DD.MM.YYYY') .
+                            '. Nu raspundeti prin sms';
                 // echo $programare->id . '<br>' . $programare->telefon . '<br>' . $mesaj . '<br><br>';
                 $this->trimiteSms('Programari Cardiologie', 'Confirmare', $programare->id, [$programare->telefon ?? ''], $mesaj);
             }

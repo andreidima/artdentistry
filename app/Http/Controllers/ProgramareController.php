@@ -99,10 +99,14 @@ class ProgramareController extends Controller
         $programare_istoric->save();
 
         // Trimitere Sms la inregistrare programare
-        $mesaj = 'Programarea pentru ' . $request->nume . ' a fost inregistrata. ' .
+        // $mesaj = 'Programarea pentru ' . $request->nume . ' a fost inregistrata. ' .
+        //             'Va asteptam la cabinet in data de ' . \Carbon\Carbon::parse($programare->data)->isoFormat('DD.MM.YYYY') .
+        //             ', la ora ' . \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') . '. ' .
+        //             'Cu stima, ArtDentistry!';
+        $mesaj = 'Programarea dvs. a fost inregistrata. ' .
                     'Va asteptam la cabinet in data de ' . \Carbon\Carbon::parse($programare->data)->isoFormat('DD.MM.YYYY') .
                     ', la ora ' . \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') . '. ' .
-                    'Cu stima, ArtDentistry!';
+                    'Cu stima, ArtDentistry! (Mesaj automat, nu raspundeti)';
         $this->trimiteSms('Programari', 'Inregistrare', $programare->id, [$request->telefon], $mesaj);
 
         return redirect($request->session()->get('programare_return_url') ?? ('/programari/afisare-saptamanal'))
@@ -180,10 +184,14 @@ class ProgramareController extends Controller
 
         // Trimitere Sms la modificare programare
         if (($programare->wasChanged(['fisa_de_tratament_id', 'data', 'ora'])) || (!$request->fisa_de_tratament_id)) {
-            $mesaj = 'Programarea pentru ' . $programare->fisa_de_tratament->nume . ' a fost modificata. ' .
+            // $mesaj = 'Programarea pentru ' . $programare->fisa_de_tratament->nume . ' a fost modificata. ' .
+            //             'Va asteptam la cabinet in data de ' . \Carbon\Carbon::parse($programare->data)->isoFormat('DD.MM.YYYY') .
+            //             ', la ora ' . \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') . '. ' .
+            //             'Cu stima, ArtDentistry!';
+            $mesaj = 'Programarea pentru dvs. a fost modificata. ' .
                         'Va asteptam la cabinet in data de ' . \Carbon\Carbon::parse($programare->data)->isoFormat('DD.MM.YYYY') .
                         ', la ora ' . \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') . '. ' .
-                        'Cu stima, ArtDentistry!';
+                        'Cu stima, ArtDentistry! (Mesaj automat, nu raspundeti).';
             $this->trimiteSms('Programari', 'Modificare', $programare->id, [$programare->fisa_de_tratament->telefon], $mesaj);
         }
 
