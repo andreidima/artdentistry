@@ -125,8 +125,8 @@ class ProgramareController extends Controller
      */
     public function update(Request $request, Programare $programare)
     {
-        // Daca data programarii se modifica la minim 2 zile peste ziua curenta, se sterge confirmarea
-        if ( (Carbon::today()->diffInDays(Carbon::parse($request->data), false)) >= 2 ){
+        // Daca data programarii se modifica, si daca se modifica la minim 2 zile peste ziua curenta, se sterge confirmarea
+        if ( ($programare->data !== $request->data) && (Carbon::today()->diffInDays(Carbon::parse($request->data), false)) >= 2 ){
             $request->request->add(['confirmare' => null]);
         }
 

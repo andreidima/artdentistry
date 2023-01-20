@@ -169,14 +169,14 @@
                                                     @php
                                                         // dd ($programare->confirmare)
                                                     @endphp
-                                                    @if ((\Carbon\Carbon::parse($programare->data) == \Carbon\Carbon::today()) || (\Carbon\Carbon::parse($programare->data) == \Carbon\Carbon::tomorrow()))
-                                                        @if (is_null($programare->confirmare) && ($programare->sms_confirmare()->first()->trimis ?? '') == 1)
+                                                    @if (is_null($programare->confirmare) && ($programare->sms_confirmare()->first()->trimis ?? '') == 1)
+                                                        @if ((\Carbon\Carbon::parse($programare->data) == \Carbon\Carbon::today()) || (\Carbon\Carbon::parse($programare->data) == \Carbon\Carbon::tomorrow()))
                                                             <i class="fas fa-question px-3 py-1 text-secondary fs-4"></i>
-                                                        @elseif (!is_null($programare->confirmare) && ($programare->confirmare == 0))
-                                                            <i class="fas fa-thumbs-down px-3 py-1 text-danger fs-4"></i>
-                                                        @elseif (!is_null($programare->confirmare) && ($programare->confirmare == 1))
-                                                            <i class="fas fa-thumbs-up px-3 py-1 text-success fs-4"></i>
                                                         @endif
+                                                    @elseif (!is_null($programare->confirmare) && ($programare->confirmare == 0))
+                                                        <i class="fas fa-thumbs-down px-3 py-1 text-danger fs-4"></i>
+                                                    @elseif (!is_null($programare->confirmare) && ($programare->confirmare == 1))
+                                                        <i class="fas fa-thumbs-up px-3 py-1 text-success fs-4"></i>
                                                     @endif
                                                 </div>
                                                 <div style="font-size:90%; line-height:1.2;">

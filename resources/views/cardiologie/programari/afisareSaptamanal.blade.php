@@ -147,7 +147,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for ($ora = (\Carbon\Carbon::parse($programari->min('ora'))->hour < 9 ? \Carbon\Carbon::parse($programari->min('ora'))->hour : 9); $ora <= (\Carbon\Carbon::parse($programari->max('ora'))->hour > 18 ? \Carbon\Carbon::parse($programari->max('ora'))->hour : 18) ; $ora ++)
+                    {{-- @for ($ora = (\Carbon\Carbon::parse($programari->min('ora'))->hour < 9 ? \Carbon\Carbon::parse($programari->min('ora'))->hour : 9); $ora <= (\Carbon\Carbon::parse($programari->max('ora'))->hour > 18 ? \Carbon\Carbon::parse($programari->max('ora'))->hour : 18) ; $ora ++) --}}
+                    @for ($ora = \Carbon\Carbon::parse($programari->min('ora'))->hour ; $ora <= \Carbon\Carbon::parse($programari->max('ora'))->hour ; $ora ++)
                         <tr class="">
                             <td class="text-white" style="background-color:#00b7ff;">
                                 {{ $ora }}:00
@@ -167,14 +168,14 @@
                                                     </span>
                                                     <br>
                                                     {{-- @if (\Carbon\Carbon::parse($programare->data) == \Carbon\Carbon::today()) --}}
-                                                    @if ((\Carbon\Carbon::parse($programare->data) == \Carbon\Carbon::today()) || (\Carbon\Carbon::parse($programare->data) == \Carbon\Carbon::tomorrow()))
-                                                        @if (is_null($programare->confirmare))
+                                                    @if (is_null($programare->confirmare))
+                                                        @if ((\Carbon\Carbon::parse($programare->data) == \Carbon\Carbon::today()) || (\Carbon\Carbon::parse($programare->data) == \Carbon\Carbon::tomorrow()))
                                                             <i class="fas fa-question px-3 py-1 fs-4 text-secondary" title="Statut confirmare programare"></i>
-                                                        @elseif ($programare->confirmare == 0)
-                                                            <i class="fas fa-thumbs-down px-3 py-1 text-danger fs-4" title="Statut confirmare programare"></i>
-                                                        @elseif ($programare->confirmare == 1)
-                                                            <i class="fas fa-thumbs-up px-3 py-1 text-success fs-4" title="Statut confirmare programare"></i>
                                                         @endif
+                                                    @elseif ($programare->confirmare == 0)
+                                                        <i class="fas fa-thumbs-down px-3 py-1 text-danger fs-4" title="Statut confirmare programare"></i>
+                                                    @elseif ($programare->confirmare == 1)
+                                                        <i class="fas fa-thumbs-up px-3 py-1 text-success fs-4" title="Statut confirmare programare"></i>
                                                     @endif
                                                 </div>
                                                 <div style="font-size:90%; line-height:1.2;">
