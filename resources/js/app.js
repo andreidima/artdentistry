@@ -44,23 +44,37 @@ if (document.querySelector('#programare')) {
             rezultate_consultatie: ((typeof rezultateConsultatie !== 'undefined') ? ((rezultateConsultatie == "true") ? true : false) : false),
 
             fise_de_tratament: fiseDeTratament,
-            fisa_de_tratament_nume_autocomplete: '',
+            // nume: nume,
+            // telefon: telefon,
+            // fisa_numar: fisa_numar,
             fise_de_tratament_lista_autocomplete: [],
             fisa_de_tratament_id: fisaDeTratamentIdVechi,
+            fisa_numar: fisa_numar,
+            nume: nume,
+            telefon: telefon,
+
         },
         created: function () {
-            if (this.fisa_de_tratament_id) {
-                this.fisa_de_tratament_nume_autocomplete = this.fise_de_tratament.find(item => item.id === this.fisa_de_tratament_id).nume;
+            // if (this.fisa_de_tratament_id) {
+            //     this.fisa_numar = this.fise_de_tratament.find(item => item.id == this.fisa_de_tratament_id).fisa_numar;
+            //     this.nume = this.fise_de_tratament.find(item => item.id == this.fisa_de_tratament_id).nume;
+            //     this.telefon = this.fise_de_tratament.find(item => item.id == this.fisa_de_tratament_id).telefon;
+            // }
+            if (!this.fisa_de_tratament_id) {
+                this.fisa_numar = '';
             }
         },
         methods: {
 
             // Autocomplete pentru datele pacientului folosind fise_de_tratament trime din start in vuejs
             autoComplete: function () {
+                this.fisa_numar = '';
+                this.fisa_de_tratament_id = '';
+
                 this.fise_de_tratament_lista_autocomplete = [];
-                if (this.fisa_de_tratament_nume_autocomplete.length > 2) {
+                if (this.nume.length > 2) {
                     for (var i = 0; i < this.fise_de_tratament.length; i++) {
-                        if (this.fise_de_tratament[i].nume.toLowerCase().includes(this.fisa_de_tratament_nume_autocomplete.toLowerCase())) {
+                        if (this.fise_de_tratament[i].nume.toLowerCase().includes(this.nume.toLowerCase())) {
                             this.fise_de_tratament_lista_autocomplete.push(this.fise_de_tratament[i]);
                         }
                     }

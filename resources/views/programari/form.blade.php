@@ -2,28 +2,14 @@
 
 <div class="row mb-0 p-3 d-flex border-radius: 0px 0px 40px 40px" id="programare">
     <div class="col-lg-12 mb-0">
-        <div class="row mb-0 align-items-center">
+        {{-- <div class="row mb-0 align-items-center">
             <div class="col-lg-5 py-1 mb-4 rounded-3" style="background-color: rgb(213, 255, 255)">
                 <script type="application/javascript">
                     fisaDeTratamentIdVechi={!! json_encode(old('fisa_de_tratament_id', ($programare->fisa_de_tratament->id ?? ""))) !!}
                     fiseDeTratament={!! json_encode($fise_de_tratament) !!}
                 </script>
                 <h4 class="text-center text-white rounded-3" style="background-color: darkcyan">Pacient înregistrat</h4>
-                <label for="fisa_de_tratament_id" class="mb-0 ps-3">Fișa de tratament:</label>
-                {{-- <select name="fisa_de_tratament_id"
-                    class="form-select bg-white rounded-pill {{ $errors->has('fisa_de_tratament_id') ? 'is-invalid' : '' }}"
-                >
-                        <option value='' selected></option>
-                    @foreach ($fise_de_tratament as $fisa_de_tratament)
-                        <option
-                            value='{{ $fisa_de_tratament->id }}'
-                            {{ ($fisa_de_tratament->id == old('fisa_de_tratament_id', $programare->fisa_de_tratament_id)) ? 'selected' : '' }}
-                        >{{ $fisa_de_tratament->fisa_numar }} - {{ $fisa_de_tratament->nume }} </option>
-                    @endforeach
-                </select> --}}
-                {{-- <small class="ps-3">
-                    *daca clientul are deja o fisa creata
-                </small> --}}
+                <label for="fisa_de_tratament_id" class="mb-0 ps-3">Fișa de tratamentsdf:</label>
                         <input
                             type="hidden"
                             v-model="fisa_de_tratament_id"
@@ -85,6 +71,74 @@
                             required>
                     </div>
                 </div>
+            </div>
+        </div> --}}
+        <div class="row mb-4 justify-content-start">
+            <script type="application/javascript">
+                fiseDeTratament={!! json_encode($fiseDeTratament) !!}
+
+                fisaDeTratamentIdVechi={!! json_encode(old('fisa_de_tratament_id', ($programare->fisa_de_tratament->id ?? ""))) !!}
+
+                fisa_numar = {!! json_encode(old('fisa_numar', ($programare->fisa_de_tratament->fisa_numar ?? ""))) !!}
+                nume = {!! json_encode(old('nume', ($programare->fisa_de_tratament->nume ?? ""))) !!}
+                telefon = {!! json_encode(old('telefon', ($programare->fisa_de_tratament->telefon ?? ""))) !!}
+            </script>
+            <input
+                type="hidden"
+                v-model="fisa_de_tratament_id"
+                name="fisa_de_tratament_id">
+            <div class="col-lg-5 mb-4">
+                <label for="nume" class="mb-0 ps-3">Nume:</label>
+                <input
+                    type="text"
+                    v-model="nume"
+                    v-on:keyup="autoComplete()"
+                    class="form-control bg-white rounded-pill {{ $errors->has('nume') ? 'is-invalid' : '' }}"
+                    name="nume"
+                    placeholder=""
+                    autocomplete="off"
+                    required>
+                        <div v-cloak v-if="fise_de_tratament_lista_autocomplete.length" class="panel-footer">
+                            <div class="list-group">
+                                    <button class="list-group-item list-group-item list-group-item-action py-0"
+                                        v-for="fisa_de_tratament in fise_de_tratament_lista_autocomplete"
+                                        v-on:click="
+                                            nume = fisa_de_tratament.nume;
+                                            telefon = fisa_de_tratament.telefon;
+                                            fisa_numar = fisa_de_tratament.fisa_numar;
+
+                                            fisa_de_tratament_id = fisa_de_tratament.id;
+
+                                            fise_de_tratament_lista_autocomplete = ''
+                                        ">
+                                            @{{ fisa_de_tratament.fisa_numar }} - @{{ fisa_de_tratament.nume }}
+                                    </button>
+                                </li>
+                            </div>
+                        </div>
+                <small class="ps-3">
+                    *Introdu minim 3 caractere pentru completare automată
+                </small>
+            </div>
+            <div class="col-lg-5 mb-4">
+                <label for="telefon" class="mb-0 ps-3">Telefon:</label>
+                <input
+                    type="text"
+                    v-model="telefon"
+                    class="form-control bg-white rounded-pill {{ $errors->has('telefon') ? 'is-invalid' : '' }}"
+                    name="telefon"
+                    placeholder=""
+                    required>
+            </div>
+            <div v-if="fisa_numar" class="col-lg-2 mb-4">
+                <label for="fisa_numar" class="mb-0 ps-3">Nr. fișă:</label>
+                <input
+                    type="text"
+                    v-model="fisa_numar"
+                    class="form-control bg-white rounded-pill {{ $errors->has('fisa_numar') ? 'is-invalid' : '' }}"
+                    name="fisa_numar"
+                    placeholder=""
+                    readonly="readonly">
             </div>
         </div>
         <div class="row mb-5 align-items-center justify-content-center">

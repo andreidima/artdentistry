@@ -59,11 +59,11 @@ class ProgramareController extends Controller
      */
     public function create(Request $request)
     {
-        $fise_de_tratament = FisaDeTratament::select('id', 'fisa_numar', 'nume')->orderBy('fisa_numar', 'desc')->get();
+        $fiseDeTratament = FisaDeTratament::select('id', 'fisa_numar', 'nume', 'telefon')->orderBy('fisa_numar', 'desc')->get();
 
         $request->session()->get('programare_return_url') ?? $request->session()->put('programare_return_url', url()->previous());
 
-        return view('programari.create', compact('fise_de_tratament'));
+        return view('programari.create', compact('fiseDeTratament'));
     }
 
     /**
@@ -87,9 +87,16 @@ class ProgramareController extends Controller
                 ]
             );
             $request->request->add(['fisa_de_tratament_id' => $fisa_de_tratament->id]);
+        } else { // Fisa de tratament deja existenta: in cazul in care se schimba numarul de telefon, acesta se actualizeaza
+            $fisa_de_tratament = FisaDeTratament::where('id', $request->fisa_de_tratament_id)->first();
+            if ($fisa_de_tratament){
+                $fisa_de_tratament->telefon = $request->telefon;
+                $fisa_de_tratament->save();
+            }
         }
 
-        $programare = Programare::create($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie', 'fisa_de_tratament_nume_autocomplete'));
+        $programare = Programare::create($request->except('fisa_numar', 'nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie', 'fisa_de_tratament_nume_autocomplete'));
+
 
         // Salvare in istoric
         $programare_istoric = new ProgramareIstoric;
@@ -134,11 +141,11 @@ class ProgramareController extends Controller
      */
     public function edit(Request $request, Programare $programare)
     {
-        $fise_de_tratament = FisaDeTratament::select('id', 'fisa_numar', 'nume')->orderBy('fisa_numar', 'desc')->get();
+        $fiseDeTratament = FisaDeTratament::select('id', 'fisa_numar', 'nume', 'telefon')->orderBy('fisa_numar', 'desc')->get();
 
         $request->session()->get('programare_return_url') ?? $request->session()->put('programare_return_url', url()->previous());
 
-        return view('programari.edit', compact('programare', 'fise_de_tratament'));
+        return view('programari.edit', compact('programare', 'fiseDeTratament'));
     }
 
     /**
@@ -150,6 +157,7 @@ class ProgramareController extends Controller
      */
     public function update(Request $request, Programare $programare)
     {
+        // dd($request);
         if(is_null($request->semnatura)){
             $request->request->remove('semnatura');
         }
@@ -160,12 +168,19 @@ class ProgramareController extends Controller
         if (!$request->fisa_de_tratament_id){
             $fisa_de_tratament = FisaDeTratament::create(
                 [
+                    'fisa_numar' => FisaDeTratament::max('fisa_numar') + 1,
                     'nume' => $request->nume,
                     'telefon' => $request->telefon,
                     'user_id' => $request->user_id
                 ]
             );
             $request->request->add(['fisa_de_tratament_id' => $fisa_de_tratament->id]);
+        } else { // Fisa de tratament deja existenta: in cazul in care se schimba numarul de telefon, acesta se actualizeaza
+            $fisa_de_tratament = FisaDeTratament::where('id', $request->fisa_de_tratament_id)->first();
+            if ($fisa_de_tratament){
+                $fisa_de_tratament->telefon = $request->telefon;
+                $fisa_de_tratament->save();
+            }
         }
 
         // Daca data programarii se modifica, si daca se modifica la minim 2 zile peste ziua curenta, se sterge confirmarea
@@ -173,7 +188,7 @@ class ProgramareController extends Controller
             $request->request->add(['confirmare' => null]);
         }
 
-        $programare->update($request->except('nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie', 'fisa_de_tratament_nume_autocomplete'));
+        $programare->update($request->except('fisa_numar', 'nume', 'telefon', 'date', 'gdpr', 'covid_19', 'rezultateConsultatie', 'fisa_de_tratament_nume_autocomplete'));
 
         // Salvare in istoric
         $programare_istoric = new ProgramareIstoric;
@@ -227,15 +242,16 @@ class ProgramareController extends Controller
     protected function validateRequest(Request $request)
     {
         // Se adauga doar la adaugare, iar la modificare nu se schimba
-        if ($request->isMethod('post')) {
+        // if ($request->isMethod('post')) {
             $request->request->add(['user_id' => $request->user()->id]);
             $request->request->add(['cheie_unica' => uniqid()]);
-        }
+        // }
 
         return request()->validate(
             [
                 'fisa_de_tratament_id' => 'nullable',
-                'nume' => 'required_without:fisa_de_tratament_id',
+                // 'nume' => 'required_without:fisa_de_tratament_id',
+                'nume' => 'required',
                 'telefon' => 'nullable',
                 'data' => 'required',
                 'ora' => 'required',
