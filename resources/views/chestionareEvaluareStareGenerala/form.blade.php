@@ -1568,6 +1568,30 @@
             </div>
         </div>
 
+        <div class="row mb-4 rounded-3" style="border:1px solid #e9ecef; border-left:0.25rem #e66800 solid">
+            <div class="col-lg-12 d-flex align-items-left">
+                <div class="me-4">
+                    Sunteti de acord cu efectuarea unei radiografii dentare?
+                </div>
+                <div class="col-auto d-flex">
+                    <div class="form-check me-4">
+                        <input class="form-check-input" type="radio" value="1" name="radiografie_dentara" id="radiografie_dentara_da"
+                            {{ old('radiografie_dentara', $chestionar->radiografie_dentara) == '1' ? 'checked' : '' }}>
+                        <label class="form-check-label" for="radiografie_dentara_da">
+                            DA
+                        </label>
+                    </div>
+                    <div class="form-check me-4">
+                        <input class="form-check-input" type="radio" value="0" name="radiografie_dentara" id="radiografie_dentara_nu"
+                            {{ old('radiografie_dentara', $chestionar->radiografie_dentara) == '0' ? 'checked' : '' }}>
+                        <label class="form-check-label" for="radiografie_dentara_nu">
+                            NU
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-lg-12 mb-2 d-flex justify-content-center">
                 <button type="submit" class="btn btn-primary text-white me-3 rounded-3">{{ $buttonText }}</button>
