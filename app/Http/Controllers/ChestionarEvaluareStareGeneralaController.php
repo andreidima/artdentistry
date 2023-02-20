@@ -174,6 +174,7 @@ class ChestionarEvaluareStareGeneralaController extends Controller
                 'droguri_tip' => 'nullable|max:500',
                 'droguri_cantitate' => 'nullable|max:500',
                 'droguri_dependenta' => 'nullable|numeric|integer|between:0,1',
+                'radiografie_dentara' => 'nullable|numeric|integer|between:0,1',
                 'observatii' => 'nullable|max:2000',
                 'user_id' => 'required',
             ],
