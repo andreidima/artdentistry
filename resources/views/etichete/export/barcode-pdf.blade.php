@@ -74,7 +74,7 @@
                         <div style="
                             width:170px;
                             padding:0px 0px 0px 0px;
-                            margin:0px 5px;
+                            margin:0px 10px;
                                 -moz-border-radius: 0px;
                                 -webkit-border-radius: 0px;
                                 border-radius: 0px;
