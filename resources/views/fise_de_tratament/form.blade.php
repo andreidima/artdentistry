@@ -33,7 +33,7 @@
                 <div class="me-2">
                     <label for="data" class="mb-0 ps-1">Data:</label>
                         <vue2-datepicker
-                            data-veche="{{ old('data', ($fisa_de_tratament->data ?? '')) }}"
+                            data-veche="{{ old('data', ($fisa_de_tratament->data ?? \Carbon\Carbon::now())) }}"
                             nume-camp-db="data"
                             tip="date"
                             value-type="YYYY-MM-DD"
@@ -44,7 +44,7 @@
                 <div>
                     <label for="ora" class="mb-0 ps-1">Ora:</label>
                         <vue2-datepicker
-                            data-veche="{{ old('ora', ($fisa_de_tratament->ora ?? '')) }}"
+                            data-veche="{{ old('ora', ($fisa_de_tratament->ora ?? \Carbon\Carbon::now()->isoFormat('HH:mm:ss'))) }}"
                             nume-camp-db="ora"
                             tip="time"
                             value-type="hh:mm:ss"
