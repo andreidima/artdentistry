@@ -54,82 +54,6 @@
 
         @include ('errors')
 
-        {{-- <div class="row d-flex justify-content-center">
-            @for ($ziua = \Carbon\Carbon::parse($search_data->startOfWeek()); $ziua->lessThan($search_data->endOfWeek()->subDays(2)); $ziua->addDay())
-                <div class="col-lg-2 px-0 table-responsive rounded">
-                    <table class="table table-striped table-hover table-sm rounded">
-                        <thead class="text-white rounded-3" style="background-color:#e66800;">
-                            <tr class="" style="padding:2rem">
-                                <th class="text-center rounded-3">
-                                    {{ \Carbon\Carbon::parse($ziua)->dayName }}
-                                    <br>
-                                    {{ \Carbon\Carbon::parse($ziua)->isoFormat('DD.MM.YYYY') }}
-                                </th>
-                            </tr>
-                        </thead>
-                        @foreach ($programari->where('data', \Carbon\Carbon::parse($ziua)->isoformat('YYYY-MM-DD')) as $programare)
-                            <tr>
-                                <td class="border border-2 border-dark">
-                                    <div class="row">
-                                        <div class="col-12 d-flex">
-                                            <div class="me-1">
-                                                <span class="px-1 text-white rounded-3" style="background-color:darkcyan;">
-                                                    {{ $programare->ora ? \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') : '' }}
-                                                </span>
-                                            </div>
-                                            <div style="font-size:90%;">
-                                                {{ $programare->fisa_de_tratament->nume ?? '' }}
-                                                @if ($programare->fisa_de_tratament->telefon)
-                                                    <br>
-                                                    {{ $programare->fisa_de_tratament->telefon ?? ''}}
-                                                @endif
-                                                @if ($programare->notita)
-                                                    <br>
-                                                    {{ $programare->notita ?? ''}}
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <div class="col-12 d-flex justify-content-end">
-                                            <a href="{{ $programare->path() }}/modifica"
-                                                class="flex me-1"
-                                            >
-                                                <span class="badge bg-primary">Modifică</span>
-                                            </a>
-                                            <div style="flex" class="">
-                                                <a
-                                                    href="#"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#stergeProgramare{{ $programare->id }}"
-                                                    title="Șterge Programare"
-                                                    >
-                                                    <span class="badge bg-danger">Șterge</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 d-flex justify-content-end">
-                                            <a href="/programari/etichete/{{ $programare->id }}"
-                                                class="flex me-1"
-                                            >
-                                                <span class="badge bg-warning px-1 text-dark">Etichete</span>
-                                            </a>
-                                            @if ($programare->fisa_de_tratament)
-                                                <a href="{{ $programare->fisa_de_tratament->path() }}/modifica"
-                                                    class=""
-                                                >
-                                                    <span class="badge bg-success px-1">Fișa de tratament</span>
-                                                </a>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </table>
-                </div>
-            @endfor
-        </div> --}}
-
-
         <div class="table-responsive rounded mb-4"  style="height: 90vh">
             <table class="table table-striped table-hover table-sm rounded table-bordered">
                 <thead class="rounded" style="">
@@ -192,6 +116,16 @@
                                                 </div>
                                             </div>
                                             <div class="col-12 py-0 px-1 d-flex justify-content-end">
+                                                <div class="me-1">
+                                                    <a
+                                                        href="#"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#trimiteRecenzie{{ $programare->id }}"
+                                                        title="Trimite Recenzie"
+                                                        >
+                                                        <span class="badge bg-secondary text-white">Recenzie</span>
+                                                    </a>
+                                                </div>
                                                 <a href="{{ $programare->path() }}/modifica"
                                                     class="flex me-1"
                                                 >
@@ -236,6 +170,38 @@
 
     </div>
 </div>
+
+    {{-- Modalele pentru recenzie programare --}}
+    @foreach ($programari as $programare)
+        <div class="modal fade text-dark" id="trimiteRecenzie{{ $programare->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header bg-warning text-dark">
+                    <h5 class="modal-title text-dark" id="exampleModalLabel">Programare: <b>{{ $programare->fisa_de_tratament->nume ?? '' }}</b></h5>
+                    <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="text-align:left;">
+                    Ești sigur ca vrei să trimiți sms-ul de recenzie?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Renunță</button>
+
+                    <form method="POST" action="programari/trimite-recenzie/{{ $programare->id }}/">
+                        @method('DELETE')
+                        @csrf
+                        <button
+                            type="submit"
+                            class="btn btn-warning text-dark"
+                            >
+                            Trimite sms-ul
+                        </button>
+                    </form>
+
+                </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
 
     {{-- Modalele pentru stergere programare --}}
     @foreach ($programari as $programare)
