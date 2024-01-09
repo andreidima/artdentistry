@@ -31,4 +31,13 @@ class Programare extends Model
     {
         return $this->hasMany(MesajTrimisSms::class, 'referinta_id', 'id')->where('categorie', 'Programari')->where('subcategorie', 'Confirmare');
     }
+
+    public function recenzieTrimisa()
+    {
+        if (MesajTrimisSms::where('telefon', $this->fisa_de_tratament->telefon)->where('subcategorie', 'Recenzie')->where('trimis', 1)->latest()->get()->first()){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

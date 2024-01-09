@@ -197,6 +197,19 @@
                                                 </div>
                                             </div>
                                             <div class="col-12 py-0 px-1 d-flex justify-content-end">
+                                                <div class="me-1">
+                                                    @if (!$programare->recenzieTrimisa())
+                                                        <a
+                                                            href="#"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#trimiteRecenzie{{ $programare->id }}"
+                                                            >
+                                                            <span class="badge bg-success text-white" title="Poți trimite recenzia">Recenzie</span>
+                                                        </a>
+                                                    @else
+                                                        <span class="badge bg-secondary text-white" title="Recenzia a fost deja trimisă">Recenzie</span>
+                                                    @endif
+                                                </div>
                                                 <a href="{{ $programare->path() }}/modifica"
                                                     class="flex me-1"
                                                 >
@@ -255,6 +268,38 @@
 
     </div>
 </div>
+
+    {{-- Modalele pentru recenzie programare --}}
+    @foreach ($programari as $programare)
+        <div class="modal fade text-dark" id="trimiteRecenzie{{ $programare->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header bg-warning text-dark">
+                    <h5 class="modal-title text-dark" id="exampleModalLabel">Programare: <b>{{ $programare->nume ?? '' }}</b></h5>
+                    <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="text-align:left;">
+                    Ești sigur ca vrei să trimiți sms-ul de recenzie?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Renunță</button>
+
+                    <form method="POST" action="/cardiologie/programari/trimite-recenzie/{{ $programare->id }}/">
+                        @method('DELETE')
+                        @csrf
+                        <button
+                            type="submit"
+                            class="btn btn-warning text-dark"
+                            >
+                            Trimite sms-ul
+                        </button>
+                    </form>
+
+                </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
 
     {{-- Modalele pentru stergere programare --}}
     @foreach ($programari as $programare)

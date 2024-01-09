@@ -342,15 +342,24 @@ class ProgramareController extends Controller
     public function trimiteRecenzie(Request $request, Programare $programare)
     {
         if(!($telefon = $programare->fisa_de_tratament->telefon)){
-            return back()->with('error', 'Programarea pentru „' . ($programare->fisa_de_tratament->nume ?? '') . '” nu are număr de telefon adăugat!');
-        } else if(MesajTrimisSms::where('telefon', $telefon)->get()) {
-            return back()->with('error', 'Numărul de telefon ' . $telefon . ' are deja sms de recenzie trimis!');
+            return back()->with('error', 'Sms-ul de recenzie NU a fost trimis către „' . ($programare->fisa_de_tratament->nume ?? '') . '”! Motiv: programarea nu are număr de telefon adăugat!');
+        } else if(MesajTrimisSms::where('telefon', $telefon)->where('subcategorie', 'Recenzie')->get()->count() > 0) {
+            return back()->with('error', 'Sms-ul de recenzie NU a fost trimis către „' . ($programare->fisa_de_tratament->nume ?? '') . '”! Motiv: Numărul de telefon ' . $telefon . ' are deja sms de recenzie trimis!');
         }
 
-        $mesaj = 'Satisfăcut de serviciile ArtDentistry? Spuneți-ne printr-un review! http://search.google.com/local/writereview?placeid=ChIJ4QGHjqEYtEARPlD-jjLKZAg';
-dd($telefon);
+        $mesaj = 'Mulțumim pentru vizita la ArtDentistry! Ne puteți lăsa un review? https://search.google.com/local/writereview?placeid=ChIJ4QGHjqEYtEARPlD-jjLKZAg';
+
         $this->trimiteSms('Programari', 'Recenzie', $programare->id, [$telefon], $mesaj);
 
-        return back()->with('status', 'Sms-ul de recenzie a fost trimis către „' . ($programare->fisa_de_tratament->nume ?? '') . '” cu succes!');
+        sleep(1); // Se asteapta o secunda de siguranta ca se salveaza raspunsul SmsLink in baza de date
+
+        $mesajTrimisSms = MesajTrimisSms::where('telefon', $telefon)->where('subcategorie', 'Recenzie')->latest()->get()->first();
+
+        if ($mesajTrimisSms->trimis === 0){
+            return back()->with('error', 'Sms-ul de recenzie NU a fost trimis către „' . ($programare->fisa_de_tratament->nume ?? '') . '”! Motiv: ' . $mesajTrimisSms->content);
+        } else if ($mesajTrimisSms->trimis === 1){
+            return back()->with('status', 'Sms-ul de recenzie către „' . ($programare->fisa_de_tratament->nume ?? '') . '” a fost trimis cu success!');
+        }
+
     }
 }

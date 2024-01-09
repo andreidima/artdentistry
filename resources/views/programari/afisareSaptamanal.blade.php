@@ -117,14 +117,17 @@
                                             </div>
                                             <div class="col-12 py-0 px-1 d-flex justify-content-end">
                                                 <div class="me-1">
-                                                    <a
-                                                        href="#"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#trimiteRecenzie{{ $programare->id }}"
-                                                        title="Trimite Recenzie"
-                                                        >
-                                                        <span class="badge bg-secondary text-white">Recenzie</span>
-                                                    </a>
+                                                    @if (!$programare->recenzieTrimisa())
+                                                        <a
+                                                            href="#"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#trimiteRecenzie{{ $programare->id }}"
+                                                            >
+                                                            <span class="badge bg-success text-white" title="Poți trimite recenzia">Recenzie</span>
+                                                        </a>
+                                                    @else
+                                                        <span class="badge bg-secondary text-white" title="Recenzia a fost deja trimisă">Recenzie</span>
+                                                    @endif
                                                 </div>
                                                 <a href="{{ $programare->path() }}/modifica"
                                                     class="flex me-1"
@@ -186,7 +189,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Renunță</button>
 
-                    <form method="POST" action="programari/trimite-recenzie/{{ $programare->id }}/">
+                    <form method="POST" action="/programari/trimite-recenzie/{{ $programare->id }}/">
                         @method('DELETE')
                         @csrf
                         <button

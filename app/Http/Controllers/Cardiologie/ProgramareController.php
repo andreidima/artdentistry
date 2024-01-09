@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Cardiologie\Programare;
 use App\Models\Cardiologie\ProgramareIstoric;
+use App\Models\MesajTrimisSms;
 use Illuminate\Http\Request;
 
 use Carbon\Carbon;
@@ -253,5 +254,29 @@ class ProgramareController extends Controller
         $request->session()->forget('cardiologie_programare_return_url');
 
         return view('cardiologie.programari.afisareLunar', compact('programari', 'search_data'));
+    }
+
+    public function trimiteRecenzie(Request $request, Programare $programare)
+    {
+        if(!($telefon = $programare->telefon)){
+            return back()->with('error', 'Sms-ul de recenzie NU a fost trimis către „' . ($programare->nume ?? '') . '”! Motiv: programarea nu are număr de telefon adăugat!');
+        } else if(MesajTrimisSms::where('telefon', $telefon)->where('subcategorie', 'Recenzie')->get()->count() > 0) {
+            return back()->with('error', 'Sms-ul de recenzie NU a fost trimis către „' . ($programare->nume ?? '') . '”! Motiv: Numărul de telefon ' . $telefon . ' are deja sms de recenzie trimis!');
+        }
+
+        $mesaj = 'Mulțumim pentru vizita la ArtDentistry! Ne puteți lăsa un review? https://search.google.com/local/writereview?placeid=ChIJ4QGHjqEYtEARPlD-jjLKZAg';
+
+        $this->trimiteSms('Programari Cardiologie', 'Recenzie', $programare->id, [$telefon], $mesaj);
+
+        sleep(1); // Se asteapta o secunda de siguranta ca se salveaza raspunsul SmsLink in baza de date
+
+        $mesajTrimisSms = MesajTrimisSms::where('telefon', $telefon)->where('subcategorie', 'Recenzie')->latest()->get()->first();
+
+        if ($mesajTrimisSms->trimis === 0){
+            return back()->with('error', 'Sms-ul de recenzie NU a fost trimis către „' . ($programare->nume ?? '') . '”! Motiv: ' . $mesajTrimisSms->content);
+        } else if ($mesajTrimisSms->trimis === 1){
+            return back()->with('status', 'Sms-ul de recenzie către „' . ($programare->nume ?? '') . '” a fost trimis cu success!');
+        }
+
     }
 }
