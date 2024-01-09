@@ -57,6 +57,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('programari/afisare-saptamanal', [ProgramareController::class, 'afisareSaptamanal'])->name('programari.afisareSaptamanal');
     Route::get('programari/afisare-lunar', [ProgramareController::class, 'afisareLunar'])->name('programari.afisareLunar');
     // Route::any('programari/etichete/{programare}/{etichetaId?}/{actiune?}', [ProgramareController::class, 'etichete'])->name('programari.etichete');
+    Route::any('programari/trimite-recenzie/{programare}', [ProgramareController::class, 'trimiteRecenzie']);
     Route::any('programari/etichete/{programare}', [ProgramareController::class, 'etichete'])->name('programari.etichete');
     Route::resource('programari', ProgramareController::class,  ['parameters' => ['programari' => 'programare']]);
 
@@ -79,21 +80,6 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::resource('mesaje-trimise-sms', MesajTrimisSmsController::class,  ['parameters' => ['mesaje-trimise-sms' => 'mesaj_trimis_sms']]);
-
-    // Route::get('generare-chei-unice-acolo-unde-lipsesc', function(){
-    //     $programari = \App\Models\Programare::where('cheie_unica', null)->get();
-    //     foreach ($programari as $programare){
-    //         // echo $programare->id . '<br>';
-    //         $programare->cheie_unica = uniqid();
-    //         $programare->save();
-    //     }
-    //     $programari = \App\Models\Cardiologie\Programare::where('cheie_unica', null)->get();
-    //     foreach ($programari as $programare){
-    //         // echo $programare->id . '<br>';
-    //         $programare->cheie_unica = uniqid();
-    //         $programare->save();
-    //     }
-    // });
 
     Route::get('toate-numerele-de-telefon-din-aplicatie', function(){
         $telefoane = \App\Models\FisaDeTratament::select('telefon')->distinct()->get();

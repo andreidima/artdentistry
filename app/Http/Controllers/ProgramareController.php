@@ -6,6 +6,7 @@ use App\Models\Programare;
 use App\Models\ProgramareIstoric;
 use App\Models\FisaDeTratament;
 use App\Models\Eticheta;
+use App\Models\MesajTrimisSms;
 use Illuminate\Http\Request;
 
 use Carbon\Carbon;
@@ -106,10 +107,6 @@ class ProgramareController extends Controller
         $programare_istoric->save();
 
         // Trimitere Sms la inregistrare programare
-        // $mesaj = 'Programarea pentru ' . $request->nume . ' a fost inregistrata. ' .
-        //             'Va asteptam la cabinet in data de ' . \Carbon\Carbon::parse($programare->data)->isoFormat('DD.MM.YYYY') .
-        //             ', la ora ' . \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') . '. ' .
-        //             'Cu stima, ArtDentistry!';
         $mesaj = 'Programarea dvs. a fost inregistrata. ' .
                     'Va asteptam la cabinet in data de ' . \Carbon\Carbon::parse($programare->data)->isoFormat('DD.MM.YYYY') .
                     ', la ora ' . \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') . '. ' .
@@ -199,10 +196,6 @@ class ProgramareController extends Controller
 
         // Trimitere Sms la modificare programare
         if (($programare->wasChanged(['fisa_de_tratament_id', 'data', 'ora'])) || (!$request->fisa_de_tratament_id)) {
-            // $mesaj = 'Programarea pentru ' . $programare->fisa_de_tratament->nume . ' a fost modificata. ' .
-            //             'Va asteptam la cabinet in data de ' . \Carbon\Carbon::parse($programare->data)->isoFormat('DD.MM.YYYY') .
-            //             ', la ora ' . \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') . '. ' .
-            //             'Cu stima, ArtDentistry!';
             $mesaj = 'Programarea pentru dvs. a fost modificata. ' .
                         'Va asteptam la cabinet in data de ' . \Carbon\Carbon::parse($programare->data)->isoFormat('DD.MM.YYYY') .
                         ', la ora ' . \Carbon\Carbon::parse($programare->ora)->isoFormat('HH:mm') . '. ' .
@@ -344,5 +337,20 @@ class ProgramareController extends Controller
             }
 
         return view('programari.diverse.etichete', compact('programare'));
+    }
+
+    public function trimiteRecenzie(Request $request, Programare $programare)
+    {
+        if(!($telefon = $programare->fisa_de_tratament->telefon)){
+            return back()->with('error', 'Programarea pentru „' . ($programare->fisa_de_tratament->nume ?? '') . '” nu are număr de telefon adăugat!');
+        } else if(MesajTrimisSms::where('telefon', $telefon)->get()) {
+            return back()->with('error', 'Numărul de telefon ' . $telefon . ' are deja sms de recenzie trimis!');
+        }
+
+        $mesaj = 'Satisfăcut de serviciile ArtDentistry? Spuneți-ne printr-un review! http://search.google.com/local/writereview?placeid=ChIJ4QGHjqEYtEARPlD-jjLKZAg';
+dd($telefon);
+        $this->trimiteSms('Programari', 'Recenzie', $programare->id, [$telefon], $mesaj);
+
+        return back()->with('status', 'Sms-ul de recenzie a fost trimis către „' . ($programare->fisa_de_tratament->nume ?? '') . '” cu succes!');
     }
 }
