@@ -351,7 +351,7 @@ class ProgramareController extends Controller
 
         $this->trimiteSms('Programari', 'Recenzie', $programare->id, [$telefon], $mesaj);
 
-        sleep(1); // Se asteapta o secunda de siguranta ca se salveaza raspunsul SmsLink in baza de date
+        // sleep(1); // Se asteapta o secunda de siguranta ca se salveaza raspunsul SmsLink in baza de date
 
         $mesajTrimisSms = MesajTrimisSms::where('telefon', $telefon)->where('subcategorie', 'Recenzie')->latest()->get()->first();
 
