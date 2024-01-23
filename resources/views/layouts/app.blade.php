@@ -72,6 +72,11 @@
                                 <i class="fa fa-tags me-1"></i>Etichete
                             </a>
                         </li>
+                        <li class="nav-item me-3">
+                            <a class="nav-link active" aria-current="page" href="{{ route('retete.index') }}">
+                                <i class="fas fa-receipt me-1"></i>Rețete
+                            </a>
+                        </li>
                         <li class="nav-item me-3 dropdown">
                             <a class="nav-link active dropdown-toggle rounded-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #00b7ff">
                                 <i class="fas fa-calendar-check me-1"></i>Programări Cardiologie

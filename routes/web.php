@@ -14,6 +14,7 @@ use App\Http\Controllers\EtichetaController;
 use App\Http\Controllers\ProgramareEtichetaController;
 use App\Http\Controllers\MesajTrimisSmsController;
 use App\Http\Controllers\SmsConfirmareProgramareController;
+use App\Http\Controllers\RetetaController;
 
 use Illuminate\Support\Facades\DB;
 
@@ -63,6 +64,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('etichete', EtichetaController::class,  ['parameters' => ['etichete' => 'eticheta']]);
     Route::post('etichete/{eticheta}/barcode/{view_type}', [EtichetaController::class, 'pdfExportBarcode']);
+
+    Route::resource('retete', RetetaController::class,  ['parameters' => ['retete' => 'reteta']]);
 
 
     // Cardiologie

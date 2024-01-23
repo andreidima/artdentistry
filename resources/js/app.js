@@ -179,3 +179,17 @@ if (document.querySelector('#programareCardiologie')) {
         }
     });
 };
+
+if (document.querySelector('#retetaMedicamente')) {
+    const app = new Vue({
+        el: '#retetaMedicamente',
+        data: {
+            medicamente: medicamente,
+        },
+        created: function () {
+            if (this.medicamente.length === 0) {
+                this.medicamente.push({});
+            }
+        },
+    });
+};
