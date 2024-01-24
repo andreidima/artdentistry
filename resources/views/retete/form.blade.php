@@ -41,13 +41,29 @@
                     value="{{ old('pacient_varsta', $reteta->pacient_varsta) }}"
                     class="form-control bg-white rounded-pill {{ $errors->has('pacient_varsta') ? 'is-invalid' : '' }}">
             </div>
-            <div class="col-lg-3 mb-4">
+            <div class="col-lg-2 mb-4">
                 <label for="pacient_cnp" class="mb-0 ps-3">CNP</label>
                 <input
                     type="text"
                     name="pacient_cnp"
                     value="{{ old('pacient_cnp', $reteta->pacient_cnp) }}"
                     class="form-control bg-white rounded-pill {{ $errors->has('pacient_cnp') ? 'is-invalid' : '' }}">
+            </div>
+            <div class="col-lg-3 mb-4">
+                <label for="pacient_adresa" class="mb-0 ps-3">Adresa</label>
+                <input
+                    type="text"
+                    name="pacient_adresa"
+                    value="{{ old('pacient_adresa', $reteta->pacient_adresa) }}"
+                    class="form-control bg-white rounded-pill {{ $errors->has('pacient_adresa') ? 'is-invalid' : '' }}">
+            </div>
+            <div class="col-lg-2 mb-4">
+                <label for="pacient_localitate" class="mb-0 ps-3">Localitate</label>
+                <input
+                    type="text"
+                    name="pacient_localitate"
+                    value="{{ old('pacient_localitate', $reteta->pacient_localitate) }}"
+                    class="form-control bg-white rounded-pill {{ $errors->has('pacient_localitate') ? 'is-invalid' : '' }}">
             </div>
             <div class="col-lg-4 mb-4">
                 <label for="pacient_diagnostic" class="mb-0 ps-3">Diagnostic</label>
@@ -71,7 +87,7 @@
                     <option value="K14 - Bolile limbii" {{ old('pacient_diagnostic', $reteta->pacient_diagnostic ?? '') == "K14 - Bolile limbii" ? 'selected' : '' }}>K14 - Bolile limbii</option>
                 </select>
             </div>
-            <div class="col-lg-12 mb-4">
+            <div class="col-lg-8 mb-4">
                 <label for="pacient_diagnostic_descriptiv" class="mb-0 ps-3">Diagnostic descriptiv</label>
                 <input
                     type="text"
@@ -102,12 +118,12 @@
                             v-model="medicamente[index].concentratie">
                     </div>
                     <div class="col-lg-4 mb-2">
-                        <label for="forma_farmceutica" class="mb-0 ps-3">Forma farmaceutică</label>
+                        <label for="forma_farmaceutica" class="mb-0 ps-3">Forma farmaceutică</label>
                         <input
                             type="text"
-                            class="form-control bg-white rounded-3 {{ $errors->has('forma_farmceutica') ? 'is-invalid' : '' }}"
-                            :name="'medicamente[' + index + '][forma_farmceutica]'"
-                            v-model="medicamente[index].forma_farmceutica">
+                            class="form-control bg-white rounded-3 {{ $errors->has('forma_farmaceutica') ? 'is-invalid' : '' }}"
+                            :name="'medicamente[' + index + '][forma_farmaceutica]'"
+                            v-model="medicamente[index].forma_farmaceutica">
                     </div>
                     <div class="col-lg-4 mb-2">
                         <label for="mod_administrare" class="mb-0 ps-3">Mod de administrare</label>

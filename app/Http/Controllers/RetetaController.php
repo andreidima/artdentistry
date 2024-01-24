@@ -24,7 +24,7 @@ class RetetaController extends Controller
 
         $retete = Reteta::
             when($searchPacient, function ($query, $searchPacient) {
-                $query->where('nume', 'like', '%' . $searchPacient . '%');
+                $query->where('pacient_nume', 'like', '%' . $searchPacient . '%');
             })
             ->when($searchData, function ($query, $searchData) {
                 return $query->whereDate('data', $searchData);
@@ -44,6 +44,7 @@ class RetetaController extends Controller
     {
         $reteta = new Reteta;
         $reteta->data = Carbon::now();
+        $reteta->pacient_localitate = "Focșani";
 
         $request->session()->get('retetaReturnUrl') ?? $request->session()->put('retetaReturnUrl', url()->previous());
 
@@ -67,7 +68,7 @@ class RetetaController extends Controller
         $reteta->unitate_sanitara_telefon = '0337.40.45.19 / 0766.63.63.62';
         $reteta->serie = "ART";
         $reteta->numar = (Reteta::latest()->first()->numar ?? 0) + 1;
-        $reteta->medic_nume = '';
+        $reteta->medic_nume = 'Dr. Vlad Hanță';
         $reteta->save();
 
         foreach ($request->medicamente as $medicament) {
@@ -152,6 +153,8 @@ class RetetaController extends Controller
                 'pacient_nume' => 'required|max:250',
                 'pacient_varsta' => 'nullable|numeric|between:1,100',
                 'pacient_cnp' => 'nullable|digits:13',
+                'pacient_adresa' => 'nullable|max:1000',
+                'pacient_localitate' => 'nullable|max:250',
                 'pacient_diagnostic' => 'nullable|max:250',
                 'pacient_diagnostic_descriptiv' => 'nullable|max:1000',
                 'data' => 'nullable',
@@ -160,7 +163,7 @@ class RetetaController extends Controller
                 // 'medicamente.*.reteta_id' => 'required',
                 'medicamente.*.denumire' => 'required|max:1000',
                 'medicamente.*.concentratie' => 'nullable|max:1000',
-                'medicamente.*.forma_farmceutica' => 'nullable|max:1000',
+                'medicamente.*.forma_faramceutica' => 'nullable|max:1000',
                 'medicamente.*.mod_administrare' => 'nullable|max:1000',
                 'medicamente.*.cantitate' => 'nullable|max:1000',
                 'medicamente.*.durata_tratament' => 'nullable|max:1000',
@@ -171,11 +174,19 @@ class RetetaController extends Controller
                 'medicamente.*.denumire.required' => 'Câmpul Denumire pentru medicamente este necesar.',
                 'medicamente.*.denumire.max' => 'Câmpul Denumire pentru medicamente poate avea maxim 1000 de caractere.',
                 'medicamente.*.concentratie.max' => 'Câmpul Concentrație pentru medicamente poate avea maxim 1000 de caractere.',
-                'medicamente.*.forma_farmceutica.max' => 'Câmpul Forma farmaceutică pentru medicamente poate avea maxim 1000 de caractere.',
+                'medicamente.*.forma_faramceutica.max' => 'Câmpul Forma farmaceutică pentru medicamente poate avea maxim 1000 de caractere.',
                 'medicamente.*.mod_administrare.max' => 'Câmpul Mod administrare pentru medicamente poate avea maxim 1000 de caractere.',
                 'medicamente.*.cantitate.max' => 'Câmpul Cantitate pentru medicamente poate avea maxim 1000 de caractere.',
                 'medicamente.*.durata_tratament.max' => 'Câmpul Durată tratament pentru medicamente poate avea maxim 1000 de caractere.',
             ]
         );
+    }
+
+    public function exportPdf(Reteta $reteta)
+    {
+        $pdf = \PDF::loadView('retete.export.retetaPdf', compact('reteta'))
+            ->setPaper('a4', 'portrait');
+        $pdf->getDomPDF()->set_option("enable_php", true);
+        return $pdf->stream();
     }
 }

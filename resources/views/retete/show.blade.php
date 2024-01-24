@@ -1,205 +1,171 @@
+@php
+    use \Carbon\Carbon;
+@endphp
+
 @extends ('layouts.app')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-7">
             <div class="shadow-lg" style="border-radius: 40px 40px 40px 40px;">
-                <div class="culoare2 border border-secondary p-2" style="border-radius: 40px 40px 0px 0px;">
-                    <span class="badge text-light fs-5">
-                        <i class="fa-solid fa-person-crane me-1"></i>Pacienți / {{ $pacient->nume }} {{ $pacient->prenume }}
-                    </span>
+                <div class="border border-secondary p-2" style="border-radius: 40px 40px 0px 0px; background-color:#e66800">
+                    <h6 class="ms-2 my-0" style="color:white"><i class="fas fa-receipt me-1"></i>Rețete / {{ $reteta->seria }}{{ $reteta->numar }}</h6>
                 </div>
 
                 <div class="card-body py-2 border border-secondary"
                     style="border-radius: 0px 0px 40px 40px;"
                 >
 
-            @include ('errors')
-
                     <div class="table-responsive col-md-12 mx-auto">
-                        <table class="table table-striped table-hover"
+                        <table class="table table-sm table-striped table-hover"
                         >
                             <tr>
-                                <td class="pe-4">
-                                    Nume
+                                <td>
+                                    Data
                                 </td>
                                 <td>
-                                    {{ $pacient->nume }}
+                                    {{ $reteta->data ? Carbon::parse($reteta->data)->isoFormat('DD.MM.YYYY') : '' }}
                                 </td>
                             </tr>
                             <tr>
                                 <td class="pe-4">
-                                    Prenume
+                                    Seria număr
                                 </td>
                                 <td>
-                                    {{ $pacient->prenume }}
+                                    {{ $reteta->seria }}{{ $reteta->numar }}
                                 </td>
                             </tr>
                             <tr>
-                                <td class="pe-4">
-                                    Telefon
+                                <td>
+                                    Pacient
                                 </td>
                                 <td>
-                                    {{ $pacient->telefon }}
+                                    {{ $reteta->pacient_nume }}
                                 </td>
                             </tr>
                             <tr>
-                                <td class="pe-4">
-                                    Email
+                                <td>
+                                    Vârsta
                                 </td>
                                 <td>
-                                    {{ $pacient->email }}
+                                    {{ $reteta->pacient_varsta }}
                                 </td>
                             </tr>
                             <tr>
-                                <td class="pe-4">
+                                <td>
                                     CNP
                                 </td>
                                 <td>
-                                    {{ $pacient->cnp }}
+                                    {{ $reteta->pacient_cnp }}
                                 </td>
                             </tr>
                             <tr>
-                                <td class="pe-4">
-                                    Serie nr. buletin
-                                </td>
                                 <td>
-                                    {{ $pacient->serie_numar_buletin }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="pe-4">
-                                    Data exp. buletin:
-                                </td>
-                                <td>
-                                    {{ $pacient->data_expirare_buletin ? \Carbon\Carbon::parse($pacient->data_expirare_buletin)->isoFormat('DD.MM.YYYY') : '' }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="pe-4">
-                                    Sex
-                                </td>
-                                <td>
-                                    {{ $pacient->sex == '1' ? 'M' : '' }}
-                                    {{ $pacient->sex == '2' ? 'F' : '' }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="pe-4">
-                                    Cum a aflat de Theranova
-                                </td>
-                                <td>
-                                    {{ $pacient->cum_a_aflat_de_theranova }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="pe-4">
                                     Adresa
                                 </td>
                                 <td>
-                                    {{ $pacient->adresa }}
+                                    {{ $reteta->pacient_adresa }}
                                 </td>
                             </tr>
                             <tr>
-                                <td class="pe-4">
-                                    Localitatea
+                                <td>
+                                    Localitate
                                 </td>
                                 <td>
-                                    {{ $pacient->localitate }}
+                                    {{ $reteta->pacient_localitate }}
                                 </td>
                             </tr>
                             <tr>
-                                <td class="pe-4">
-                                    Județ
+                                <td>
+                                    Diagnostic
                                 </td>
                                 <td>
-                                    {{ $pacient->judet }}
+                                   {{ $reteta->pacient_diagnostic }}
                                 </td>
                             </tr>
-                            {{-- <tr>
-                                <td class="pe-4">
-                                    Cod poștal
+                            <tr>
+                                <td>
+                                    Diagnostic descriptiv
                                 </td>
                                 <td>
-                                    {{ $pacient->cod_postal }}
+                                   {{ $reteta->pacient_diagnostic_descriptiv }}
                                 </td>
-                            </tr> --}}
-                            @foreach ($pacient->apartinatori as $apartinator)
+                            </tr>
+                            @foreach ($reteta->medicamente as $medicament)
                                 @if ($loop->first)
                                     <tr>
-                                        <td colspan="2">
-                                            &nbsp;
-                                        </td>
-                                    </tr>
-                                    <tr>
                                         <td colspan="2" class="text-center">
-                                            <b>Aparținători</b>
+                                            &nbsp;
+                                            <br>
+                                            &nbsp;
+                                            <br>
+                                            MEDICAMENTE
+                                            <br>
+                                            &nbsp;
                                         </td>
                                     </tr>
                                 @endif
                                 <tr>
-                                    <td class="pe-4">
-                                        Nume
+                                    <td>
+                                        Denumire
                                     </td>
                                     <td>
-                                        {{ $apartinator->nume }}
+                                    {{ $medicament->denumire }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="pe-4">
-                                        Prenume
+                                    <td>
+                                        Concentrație
                                     </td>
                                     <td>
-                                        {{ $apartinator->prenume }}
+                                    {{ $medicament->concentratie }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="pe-4">
-                                        Telefon
+                                    <td>
+                                        Forma farmaceutica
                                     </td>
                                     <td>
-                                        {{ $apartinator->telefon }}
+                                    {{ $medicament->forma_farmaceutica }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="pe-4">
-                                        Email
+                                    <td>
+                                        Mod administrare
                                     </td>
                                     <td>
-                                        {{ $apartinator->email }}
+                                    {{ $medicament->mod_administrare }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="pe-4">
-                                        Grad rudenie
+                                    <td>
+                                        Cantitate
                                     </td>
                                     <td>
-                                        {{ $apartinator->grad_rudenie }}
+                                    {{ $medicament->cantitate }}
                                     </td>
                                 </tr>
-                                @if ($loop->last)
+                                <tr>
+                                    <td>
+                                        Durată tratament
+                                    </td>
+                                    <td>
+                                    {{ $medicament->durata_tratament }}
+                                    </td>
+                                </tr>
+                                @if (!$loop->last)
                                     <tr>
-                                        <td colspan="2">
-                                            &nbsp;
-                                        </td>
+                                        <td colspan="2">&nbsp;</td>
                                     </tr>
                                 @endif
                             @endforeach
-                            <tr>
-                                <td class="pe-4">
-                                    Observații
-                                </td>
-                                <td>
-                                    {{ $pacient->observatii }}
-                                </td>
-                            </tr>
                         </table>
                     </div>
 
                     <div class="form-row mb-2 px-2">
                         <div class="col-lg-12 d-flex justify-content-center">
-                            <a class="btn btn-secondary text-white rounded-3" href="{{ Session::get('pacientReturnUrl') }}">Înapoi</a>
+                            <a class="btn btn-lg btn-secondary rounded-3" href="{{ Session::get('retetaReturnUrl') }}">Înapoi</a>
                         </div>
                     </div>
 

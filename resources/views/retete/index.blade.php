@@ -58,6 +58,7 @@
                             <th>Serie număr</th>
                             <th>Pacient</th>
                             <th>Data</th>
+                            <th>Pdf</th>
                             <th class="text-end">Acțiuni</th>
                         </tr>
                     </thead>
@@ -75,6 +76,11 @@
                                 </td>
                                 <td class="">
                                     {{ $reteta->data ? Carbon::parse($reteta->data)->isoFormat('DD.MM.YYYY') : '' }}
+                                </td>
+                                <td class="pb-0">
+                                    <a href="{{ $reteta->path() }}/export/pdf" target="_blank">
+                                        {{-- <span class="text-danger"><i class="fas fa-file-pdf h4 mb-0"></i></a> --}}
+                                        <span class="badge bg-success">Pdf</a>
                                 </td>
                                 <td>
                                     <div class="text-end">

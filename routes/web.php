@@ -65,6 +65,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('etichete', EtichetaController::class,  ['parameters' => ['etichete' => 'eticheta']]);
     Route::post('etichete/{eticheta}/barcode/{view_type}', [EtichetaController::class, 'pdfExportBarcode']);
 
+    Route::get('retete/{reteta}/export/pdf', [RetetaController::class, 'exportPdf']);
     Route::resource('retete', RetetaController::class,  ['parameters' => ['retete' => 'reteta']]);
 
 

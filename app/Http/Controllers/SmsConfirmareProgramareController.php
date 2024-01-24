@@ -61,6 +61,9 @@ class SmsConfirmareProgramareController extends Controller
     public function statusProgramare(Request $request, $cheie_unica)
     {
         $programare = Programare::where('cheie_unica', $cheie_unica)->first() ?? \App\Models\Cardiologie\Programare::where('cheie_unica', $cheie_unica)->first();
+        if (!$programare) {
+            return view('diverse.confirmareAnulareProgramare', compact('programare'));
+        }
         $data_programare = Carbon::parse($programare->data)->addHours(Carbon::parse($programare->ora)->hour)->addMinutes(Carbon::parse($programare->ora)->minute);
 
         if (($programare->confirmare === null) && ($data_programare->greaterThan(Carbon::now()))){

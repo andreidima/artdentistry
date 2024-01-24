@@ -24,7 +24,15 @@
 
                 @include ('errors')
 
-                    @if ($data_programare->lessThan(\Carbon\Carbon::now()))
+                    @if (!$programare)
+                        <div class="row">
+                            <div class="col-lg-7 py-2 mx-auto">
+                                <h5 class="ps-3 py-2 mb-0 text-center bg bg-danger text-white">
+                                    Această programare nu există în sistem
+                                </h5>
+                            </div>
+                        </div>
+                    @elseif ($data_programare->lessThan(\Carbon\Carbon::now()))
                         <div class="row">
                             <div class="col-lg-7 py-2 mx-auto">
                                 <h5 class="ps-3 py-2 mb-0 text-center bg bg-danger text-white">
