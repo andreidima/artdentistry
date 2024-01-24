@@ -33,7 +33,7 @@
                                     Seria număr
                                 </td>
                                 <td>
-                                    {{ $reteta->seria }}{{ $reteta->numar }}
+                                    {{ $reteta->serie }}{{ $reteta->numar }}
                                 </td>
                             </tr>
                             <tr>
