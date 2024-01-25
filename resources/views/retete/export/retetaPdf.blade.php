@@ -166,12 +166,12 @@
 
             <table style="page-break-inside: avoid;">
                 <tr>
-                    <td valign="top" style="border-width:0px; width:80%">
+                    <td valign="top" style="border-width:0px; width:60%">
                         Data eliberării prescripției medicale,
                         <br>
                         <b>{{ $reteta->data ? \Carbon\Carbon::parse($reteta->data)->isoFormat('DD.MM.YYYY') : '' }}</b>
                     </td>
-                    <td style="border-width:0px;">
+                    <td style="border-width:0px; text-align:center;">
                         {{ $reteta->medic_nume }}
                         <br>
                         <img src="{{ asset('imagini/StampilaSemnatura.png') }}" width="150px">
