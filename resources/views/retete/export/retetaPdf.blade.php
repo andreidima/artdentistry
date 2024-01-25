@@ -174,7 +174,7 @@
                     <td style="border-width:0px;">
                         {{ $reteta->medic_nume }}
                         <br>
-                        <img src="{{ asset('imagini/ParafaSemnatura.jpg') }}" width="150px">
+                        <img src="{{ asset('imagini/StampilaSemnatura.png') }}" width="150px">
                     </td>
                 </tr>
                 <tr>
