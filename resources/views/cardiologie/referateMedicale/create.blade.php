@@ -18,7 +18,7 @@
 
 
                                 @include ('cardiologie.referateMedicale.form', [
-                                    'referat_medical' => new App\Models\Cardiologie\ReferatMedical,
+                                    // 'referat_medical' => new App\Models\Cardiologie\ReferatMedical,
                                     'buttonText' => 'Salvează Referatul Medical'
                                 ])
                     </form>

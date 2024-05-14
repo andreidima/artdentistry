@@ -69,25 +69,26 @@
                 <div>
                     <table>
                         <tr>
-                            <td colspan="2" style="border-width:0px">
+                            <td style="border-width:0px">
                                 CLINICA MEDICALA "ART DENTISTRY", FOCŞANI
                                 <br>
                                 CABINET CARDIOLOGIE
                                 <br>
                                 0725.170.979
                             </td>
-                            <td rowspan="2" width="25%" align="center" style="border-width:0px">
-                                <img src="{{url('/imagini/logo_pdf.jpg')}}" alt="Logo PDF" width="100px"/>
+                            <td width="50%" align="right" style="border-width:0px">
+                                {{-- <img src="{{url('/imagini/logo_pdf.jpg')}}" alt="Logo PDF" width="100px"/> --}}
+                                <img src="{{ asset('imagini/logo.png') }}" width="200px">
                             </td>
                         </tr>
                         <tr>
-                            <td width="25%" style="border-width:0px">
-                            </td>
-                            <td width="50%" style="border-width:0px; text-align:center">
+                            <td colspan="2" width="50%" style="border-width:0px; text-align:center">
                                 <h2 style="text-align: center; margin-bottom: 0px;">
                                     REFERAT MEDICAL
                                 </h2>
                                 {{ $referat_medical->numar_inregistrare }}
+                                /
+                                {{ $referat_medical->programare->data ? \Carbon\Carbon::parse($referat_medical->programare->data)->isoFormat('DD.MM.YYYY') : '' }}
                             </td>
                         </tr>
                     </table>
@@ -99,29 +100,29 @@
                         cu domiciliul în {{ $referat_medical->adresa }}
                     </p>
 
-                    <p>Diagnostic clinic: {{ $referat_medical->diagnostic_clinic }}
+                    <p><b>Diagnostic clinic</b>: {{ $referat_medical->diagnostic_clinic }}
                     </p>
 
-                    <p>Simptomatologie: {{ $referat_medical->simptomatologie }}
+                    <p><b>Simptomatologie</b>: {{ $referat_medical->simptomatologie }}
                     </p>
 
-                    <p style="margin: 0px;">Examen obiectiv detaliat:
-                        Î={{ $referat_medical->inaltime }} cm,
-                        G={{ $referat_medical->greutate }} Kg,
-                        TA={{ $referat_medical->ta }} mmHg,
-                        AV={{ $referat_medical->av }} b/min,
+                    <p style="margin: 0px;"><b>Examen obiectiv detaliat</b>:
+                        <b>Î</b>={{ $referat_medical->inaltime }} cm,
+                        <b>G</b>={{ $referat_medical->greutate }} Kg,
+                        <b>TA</b>={{ $referat_medical->ta }} mmHg,
+                        <b>AV</b>={{ $referat_medical->av }} b/min,
                     </p>
 
                     <p style="margin: 0px;">{{ $referat_medical->examen_obiectiv_detaliat }}
                     </p>
 
-                    <p>Investigații clinice, paraclinice: {{ $referat_medical->investigatii_clinice_paraclinice }}
+                    <p><b>Investigații clinice, paraclinice</b>: {{ $referat_medical->investigatii_clinice_paraclinice }}
                     </p>
 
-                    <p>Tratamente urmate: {{ $referat_medical->tratamente_urmate }}
+                    <p><b>Tratamente urmate</b>: {{ $referat_medical->tratamente_urmate }}
                     </p>
 
-                    <p>Observații: {{ $referat_medical->observatii }}
+                    <p><b>Observații</b>: {{ $referat_medical->observatii }}
                     </p>
 
                     <br><br>
@@ -130,7 +131,7 @@
 
                     <table>
                         <tr>
-                            <td style="border-width:0px; width: 70%">
+                            <td style="border-width:0px; width: 70%;">
                                 Data
                                 <br>
                                 {{ $referat_medical->programare->data ? \Carbon\Carbon::parse($referat_medical->programare->data)->isoFormat('DD.MM.YYYY') : '' }}

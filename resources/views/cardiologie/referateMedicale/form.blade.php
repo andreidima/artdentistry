@@ -11,16 +11,16 @@
 
         <div class="row mb-4 rounded-3 d-flex align-items-center" style="">
             <div class="col-lg-12 align-items-center">
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-lg-3 mb-4">
-                        <label for="numar_inregistrare" class="ps-3">Număr înregistrare</label>
+                        <label for="numar_inregistrare" class="ps-3">Număr înregistrare</label><span class="text-danger">*</span>
                         <input
                             type="text"
                             name="numar_inregistrare"
                             class="form-control rounded-3 {{ $errors->has('numar_inregistrare') ? 'is-invalid' : '' }}"
                             value="{{ old('numar_inregistrare', $referat_medical->numar_inregistrare) }}">
                     </div>
-                </div>
+                </div> --}}
                 <div class="row d-flex justify-content-center align-items-center">
                     <div class="col-lg-3 mb-4">
                             {{-- Cheia straina ce se salveaza in tabelul cardiologie referate medicale --}}

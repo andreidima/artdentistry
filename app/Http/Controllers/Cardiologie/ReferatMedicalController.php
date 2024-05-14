@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Arr;
 use Carbon\Carbon;
+use Illuminate\Validation\Rule;
 
 use Illuminate\Database\Eloquent\Builder;
 
@@ -33,7 +34,10 @@ class ReferatMedicalController extends Controller
     {
         $request->session()->get('cardiologie_programare_return_url') ?? $request->session()->put('cardiologie_programare_return_url', url()->previous());
 
-        return view('cardiologie.referateMedicale.create', compact('programare'));
+        $referat_medical = new ReferatMedical;
+        // $referat_medical->numar_inregistrare = ReferatMedical::max('numar_inregistrare') ?? 1;
+
+        return view('cardiologie.referateMedicale.create', compact('programare', 'referat_medical'));
     }
 
     /**
@@ -44,7 +48,11 @@ class ReferatMedicalController extends Controller
      */
     public function store(Request $request)
     {
-        $referat_medical = ReferatMedical::create($this->validateRequest());
+        // dd (ReferatMedical::max('numar_inregistrare'));
+        // $referat_medical = ReferatMedical::create($this->validateRequest());
+        $referat_medical = ReferatMedical::make($this->validateRequest());
+        $referat_medical->numar_inregistrare = ReferatMedical::max('numar_inregistrare') + 1 ?? 1;
+        $referat_medical->save();
 
         return redirect($request->session()->get('cardiologie_programare_return_url') ?? ('cardiologie/programari/afisare-saptamanal'))
             ->with('status', 'Referatul medical pentru „' . ($referat_medical->programare->nume ?? '') . '” a fost adăugat cu succes!');
@@ -117,7 +125,11 @@ class ReferatMedicalController extends Controller
                 'programare_id' => 'required',
                 'cnp' => 'nullable|max:500',
                 'adresa' => 'nullable|max:500',
-                'numar_inregistrare' => 'nullable|max:500',
+                // 'numar_inregistrare' => 'required|unique:App\Models\Cardiologie\ReferatMedical|numeric|gt:0',
+                // 'numar_inregistrare' => [
+                //     'required', 'numeric', 'gt:0',
+                //     Rule::unique('App\Models\Cardiologie\ReferatMedical')->ignore($referat_medical->id),
+                // ],
                 'diagnostic_clinic' => 'nullable|max:2000',
                 'simptomatologie' => 'nullable|max:2000',
                 'examen_obiectiv_detaliat' => 'nullable|max:2000',
