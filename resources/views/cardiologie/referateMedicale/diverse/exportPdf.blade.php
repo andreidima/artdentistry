@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Fișă consultație</title>
+    <title>Referat medical</title>
     <style>
         body {
             font-family: DejaVu Sans, sans-serif;
@@ -48,6 +48,9 @@
             border-style: inset;
             border-width: 0.5px;
         }
+        p {
+            text-indent: 15; */
+        }
         /* tr:nth-child(even) {background-color:lightgray;} */
     </style>
 </head>
@@ -82,7 +85,7 @@
                             </td>
                             <td width="50%" style="border-width:0px">
                                 <h2 style="text-align: center">
-                                    FIȘĂ CONSULTAȚIE
+                                    REFERAT MEDICAL
                                 </h2>
                             </td>
                         </tr>
@@ -90,77 +93,35 @@
 
                     <br><br>
 
-                    <p style="margin-left: 0px">
-                        NUME: <span style="font-size: 14px; font-weight:bold">{{ $programare->nume }}</span>
-                        <br>
-                        VARSTA: {{ $fisa_consultatie->varsta }}
+                    <p>Privind pe dl/dna <b>{{ $referat_medical->programare->nume ?? '' }}</b>,
+                        CNP {{ $referat_medical->cnp }},
+                        cu domiciliul în {{ $referat_medical->adresa }}
                     </p>
 
-                    <br>
-                    <br>
-
-                    <p style="">
-                        Motivele prezentării - evaluare cardiovasculară: {{ $fisa_consultatie->motive_prezentare }}
+                    <p>Diagnostic clinic: {{ $referat_medical->diagnostic_clinic }}
                     </p>
 
-                    <p style="">
-                        Factori de risc cardiovasculari: {{ $fisa_consultatie->factori_de_risc_cardiovasculari }}
+                    <p>Simptomologie: {{ $referat_medical->simptomologie }}
                     </p>
 
-                    <p style="">
-                        Antecedente personale patologice: {{ $fisa_consultatie->antecedente_personale_patologice }}
+                    <p style="margin: 0px;">Examen obiectiv detaliat:
+                        Î={{ $referat_medical->inaltime }} cm,
+                        G={{ $referat_medical->greutate }} Kg,
+                        TA={{ $referat_medical->ta }} mmHg,
+                        AV={{ $referat_medical->av }} b/min,
                     </p>
 
-                    <p style="">
-                        Diagnostic: {{ $fisa_consultatie->diagnostic }}
+                    <p style="margin: 0px;">{{ $referat_medical->examen_obiectiv_detaliat }}
                     </p>
 
-                    <p style="">
-                        Examen clinic: {{ $fisa_consultatie->examen_clinic }}
+                    <p>Investigații clinice, paraclinice: {{ $referat_medical->investigatii_clinice_paraclinice }}
                     </p>
 
-                    <p style="">
-                        EKG: {{ $fisa_consultatie->ekg }}
+                    <p>Tratamente urmate: {{ $referat_medical->tratamente_urmate }}
                     </p>
 
-                    <p style="">
-                        Tratament efectuat: {{ $fisa_consultatie->tratament_efectuat }}
+                    <p>Observații: {{ $referat_medical->observatii }}
                     </p>
-
-                    <br>
-
-                    <ul>Recomandări:
-                        <li>Regim hiposodat, hipolipidic;</li>
-                        <li>Evita efortul fizic irriens, temperaturile extreme, stresul,</li>
-                        <li>Tratament conform schemei;</li>
-                        <li>Control cardiologie periodic;</li>
-                        <li>Monitorizare TA, FC;</li>
-                        <li>Scădere ponderala</li>
-                        <li>Evaluare profil lipidic (colesterol, HDL-C,LDL-C, TG), acid uric, glicemie -evaluare hemoleucograma, uree, creatinina, sodiu, potasiu, TGP,TGO,GGT</li>
-                    </ul>
-
-                    <br>
-
-                    <p>Tratament recomandat conform schemei:</p>
-
-                    @if ($fisa_consultatie->medicamente->count() > 0)
-                        <table>
-                                <tr>
-                                    <td>Medicament</td>
-                                    <td>Dimineața</td>
-                                    <td>Prânz</td>
-                                    <td>Seara</td>
-                                </tr>
-                            @foreach ($fisa_consultatie->medicamente as $medicament)
-                                <tr>
-                                    <td>{{ $medicament->nume }}</td>
-                                    <td>{{ $medicament->dimineata }}</td>
-                                    <td>{{ $medicament->pranz }}</td>
-                                    <td>{{ $medicament->seara }}</td>
-                                </tr>
-                            @endforeach
-                        </table>
-                    @endif
 
                     <br><br>
 
@@ -171,7 +132,7 @@
                             <td style="border-width:0px; width: 70%">
                                 Data
                                 <br>
-                                {{ $fisa_consultatie->data ? \Carbon\Carbon::parse($fisa_consultatie->data)->isoFormat('DD.MM.YYYY') : '' }}
+                                {{ $referat_medical->programare->data ? \Carbon\Carbon::parse($referat_medical->programare->data)->isoFormat('DD.MM.YYYY') : '' }}
                             </td>
                             <td style="border-width:0px;">
                                 Dr. Hanţa Crina Mihaela

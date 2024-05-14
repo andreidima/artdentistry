@@ -81,6 +81,9 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::resource('programari/{programare}/fisa-consultatie', App\Http\Controllers\Cardiologie\FisaConsultatieController::class, ['parameters' => ['fisa-consultatie' => 'fisa_consultatie']]);
         Route::get('programari/{programare}/fisa-consultatie-export/{fisa_consultatie}/{view_type}', [App\Http\Controllers\Cardiologie\FisaConsultatieController::class, 'exportPdf']);
+
+        Route::resource('programari/{programare}/referat-medical', App\Http\Controllers\Cardiologie\ReferatMedicalController::class, ['parameters' => ['referat-medical' => 'referat_medical']]);
+        Route::get('programari/{programare}/referat-medical-export/{referat_medical}/{view_type}', [App\Http\Controllers\Cardiologie\ReferatMedicalController::class, 'exportPdf']);
     });
 
     Route::resource('mesaje-trimise-sms', MesajTrimisSmsController::class,  ['parameters' => ['mesaje-trimise-sms' => 'mesaj_trimis_sms']]);

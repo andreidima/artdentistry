@@ -44,12 +44,34 @@ class Programare extends Model
         return $this->hasMany(\App\Models\MesajTrimisSms::class, 'referinta_id', 'id')->where('categorie', 'Programari Cardiologie')->where('subcategorie', 'Confirmare');
     }
 
-    public function recenzieTrimisa()
+    // I don't know if it's needed anymore. It was replaced with smsRecenzie() function
+    // To be deleted 01.06.2024
+    // public function recenzieTrimisa()
+    // {
+    //     if (\App\Models\MesajTrimisSms::where('telefon', $this->telefon)->where('subcategorie', 'Recenzie')->where('trimis', 1)->latest()->get()->first()){
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+
+    /**
+     * Get the smsRecenzie associated with the Programare
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function smsRecenzie()
     {
-        if (\App\Models\MesajTrimisSms::where('telefon', $this->telefon)->where('subcategorie', 'Recenzie')->where('trimis', 1)->latest()->get()->first()){
-            return true;
-        } else {
-            return false;
-        }
+        return $this->hasOne(\App\Models\MesajTrimisSms::class, 'telefon', 'telefon')->where('subcategorie', 'Recenzie')->where('trimis', 1);
+    }
+
+    /**
+     * Get the referatMedical associated with the Programare
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function referatMedical()
+    {
+        return $this->hasOne(ReferatMedical::class, 'programare_id');
     }
 }

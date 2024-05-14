@@ -198,7 +198,7 @@
                                             </div>
                                             <div class="col-12 py-0 px-1 d-flex justify-content-end">
                                                 <div class="me-1">
-                                                    @if (!$programare->recenzieTrimisa())
+                                                    @if (!$programare->smsRecenzie)
                                                         <a
                                                             href="#"
                                                             data-bs-toggle="modal"
@@ -227,32 +227,45 @@
                                                 </div>
                                             </div>
                                             <div class="col-12 py-0 px-1 d-flex justify-content-end">
-                                                @if (!$programare->buletin_ecocardiografic)
-                                                    <a class="" href="/cardiologie/programari/{{ $programare->id }}/buletin-ecocardiografic/adauga">
-                                                        <span class="badge bg-success px-1">Buletin ecocardiografic</span>
-                                                    </a>
-                                                @else
-                                                    <a class="" href="/cardiologie/programari/{{ $programare->id }}/buletin-ecocardiografic/{{ $programare->buletin_ecocardiografic->id }}/modifica">
-                                                        <span class="badge bg-success px-1">Buletin ecocardiografic</span>
-                                                    </a>
-                                                    <a class="" href="/cardiologie/programari/{{ $programare->id }}/buletin-ecocardiografic-export/{{$programare->buletin_ecocardiografic->id}}/export-pdf" target="_blank">
-                                                        <span class="badge bg-white text-danger border border-danger px-1">PDF</span>
-                                                    </a>
-                                                @endif
-                                            </div>
-                                            <div class="col-12 py-0 px-1 d-flex justify-content-end">
-                                                @if (!$programare->fisa_consultatie)
-                                                    <a class="" href="/cardiologie/programari/{{ $programare->id }}/fisa-consultatie/adauga">
-                                                        <span class="badge bg-success px-1">Fișă consultație</span>
-                                                    </a>
-                                                @else
-                                                    <a class="" href="/cardiologie/programari/{{ $programare->id }}/fisa-consultatie/{{ $programare->fisa_consultatie->id }}/modifica">
-                                                        <span class="badge bg-success px-1">Fișă consultație</span>
-                                                    </a>
-                                                    <a class="" href="/cardiologie/programari/{{ $programare->id }}/fisa-consultatie-export/{{$programare->fisa_consultatie->id}}/export-pdf" target="_blank">
-                                                        <span class="badge bg-white text-danger border border-danger px-1">PDF</span>
-                                                    </a>
-                                                @endif
+                                                <div class="me-1">
+                                                    @if (!$programare->buletin_ecocardiografic)
+                                                        <a class="" href="/cardiologie/programari/{{ $programare->id }}/buletin-ecocardiografic/adauga">
+                                                            <span class="badge bg-success px-1" title="Buletin ecocardiografic">BE</span>
+                                                        </a>
+                                                    @else
+                                                        <a class="" href="/cardiologie/programari/{{ $programare->id }}/buletin-ecocardiografic/{{ $programare->buletin_ecocardiografic->id }}/modifica">
+                                                            <span class="badge bg-success border border-success px-1" title="Buletin ecocardiografic">BE</span>
+                                                        </a><a class="" href="/cardiologie/programari/{{ $programare->id }}/buletin-ecocardiografic-export/{{$programare->buletin_ecocardiografic->id}}/export-pdf" target="_blank">
+                                                            <span class="badge bg-white text-danger border border-success px-0">PDF</span>
+                                                        </a>
+                                                    @endif
+                                                </div>
+                                                <div class="me-1">
+                                                    @if (!$programare->fisa_consultatie)
+                                                        <a class="" href="/cardiologie/programari/{{ $programare->id }}/fisa-consultatie/adauga">
+                                                            <span class="badge bg-success px-1" title="Fișă consultație">FC</span>
+                                                        </a>
+                                                    @else
+                                                        <a class="" href="/cardiologie/programari/{{ $programare->id }}/fisa-consultatie/{{ $programare->fisa_consultatie->id }}/modifica">
+                                                            <span class="badge bg-success border border-success px-1" title="Fișă consultație">FC</span>
+                                                        </a><a class="" href="/cardiologie/programari/{{ $programare->id }}/fisa-consultatie-export/{{$programare->fisa_consultatie->id}}/export-pdf" target="_blank">
+                                                            <span class="badge bg-white text-danger border border-success px-0">PDF</span>
+                                                        </a>
+                                                    @endif
+                                                </div>
+                                                <div>
+                                                    @if (!$programare->referatMedical)
+                                                        <a class="" href="/cardiologie/programari/{{ $programare->id }}/referat-medical/adauga">
+                                                            <span class="badge bg-success px-1" title="Referat Medical">RM</span>
+                                                        </a>
+                                                    @else
+                                                        <a class="" href="/cardiologie/programari/{{ $programare->id }}/referat-medical/{{ $programare->referatMedical->id }}/modifica">
+                                                            <span class="badge bg-success border border-success px-1" title="Referat Medical">RM</span>
+                                                        </a><a class="" href="/cardiologie/programari/{{ $programare->id }}/referat-medical-export/{{$programare->referatMedical->id}}/export-pdf" target="_blank">
+                                                            <span class="badge bg-white text-danger border border-success px-0">PDF</span>
+                                                        </a>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                 @endforeach

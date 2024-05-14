@@ -93,7 +93,7 @@
                                                     @php
                                                         // dd ($programare->confirmare)
                                                     @endphp
-                                                    @if (is_null($programare->confirmare) && ($programare->sms_confirmare()->first()->trimis ?? '') == 1)
+                                                    @if (is_null($programare->confirmare))
                                                         @if ((\Carbon\Carbon::parse($programare->data) == \Carbon\Carbon::today()) || (\Carbon\Carbon::parse($programare->data) == \Carbon\Carbon::tomorrow()))
                                                             <i class="fas fa-question px-3 py-1 text-secondary fs-4"></i>
                                                         @endif
@@ -117,7 +117,7 @@
                                             </div>
                                             <div class="col-12 py-0 px-1 d-flex justify-content-end">
                                                 <div class="me-1">
-                                                    @if (!$programare->recenzieTrimisa())
+                                                    @if (!$programare->smsRecenzie)
                                                         <a
                                                             href="#"
                                                             data-bs-toggle="modal"

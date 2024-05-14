@@ -276,7 +276,7 @@ class ProgramareController extends Controller
         $search_data = $request->search_data ? Carbon::parse($request->search_data) : Carbon::today();
         $data_de_cautat = Carbon::parse($search_data);
 
-        $programari = Programare::with('fisa_de_tratament')
+        $programari = Programare::with('fisa_de_tratament', 'smsRecenzie')
             ->whereDate('data', '>=', $data_de_cautat->startOfWeek())
             ->whereDate('data', '<=', $data_de_cautat->endOfWeek())
             ->orderBy('ora')

@@ -67,7 +67,7 @@
                     <table>
                         <tr>
                             <td colspan="2" style="border-width:0px">
-                                CLINICA MEDICALA "ARI DENTISTRY", FOCŞANI
+                                CLINICA MEDICALA "ART DENTISTRY", FOCŞANI
                                 <br>
                                 CABINET CARDIOLOGIE
                                 <br>
@@ -738,7 +738,7 @@
                     <table>
                         <tr>
                             <td colspan="2" style="border-width:0px">
-                                CLINICA MEDICALA "ARI DENTISTRY", FOCŞANI
+                                CLINICA MEDICALA "ART DENTISTRY", FOCŞANI
                                 <br>
                                 CABINET CARDIOLOGIE
                                 <br>
