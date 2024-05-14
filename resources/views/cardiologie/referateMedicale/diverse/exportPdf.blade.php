@@ -49,7 +49,7 @@
             border-width: 0.5px;
         }
         p {
-            text-indent: 15; */
+            text-indent: 15;
         }
         /* tr:nth-child(even) {background-color:lightgray;} */
     </style>
@@ -83,10 +83,11 @@
                         <tr>
                             <td width="25%" style="border-width:0px">
                             </td>
-                            <td width="50%" style="border-width:0px">
-                                <h2 style="text-align: center">
+                            <td width="50%" style="border-width:0px; text-align:center">
+                                <h2 style="text-align: center; margin-bottom: 0px;">
                                     REFERAT MEDICAL
                                 </h2>
+                                {{ $referat_medical->numar_inregistrare }}
                             </td>
                         </tr>
                     </table>
