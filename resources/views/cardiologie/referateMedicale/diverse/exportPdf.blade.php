@@ -114,7 +114,7 @@
                         <b>Î</b>={{ $referat_medical->inaltime }} cm,
                         <b>G</b>={{ $referat_medical->greutate }} Kg,
                         <b>TA</b>={{ $referat_medical->ta }} mmHg,
-                        <b>AV</b>={{ $referat_medical->av }} b/min,
+                        <b>AV</b>={{ $referat_medical->av }} b/min
                         <br>
                         {!! nl2br($referat_medical->examen_obiectiv_detaliat) !!}
                     </p>
