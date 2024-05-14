@@ -100,10 +100,14 @@
                         cu domiciliul în {{ $referat_medical->adresa }}.
                     </p>
 
-                    <p><b>Diagnostic clinic</b>: {!! nl2br($referat_medical->diagnostic_clinic) !!}
+                    <p><b>Diagnostic clinic</b>:
+                        <br>
+                        {!! nl2br($referat_medical->diagnostic_clinic) !!}
                     </p>
 
-                    <p><b>Simptomatologie</b>: {!! nl2br($referat_medical->simptomatologie) !!}
+                    <p><b>Simptomatologie</b>:
+                        <br>
+                        {!! nl2br($referat_medical->simptomatologie) !!}
                     </p>
 
                     <p style="margin: 0px;"><b>Examen obiectiv detaliat</b>:
@@ -111,19 +115,24 @@
                         <b>G</b>={{ $referat_medical->greutate }} Kg,
                         <b>TA</b>={{ $referat_medical->ta }} mmHg,
                         <b>AV</b>={{ $referat_medical->av }} b/min,
+                        <br>
+                        {!! nl2br($referat_medical->examen_obiectiv_detaliat) !!}
                     </p>
 
-                    <p style="margin: 0px;">{!! nl2br($referat_medical->examen_obiectiv_detaliat) !!}
+                    <p><b>Investigații clinice, paraclinice</b>:
+                        <br>
+                        {!! nl2br($referat_medical->investigatii_clinice_paraclinice) !!}
                     </p>
 
-                    <p><b>Investigații clinice, paraclinice</b>: {!! nl2br($referat_medical->investigatii_clinice_paraclinice) !!}
-                    </p>
-
-                    <p><b>Tratamente urmate</b>: {!! nl2br($referat_medical->tratamente_urmate) !!}
+                    <p><b>Tratamente urmate</b>:
+                        <br>
+                        {!! nl2br($referat_medical->tratamente_urmate) !!}
                     </p>
 
                     <div style="page-break-inside: avoid;">
-                        <p style="margin: 0px;"><b>Observații</b>: {!! nl2br($referat_medical->observatii) !!}
+                        <p style="margin: 0px;"><b>Observații</b>:
+                        <br>
+                        {!! nl2br($referat_medical->observatii) !!}
                         </p>
 
                         <br><br>
