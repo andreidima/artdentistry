@@ -97,13 +97,13 @@
 
                     <p>Privind pe dl/dna <b>{{ $referat_medical->programare->nume ?? '' }}</b>,
                         CNP {{ $referat_medical->cnp }},
-                        cu domiciliul în {{ $referat_medical->adresa }}
+                        cu domiciliul în {{ $referat_medical->adresa }}.
                     </p>
 
-                    <p><b>Diagnostic clinic</b>: {{ $referat_medical->diagnostic_clinic }}
+                    <p><b>Diagnostic clinic</b>: {!! nl2br($referat_medical->diagnostic_clinic) !!}
                     </p>
 
-                    <p><b>Simptomatologie</b>: {{ $referat_medical->simptomatologie }}
+                    <p><b>Simptomatologie</b>: {!! nl2br($referat_medical->simptomatologie) !!}
                     </p>
 
                     <p style="margin: 0px;"><b>Examen obiectiv detaliat</b>:
@@ -113,40 +113,40 @@
                         <b>AV</b>={{ $referat_medical->av }} b/min,
                     </p>
 
-                    <p style="margin: 0px;">{{ $referat_medical->examen_obiectiv_detaliat }}
+                    <p style="margin: 0px;">{!! nl2br($referat_medical->examen_obiectiv_detaliat) !!}
                     </p>
 
-                    <p><b>Investigații clinice, paraclinice</b>: {{ $referat_medical->investigatii_clinice_paraclinice }}
+                    <p><b>Investigații clinice, paraclinice</b>: {!! nl2br($referat_medical->investigatii_clinice_paraclinice) !!}
                     </p>
 
-                    <p><b>Tratamente urmate</b>: {{ $referat_medical->tratamente_urmate }}
+                    <p><b>Tratamente urmate</b>: {!! nl2br($referat_medical->tratamente_urmate) !!}
                     </p>
 
-                    <p><b>Observații</b>: {{ $referat_medical->observatii }}
-                    </p>
+                    <div style="page-break-inside: avoid;">
+                        <p style="margin: 0px;"><b>Observații</b>: {!! nl2br($referat_medical->observatii) !!}
+                        </p>
 
-                    <br><br>
+                        <br><br>
 
-                    {{-- <div style="page-break-after:always"></div> --}}
-
-                    <table>
-                        <tr>
-                            <td style="border-width:0px; width: 70%;">
-                                Data
-                                <br>
-                                {{ $referat_medical->programare->data ? \Carbon\Carbon::parse($referat_medical->programare->data)->isoFormat('DD.MM.YYYY') : '' }}
-                            </td>
-                            <td style="border-width:0px;">
-                                Dr. Hanţa Crina Mihaela
-                                <br>
-                                Medic Specialist cardiolog
-                            </td>
-                        </tr>
-                    </table>
+                        <table style="">
+                            <tr>
+                                <td style="border-width:0px; width: 500px;">
+                                    Data
+                                    <br>
+                                    {{ $referat_medical->programare->data ? \Carbon\Carbon::parse($referat_medical->programare->data)->isoFormat('DD.MM.YYYY') : '' }}
+                                </td>
+                                <td style="border-width:0px;">
+                                    Dr. Hanţa Crina Mihaela
+                                    <br>
+                                    Medic Specialist cardiolog
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
 
                 </div>
 
-                <br><br><br><br>
+                {{-- <br><br><br><br> --}}
 
 
 
