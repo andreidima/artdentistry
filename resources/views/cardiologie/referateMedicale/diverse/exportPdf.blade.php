@@ -102,7 +102,7 @@
                     <p>Diagnostic clinic: {{ $referat_medical->diagnostic_clinic }}
                     </p>
 
-                    <p>Simptomologie: {{ $referat_medical->simptomologie }}
+                    <p>Simptomatologie: {{ $referat_medical->simptomatologie }}
                     </p>
 
                     <p style="margin: 0px;">Examen obiectiv detaliat:

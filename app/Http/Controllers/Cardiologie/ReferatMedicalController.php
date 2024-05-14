@@ -119,7 +119,7 @@ class ReferatMedicalController extends Controller
                 'adresa' => 'nullable|max:500',
                 'numar_inregistrare' => 'nullable|max:500',
                 'diagnostic_clinic' => 'nullable|max:2000',
-                'simptomologie' => 'nullable|max:2000',
+                'simptomatologie' => 'nullable|max:2000',
                 'examen_obiectiv_detaliat' => 'nullable|max:2000',
                 'inaltime' => 'nullable|max:500',
                 'greutate' => 'nullable|max:500',

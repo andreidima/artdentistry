@@ -59,9 +59,9 @@
                             name="diagnostic_clinic" rows="3">{{ old('diagnostic_clinic', $referat_medical->diagnostic_clinic) }}</textarea>
                     </div>
                     <div class="col-lg-6 mb-4">
-                        <label for="simptomologie" class="mb-0 ps-3">Simptomologie</label>
-                        <textarea class="form-control bg-white {{ $errors->has('simptomologie') ? 'is-invalid' : '' }}"
-                            name="simptomologie" rows="3">{{ old('simptomologie', $referat_medical->simptomologie) }}</textarea>
+                        <label for="simptomatologie" class="mb-0 ps-3">Simptomatologie</label>
+                        <textarea class="form-control bg-white {{ $errors->has('simptomatologie') ? 'is-invalid' : '' }}"
+                            name="simptomatologie" rows="3">{{ old('simptomatologie', $referat_medical->simptomatologie) }}</textarea>
                     </div>
                     <div class="col-lg-3 mb-4">
                         <label for="inaltime" class="ps-3">Înălțime (cm)</label>
