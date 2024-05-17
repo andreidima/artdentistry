@@ -66,22 +66,21 @@
                 <div>
                     <table>
                         <tr>
-                            <td colspan="2" style="border-width:0px">
+                            <td style="border-width:0px">
                                 CLINICA MEDICALA "ART DENTISTRY", FOCŞANI
                                 <br>
                                 CABINET CARDIOLOGIE
                                 <br>
                                 0725.170.979
                             </td>
-                            <td rowspan="2" width="25%" align="center" style="border-width:0px">
-                                <img src="{{url('/imagini/logo_pdf.jpg')}}" alt="Logo PDF" width="100px"/>
+                            <td width="50%" align="right" style="border-width:0px">
+                                {{-- <img src="{{url('/imagini/logo_pdf.jpg')}}" alt="Logo PDF" width="100px"/> --}}
+                                <img src="{{ asset('imagini/logo.png') }}" width="200px">
                             </td>
                         </tr>
                         <tr>
-                            <td width="25%" style="border-width:0px">
-                            </td>
-                            <td width="50%" style="border-width:0px">
-                                <h2 style="text-align: center">
+                            <td colspan="2" width="50%" style="border-width:0px; text-align:center">
+                                <h2 style="text-align: center; margin-bottom: 0px;">
                                     FIȘĂ CONSULTAȚIE
                                 </h2>
                             </td>
@@ -97,39 +96,50 @@
                     </p>
 
                     <br>
-                    <br>
 
                     <p style="">
-                        Motivele prezentării - evaluare cardiovasculară: {{ $fisa_consultatie->motive_prezentare }}
+                        <b>Motivele prezentării - evaluare cardiovasculară</b>:
+                        <br>
+                        {!! nl2br( $fisa_consultatie->motive_prezentare) !!}
                     </p>
 
                     <p style="">
-                        Factori de risc cardiovasculari: {{ $fisa_consultatie->factori_de_risc_cardiovasculari }}
+                        <b>Factori de risc cardiovasculari</b>
+                        <br>
+                        {!! nl2br($fisa_consultatie->factori_de_risc_cardiovasculari) !!}
                     </p>
 
                     <p style="">
-                        Antecedente personale patologice: {{ $fisa_consultatie->antecedente_personale_patologice }}
+                        <b>Antecedente personale patologice</b>
+                        <br>
+                        {!! nl2br( $fisa_consultatie->antecedente_personale_patologice) !!}
                     </p>
 
                     <p style="">
-                        Diagnostic: {{ $fisa_consultatie->diagnostic }}
+                        <b>Diagnostic</b>
+                        <br>
+                        {!! nl2br( $fisa_consultatie->diagnostic) !!}
                     </p>
 
                     <p style="">
-                        Examen clinic: {{ $fisa_consultatie->examen_clinic }}
+                        <b>Examen clinic</b>
+                        <br>
+                        {!! nl2br($fisa_consultatie->examen_clinic) !!}
                     </p>
 
                     <p style="">
-                        EKG: {{ $fisa_consultatie->ekg }}
+                        <b>EKG</b>
+                        <br>
+                        {!! nl2br( $fisa_consultatie->ekg) !!}
                     </p>
 
                     <p style="">
-                        Tratament efectuat: {{ $fisa_consultatie->tratament_efectuat }}
+                        <b>Tratament efectuat</b>:
+                        <br>
+                        {!! nl2br( $fisa_consultatie->tratament_efectuat) !!}
                     </p>
 
-                    <br>
-
-                    <ul>Recomandări:
+                    <ul style="padding: 0px 15px;"><b>Recomandări:</b>
                         <li>Regim hiposodat, hipolipidic;</li>
                         <li>Evita efortul fizic irriens, temperaturile extreme, stresul,</li>
                         <li>Tratament conform schemei;</li>
@@ -141,45 +151,45 @@
 
                     <br>
 
-                    <p>Tratament recomandat conform schemei:</p>
+                    <div style="page-break-inside: avoid;">
+                        <p><b>Tratament recomandat conform schemei:</b></p>
 
-                    @if ($fisa_consultatie->medicamente->count() > 0)
-                        <table>
-                                <tr>
-                                    <td>Medicament</td>
-                                    <td>Dimineața</td>
-                                    <td>Prânz</td>
-                                    <td>Seara</td>
-                                </tr>
-                            @foreach ($fisa_consultatie->medicamente as $medicament)
-                                <tr>
-                                    <td>{{ $medicament->nume }}</td>
-                                    <td>{{ $medicament->dimineata }}</td>
-                                    <td>{{ $medicament->pranz }}</td>
-                                    <td>{{ $medicament->seara }}</td>
-                                </tr>
-                            @endforeach
+                        @if ($fisa_consultatie->medicamente->count() > 0)
+                            <table>
+                                    <tr>
+                                        <td>Medicament</td>
+                                        <td>Dimineața</td>
+                                        <td>Prânz</td>
+                                        <td>Seara</td>
+                                    </tr>
+                                @foreach ($fisa_consultatie->medicamente as $medicament)
+                                    <tr>
+                                        <td>{{ $medicament->nume }}</td>
+                                        <td>{{ $medicament->dimineata }}</td>
+                                        <td>{{ $medicament->pranz }}</td>
+                                        <td>{{ $medicament->seara }}</td>
+                                    </tr>
+                                @endforeach
+                            </table>
+                        @endif
+
+                        <br><br>
+
+                        <table style="">
+                            <tr>
+                                <td style="border-width:0px; width: 500px;">
+                                    Data
+                                    <br>
+                                    {{ $fisa_consultatie->data ? \Carbon\Carbon::parse($fisa_consultatie->data)->isoFormat('DD.MM.YYYY') : '' }}
+                                </td>
+                                <td style="border-width:0px;">
+                                    Dr. Hanţa Crina Mihaela
+                                    <br>
+                                    Medic Specialist cardiolog
+                                </td>
+                            </tr>
                         </table>
-                    @endif
-
-                    <br><br>
-
-                    {{-- <div style="page-break-after:always"></div> --}}
-
-                    <table>
-                        <tr>
-                            <td style="border-width:0px; width: 70%">
-                                Data
-                                <br>
-                                {{ $fisa_consultatie->data ? \Carbon\Carbon::parse($fisa_consultatie->data)->isoFormat('DD.MM.YYYY') : '' }}
-                            </td>
-                            <td style="border-width:0px;">
-                                Dr. Hanţa Crina Mihaela
-                                <br>
-                                Medic Specialist cardiolog
-                            </td>
-                        </tr>
-                    </table>
+                    </div>
 
                 </div>
 

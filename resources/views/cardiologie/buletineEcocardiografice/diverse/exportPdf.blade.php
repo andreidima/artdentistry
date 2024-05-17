@@ -66,27 +66,28 @@
                 <div>
                     <table>
                         <tr>
-                            <td colspan="2" style="border-width:0px">
+                            <td style="border-width:0px">
                                 CLINICA MEDICALA "ART DENTISTRY", FOCŞANI
                                 <br>
                                 CABINET CARDIOLOGIE
                                 <br>
                                 0725.170.979
                             </td>
-                            <td rowspan="2" width="25%" align="center" style="border-width:0px">
-                                <img src="{{url('/imagini/logo_pdf.jpg')}}" alt="Logo PDF" width="100px"/>
+                            <td width="50%" align="right" style="border-width:0px">
+                                {{-- <img src="{{url('/imagini/logo_pdf.jpg')}}" alt="Logo PDF" width="100px"/> --}}
+                                <img src="{{ asset('imagini/logo.png') }}" width="200px">
                             </td>
                         </tr>
                         <tr>
-                            <td width="25%" style="border-width:0px">
-                            </td>
-                            <td width="50%" style="border-width:0px">
-                                <h2 style="text-align: center">
+                            <td colspan="2" width="50%" style="border-width:0px; text-align:center">
+                                <h2 style="text-align: center; margin-bottom: 0px;">
                                     BULETIN ECOCARDIOGRAFIC
                                 </h2>
                             </td>
                         </tr>
                     </table>
+
+                    <br><br>
 
                     <p style="margin-left: 10px">
                         NUME: <span style="font-size: 14px; font-weight:bold">{{ $programare->nume }}</span>
@@ -737,23 +738,16 @@
 
                     <table>
                         <tr>
-                            <td colspan="2" style="border-width:0px">
+                            <td style="border-width:0px">
                                 CLINICA MEDICALA "ART DENTISTRY", FOCŞANI
                                 <br>
                                 CABINET CARDIOLOGIE
                                 <br>
                                 0725.170.979
                             </td>
-                            <td rowspan="2" width="25%" align="center" style="border-width:0px">
-                                <img src="{{url('/imagini/logo_pdf.jpg')}}" alt="Logo PDF" width="100px"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="25%" style="border-width:0px">
-                            </td>
-                            <td width="50%" style="border-width:0px">
-                                <h2 style="text-align: center">
-                                </h2>
+                            <td width="50%" align="right" style="border-width:0px">
+                                {{-- <img src="{{url('/imagini/logo_pdf.jpg')}}" alt="Logo PDF" width="100px"/> --}}
+                                <img src="{{ asset('imagini/logo.png') }}" width="200px">
                             </td>
                         </tr>
                     </table>
