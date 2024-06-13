@@ -33,7 +33,9 @@ Auth::routes(['register' => false, 'password.request' => false, 'reset' => false
 
 // Trimitere Cron joburi din Cpanel
 Route::any('/cron-jobs/trimitere-automata-sms-cerere-confirmare-programare/{key}', [SmsConfirmareProgramareController::class, 'cronJobTrimitereAutomataSmsCerereConfirmareProgramare']);
+// The next 2 routes are identical, the difference is that the second one is smaller to fit better in 1 sms.
 Route::get('status-programare/{cheie_unica}', [SmsConfirmareProgramareController::class, 'statusProgramare']);
+Route::get('sp/{cheie_unica}', [SmsConfirmareProgramareController::class, 'statusProgramare']);
 
 
 Route::group(['middleware' => 'auth'], function () {
