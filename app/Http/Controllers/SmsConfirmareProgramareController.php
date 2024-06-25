@@ -35,9 +35,9 @@ class SmsConfirmareProgramareController extends Controller
                 //             '. Nu raspundeti prin sms';
                 $mesaj = 'Accesati ' . \Config::get('app.url_short') . 'sp/' . $programare->cheie_unica . ' si confirmati programarea Artdentistry ' . Carbon::parse($programare->data)->isoFormat('DD.MM.YYYY') .
                             ', altfel aceasta se va anula. Nu raspundeti prin sms';
-                echo $programare->id . '<br>' . $programare->fisa_de_tratament->telefon . '<br>' . $mesaj . '<br><br>';
+                // echo $programare->id . '<br>' . $programare->fisa_de_tratament->telefon . '<br>' . $mesaj . '<br><br>';
 
-                // $this->trimiteSms('Programari', 'Confirmare', $programare->id, [$programare->fisa_de_tratament->telefon ?? ''], $mesaj);
+                $this->trimiteSms('Programari', 'Confirmare', $programare->id, [$programare->fisa_de_tratament->telefon ?? ''], $mesaj);
             }
 
             echo '<br><br><br><br>';
@@ -54,8 +54,8 @@ class SmsConfirmareProgramareController extends Controller
                 //             '. Nu raspundeti prin sms';
                 $mesaj = 'Accesati ' . \Config::get('app.url_short') . 'sp/' . $programare->cheie_unica . ' si confirmati programarea Artdentistry ' . Carbon::parse($programare->data)->isoFormat('DD.MM.YYYY') .
                             ', altfel aceasta se va anula. Nu raspundeti prin sms';
-                echo $programare->id . '<br>' . $programare->telefon . '<br>' . $mesaj . '<br><br>';
-                // $this->trimiteSms('Programari Cardiologie', 'Confirmare', $programare->id, [$programare->telefon ?? ''], $mesaj);
+                // echo $programare->id . '<br>' . $programare->telefon . '<br>' . $mesaj . '<br><br>';
+                $this->trimiteSms('Programari Cardiologie', 'Confirmare', $programare->id, [$programare->telefon ?? ''], $mesaj);
             }
 
         } else {
