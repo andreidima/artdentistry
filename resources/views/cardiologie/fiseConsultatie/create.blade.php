@@ -18,7 +18,7 @@
 
 
                                 @include ('cardiologie.fiseConsultatie.form', [
-                                    'fisa_consultatie' => new App\Models\Cardiologie\FisaConsultatie,
+                                    // 'fisa_consultatie' => new App\Models\Cardiologie\FisaConsultatie,
                                     'buttonText' => 'Salvează Fișa de Consultație'
                                 ])
                     </form>

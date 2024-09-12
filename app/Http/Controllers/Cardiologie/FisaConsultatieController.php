@@ -35,7 +35,18 @@ class FisaConsultatieController extends Controller
     {
         $request->session()->get('cardiologie_programare_return_url') ?? $request->session()->put('cardiologie_programare_return_url', url()->previous());
 
-        return view('cardiologie.fiseConsultatie.create', compact('programare'));
+        $programareUltimaDeLaAcelasiPacient = Programare::with('fisa_consultatie')->whereHas('fisa_consultatie')->where('nume', $programare->nume)->where('telefon', $programare->telefon)->latest()->first();
+
+        $fisa_consultatie = new FisaConsultatie;
+        $fisa_consultatie->motive_prezentare = $programareUltimaDeLaAcelasiPacient->fisa_consultatie->motive_prezentare ?? '';
+        $fisa_consultatie->factori_de_risc_cardiovasculari = $programareUltimaDeLaAcelasiPacient->fisa_consultatie->factori_de_risc_cardiovasculari ?? '';
+        $fisa_consultatie->antecedente_personale_patologice = $programareUltimaDeLaAcelasiPacient->fisa_consultatie->antecedente_personale_patologice ?? '';
+        $fisa_consultatie->diagnostic = $programareUltimaDeLaAcelasiPacient->fisa_consultatie->diagnostic ?? '';
+        $fisa_consultatie->examen_clinic = $programareUltimaDeLaAcelasiPacient->fisa_consultatie->examen_clinic ?? '';
+        $fisa_consultatie->ekg = $programareUltimaDeLaAcelasiPacient->fisa_consultatie->ekg ?? '';
+        $fisa_consultatie->tratament_efectuat = $programareUltimaDeLaAcelasiPacient->fisa_consultatie->tratament_efectuat ?? '';
+
+        return view('cardiologie.fiseConsultatie.create', compact('programare', 'fisa_consultatie'));
     }
 
     /**
