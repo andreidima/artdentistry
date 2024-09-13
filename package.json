@@ -31,6 +31,7 @@
         "@tiptap/starter-kit": "^2.0.0-beta.199",
         "@tiptap/vue-2": "^2.0.0-beta.199",
         "moment": "^2.29.1",
+        "tinymce": "^7.3.0",
         "vue-signature-pad": "^2.0.4",
         "vue2-datepicker": "^3.10.1"
     }

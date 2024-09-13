@@ -22,7 +22,7 @@ window.Vue = require('vue').default;
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('vue2-datepicker', require('./components/DatePicker.vue').default);
 Vue.component('vue-signature-pad', require('./components/VueSignaturePad.vue').default);
-Vue.component('vue-tiptap', require('./components/Tiptap.vue').default);
+// Vue.component('vue-tiptap', require('./components/Tiptap.vue').default);
 Vue.component('tinymce-vue', require('./components/TinyMCE.vue').default);
 
 /**
@@ -167,10 +167,10 @@ if (document.querySelector('#programareCardiologie')) {
             autoComplete: function () {
                 this.programareListaAutocomplete = [];
                 if (this.programareNumeAutocomplete.length > 2) {
-                    console.log('mai mult de 2 caractere');
+                    // console.log('mai mult de 2 caractere');
                     for (var i = 0; i < this.proramariCardiologieVechiDistincte.length; i++) {
                         if (this.proramariCardiologieVechiDistincte[i].nume.toLowerCase().includes(this.programareNumeAutocomplete.toLowerCase())) {
-                            console.log('s-a gasit asemanare');
+                            // console.log('s-a gasit asemanare');
                             this.programareListaAutocomplete.push(this.proramariCardiologieVechiDistincte[i]);
                         }
                     }
@@ -179,6 +179,50 @@ if (document.querySelector('#programareCardiologie')) {
         }
     });
 };
+
+// if (document.querySelector('#fisaConsultatieCardiologie')) {
+//     const app = new Vue({
+//         el: '#fisaConsultatieCardiologie',
+//         data: {
+//             motive_prezentare: motive_prezentare,
+//             factori_de_risc_cardiovasculari: factori_de_risc_cardiovasculari,
+//             antecedente_personale_patologice: antecedente_personale_patologice,
+//             diagnostic: diagnostic,
+//             examen_clinic: examen_clinic,
+//             ekg: ekg,
+//             tratament_efectuat: tratament_efectuat,
+
+//             programareUltimaDeLaAcelasiPacient: programareUltimaDeLaAcelasiPacient,
+
+//             programareAutocomplete: '',
+//             motivePrezentareAutocomplete: '',
+//         },
+//         directives: {
+//             // Register the local click-outside directive
+//             clickOutside: {
+//                 bind(el, binding) {
+//                     el.clickOutsideEvent = function (event) {
+//                         // Check if the clicked element is outside the bound element
+//                         if (!(el === event.target || el.contains(event.target))) {
+//                             // Call the function passed to the directive
+//                             if (typeof binding.value === 'function') {
+//                                 binding.value(event); // call the function passed in the v-click-outside directive
+//                             }
+//                         }
+//                     };
+//                     // Attach the event listener to the document
+//                     document.body.addEventListener('click', el.clickOutsideEvent);
+//                 },
+//                 unbind(el) {
+//                     // Remove the event listener when the element is destroyed
+//                     document.body.removeEventListener('click', el.clickOutsideEvent);
+//                 }
+//             }
+//         },
+//         methods: {
+//         }
+//     });
+// };
 
 if (document.querySelector('#retetaMedicamente')) {
     const app = new Vue({

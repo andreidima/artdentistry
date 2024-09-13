@@ -51,7 +51,35 @@
             </div>
         </div>
 
-        <div class="row mb-2 rounded-3" style="">
+        <div class="row mb-2 rounded-3" style="" id="fisaConsultatieCardiologie">
+            {{-- <script type="application/javascript">
+                motive_prezentare={!! json_encode(old('motive_prezentare', $fisa_consultatie->motive_prezentare)) !!}
+                factori_de_risc_cardiovasculari={!! json_encode(old('factori_de_risc_cardiovasculari', $fisa_consultatie->factori_de_risc_cardiovasculari)) !!}
+                antecedente_personale_patologice={!! json_encode(old('antecedente_personale_patologice', $fisa_consultatie->antecedente_personale_patologice)) !!}
+                diagnostic={!! json_encode(old('diagnostic', $fisa_consultatie->diagnostic)) !!}
+                examen_clinic={!! json_encode(old('examen_clinic', $fisa_consultatie->examen_clinic)) !!}
+                ekg={!! json_encode(old('ekg', $fisa_consultatie->ekg)) !!}
+                tratament_efectuat={!! json_encode(old('tratament_efectuat', $fisa_consultatie->tratament_efectuat)) !!}
+
+                programareUltimaDeLaAcelasiPacient={!! json_encode($programareUltimaDeLaAcelasiPacient) !!}
+            </script> --}}
+            {{-- <div class="col-lg-6 py-1 mb-4 align-items-center" v-on:focus="programareAutocomplete = programareUltimaDeLaAcelasiPacient;" v-click-outside="programareAutocomplete = ''"> --}}
+            {{-- <div class="col-lg-6 py-1 mb-4 align-items-center" v-click-outside="programareAutocomplete = ''">
+                <label for="motive_prezentare" class="mb-0 ps-3">Motivele prezentării: evaluare cardiovasculară</label>
+                <textarea class="form-control bg-white {{ $errors->has('motive_prezentare') ? 'is-invalid' : '' }}"
+                    name="motive_prezentare" rows="3" v-model="motive_prezentare" v-on:focus="motivePrezentareAutocomplete = programareUltimaDeLaAcelasiPacient.fisa_consultatie.motive_prezentare;"></textarea>
+                <div v-cloak v-if="!motive_prezentare || (motivePrezentareAutocomplete && motivePrezentareAutocomplete.toLowerCase().includes(motive_prezentare.toLowerCase()))"
+                    class="panel-footer">
+                    <div class="list-group">
+                        <button class="list-group-item list-group-item list-group-item-action py-0"
+                            v-on:click="motive_prezentare = motivePrezentareAutocomplete"
+                            >
+                                @{{ programareUltimaDeLaAcelasiPacient.fisa_consultatie.motive_prezentare }}
+                        </button>
+                        </li>
+                    </div>
+                </div>
+            </div> --}}
             <div class="col-lg-6 py-1 mb-4 align-items-center">
                 <label for="motive_prezentare" class="mb-0 ps-3">Motivele prezentării: evaluare cardiovasculară</label>
                 <textarea class="form-control bg-white {{ $errors->has('motive_prezentare') ? 'is-invalid' : '' }}"
