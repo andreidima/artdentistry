@@ -11,10 +11,14 @@ trait TrimiteSmsTrait {
         // }
         // dd($categorie, $subcategorie, $referinta_id, $telefoane, $mesaj);
 
-        // Referitor la diacritice, puteti face conversia unui string cu diacritice intr-unul fara diacritice, in mod automatizat cu aceasta functie PHP:
-        $transliterator = \Transliterator::createFromRules(':: Any-Latin; :: Latin-ASCII; :: NFD; :: [:Nonspacing Mark:] Remove; :: NFC;', \Transliterator::FORWARD);
-        // $textFaraDiacritice = $transliterator->transliterate($textCuDiacritice);
-        $mesaj = $transliterator->transliterate($mesaj);
+        // // Referitor la diacritice, puteti face conversia unui string cu diacritice intr-unul fara diacritice, in mod automatizat cu aceasta functie PHP:
+        // $transliterator = \Transliterator::createFromRules(':: Any-Latin; :: Latin-ASCII; :: NFD; :: [:Nonspacing Mark:] Remove; :: NFC;', \Transliterator::FORWARD);
+        // // $textFaraDiacritice = $transliterator->transliterate($textCuDiacritice);
+        // $mesaj = $transliterator->transliterate($mesaj);
+
+        // New version to remove diacritics
+        $transliterated = iconv('UTF-8', 'ASCII//TRANSLIT', $mesaj);
+        $mesaj = preg_replace('/[^A-Za-z0-9 ]/', '', $transliterated); // Remove non-ASCII characters
 
         // Setarea trimiterii live sau testarea sms-ului
         // $test = 1; // sms-ul nu se trimite
