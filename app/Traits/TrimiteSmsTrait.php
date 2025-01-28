@@ -18,7 +18,8 @@ trait TrimiteSmsTrait {
 
         // New version to remove diacritics
         $transliterated = iconv('UTF-8', 'ASCII//TRANSLIT', $mesaj);
-        $mesaj = preg_replace('/[^A-Za-z0-9 ]/', '', $transliterated); // Remove non-ASCII characters
+        // Allow letters, numbers, spaces, and common punctuation marks
+        $mesaj = preg_replace('/[^A-Za-z0-9 .,!?]/', '', $transliterated); // Remove non-ASCII characters
 
         // Setarea trimiterii live sau testarea sms-ului
         // $test = 1; // sms-ul nu se trimite
